@@ -7,9 +7,9 @@ const Header = () => {
     setActive(!active);
   };
   return (
-    <nav className="bg-red-600">
+    <nav className="bg-red-850">
       <div className="w-full flex flex-row bg-white">
-        <div className="flex-1 md:text-4xl text-xs justify-center pl-8  my-6 flex items-center font-bold text-red-600 ">
+        <div className="flex-1 md:text-4xl text-xs justify-center pl-8  my-6 flex items-center font-black text-red-850 ">
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
         <div className="mr-3 flex-2">
@@ -91,7 +91,7 @@ const Header = () => {
               onClick={handleClick}
             >
               <svg
-                className="w-6 h-6"
+                className="w-6 h-6 text-white"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -110,31 +110,31 @@ const Header = () => {
       </div>
 
       <div className={`${active ? "" : "hidden md:hidden"}`}>
-        <a href="#" className="block py-1 px-4 text-xs hover:bg-white">
+        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
           Features
         </a>
-        <a href="#" className="block py-1 px-4 text-xs hover:bg-white">
+        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
           About SSGSA
         </a>
-        <a href="#" className="block py-1 px-4 text-xs hover:bg-white">
+        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
           Members
         </a>
-        <a href="#" className="block py-1 px-4 text-xs hover:bg-white">
+        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
           Scholar's profiles
         </a>
-        <a href="#" className="block py-1 px-4 text-xs hover:bg-white">
+        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
           Resources
         </a>
-        <a href="#" className="block py-1 px-4 text-xs hover:bg-white">
+        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
           Newsletters
         </a>
-        <a href="#" className="block py-1 px-4 text-xs hover:bg-white">
+        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
           FAQs
         </a>
-        <a href="#" className="block py-1 px-4 text-xs hover:bg-white">
+        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
           Contact us
         </a>
-        <a href="#" className="block py-1 px-4 text-xs hover:bg-white">
+        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-white">
           International Summer Research Award(ISRA)
         </a>
       </div>
