@@ -1,11 +1,13 @@
-import logo from "../public/logo.png";
-import Image from "next/image";
-import { useState } from "react";
-const Header = () => {
-  const [active, setActive] = useState(false);
+import Image from "next/image"
+import { useState } from "react"
+import logo from "../public/logo.png"
+
+export default function Header() {
+  const [active, setActive] = useState(false)
   const handleClick = () => {
-    setActive(!active);
-  };
+    setActive(!active)
+  }
+
   return (
     <nav className="bg-red-850">
       <div className="w-full flex flex-row bg-white">
@@ -13,12 +15,7 @@ const Header = () => {
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
         <div className="mr-3 flex-2">
-          <Image
-            width={93}
-            height={93}
-            src={logo}
-            alt="...."
-          />
+          <Image width={93} height={93} src={logo} alt="SSGSA Logo" />
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-4">
@@ -47,7 +44,7 @@ const Header = () => {
                 href="#"
                 className="py-4 px-2 text-white hover:bg-red-500 text-sm"
               >
-                Scholar's profiles
+                Scholars&apos; profiles
               </a>
               <a
                 href="#"
@@ -110,36 +107,61 @@ const Header = () => {
       </div>
 
       <div className={`${active ? "" : "hidden md:hidden"}`}>
-        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+        <a
+          href="#"
+          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
+        >
           Features
         </a>
-        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+        <a
+          href="#"
+          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
+        >
           About SSGSA
         </a>
-        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+        <a
+          href="#"
+          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
+        >
           Members
         </a>
-        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
-          Scholar's profiles
+        <a
+          href="#"
+          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
+        >
+          Scholars&apos; profiles
         </a>
-        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+        <a
+          href="#"
+          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
+        >
           Resources
         </a>
-        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+        <a
+          href="#"
+          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
+        >
           Newsletters
         </a>
-        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+        <a
+          href="#"
+          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
+        >
           FAQs
         </a>
-        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+        <a
+          href="#"
+          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
+        >
           Contact us
         </a>
-        <a href="#" className="block text-white py-1 px-4 text-xs hover:bg-white">
+        <a
+          href="#"
+          className="block text-white py-1 px-4 text-xs hover:bg-white"
+        >
           International Summer Research Award(ISRA)
         </a>
       </div>
     </nav>
-  );
-};
-
-export default Header;
+  )
+}
