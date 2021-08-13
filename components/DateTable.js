@@ -1,4 +1,4 @@
-const Datetable = () => {
+const DateTable = () => {
   return (
     <div className = "w-full lg:mr-4">
       <h1 className="text-blue-850 text-3xl mx-2 mb-4 font-extrabold">Dates of Full Term 2021-2022</h1>
@@ -54,4 +54,4 @@ const Datetable = () => {
   );
 };
 
-export default Datetable;
+export default DateTable;
