@@ -1,5 +1,6 @@
 import Apply from "../components/Apply";
-import Datetable from "../components/Datetable";
+import Counter from "../components/Counter";
+import DateTable from "../components/DateTable";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import UpperCarousel from "../components/UpperCarousel";
@@ -10,8 +11,9 @@ export default function Home() {
     <div className={styles.container}>
       <Header />
       <UpperCarousel />
+      <Counter />
       <div className="mx-2 mt-10 lg:flex justify-around lg:mx-20">
-        <Datetable />
+        <DateTable />
         <Apply />
       </div>
       <Footer />
