@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const TextBox = () => {
+const About = () => {
   return (
-    <div className="bg-blue-850 text-white w-full lg:mr-4 h-full lg:p-8 p-4">
+    <div className="bg-blue-850 text-white w-full lg:mr-4 lg:p-8 p-4">
       <h1 className="lg:text-3xl text-2xl mb-4 font-extrabold">About</h1>
 
       <p>
@@ -103,4 +103,4 @@ const TextBox = () => {
   );
 };
 
-export default TextBox;
+export default About;

@@ -16,7 +16,9 @@ export default function Header() {
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
         <div className="mr-3 flex-2">
-          <Image width={93} height={93} src={logo} alt="SSGSA Logo" />
+          <Link href="/">
+            <Image width={93} height={93} src={logo} alt="SSGSA Logo" />
+          </Link>
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-4">
@@ -77,83 +79,77 @@ export default function Header() {
 
           <div className="md:hidden flex items-center">
             <button
-              className="mobile-menu-button hover:bg-red-500"
+              className="mobile-menu-button hover:bg-red-500 text-white"
               onClick={handleClick}
             >
-              <svg
-                className="w-6 h-6 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
+              <div className="flex justify-end ...">
+                <div className="text-white mr-2 font-bold">SSGSA</div>
+                <div>
+                  <svg
+                    className="w-6 h-6 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                </div>
+              </div>
             </button>
           </div>
         </div>
       </div>
 
       <div className={`${active ? "" : "hidden md:hidden"}`}>
-        <a
-          href="#"
-          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
-        >
-          Features
-        </a>
-        <a
-          href="#"
-          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
-        >
-          About SSGSA
-        </a>
-        <a
-          href="#"
-          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
-        >
-          Members
-        </a>
-        <a
-          href="#"
-          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
-        >
-          Scholars&apos; profiles
-        </a>
-        <a
-          href="#"
-          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
-        >
-          Resources
-        </a>
-        <a
-          href="#"
-          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
-        >
-          Newsletters
-        </a>
-        <a
-          href="#"
-          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
-        >
-          FAQs
-        </a>
-        <a
-          href="#"
-          className="block text-white py-1 px-4 text-xs hover:bg-red-500"
-        >
-          Contact us
-        </a>
-        <a
-          href="#"
-          className="block text-white py-1 px-4 text-xs hover:bg-white"
-        >
-          International Summer Research Award(ISRA)
-        </a>
+        <Link href="/about">
+          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+            About SSGSA
+          </a>
+        </Link>
+        <Link href="#">
+          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+            Members
+          </a>
+        </Link>
+        <Link href="#">
+          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+            Scholars&apos; profiles
+          </a>
+        </Link>
+        <Link href="#">
+          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+            Resources
+          </a>
+        </Link>
+        <Link href="#">
+          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+            Newsletters
+          </a>
+        </Link>
+        <Link href="#">
+          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+            FAQs
+          </a>
+        </Link>
+        <Link href="#">
+          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+            Contact us
+          </a>
+        </Link>
+        <Link href="#">
+          <a
+            href="#"
+            className="block text-white py-1 px-4 text-xs hover:bg-white"
+          >
+            International Summer Research Award(ISRA)
+          </a>
+        </Link>
       </div>
     </nav>
   );
