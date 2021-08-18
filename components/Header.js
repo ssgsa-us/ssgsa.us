@@ -1,12 +1,13 @@
-import Image from "next/image"
-import { useState } from "react"
-import logo from "../public/logo.png"
+import Image from "next/image";
+import { useState } from "react";
+import logo from "../public/logo.png";
+import Link from "next/dist/client/link";
 
 export default function Header() {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
   const handleClick = () => {
-    setActive(!active)
-  }
+    setActive(!active);
+  };
 
   return (
     <nav className="bg-red-850">
@@ -22,54 +23,46 @@ export default function Header() {
         <div className="flex justify-between">
           <div className="flex space-x-2">
             <div className="hidden md:flex items-center space-x-1">
-              <a
-                href="#"
-                className="py-4 px-2 text-white text-sm hover:bg-red-500"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="py-4 px-2 text-white hover:bg-red-500 text-sm "
-              >
-                About SSGSA
-              </a>
-              <a
-                href="#"
-                className="py-4 px-2 text-white hover:bg-red-500 text-sm"
-              >
-                Members
-              </a>
-              <a
-                href="#"
-                className="py-4 px-2 text-white hover:bg-red-500 text-sm"
-              >
-                Scholars&apos; profiles
-              </a>
-              <a
-                href="#"
-                className="py-4 px-2 text-white hover:bg-red-500 text-sm"
-              >
-                Resources
-              </a>
-              <a
-                href="#"
-                className="py-4 px-2 text-white hover:bg-red-500 text-sm"
-              >
-                Newsletters
-              </a>
-              <a
-                href="#"
-                className="py-4 px-2 text-white hover:bg-red-500 text-sm"
-              >
-                FAQs
-              </a>
-              <a
-                href="#"
-                className="py-4 px-2 text-white hover:bg-red-500 text-sm"
-              >
-                Contact us
-              </a>
+              <Link href="/">
+                <a className="py-4 px-2 text-white text-sm hover:bg-red-500">
+                  Home
+                </a>
+              </Link>
+              <Link href="/about">
+                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm ">
+                  About SSGSA
+                </a>
+              </Link>
+              <Link href="#">
+                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
+                  Members
+                </a>
+              </Link>
+              <Link href="#">
+                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
+                  Scholars&apos; profiles
+                </a>
+              </Link>
+              <Link href="#">
+                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
+                  Resources
+                </a>
+              </Link>
+              <Link href="#">
+                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
+                  Newsletters
+                </a>
+              </Link>
+              <Link href="#">
+                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
+                  FAQs
+                </a>
+              </Link>
+              <Link href="#">
+                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
+                  Contact us
+                </a>
+              </Link>
             </div>
           </div>
 
@@ -163,5 +156,5 @@ export default function Header() {
         </a>
       </div>
     </nav>
-  )
+  );
 }
