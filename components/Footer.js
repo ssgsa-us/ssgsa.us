@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div className="mt-5">
       <div className="relative w-full h-32 lg:h-40 hidden sm:block">
-        <Image src="/Sir Syed Hall.jpg" alt="Sir Syed Hall" layout="fill" />
+        <Image src="/SirSyedHall.jpg" alt="Sir Syed Hall" layout="fill" />
       </div>
       <div className="grid grid-cols-3 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 text-white">
         <div className="sm:col-span-2 hidden sm:flex items-center justify-center p-2">
