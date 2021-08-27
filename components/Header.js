@@ -10,9 +10,9 @@ export default function Header() {
   };
 
   return (
-    <nav className="bg-red-850">
+    <nav className="sticky top-0 z-50 bg-red-850">
       <div className="w-full flex flex-row bg-white">
-        <div className="flex-1 md:text-4xl text-xs justify-center pl-8  my-6 flex items-center font-black text-red-850 ">
+        <div className="flex-1 text-sm sm:text-2xl md:text-3xl justify-center pl-8 my-6 flex items-center font-black text-red-850 ">
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
         <div className="mr-3 flex-2">
@@ -23,6 +23,7 @@ export default function Header() {
       </div>
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between">
+          <div className="md:hidden text-white m-1 text-xl font-bold">SSGSA</div>
           <div className="flex space-x-2">
             <div className="hidden md:flex items-center space-x-1">
               <Link href="/">
@@ -83,10 +84,9 @@ export default function Header() {
               onClick={handleClick}
             >
               <div className="flex justify-end ...">
-                <div className="text-white mr-2 font-bold">SSGSA</div>
                 <div>
                   <svg
-                    className="w-6 h-6 text-white"
+                    className="w-7 h-7 text-white"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -106,46 +106,46 @@ export default function Header() {
         </div>
       </div>
 
-      <div className={`${active ? "" : "hidden md:hidden"}`}>
+      <div className={`${active ? "md:hidden py-1" : "hidden md:hidden"}`}>
         <Link href="/about">
-          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
             About SSGSA
           </a>
         </Link>
         <Link href="#">
-          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
             Members
           </a>
         </Link>
         <Link href="#">
-          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
             Scholars&apos; profiles
           </a>
         </Link>
         <Link href="#">
-          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
             Resources
           </a>
         </Link>
         <Link href="#">
-          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
             Newsletters
           </a>
         </Link>
         <Link href="#">
-          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
             FAQs
           </a>
         </Link>
         <Link href="#">
-          <a className="block text-white py-1 px-4 text-xs hover:bg-red-500">
+          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
             Contact us
           </a>
         </Link>
         <Link href="#">
           <a
             href="#"
-            className="block text-white py-1 px-4 text-xs hover:bg-white"
+            className="block text-white py-1 px-5 text-sm hover:bg-white"
           >
             International Summer Research Award(ISRA)
           </a>
