@@ -2,7 +2,8 @@ import CountUp from 'react-countup';
 
 const Counter = () => {
     return (
-      <div className="flex mx-2 my-5 lg:my-40 md:my-14 lg:mx-20 justify-around lg:text-4xl md:text-2xl text-blue-850 font-bold" style={{fontSize: "80px", display: "flex"}} >
+      <div className="flex mx-2 my-5 lg:my-40 md:my-14 lg:mx-20 justify-around lg:text-4xl md:text-2xl text-blue-850 font-bold"
+      style={{fontSize: "80px", display: "flex", flexWrap: "wrap" }} >
         <div className="flex-shrink">
           <CountUp start={0} end={20} duration={1} />+ <span style={{fontSize: "40px"}}>Countries</span>
         </div>
