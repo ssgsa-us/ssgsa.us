@@ -22,63 +22,10 @@ export default function Header() {
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex justify-between">
-          <div className="md:hidden text-white m-1 text-xl font-bold">SSGSA</div>
-          <div className="flex space-x-2">
-            <div className="hidden md:flex items-center space-x-1">
-              <Link href="/">
-                <a className="py-4 px-2 text-white text-sm hover:bg-red-500">
-                  Home
-                </a>
-              </Link>
-              <Link href="/about">
-                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm ">
-                  About SSGSA
-                </a>
-              </Link>
-              <Link href="#">
-                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
-                  Members
-                </a>
-              </Link>
-              <Link href="#">
-                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
-                  Scholars&apos; profiles
-                </a>
-              </Link>
-              <Link href="#">
-                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
-                  Resources
-                </a>
-              </Link>
-              <Link href="#">
-                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
-                  Newsletters
-                </a>
-              </Link>
-              <Link href="#">
-                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
-                  FAQs
-                </a>
-              </Link>
-              <Link href="#">
-                <a className="py-4 px-2 text-white hover:bg-red-500 text-sm">
-                  Contact us
-                </a>
-              </Link>
-            </div>
-          </div>
+        <div className="md:hidden flex justify-between">
+          <div className="text-white m-1 text-xl font-bold">SSGSA</div>
 
-          <div className="hidden md:flex items-center space-x-1">
-            <a
-              href="#"
-              className="py-4 px-1 text-white hover:bg-red-500 text-sm"
-            >
-              International Summer Research Award(ISRA)
-            </a>
-          </div>
-
-          <div className="md:hidden flex items-center">
+          <div className="flex items-center">
             <button
               className="mobile-menu-button hover:bg-red-500 text-white"
               onClick={handleClick}
@@ -104,52 +51,151 @@ export default function Header() {
             </button>
           </div>
         </div>
-      </div>
 
-      <div className={`${active ? "md:hidden py-1" : "hidden md:hidden"}`}>
-        <Link href="/about">
-          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
-            About SSGSA
-          </a>
-        </Link>
-        <Link href="#">
-          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
-            Members
-          </a>
-        </Link>
-        <Link href="#">
-          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
-            Scholars&apos; profiles
-          </a>
-        </Link>
-        <Link href="#">
-          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
-            Resources
-          </a>
-        </Link>
-        <Link href="#">
-          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
-            Newsletters
-          </a>
-        </Link>
-        <Link href="#">
-          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
-            FAQs
-          </a>
-        </Link>
-        <Link href="#">
-          <a className="block text-white py-1 px-5 text-sm hover:bg-red-500">
-            Contact us
-          </a>
-        </Link>
-        <Link href="#">
-          <a
-            href="#"
-            className="block text-white py-1 px-5 text-sm hover:bg-white"
-          >
-            International Summer Research Award(ISRA)
-          </a>
-        </Link>
+        <div className={`${active ? "py-1 md:py-0" : "hidden"} md:flex md:justify-between `}>
+          <div className="flex space-x-2">
+            <div className="flex flex-col w-full md:flex-row md:items-center md:space-x-1">
+              <div className="md:flex md:flex-col md:justify-center h-full hover:bg-blue-850">
+                <Link href="/">
+                  <a className="py-4 px-2 text-white text-sm">
+                    HOME
+                  </a>
+                </Link>
+              </div>
+              <div className="group w-full h-full hover:bg-blue-850">
+                <div className="md:flex md:flex-col md:justify-center md:h-full">
+                  <Link href="">
+                    <a className="py-4 px-2 text-white text-sm ">
+                      ABOUT
+                    </a>
+                  </Link>
+                </div>
+
+                <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
+                  <Link href="/about">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                      Foundation Of SSGSA
+                    </a>
+                  </Link>
+                  <Link href="/about">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                      Mission
+                    </a>
+                  </Link>
+                  <div className="navgroup hover:bg-blue-850">
+                    <div className="flex">
+                      <Link href="">
+                        <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 navgroup-text text-sm w-full">
+                          Members
+                        </a>
+                      </Link>
+                    </div>
+
+                    <div className="flex-col md:absolute md:left-full md:top-1/2 bg-red-850 md:bg-gray-200 hidden navgroup-box w-full">
+                      <Link href="/about">
+                        <a className="px-6 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
+                          Executive Committee
+                        </a>
+                      </Link>
+                      <Link href="/about">
+                        <a className="px-6 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
+                          Advisory Board
+                        </a>
+                      </Link>
+                      <Link href="/about">
+                        <a className="px-6 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
+                          Leadership History
+                        </a>
+                      </Link>
+                      <Link href="/about">
+                        <a className="px-6 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
+                          Donors And Contributors
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                  <Link href="/about">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                      Our Alumni
+                    </a>
+                  </Link>
+                </div>
+              </div>
+              <div className="group h-full hover:bg-blue-850">
+                <div className="md:flex md:flex-col md:justify-center md:h-full">
+                  <Link href="">
+                    <a className="py-4 px-2 text-white text-sm ">
+                      APPLY
+                    </a>
+                  </Link>
+                </div>
+
+                <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
+                  <Link href="">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                      Who can apply?
+                    </a>
+                  </Link>
+                  <Link href="">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                      Application Timeline: 2022-2023
+                    </a>
+                  </Link>
+                  <Link href="">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                      FAQs
+                    </a>
+                  </Link>
+                  <Link href="">
+                    <a className="px-4 md:py-4 md:px-2 text-white hover:bg-blue-850 md:hover:bg-red-850 md:bg-red-850 text-white text-sm ">
+                      Start Your Application!
+                    </a>
+                  </Link>
+                </div>
+              </div>
+              <div className="group h-full hover:bg-blue-850">
+                <div className="md:flex md:flex-col md:justify-center md:h-full">
+                  <Link href="">
+                    <a className="py-4 px-2 text-white text-sm ">
+                      ALUMNI
+                    </a>
+                  </Link>
+                </div>
+
+                <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
+                  <Link href="">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                      Testimonials
+                    </a>
+                  </Link>
+                  <Link href="">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                      Awardees
+                    </a>
+                  </Link>
+                </div>
+              </div>
+              <div className="md:flex md:flex-col md:justify-center h-full hover:bg-blue-850">
+                <Link href="">
+                  <a className="py-4 px-2 text-white text-sm">
+                    RESOURCES
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="md:flex md:items-center md:space-x-1">
+            <div className="flex flex-col justify-center h-full hover:bg-blue-850">
+              <a
+                href="#"
+                className="px-2 md:py-4 md:px-1 text-white text-sm"
+              >
+                International Summer Research Award(ISRA)
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   );
