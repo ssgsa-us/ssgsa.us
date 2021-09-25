@@ -2,11 +2,14 @@ import Image from "next/image";
 import { useState } from "react";
 import logo from "../public/logo.png";
 import Link from "next/dist/client/link";
+import { useRouter } from "next/router";
 
 export default function Header() {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(false)
+  const router = useRouter()
+
   const handleClick = () => {
-    setActive(!active);
+    setActive(!active)
   };
 
   return (
@@ -55,17 +58,17 @@ export default function Header() {
         <div className={`${active ? "py-1 md:py-0" : "hidden"} md:flex md:justify-between `}>
           <div className="flex space-x-2">
             <div className="flex flex-col w-full md:flex-row md:items-center md:space-x-1">
-              <div className="md:flex md:flex-col md:justify-center h-full hover:bg-blue-850">
+              <div className={`md:flex md:flex-col md:justify-center h-full hover:bg-blue-850 ${router.pathname == '/' && "bg-blue-850"}`}>
                 <Link href="/">
                   <a className="py-4 px-2 text-white text-sm">
                     HOME
                   </a>
                 </Link>
               </div>
-              <div className="group w-full h-full hover:bg-blue-850">
+              <div className={`group w-full h-full hover:bg-blue-850 ${router.pathname == '/about' && "bg-blue-850"}`}>
                 <div className="md:flex md:flex-col md:justify-center md:h-full">
                   <Link href="">
-                    <a className="py-4 px-2 text-white text-sm ">
+                    <a className="py-4 px-2 text-white text-sm">
                       ABOUT
                     </a>
                   </Link>
@@ -73,12 +76,12 @@ export default function Header() {
 
                 <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
                   <Link href="/about">
-                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Foundation Of SSGSA
                     </a>
                   </Link>
                   <Link href="/about">
-                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Mission
                     </a>
                   </Link>
@@ -115,16 +118,16 @@ export default function Header() {
                     </div>
                   </div>
                   <Link href="/about">
-                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Our Alumni
                     </a>
                   </Link>
                 </div>
               </div>
-              <div className="group h-full hover:bg-blue-850">
+              <div className={`group h-full hover:bg-blue-850 ${router.pathname == '/apply' && "bg-blue-850"}`}>
                 <div className="md:flex md:flex-col md:justify-center md:h-full">
                   <Link href="">
-                    <a className="py-4 px-2 text-white text-sm ">
+                    <a className="py-4 px-2 text-white text-sm">
                       APPLY
                     </a>
                   </Link>
@@ -132,31 +135,31 @@ export default function Header() {
 
                 <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
                   <Link href="">
-                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Who can apply?
                     </a>
                   </Link>
                   <Link href="">
-                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Application Timeline: 2022-2023
                     </a>
                   </Link>
                   <Link href="">
-                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       FAQs
                     </a>
                   </Link>
                   <Link href="">
-                    <a className="px-4 md:py-4 md:px-2 text-white hover:bg-blue-850 md:hover:bg-red-850 md:bg-red-850 text-white text-sm ">
+                    <a className="px-4 md:py-4 md:px-2 text-white hover:bg-blue-850 md:hover:bg-red-850 md:bg-red-850 text-white text-sm">
                       Start Your Application!
                     </a>
                   </Link>
                 </div>
               </div>
-              <div className="group h-full hover:bg-blue-850">
+              <div className={`group h-full hover:bg-blue-850 ${router.pathname == '/alumni' && "bg-blue-850"}`}>
                 <div className="md:flex md:flex-col md:justify-center md:h-full">
                   <Link href="">
-                    <a className="py-4 px-2 text-white text-sm ">
+                    <a className="py-4 px-2 text-white text-sm">
                       ALUMNI
                     </a>
                   </Link>
@@ -164,18 +167,18 @@ export default function Header() {
 
                 <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
                   <Link href="">
-                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Testimonials
                     </a>
                   </Link>
                   <Link href="">
-                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm ">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Awardees
                     </a>
                   </Link>
                 </div>
               </div>
-              <div className="md:flex md:flex-col md:justify-center h-full hover:bg-blue-850">
+              <div className={`md:flex md:flex-col md:justify-center h-full hover:bg-blue-850 ${router.pathname == '/resources' && "bg-blue-850"}`}>
                 <Link href="">
                   <a className="py-4 px-2 text-white text-sm">
                     RESOURCES
@@ -186,7 +189,7 @@ export default function Header() {
           </div>
 
           <div className="md:flex md:items-center md:space-x-1">
-            <div className="flex flex-col justify-center h-full hover:bg-blue-850">
+            <div className={`flex flex-col justify-center h-full hover:bg-blue-850 ${router.pathname == '/isra' && "bg-blue-850"}`}>
               <a
                 href="#"
                 className="px-2 md:py-4 md:px-1 text-white text-sm"
