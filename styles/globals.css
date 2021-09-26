@@ -21,3 +21,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.navgroup:hover .navgroup-text {
+  color: white;
+}
+
+.navgroup:hover .navgroup-box {
+  display: flex;
+}
