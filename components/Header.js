@@ -75,7 +75,7 @@ export default function Header() {
                 </div>
 
                 <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
-                  <Link href="/about#Foundation">
+                  <Link href="/about">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Foundation Of SSGSA
                     </a>

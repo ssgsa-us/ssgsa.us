@@ -9,42 +9,42 @@ const Members = () => {
           position: "Chairperson",
           university: "Clemson University",
           place: "Clemson, USA",
-          imageUrl: "/members/Salman Bin Kashif.jpg"
+          imageUrl: "/members/SalmanBinKashif.jpg"
         },
         {
           name: "Mr. Syed Ali Rizvi",
           place: "Boston, Massachusetts, USA",
-          imageUrl: "/members/Syed Ali Rizvi.jpg"
+          imageUrl: "/members/SyedAliRizvi.jpg"
         },
         {
           name: "Dr. Saif Sheikh",
           place: "Chicago, Illinois, USA",
-          imageUrl: "/members/Saif Sheikh.jpg"
+          imageUrl: "/members/SaifSheikh.jpg"
         },
         {
           name: "Dr. Rehan Baqri",
           place: "Boston, Massachusetts, USA",
-          imageUrl: "/members/Rehan Baqri.jpg"
+          imageUrl: "/members/RehanBaqri.jpg"
         },
         {
           name: "Dr. Shaida Andrabi",
           place: "Kashmir, India",
-          imageUrl: "/members/Shaida Andrabi.jpg"
+          imageUrl: "/members/ShaidaAndrabi.jpg"
         },
         {
           name: "Dr. Mohsin Khan",
           place: "Washington DC, USA",
-          imageUrl: "/members/Mohsin Khan.jpg"
+          imageUrl: "/members/MohsinKhan.jpg"
         },
         {
           name: "Mr. Ali Muzaffar",
           place: "Irvine, CA, USA",
-          imageUrl: "/members/Ali Muzaffar.jpg"
+          imageUrl: "/members/AliMuzaffar.jpg"
         },
         {
           name: "Mr. Wasikul Islam",
           place: "Stillwater, Oklahoma, USA",
-          imageUrl: "/members/Wasikul Islam.jpg"
+          imageUrl: "/members/WasikulIslam.jpg"
         }
       ]
     },
@@ -56,41 +56,41 @@ const Members = () => {
           scholar: "SSGSA Scholar 2014-15",
           university: "Iowa State University",
           place: "Ames, USA",
-          imageUrl: "/members/Shujaut H. Bader.jpg"
+          imageUrl: "/members/ShujautHBader.jpg"
         },
         {
           name: "Mr. Shiva Agarwal",
           scholar: "SSGSA Scholar 2018-19",
           university: "Western Michigan University",
-          imageUrl: "/members/Shiva Agarwal.jpeg"
+          imageUrl: "/members/ShivaAgarwal.jpeg"
         },
         {
           name: "Mr. Sk Abdus Sayeed",
           scholar: "ISRA Scholar 2015",
           university: "Cleveland State University",
           place: "Cleveland, OH, USA",
-          imageUrl: "/members/Sk Abdus Sayeed.jpg"
+          imageUrl: "/members/SkAbdusSayeed.jpg"
         },
         {
           name: "Mr. Sajad Sheikh",
           scholar: "SSGSA Scholar 2016-17",
           university: "Kent State University",
           place: "OH, USA",
-          imageUrl: "/members/Sajad Sheikh.jpeg"
+          imageUrl: "/members/SajadSheikh.jpeg"
         },
         {
           name: "Mr. Md Ful Hossain Sk",
           scholar: "SSGSA Scholar 2018-19",
           university: "University of Kansas Lawrence",
           place: "Kansas USA",
-          imageUrl: "/members/Ful Hossain.jpeg"
+          imageUrl: "/members/FulHossain.jpeg"
         },
         {
           name: "Mr. Omar Khursheed",
           scholar: "SSGSA Scholar 2018-19",
           university: "University of Massachusetts",
           place: "Amherst, USA",
-          imageUrl: "/members/Omar Khursheed.jpeg"
+          imageUrl: "/members/OmarKhursheed.jpeg"
         },
       ]
     },
@@ -102,13 +102,13 @@ const Members = () => {
           scholar: "SSGSA Scholar 2015-16",
           university: "Kent State University",
           place: "Kent, OH, USA",
-          imageUrl: "/members/Ajaharul Islam.jpg"
+          imageUrl: "/members/AjaharulIslam.jpg"
         },
         {
           name: "Mr. Sachin Gupta",
           scholar: "SSGSA Scholar 2017-18",
           university: "University of Massachusetts, Lowell",
-          imageUrl: "/members/Sachin Gupta.jpeg"
+          imageUrl: "/members/SachinGupta.jpeg"
         }
       ]
     },
@@ -120,26 +120,26 @@ const Members = () => {
           scholar: "SSGSA Scholar 2015-16",
           university: "Univ. of Southern California",
           place: "LA, USA",
-          imageUrl: "/members/Rajat Kant Goel.jpg"
+          imageUrl: "/members/RajatKantGoel.jpg"
         },
         {
           name: "Mr. Prateek Jain",
           position: "Team Lead",
           university: "Aligarh Muslim University",
           place: "Aligarh, India",
-          imageUrl: "/members/Prateek Jain.jpg"
+          imageUrl: "/members/PrateekJain.jpg"
         },
         {
           name: "Mr. Prajjwal Nijhara",
           university: "Aligarh Muslim University",
           place: "Aligarh, India",
-          imageUrl: "/members/Prajjwal Nijhara.jpeg"
+          imageUrl: "/members/PrajjwalNijhara.jpeg"
         },
         {
           name: "Mr. Roshan Sharma",
           university: "Aligarh Muslim University",
           place: "Aligarh, India",
-          imageUrl: "/members/Roshan Sharma.jpeg"
+          imageUrl: "/members/RoshanSharma.jpeg"
         }
       ]
     },
@@ -157,13 +157,13 @@ const Members = () => {
           name: "Ms. Sadia Tanweer",
           scholar: "SSGSA Scholar 2016-17",
           place: "Finland",
-          imageUrl: "/members/Sadia Tanweer.png"
+          imageUrl: "/members/SadiaTanweer.png"
         },
         {
           name: "Mr. Kashif Ahmad",
           scholar: "SSGSA Scholar 2015-16",
           place: "Nevada,United States",
-          imageUrl: "/members/Kashif Ahmad.jpeg"
+          imageUrl: "/members/KashifAhmad.jpeg"
         }
       ]
     },
@@ -174,18 +174,18 @@ const Members = () => {
           position: "Team Lead",
           scholar: "SSGSA Scholar 2017-18",
           place: "Munich, Germany",
-          imageUrl: "/members/Toaha Umar.jpg"
+          imageUrl: "/members/ToahaUmar.jpg"
         },
         {
           name: "Mr. Salman Khan",
           place: "Aligarh, India",
-          imageUrl: "/members/Salman Khan.jpg"
+          imageUrl: "/members/SalmanKhan.jpg"
         },
         {
           name: "Ms. Madeeha Zubair",
           scholar: "SSGSA Scholar 2018-19",
           place: "Aligarh, India",
-          imageUrl: "/members/Madeeha Zubair.jpeg"
+          imageUrl: "/members/MadeehaZubair.jpeg"
         }
       ]
     },
@@ -196,7 +196,7 @@ const Members = () => {
           position: "Team Lead",
           scholar: "SSGSA Scholar 2012-13",
           place: "San Diego, California, USA",
-          imageUrl: "/members/Tanwee Kausar.jpg"
+          imageUrl: "/members/TanweeKausar.jpg"
         },
         {
           name: "Mr. Sabahuddin Ahmad",
@@ -204,7 +204,7 @@ const Members = () => {
           scholar: "ISRA scholar 2013-14",
           university: "Heinrich Heine University",
           place: "Duesseldorf, Germany",
-          imageUrl: "/members/Sabahuddin Ahmad.jpeg"
+          imageUrl: "/members/SabahuddinAhmad.jpeg"
         }
       ]
     }
