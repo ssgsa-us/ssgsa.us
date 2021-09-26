@@ -1,9 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
-
-const About = () => {
+const Foundation = () => {
   return (
-    <div className="bg-blue-850 text-white w-full lg:mr-4 lg:p-8 p-4">
+    <div className="bg-blue-850 text-white w-full lg:mr-4 lg:p-8 p-4" id="Foundation">
       <h1 className="lg:text-3xl text-2xl mb-4 font-extrabold">About</h1>
 
       <p>
@@ -103,4 +100,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Foundation;
