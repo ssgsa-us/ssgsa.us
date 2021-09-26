@@ -80,7 +80,7 @@ export default function Header() {
                       Foundation Of SSGSA
                     </a>
                   </Link>
-                  <Link href="/about">
+                  <Link href="/about#Mission">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Mission
                     </a>
@@ -95,29 +95,29 @@ export default function Header() {
                     </div>
 
                     <div className="flex-col md:absolute md:left-full md:top-1/2 bg-red-850 md:bg-gray-200 hidden navgroup-box w-full">
-                      <Link href="/about">
+                      <Link href="/about#Members">
                         <a className="px-6 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                           Executive Committee
                         </a>
                       </Link>
-                      <Link href="/about">
+                      <Link href="/about#Advisory">
                         <a className="px-6 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                           Advisory Board
                         </a>
                       </Link>
-                      <Link href="/about">
+                      <Link href="/about#Leadership">
                         <a className="px-6 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                           Leadership History
                         </a>
                       </Link>
-                      <Link href="/about">
+                      <Link href="/about#Donors">
                         <a className="px-6 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                           Donors And Contributors
                         </a>
                       </Link>
                     </div>
                   </div>
-                  <Link href="/about">
+                  <Link href="/about#Alumni">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Our Alumni
                     </a>
