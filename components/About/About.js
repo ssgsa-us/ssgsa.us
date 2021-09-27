@@ -1,3 +1,6 @@
+import AdvisoryBoard from "./AdvisoryBoard";
+import DonorAndContributors from "./DonorAndContributors";
+import LeadershipHistory from "./LeadershipHistory";
 import Members from "./Members";
 
 const About = () => {
@@ -19,16 +22,20 @@ const About = () => {
             </li>
             <li className="m-2">
               Expanding our strong formal network of academic mentors who also
-              function as brand ambassadors of AMU at their respective universities
-              and organisations where they are placed after finishing their studies.
+              function as brand ambassadors of AMU at their respective
+              universities and organisations where they are placed after
+              finishing their studies.
             </li>
           </ul>
         </div>
       </div>
 
       <Members />
+      <AdvisoryBoard />
+      <LeadershipHistory />
+      <DonorAndContributors />
     </div>
-  )
+  );
 };
 
 export default About;
