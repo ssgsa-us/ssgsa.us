@@ -28,32 +28,32 @@ const Apply = () => {
             at any time.
           </p>
         </div>
-        <a href="https://amu.ac.in/" target="_blank">
+        <a href="https://amu.ac.in/" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-8 w-full bg-red-850 text-sm text-white text-center">
           The Aligarh Muslim University
         </button>
         </a>
-        <a href="/assets/PressRelease-SSGSA-2021-22.pdf" target="_blank">
+        <a href="/assets/PressRelease-SSGSA-2021-22.pdf" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           SSGSA results (2021-2022) announced
         </button>
         </a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdZypeiKqTu5AR573bFuVxmw_rZHgWWDAt--8fkWIosNH_-w/viewform" target="_blank">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdZypeiKqTu5AR573bFuVxmw_rZHgWWDAt--8fkWIosNH_-w/viewform" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Pledge your support to SSGSA
         </button>
         </a>
-        <a href="http://www.aligs.org/" target="_blank">
+        <a href="http://www.aligs.org/" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Federation of Aligarh Alumni Associations(FAAA)
         </button>
         </a>
-        <a href="https://www.facebook.com/groups/ssesa/" target="_blank">
+        <a href="https://www.facebook.com/groups/ssesa/" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Join our Facebook Group
         </button>
         </a>
-        <a href="/assets/SSGSA_Convention_2020_Press_Release.pdf" target="_blank">
+        <a href="/assets/SSGSA_Convention_2020_Press_Release.pdf" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Press Release Statement of SSGSA Convention 2020
         </button>
