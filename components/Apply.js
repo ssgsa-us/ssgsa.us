@@ -28,21 +28,31 @@ const Apply = () => {
             at any time.
           </p>
         </div>
+        <a href="https://amu.ac.in/">
         <button className="px-2 py-2 mt-8 w-full bg-red-850 text-sm text-white text-center">
           The Aligarh Muslim University
         </button>
+        </a>
+        <a href="#">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           SSGSA results (2021-2022) announced
         </button>
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdZypeiKqTu5AR573bFuVxmw_rZHgWWDAt--8fkWIosNH_-w/viewform">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Pledge your support to SSGSA
         </button>
+        </a>
+        <a href="http://www.aligs.org/">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Federation of Aligarh Alumni Associations(FAAA)
         </button>
+        </a>
+        <a href="https://www.facebook.com/groups/ssesa/">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Join our Facebook Group
         </button>
+        </a>
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Press Release Statement of SSGSA Convention 2020
         </button>
