@@ -33,7 +33,7 @@ const Apply = () => {
           The Aligarh Muslim University
         </button>
         </a>
-        <a href="#">
+        <a href="http://ssgsa.us/uploads/PressRelease-SSGSA-2021-22.pdf">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           SSGSA results (2021-2022) announced
         </button>
@@ -53,9 +53,11 @@ const Apply = () => {
           Join our Facebook Group
         </button>
         </a>
+        <a href="http://ssgsa.us/assets/SSGSA_Convention_2020_Press_Release.pdf">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Press Release Statement of SSGSA Convention 2020
         </button>
+        </a>
 
         <div className="mx-4">
           <button className="px-2 py-2 mt-8 mb-8 w-full bg-blue-850 text-sm text-white text-center rounded-tl-md rounded-br-md">
