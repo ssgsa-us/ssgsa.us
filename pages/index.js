@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
       <div className="bg-gray-200 text-blue-900 w-full mt-8 lg:mr-2 lg:p-2 p-1"  >
   <marquee>
-    <p> SSGSA results (2021-2022) annonced </p>
+    <p> SSGSA results (2021-2022) announced </p>
   </marquee>
    </div>
       <UpperCarousel />
