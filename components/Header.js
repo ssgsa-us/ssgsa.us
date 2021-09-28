@@ -67,11 +67,9 @@ export default function Header() {
               </div>
               <div className={`group w-full h-full hover:bg-blue-850 ${router.pathname == '/about' && "bg-blue-850"}`}>
                 <div className="md:flex md:flex-col md:justify-center md:h-full">
-                  <Link href="">
-                    <a className="py-4 px-2 text-white text-sm">
-                      ABOUT
-                    </a>
-                  </Link>
+                  <a className="py-4 px-2 text-white text-sm cursor-pointer">
+                    ABOUT
+                  </a>
                 </div>
 
                 <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
@@ -87,11 +85,9 @@ export default function Header() {
                   </Link>
                   <div className="navgroup hover:bg-blue-850">
                     <div className="flex">
-                      <Link href="">
-                        <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 navgroup-text text-sm w-full">
-                          Members
-                        </a>
-                      </Link>
+                      <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 navgroup-text text-sm w-full cursor-pointer">
+                        Members
+                      </a>
                     </div>
 
                     <div className="flex-col md:absolute md:left-full md:top-1/2 bg-red-850 md:bg-gray-200 hidden navgroup-box w-full">
@@ -126,11 +122,9 @@ export default function Header() {
               </div>
               <div className={`group h-full hover:bg-blue-850 ${router.pathname == '/apply' && "bg-blue-850"}`}>
                 <div className="md:flex md:flex-col md:justify-center md:h-full">
-                  <Link href="">
-                    <a className="py-4 px-2 text-white text-sm">
-                      APPLY
-                    </a>
-                  </Link>
+                  <a className="py-4 px-2 text-white text-sm cursor-pointer">
+                    APPLY
+                  </a>
                 </div>
 
                 <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
@@ -158,11 +152,9 @@ export default function Header() {
               </div>
               <div className={`group h-full hover:bg-blue-850 ${router.pathname == '/alumni' && "bg-blue-850"}`}>
                 <div className="md:flex md:flex-col md:justify-center md:h-full">
-                  <Link href="">
-                    <a className="py-4 px-2 text-white text-sm">
-                      ALUMNI
-                    </a>
-                  </Link>
+                  <a className="py-4 px-2 text-white text-sm cursor-pointer">
+                    ALUMNI
+                  </a>
                 </div>
 
                 <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
@@ -190,12 +182,13 @@ export default function Header() {
 
           <div className="md:flex md:items-center md:space-x-1">
             <div className={`flex flex-col justify-center h-full hover:bg-blue-850 ${router.pathname == '/isra' && "bg-blue-850"}`}>
-              <a
-                href="#"
-                className="px-2 md:py-4 md:px-1 text-white text-sm"
-              >
-                International Summer Research Award(ISRA)
-              </a>
+              <Link href="/isra">
+                <a
+                  className="px-2 md:py-4 md:px-1 text-white text-sm"
+                >
+                  International Summer Research Award(ISRA)
+                </a>
+              </Link>
             </div>
           </div>
         </div>
