@@ -10,13 +10,14 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Header />
-      <div className="bg-gray-200 text-blue-900 w-full mt-8 lg:mr-2 lg:p-2 p-1"  >
-  <marquee>
-    <p> SSGSA results (2021-2022) annonced </p>
-  </marquee>
-   </div>
-      <UpperCarousel />
+      <div className="bg-gray-200 text-blue-900 w-full mt-8 lg:mr-2 lg:p-2 p-1">
+        <marquee>
+          <p> SSGSA results (2021-2022) annonced </p>
+        </marquee>
+      </div>
       <Counter />
+      <UpperCarousel />
+
       <div className="mx-2 mt-10 lg:flex justify-around lg:mx-20">
         <Datetable />
         <Apply />
