@@ -22,44 +22,45 @@ const Apply = () => {
             <Image src="/donate2.png" alt="Donate" width={250} height={30} />
           </div>
           <p className="text-sm mt-8">
-            By supporting students, you&apos;re becoming an active participant in
-            building their careers. You can easily cancel or upgrade your
-            contribution at any time.
+            By supporting students, you are becoming an active participant in
+            building their careers. All donations and contributions directly sponsor the attempts of talented students to 
+            secure admission in an MS/PhD program at a university of international repute. You can easily cancel or upgrade your contribution
+            at any time.
           </p>
         </div>
+        <a href="https://amu.ac.in/" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-8 w-full bg-red-850 text-sm text-white text-center">
-          SSGSA results (2021-2022) announce
+          The Aligarh Muslim University
         </button>
+        </a>
+        <a href="/assets/PressRelease-SSGSA-2021-22.pdf" target="_blank" rel="noopener noreferrer">
+        <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
+          SSGSA results (2021-2022) announced
+        </button>
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdZypeiKqTu5AR573bFuVxmw_rZHgWWDAt--8fkWIosNH_-w/viewform" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Pledge your support to SSGSA
         </button>
+        </a>
+        <a href="http://www.aligs.org/" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Federation of Aligarh Alumni Associations(FAAA)
         </button>
-        <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
-          The Aligarh Muslim University
-        </button>
+        </a>
+        <a href="https://www.facebook.com/groups/ssesa/" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Join our Facebook Group
         </button>
+        </a>
+        <a href="/assets/SSGSA_Convention_2020_Press_Release.pdf" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
           Press Release Statement of SSGSA Convention 2020
         </button>
+        </a>
 
         <div className="mx-4">
-          <button className="px-2 py-2 mt-8 w-full bg-blue-850 text-sm text-white text-center rounded-tl-md rounded-br-md">
-            Subscribe to our Newsletter
-          </button>
-          <div className="flex space-x-2 mt-2">
-            <input
-              className="border-2 border-gray-300 pl-1 w-2/3 placeholder-text-gray-400 text-sm"
-              placeholder="Your email"
-            ></input>
-            <button className="px-1 py-2 w-1/3 bg-red-850 font-black text-xs text-white text-center">
-              Sign me up
-            </button>
-          </div>
-          <button className="px-2 py-2 mt-8 mb-8 w-full bg-red-850 text-sm text-white text-center rounded-tl-md rounded-br-md">
+          <button className="px-2 py-2 mt-8 mb-8 w-full bg-blue-850 text-sm text-white text-center rounded-tl-md rounded-br-md">
             Ask a Question
           </button>
         </div>
