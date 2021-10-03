@@ -332,21 +332,26 @@ const Awardees = () => {
         Awardees
       </h1>
       <div className="flex flex-wrap justify-around my-8 mx-8 sm:mx-16 lg:mx-24 bg-gray-200">
-        {awardees.map(session => (
+        {awardees.map((session, index) => (
           <h3
             className={`text-red-850 ${currentSession == session.session ? "bg-blue-850": ""} font-bold w-32 text-center text-xl px-4 py-2 cursor-pointer`}
             onClick={() => setCurrentSession(session.session)}
+            key={index}
           >
             {session.session}
           </h3>
         ))}
       </div>
       <div className=" my-8 mx-8 sm:mx-16 lg:mx-24">
-        {awardees.map(session => (
-          <table className="w-full" hidden={currentSession != session.session}>
+        {awardees.map((session, index) => (
+          <table
+            className="w-full"
+            hidden={currentSession != session.session}
+            key={index}
+          >
             <tbody>
-              {session.awardees.map((awardee) => (
-                <tr>
+              {session.awardees.map((awardee, ind) => (
+                <tr key={ind}>
                   <td className="bg-gray-200 text-blue-850 font-bold p-2 w-2/5">
                     {awardee.name}
                   </td>
