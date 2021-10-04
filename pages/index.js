@@ -16,8 +16,8 @@ export default function Home() {
           <p> SSGSA results (2021-2022) announced </p>
         </marquee>
       </div>
-      <UpperCarousel />
       <Counter />
+      <UpperCarousel />
       <div className="mx-2 mt-10 lg:flex justify-around lg:mx-20">
         <div className="w-full lg:mr-4">
           <h1 className="text-blue-850 lg:text-3xl mx-2 mb-4 font-extrabold">
