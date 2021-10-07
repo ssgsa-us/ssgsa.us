@@ -29,3 +29,8 @@ a {
 .navgroup:hover .navgroup-box {
   display: flex;
 }
+
+#Testimonials .rec-carousel-item {
+  display: flex;
+  align-items: center;
+}
