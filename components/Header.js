@@ -14,13 +14,32 @@ export default function Header() {
 
   return (
     <nav className="sticky top-0 z-50 bg-red-850">
-      <div className="w-full flex flex-row bg-white">
-        <div className="flex-1 text-sm sm:text-2xl md:text-3xl justify-center pl-8 my-6 flex items-center font-black text-red-850 ">
+      <div className="flex justify-end bg-white">
+        <div className="flex bg-blue-850 text-white text-xs sm:text-sm md:text-base font-bold px-4 py-2">
+          <Link href="/">
+            <a className="px-1 sm:px-4">
+              Newsletters
+            </a>
+          </Link>
+          <Link href="/">
+            <a className="px-1 sm:px-4">
+              News &amp; Events
+            </a>
+          </Link>
+          <Link href="/">
+            <a className="px-1 sm:px-4">
+              Contact Us
+            </a>
+          </Link>
+        </div>
+      </div>
+      <div className="w-full flex flex-row bg-white items-center">
+        <div className="flex-1 text-xl sm:text-2xl md:text-3xl lg:text-4xl justify-center pl-8 my-6 flex items-center font-black text-red-850 ">
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
         <div className="mr-3 flex-2">
           <Link href="/">
-            <Image width={93} height={93} src={logo} alt="SSGSA Logo" />
+            <Image width={130} height={130} src={logo} alt="SSGSA Logo" />
           </Link>
         </div>
       </div>
