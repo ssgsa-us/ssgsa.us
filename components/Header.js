@@ -34,12 +34,12 @@ export default function Header() {
         </div>
       </div>
       <div className="w-full flex flex-row bg-white items-center">
-        <div className="flex-1 text-xl sm:text-2xl md:text-3xl lg:text-4xl justify-center pl-8 my-6 flex items-center font-black text-red-850 ">
+        <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 flex items-center font-black text-red-850 ">
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
-        <div className="mr-3 flex-2">
+        <div className="mr-3 flex-2 hidden sm:flex">
           <Link href="/">
-            <Image width={130} height={130} src={logo} alt="SSGSA Logo" />
+            <Image width={110} height={110} src={logo} alt="SSGSA Logo" />
           </Link>
         </div>
       </div>
