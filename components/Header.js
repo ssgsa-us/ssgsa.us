@@ -33,11 +33,11 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      <div className="w-full flex flex-row bg-white items-center">
+      <div className="w-full flex flex-row bg-white items-center hidden sm:flex">
         <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 flex items-center font-black text-red-850 ">
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
-        <div className="mr-3 flex-2 hidden sm:flex">
+        <div className="mr-3 flex-2">
           <Link href="/">
             <Image width={110} height={110} src={logo} alt="SSGSA Logo" />
           </Link>
