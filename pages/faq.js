@@ -103,8 +103,8 @@ export default function Home() {
                     Undergraduate program (after 12th grade).
                   </li>
                   <li>
-                    For applicants currently with a three years’ bachelor’s
-                    degree, you have to be already enrolled in a Master’s
+                    For applicants currently with a three years&apos; bachelor&apos;s
+                    degree, you have to be already enrolled in a Master&apos;s
                     program inorder to be eligible for the award.
                   </li>
                   <li>
@@ -140,7 +140,7 @@ export default function Home() {
                   <span className="text-blue-400 cursor-pointer">
                     &nbsp; contact@ssgsa.us
                   </span>
-                  , or you can send a personalized message through SSGSA’s
+                  , or you can send a personalized message through SSGSA&apos;s
                   contact page.
                 </p>
               </div>
@@ -202,8 +202,8 @@ export default function Home() {
                   <li>Your curriculum vitae.</li>
                   <li>
                     Attested copies of your marksheets from 10th standard
-                    onwards. It should include Grade 12, Bachelor’s and
-                    Master’s (NET, GATE scores if already taken)
+                    onwards. It should include Grade 12, Bachelor&apos;s and
+                    Master&apos;s (NET, GATE scores if already taken)
                   </li>
                   <li>
                     Attested copies of certificates of any of your achievements
@@ -300,7 +300,7 @@ export default function Home() {
                   Anyone who has been involved in a professional relationship
                   with the scholar.
                   <br />
-                  Examples are your manager (past or current) if you're working,
+                  Examples are your manager (past or current) if you&apos;re working,
                   your teachers at the university level (professors or lecturers),
                   or any others including coaches and mentors etc. Please
                   refrain from using connections as your referees whom you do
