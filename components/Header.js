@@ -157,7 +157,7 @@ export default function Header() {
                       Application Timeline: 2022-2023
                     </a>
                   </Link>
-                  <Link href="">
+                  <Link href="/faq">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       FAQs
                     </a>
