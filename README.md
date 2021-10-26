@@ -36,9 +36,17 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Tailwind CSS Config
 
 The easiest way to show same colors on each page is to set theme in tailwind css config for custom colors and get custom classes.
+
 To learn more about this refer [Tailwind CSS Custom Colors Documentation](https://tailwindcss.com/docs/customizing-colors)
 
 Custom class "bg-blue-850" is created for color of hexcode "#003366".
+
 Custom class "bg-red-850" is created for color of hexcode "#cc0000".
 
 Variant 'group-hover' is added for 'display' property in this tailwind css config.
+
+## Icons
+
+Icons Library used for ssgsa is [FontAwesome](https://fontawesome.com/).
+
+To search all icons, check https://fontawesome.com/v5.15/icons?d=gallery&p=2
