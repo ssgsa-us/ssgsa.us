@@ -19,27 +19,32 @@ export default function Home() {
     e.preventDefault();
 
     if (name && email && affiliation && subject && message) {
-      const templateParams = {
-        "name": name,
-        "email": email,
-        "affiliation": affiliation,
-        "subject": subject,
-        "message": message
-      }
+      const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (regex.test(String(email).toLowerCase())) {
+        const templateParams = {
+          "name": name,
+          "email": email,
+          "affiliation": affiliation,
+          "subject": subject,
+          "message": message
+        }
 
-      emailjs
-        .send(
-          process.env.EMAILJS_SERVICE_ID,
-          process.env.EMAILJS_TEMPLATE_ID,
-          templateParams,
-          process.env.EMAILJS_USER_ID
-        )
-        .then(() => {
-          setSuccess("We have recieved your mail and will contact you as soon as possible.")
-        })
-        .catch(() => {
-          setError("Some Error Occured. Try Again!")
-        })
+        emailjs
+          .send(
+            process.env.EMAILJS_SERVICE_ID,
+            process.env.EMAILJS_TEMPLATE_ID,
+            templateParams,
+            process.env.EMAILJS_USER_ID
+          )
+          .then(() => {
+            setSuccess("We have recieved your mail and will contact you as soon as possible.")
+          })
+          .catch(() => {
+            setError("Some Error Occured. Try Again!")
+          })
+      } else {
+        setError("Email should be valid.")
+      }
     } else {
       setError("All Fields Are Required.")
     }
@@ -66,7 +71,7 @@ export default function Home() {
             <div
               className="bg-green-600 rounded-3xl p-2 pl-6 mb-2"
             >
-              <p><span className='font-bold'>Sent:</span> {success}</p>
+              <p className='text-white'><span className='font-bold'>Sent:</span> {success}</p>
             </div>
           ) : null}
 
