@@ -13,6 +13,16 @@ body {
   font-size: 18px;
 }
 
+html {
+  scroll-padding-top: 220px;
+}
+
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 80px;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;

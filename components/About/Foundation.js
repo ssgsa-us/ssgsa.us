@@ -1,6 +1,6 @@
 const Foundation = () => {
   return (
-    <div className="text-black w-full lg:mr-4 lg:p-8 p-4">
+    <div className="text-black w-full lg:mr-4 lg:p-8 p-4" id="Foundation">
       <h1
         className="text-sm sm:text-xl md:text-2xl -my-8 bg-blue-850  mb-10  text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl"
       >

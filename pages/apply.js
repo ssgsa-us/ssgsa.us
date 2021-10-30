@@ -1,14 +1,11 @@
 import Apply from "../components/Apply";
 import Datetable from "../components/Datetable";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Link from "next/link"
-import styles from "../styles/Home.module.css";
+import Link from "next/link";
+import MainLayout from "../layouts/Main";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Header />
+    <MainLayout>
       <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 lg:flex justify-around text-black">
         <div>
           <div id="WhoCanApply">
@@ -63,8 +60,6 @@ export default function Home() {
 
         <Apply />
       </div>
-
-      <Footer />
-    </div>
+    </MainLayout>
   );
 }
