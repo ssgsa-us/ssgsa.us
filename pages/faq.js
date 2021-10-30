@@ -2,16 +2,13 @@ import { faArrowAltCircleDown, faArrowAltCircleUp } from '@fortawesome/free-soli
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from "next/link"
 import { useState } from "react"
-import Footer from "../components/Footer"
-import Header from "../components/Header"
-import styles from "../styles/Home.module.css"
+import MainLayout from '../layouts/Main'
 
 export default function Home() {
   const [index, setIndex] = useState(0)
 
   return (
-    <div className={styles.container}>
-      <Header />
+    <MainLayout>
       <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 flex justify-center">
         <div>
           <h1
@@ -340,7 +337,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
+    </MainLayout>
   )
 }

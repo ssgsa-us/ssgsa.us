@@ -1,8 +1,6 @@
 import emailjs from 'emailjs-com';
 import { useState } from "react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import styles from "../styles/Home.module.css";
+import MainLayout from "../layouts/Main";
 
 export default function Home() {
   const [name, setName] = useState("")
@@ -51,8 +49,7 @@ export default function Home() {
   }
 
   return (
-    <div className={styles.container}>
-      <Header />
+    <MainLayout>
       <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 flex justify-center">
         <div>
           <h1 className="mb-4 bg-blue-850 text-xl sm:text-2xl lg:text-3xl text-center text-white font-extrabold py-2 px-6 sm:px-12 rounded-tl-3xl rounded-br-3xl">
@@ -142,7 +139,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
+    </MainLayout>
   );
 }
