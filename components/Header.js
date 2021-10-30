@@ -26,7 +26,7 @@ export default function Header() {
               News &amp; Events
             </a>
           </Link>
-          <Link href="/contactUs">
+          <Link href="/contact">
             <a className="px-1 sm:px-4">
               Contact Us
             </a>
