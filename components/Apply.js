@@ -28,10 +28,11 @@ const Apply = () => {
             at any time.
           </p>
         </div>
-          <Link href="/about_sirsyed">
+        <Link href="/about_sirsyed">
           <button className="px-2 py-2 mt-8 w-full bg-red-850 text-sm text-white text-center">
-          About Sir Syed
-        </button></Link>
+            About Sir Syed
+          </button>
+        </Link>
       
         <a href="https://amu.ac.in/" target="_blank" rel="noopener noreferrer">
         <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
