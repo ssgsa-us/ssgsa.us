@@ -1,16 +1,13 @@
 import Apply from "../components/Apply";
 import Counter from "../components/Counter";
 import Datetable from "../components/Datetable";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import UpperCarousel from "../components/UpperCarousel";
+import MainLayout from "../layouts/Main";
 import Scholar from "../components/Scholar";
-import styles from "../styles/Home.module.css";
+import UpperCarousel from "../components/UpperCarousel";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Header />
+    <MainLayout>
       <div className="bg-gray-200 text-blue-900 w-full mt-8 lg:mr-2 lg:p-2 p-1">
         <marquee>
           <p> SSGSA results (2021-2022) announced </p>
@@ -29,7 +26,6 @@ export default function Home() {
         </div>
         <Apply />
       </div>
-      <Footer />
-    </div>
+    </MainLayout>
   );
 }

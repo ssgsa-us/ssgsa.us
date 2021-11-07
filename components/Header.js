@@ -26,7 +26,7 @@ export default function Header() {
               News &amp; Events
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/contact">
             <a className="px-1 sm:px-4">
               Contact Us
             </a>
@@ -92,7 +92,7 @@ export default function Header() {
                 </div>
 
                 <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
-                  <Link href="/about">
+                  <Link href="/about#Foundation">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Foundation Of SSGSA
                     </a>
@@ -147,7 +147,7 @@ export default function Header() {
                 </div>
 
                 <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
-                  <Link href="/apply">
+                  <Link href="/apply#WhoCanApply">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Who can apply?
                     </a>
@@ -177,7 +177,7 @@ export default function Header() {
                 </div>
 
                 <div className="flex-col md:absolute md:top-full bg-red-850 md:bg-gray-200 hidden group-hover:flex w-auto">
-                  <Link href="/alumni">
+                  <Link href="/alumni#Testimonials">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Testimonials
                     </a>
