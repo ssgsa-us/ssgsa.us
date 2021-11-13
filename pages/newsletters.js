@@ -16,7 +16,10 @@ export default function Home() {
           <div className="flex justify-center flex-wrap">
             {newsletters.map((newsletter, index) => (
               <Link href={newsletter.link} key={index}>
-                <a className={`flex justify-center items-center text-center bg-gray-400 text-white font-bold w-40 h-24 m-4 ${index%3 == 2 ? "bg-red-850" : (index%3 == 1 ? "bg-blue-850" : (index%6 == 0 ? "text-red-850" : "text-blue-850"))}`}>
+                <a
+                  className={`flex justify-center items-center text-center bg-gray-400 text-white font-bold w-40 h-24 m-4 ${index%3 == 2 ? "bg-red-850" : (index%3 == 1 ? "bg-blue-850" : (index%6 == 0 ? "text-red-850" : "text-blue-850"))}`}
+                  target="_blank"
+                >
                   {newsletter.title}
                 </a>
               </Link>
