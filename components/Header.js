@@ -16,7 +16,7 @@ export default function Header() {
     <nav className="sticky top-0 z-50 bg-red-850">
       <div className="flex justify-end bg-white">
         <div className="flex bg-blue-850 text-white text-xs sm:text-sm md:text-base font-bold px-4 py-2">
-          <Link href="/">
+          <Link href="/newsletters">
             <a className="px-1 sm:px-4">
               Newsletters
             </a>
