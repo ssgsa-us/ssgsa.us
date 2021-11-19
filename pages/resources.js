@@ -21,8 +21,8 @@ export default function Home() {
                 </h3>
                 <div className="flex justify-center flex-wrap">
                   {group.resources.map((resource, index) => (
-                    <div className="w-52 m-4 text-center">
-                      <Link href={resource.link} key={ind*100+index}>
+                    <div className="w-52 m-4 text-center" key={ind*100+index}>
+                      <Link href={resource.link}>
                         <a
                           className={`flex justify-center items-center text-center bg-gray-400 text-white font-bold w-52 h-24 ${index%3 == 2 ? "bg-red-850" : (index%3 == 1 ? "bg-blue-850" : (index%6 == 0 ? "text-red-850" : "text-blue-850"))}`}
                           target="_blank"
