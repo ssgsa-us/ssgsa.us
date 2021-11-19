@@ -190,7 +190,7 @@ export default function Header() {
                 </div>
               </div>
               <div className={`md:flex md:flex-col md:justify-center h-full hover:bg-blue-850 ${router.pathname == '/resources' && "bg-blue-850"}`}>
-                <Link href="">
+                <Link href="/resources">
                   <a className="py-4 px-2 text-white text-sm">
                     RESOURCES
                   </a>
