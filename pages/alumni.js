@@ -1,6 +1,6 @@
-import Awardees from "../components/Alumni/Awardees"
-import MainLayout from "../layouts/Main"
-import Testimonials from "../components/Alumni/Testimonials"
+import Awardees from '../components/Alumni/Awardees'
+import MainLayout from '../layouts/Main'
+import Testimonials from '../components/Alumni/Testimonials'
 
 export default function Home() {
   return (
@@ -8,5 +8,5 @@ export default function Home() {
       <Testimonials />
       <Awardees />
     </MainLayout>
-  );
+  )
 }

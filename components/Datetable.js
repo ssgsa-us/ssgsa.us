@@ -1,4 +1,4 @@
-const DateTable = ({bgcolor, textcolor, textbold}) => {
+const DateTable = ({ bgcolor, textcolor, textbold }) => {
   return (
     <div>
       <table className="w-full">
@@ -30,7 +30,9 @@ const DateTable = ({bgcolor, textcolor, textbold}) => {
             <td className="border-2 border-gray-300 p-2">To be announced</td>
           </tr>
           <tr>
-            <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>Interviews</td>
+            <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
+              Interviews
+            </td>
             <td className="border-2 border-gray-300 p-2">To be announced</td>
           </tr>
           <tr>
@@ -40,21 +42,27 @@ const DateTable = ({bgcolor, textcolor, textbold}) => {
             <td className="border-2 border-gray-300 p-2">To be announced</td>
           </tr>
           <tr>
-            <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>Orientation</td>
+            <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
+              Orientation
+            </td>
             <td className="border-2 border-gray-300 p-2">To be announced</td>
           </tr>
           <tr>
-            <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>Allotment of Mentors</td>
+            <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
+              Allotment of Mentors
+            </td>
             <td className="border-2 border-gray-300 p-2">To be announced</td>
           </tr>
           <tr>
-            <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>Start of Term</td>
+            <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
+              Start of Term
+            </td>
             <td className="border-2 border-gray-300 p-2">To be announced</td>
           </tr>
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default DateTable;
+export default DateTable

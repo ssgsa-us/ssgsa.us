@@ -14,7 +14,7 @@ const DonorAndContributors = () => {
         <div className="mt-6 mb-10">All donors, students and alumni.</div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DonorAndContributors;
+export default DonorAndContributors

@@ -1,5 +1,5 @@
-import Image from "next/image";
-import MainLayout from "../layouts/Main";
+import Image from 'next/image'
+import MainLayout from '../layouts/Main'
 
 export default function Home() {
   return (
@@ -29,30 +29,29 @@ export default function Home() {
                 landscape of the muslim community by promoting modern education
                 and a rationalist political approach.
               </p>
-              <br/>
+              <br />
               <p>
                 His ideas materialized in the form of many educational
-                institutions including but not limited to the Scientific
-                Society of Aligarh, the first scientific association of its
-                kind in India, as well as the internationally reputed Aligarh
-                Muslim University (AMU). While his philosophical and
-                intellectual endeavors continue to inspire generations of
-                scholars globally, it is through the establishment of Mohammad
-                Anglo-Oriental College (1875), which later became AMU,that he
-                has made an everlasting contribution to the Indian education
-                system.
+                institutions including but not limited to the Scientific Society
+                of Aligarh, the first scientific association of its kind in
+                India, as well as the internationally reputed Aligarh Muslim
+                University (AMU). While his philosophical and intellectual
+                endeavors continue to inspire generations of scholars globally,
+                it is through the establishment of Mohammad Anglo-Oriental
+                College (1875), which later became AMU,that he has made an
+                everlasting contribution to the Indian education system.
               </p>
-              <br/>
+              <br />
               <p>
                 At the Sir Syed Education Society of North America, we feel
                 privileged to have been influenced by his vision in the
                 formative years of our careers at AMU.
               </p>
-              <br/>
+              <br />
             </div>
           </div>
         </div>
       </div>
     </MainLayout>
-  );
+  )
 }

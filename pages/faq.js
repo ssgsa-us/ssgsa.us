@@ -1,7 +1,10 @@
-import { faArrowAltCircleDown, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowAltCircleDown,
+  faArrowAltCircleUp,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Link from "next/link"
-import { useState } from "react"
+import Link from 'next/link'
+import { useState } from 'react'
 import MainLayout from '../layouts/Main'
 
 export default function Home() {
@@ -11,9 +14,7 @@ export default function Home() {
     <MainLayout>
       <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 flex justify-center">
         <div>
-          <h1
-            className="mb-8 bg-blue-850 text-xl sm:text-2xl lg:text-3xl text-center text-white font-extrabold py-2 px-6 sm:px-12 rounded-tl-3xl rounded-br-3xl"
-          >
+          <h1 className="mb-8 bg-blue-850 text-xl sm:text-2xl lg:text-3xl text-center text-white font-extrabold py-2 px-6 sm:px-12 rounded-tl-3xl rounded-br-3xl">
             Frequently Asked Questions
           </h1>
 
@@ -21,13 +22,21 @@ export default function Home() {
             <div>
               <div
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
-                onClick={() => index == 1 ? setIndex(0) : setIndex(1)}
+                onClick={() => (index == 1 ? setIndex(0) : setIndex(1))}
               >
                 <p className="font-bold text-sm sm:text-base">What is SSGSA?</p>
-                { index == 1 ? (
-                  <FontAwesomeIcon icon={faArrowAltCircleUp} size='lg' className='ml-2 text-red-850' />
+                {index == 1 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 ) : (
-                  <FontAwesomeIcon icon={faArrowAltCircleDown} size='lg' className='ml-2 text-red-850' />
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 )}
               </div>
               <div
@@ -38,25 +47,33 @@ export default function Home() {
                 <p className="text-sm sm:text-base text-white">
                   SSGSA (Sir Syed Global Scholar Award, run by AMU alumni based
                   in USA) is an award given to successful applicants towards
-                  their expenses for GRE, TOEFL and five university
-                  applications fees along with the mentorship throughout the
-                  application process.
+                  their expenses for GRE, TOEFL and five university applications
+                  fees along with the mentorship throughout the application
+                  process.
                 </p>
               </div>
             </div>
             <div>
               <div
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
-                onClick={() => index == 2 ? setIndex(0) : setIndex(2)}
+                onClick={() => (index == 2 ? setIndex(0) : setIndex(2))}
               >
                 <p className="font-bold text-sm sm:text-base">
-                  When are the applications due and how long does it take to
-                  get the applications reviewed?
+                  When are the applications due and how long does it take to get
+                  the applications reviewed?
                 </p>
-                { index == 2 ? (
-                  <FontAwesomeIcon icon={faArrowAltCircleUp} size='lg' className='ml-2 text-red-850' />
+                {index == 2 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 ) : (
-                  <FontAwesomeIcon icon={faArrowAltCircleDown} size='lg' className='ml-2 text-red-850' />
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 )}
               </div>
               <div
@@ -77,15 +94,23 @@ export default function Home() {
             <div>
               <div
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
-                onClick={() => index == 3 ? setIndex(0) : setIndex(3)}
+                onClick={() => (index == 3 ? setIndex(0) : setIndex(3))}
               >
                 <p className="font-bold text-sm sm:text-base">
                   What is the eligibility criteria to apply for SSGSA award?
                 </p>
-                { index == 3 ? (
-                  <FontAwesomeIcon icon={faArrowAltCircleUp} size='lg' className='ml-2 text-red-850' />
+                {index == 3 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 ) : (
-                  <FontAwesomeIcon icon={faArrowAltCircleDown} size='lg' className='ml-2 text-red-850' />
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 )}
               </div>
               <div
@@ -93,20 +118,26 @@ export default function Home() {
                 className="bg-red-850 pl-3 py-3 pr-12"
                 hidden={index != 3}
               >
-                <ul style={{ listStyle: "disc" }} className="text-sm sm:text-base text-white ml-5">
+                <ul
+                  style={{ listStyle: 'disc' }}
+                  className="text-sm sm:text-base text-white ml-5"
+                >
                   <li>You have to be a student or an alumnus of AMU.</li>
                   <li>
                     You will have to be enrolled in at least a 4+ years of
                     Undergraduate program (after 12th grade).
                   </li>
                   <li>
-                    For applicants currently with a three years&apos; bachelor&apos;s
-                    degree, you have to be already enrolled in a Master&apos;s
-                    program inorder to be eligible for the award.
+                    For applicants currently with a three years&apos;
+                    bachelor&apos;s degree, you have to be already enrolled in a
+                    Master&apos;s program inorder to be eligible for the award.
                   </li>
                   <li>
                     For more information, check the details
-                    <Link href="/"><a className="text-blue-400"> here</a></Link>.
+                    <Link href="/">
+                      <a className="text-blue-400"> here</a>
+                    </Link>
+                    .
                   </li>
                 </ul>
               </div>
@@ -114,17 +145,25 @@ export default function Home() {
             <div>
               <div
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
-                onClick={() => index == 4 ? setIndex(0) : setIndex(4)}
+                onClick={() => (index == 4 ? setIndex(0) : setIndex(4))}
               >
                 <p className="font-bold text-sm sm:text-base">
                   I already graduated from AMU and am currently a working
                   professional. I already have a GRE and TOEFL score. Can I get
                   my SOP reviewed by the SSGSA team?
                 </p>
-                { index == 4 ? (
-                  <FontAwesomeIcon icon={faArrowAltCircleUp} size='lg' className='ml-2 text-red-850' />
+                {index == 4 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 ) : (
-                  <FontAwesomeIcon icon={faArrowAltCircleDown} size='lg' className='ml-2 text-red-850' />
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 )}
               </div>
               <div
@@ -145,16 +184,24 @@ export default function Home() {
             <div>
               <div
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
-                onClick={() => index == 5 ? setIndex(0) : setIndex(5)}
+                onClick={() => (index == 5 ? setIndex(0) : setIndex(5))}
               >
                 <p className="font-bold text-sm sm:text-base">
                   I am a final year student of a 3-year undergraduate degree
                   program, can I apply this year? If not, why?
                 </p>
-                { index == 5 ? (
-                  <FontAwesomeIcon icon={faArrowAltCircleUp} size='lg' className='ml-2 text-red-850' />
+                {index == 5 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 ) : (
-                  <FontAwesomeIcon icon={faArrowAltCircleDown} size='lg' className='ml-2 text-red-850' />
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 )}
               </div>
               <div
@@ -164,12 +211,12 @@ export default function Home() {
               >
                 <p className="text-sm sm:text-base text-white">
                   No, you cannot apply this year because most of the
-                  universities in the United States require a minimum of 4
-                  years of university level education for their graduate
-                  programs. Given that you are three years away from the
-                  admission, availing this award in the final year of your
-                  3-year undergraduate program would not benefit you immediately
-                  for you would still have to wait to get your masters degree in
+                  universities in the United States require a minimum of 4 years
+                  of university level education for their graduate programs.
+                  Given that you are three years away from the admission,
+                  availing this award in the final year of your 3-year
+                  undergraduate program would not benefit you immediately for
+                  you would still have to wait to get your masters degree in
                   order to be eligible for admissions abroad. We encourage you
                   to apply for SSGSA next year when you are enrolled in the
                   first year of your masters degree.
@@ -179,15 +226,23 @@ export default function Home() {
             <div>
               <div
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
-                onClick={() => index == 6 ? setIndex(0) : setIndex(6)}
+                onClick={() => (index == 6 ? setIndex(0) : setIndex(6))}
               >
                 <p className="font-bold text-sm sm:text-base">
                   What are the documents I need to attach with the application?
                 </p>
-                { index == 6 ? (
-                  <FontAwesomeIcon icon={faArrowAltCircleUp} size='lg' className='ml-2 text-red-850' />
+                {index == 6 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 ) : (
-                  <FontAwesomeIcon icon={faArrowAltCircleDown} size='lg' className='ml-2 text-red-850' />
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 )}
               </div>
               <div
@@ -195,7 +250,10 @@ export default function Home() {
                 className="bg-red-850 pl-3 py-3 pr-12"
                 hidden={index != 6}
               >
-                <ul style={{ listStyle: "disc" }} className="text-sm sm:text-base text-white ml-5">
+                <ul
+                  style={{ listStyle: 'disc' }}
+                  className="text-sm sm:text-base text-white ml-5"
+                >
                   <li>Your curriculum vitae.</li>
                   <li>
                     Attested copies of your marksheets from 10th standard
@@ -214,16 +272,24 @@ export default function Home() {
             <div>
               <div
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
-                onClick={() => index == 7 ? setIndex(0) : setIndex(7)}
+                onClick={() => (index == 7 ? setIndex(0) : setIndex(7))}
               >
                 <p className="font-bold text-sm sm:text-base">
-                  I want to apply for the Summer Internship (ISRA). What are
-                  the requirements for this program?
+                  I want to apply for the Summer Internship (ISRA). What are the
+                  requirements for this program?
                 </p>
-                { index == 7 ? (
-                  <FontAwesomeIcon icon={faArrowAltCircleUp} size='lg' className='ml-2 text-red-850' />
+                {index == 7 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 ) : (
-                  <FontAwesomeIcon icon={faArrowAltCircleDown} size='lg' className='ml-2 text-red-850' />
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 )}
               </div>
               <div
@@ -249,16 +315,24 @@ export default function Home() {
             <div>
               <div
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
-                onClick={() => index == 8 ? setIndex(0) : setIndex(8)}
+                onClick={() => (index == 8 ? setIndex(0) : setIndex(8))}
               >
                 <p className="font-bold text-sm sm:text-base">
                   After I become a successful SSGSA awardee, how long will the
                   award remain valid?
                 </p>
-                { index == 8 ? (
-                  <FontAwesomeIcon icon={faArrowAltCircleUp} size='lg' className='ml-2 text-red-850' />
+                {index == 8 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 ) : (
-                  <FontAwesomeIcon icon={faArrowAltCircleDown} size='lg' className='ml-2 text-red-850' />
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 )}
               </div>
               <div
@@ -267,8 +341,8 @@ export default function Home() {
                 hidden={index != 8}
               >
                 <p className="text-sm sm:text-base text-white">
-                  Generally the award remains valid for Two years after you
-                  have become an awardee.
+                  Generally the award remains valid for Two years after you have
+                  become an awardee.
                   <br />
                   For example, if you are a 2021 batch of SSGSA awardees, your
                   award will terminate in 2023, 2 years from the date of the
@@ -279,13 +353,23 @@ export default function Home() {
             <div>
               <div
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
-                onClick={() => index == 9 ? setIndex(0) : setIndex(9)}
+                onClick={() => (index == 9 ? setIndex(0) : setIndex(9))}
               >
-                <p className="font-bold text-sm sm:text-base">Who can I consider a referee?</p>
-                { index == 9 ? (
-                  <FontAwesomeIcon icon={faArrowAltCircleUp} size='lg' className='ml-2 text-red-850' />
+                <p className="font-bold text-sm sm:text-base">
+                  Who can I consider a referee?
+                </p>
+                {index == 9 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 ) : (
-                  <FontAwesomeIcon icon={faArrowAltCircleDown} size='lg' className='ml-2 text-red-850' />
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 )}
               </div>
               <div
@@ -297,30 +381,39 @@ export default function Home() {
                   Anyone who has been involved in a professional relationship
                   with the scholar.
                   <br />
-                  Examples are your manager (past or current) if you&apos;re working,
-                  your teachers at the university level (professors or lecturers),
-                  or any others including coaches and mentors etc. Please
-                  refrain from using connections as your referees whom you do
-                  not know (or have worked with) in any professional capacity.
+                  Examples are your manager (past or current) if you&apos;re
+                  working, your teachers at the university level (professors or
+                  lecturers), or any others including coaches and mentors etc.
+                  Please refrain from using connections as your referees whom
+                  you do not know (or have worked with) in any professional
+                  capacity.
                   <br />
-                  Personal connections like friends and relatives do not
-                  qualify as valid referees.
+                  Personal connections like friends and relatives do not qualify
+                  as valid referees.
                 </p>
               </div>
             </div>
             <div>
               <div
                 className="flex justify-between px-3 py-3 border-2 border-red-850 cursor-pointer"
-                onClick={() => index == 10 ? setIndex(0) : setIndex(10)}
+                onClick={() => (index == 10 ? setIndex(0) : setIndex(10))}
               >
                 <p className="font-bold text-sm sm:text-base">
                   Is there any limitations on how many times I can apply for
                   SSGSA?
                 </p>
-                { index == 10 ? (
-                  <FontAwesomeIcon icon={faArrowAltCircleUp} size='lg' className='ml-2 text-red-850' />
+                {index == 10 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 ) : (
-                  <FontAwesomeIcon icon={faArrowAltCircleDown} size='lg' className='ml-2 text-red-850' />
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    className="ml-2 text-red-850"
+                  />
                 )}
               </div>
               <div

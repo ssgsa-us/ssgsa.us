@@ -40,7 +40,7 @@ const AdvisoryBoard = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AdvisoryBoard;
+export default AdvisoryBoard

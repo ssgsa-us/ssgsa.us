@@ -1,7 +1,7 @@
-import About from "../components/About/About";
-import Apply from "../components/Apply";
-import Foundation from "../components/About/Foundation";
-import MainLayout from "../layouts/Main";
+import About from '../components/About/About'
+import Apply from '../components/Apply'
+import Foundation from '../components/About/Foundation'
+import MainLayout from '../layouts/Main'
 
 export default function Home() {
   return (
@@ -13,5 +13,5 @@ export default function Home() {
 
       <About />
     </MainLayout>
-  );
+  )
 }

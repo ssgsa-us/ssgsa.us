@@ -1,9 +1,9 @@
-import { useState } from "react"
-import { awardees } from "../../constants/awardees"
+import { useState } from 'react'
+import { awardees } from '../../constants/awardees'
 
 const Awardees = () => {
   const [currentSession, setCurrentSession] = useState('2007-08')
-  
+
   return (
     <div id="Awardees">
       <h1 className="my-8 mx-4 sm:mx-12 lg:mx-20 bg-blue-850 lg:text-3xl text-2xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
@@ -15,7 +15,9 @@ const Awardees = () => {
       >
         {awardees.map((session, index) => (
           <h3
-            className={`text-red-850 ${currentSession == session.session ? "bg-blue-850": ""} font-bold w-32 text-center text-xl px-4 py-2 cursor-pointer`}
+            className={`text-red-850 ${
+              currentSession == session.session ? 'bg-blue-850' : ''
+            } font-bold w-32 text-center text-xl px-4 py-2 cursor-pointer`}
             onClick={() => setCurrentSession(session.session)}
             key={index}
           >
@@ -36,9 +38,7 @@ const Awardees = () => {
                   <td className="bg-gray-200 text-blue-850 font-bold p-2 w-2/5">
                     {awardee.name}
                   </td>
-                  <td className="p-2 w-3/5">
-                    {awardee.field}
-                  </td>
+                  <td className="p-2 w-3/5">{awardee.field}</td>
                 </tr>
               ))}
             </tbody>

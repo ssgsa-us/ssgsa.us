@@ -1,6 +1,6 @@
-import Apply from "../components/Apply";
-import Isra from "../components/Isra";
-import MainLayout from "../layouts/Main";
+import Apply from '../components/Apply'
+import Isra from '../components/Isra'
+import MainLayout from '../layouts/Main'
 
 export default function Home() {
   return (
@@ -10,5 +10,5 @@ export default function Home() {
         <Apply />
       </div>
     </MainLayout>
-  );
+  )
 }

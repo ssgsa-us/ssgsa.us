@@ -1,7 +1,7 @@
-import Apply from "../components/Apply";
-import Datetable from "../components/Datetable";
-import Link from "next/link";
-import MainLayout from "../layouts/Main";
+import Apply from '../components/Apply'
+import Datetable from '../components/Datetable'
+import Link from 'next/link'
+import MainLayout from '../layouts/Main'
 
 export default function Home() {
   return (
@@ -18,13 +18,9 @@ export default function Home() {
                 Current students or alumni from all faculties of Aligarh Muslim
                 University who satisfy the following conditions may apply:
               </p>
-              <ul style={{ listStyle: "disc" }} className="ml-2 p-2">
-                <li>
-                  Hold a Bachelor’s degree,
-                </li>
-                <li>
-                  Have an outstanding academic record, and
-                </li>
+              <ul style={{ listStyle: 'disc' }} className="ml-2 p-2">
+                <li>Hold a Bachelor’s degree,</li>
+                <li>Have an outstanding academic record, and</li>
                 <li>
                   Wish to apply for a Master’s or PhD degree at a university of
                   international repute outside India within the next 2 academic
@@ -32,10 +28,10 @@ export default function Home() {
                 </li>
               </ul>
               <p>
-                The Sir Syed Global Scholar Award is an equal opportunity scholarship.
-                We strongly encourage women, people with disabilities and those from
-                economically and socially excluded communities that satisfy the above
-                conditions to apply.
+                The Sir Syed Global Scholar Award is an equal opportunity
+                scholarship. We strongly encourage women, people with
+                disabilities and those from economically and socially excluded
+                communities that satisfy the above conditions to apply.
               </p>
             </div>
           </div>
@@ -45,13 +41,19 @@ export default function Home() {
               Application Timeline: 2022-2023
             </h1>
 
-            <Datetable bgcolor="bg-gray-200" textcolor="text-blue-850" textbold="font-bold" />
+            <Datetable
+              bgcolor="bg-gray-200"
+              textcolor="text-blue-850"
+              textbold="font-bold"
+            />
           </div>
 
           <div className="mx-4 my-8">
             <p>
               See Frequently Asked Questions
-              <Link href=""><a className="text-blue-500">&nbsp;here</a></Link>
+              <Link href="">
+                <a className="text-blue-500">&nbsp;here</a>
+              </Link>
             </p>
             <br />
             <p>To start your application, click Apply!</p>
@@ -61,5 +63,5 @@ export default function Home() {
         <Apply />
       </div>
     </MainLayout>
-  );
+  )
 }

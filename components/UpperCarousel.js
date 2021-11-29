@@ -1,6 +1,6 @@
-import Image from "next/image";
-import Carousel from "react-elastic-carousel";
-import { CarouselData } from "../constants/upperCarouselData";
+import Image from 'next/image'
+import Carousel from 'react-elastic-carousel'
+import { CarouselData } from '../constants/upperCarouselData'
 
 const UpperCarousel = () => {
   return (
@@ -25,10 +25,10 @@ const UpperCarousel = () => {
               <p className="mt-3">{data.content}</p>
             </div>
           </div>
-        );
+        )
       })}
     </Carousel>
-  );
-};
+  )
+}
 
-export default UpperCarousel;
+export default UpperCarousel

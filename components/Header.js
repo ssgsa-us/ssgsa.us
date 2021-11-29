@@ -1,8 +1,8 @@
-import Image from "next/image";
-import { useState } from "react";
-import logo from "../public/logo.png";
-import Link from "next/dist/client/link";
-import { useRouter } from "next/router";
+import Image from 'next/image'
+import { useState } from 'react'
+import logo from '../public/logo.png'
+import Link from 'next/dist/client/link'
+import { useRouter } from 'next/router'
 
 export default function Header() {
   const [active, setActive] = useState(false)
@@ -10,26 +10,20 @@ export default function Header() {
 
   const handleClick = () => {
     setActive(!active)
-  };
+  }
 
   return (
     <nav className="sticky top-0 z-50 bg-red-850">
       <div className="flex justify-end bg-white">
         <div className="flex bg-blue-850 text-white text-xs sm:text-sm md:text-base font-bold px-4 py-2">
           <Link href="/newsletters">
-            <a className="px-1 sm:px-4">
-              Newsletters
-            </a>
+            <a className="px-1 sm:px-4">Newsletters</a>
           </Link>
           <Link href="/">
-            <a className="px-1 sm:px-4">
-              News &amp; Events
-            </a>
+            <a className="px-1 sm:px-4">News &amp; Events</a>
           </Link>
           <Link href="/contact">
-            <a className="px-1 sm:px-4">
-              Contact Us
-            </a>
+            <a className="px-1 sm:px-4">Contact Us</a>
           </Link>
         </div>
       </div>
@@ -74,17 +68,27 @@ export default function Header() {
           </div>
         </div>
 
-        <div className={`${active ? "py-1 md:py-0" : "hidden"} md:flex md:justify-between `}>
+        <div
+          className={`${
+            active ? 'py-1 md:py-0' : 'hidden'
+          } md:flex md:justify-between `}
+        >
           <div className="flex space-x-2">
             <div className="flex flex-col w-full md:flex-row md:items-center md:space-x-1">
-              <div className={`md:flex md:flex-col md:justify-center h-full hover:bg-blue-850 ${router.pathname == '/' && "bg-blue-850"}`}>
+              <div
+                className={`md:flex md:flex-col md:justify-center h-full hover:bg-blue-850 ${
+                  router.pathname == '/' && 'bg-blue-850'
+                }`}
+              >
                 <Link href="/">
-                  <a className="py-4 px-2 text-white text-sm">
-                    HOME
-                  </a>
+                  <a className="py-4 px-2 text-white text-sm">HOME</a>
                 </Link>
               </div>
-              <div className={`group w-full h-full hover:bg-blue-850 ${router.pathname == '/about' && "bg-blue-850"}`}>
+              <div
+                className={`group w-full h-full hover:bg-blue-850 ${
+                  router.pathname == '/about' && 'bg-blue-850'
+                }`}
+              >
                 <div className="md:flex md:flex-col md:justify-center md:h-full">
                   <a className="py-4 px-2 text-white text-sm cursor-pointer">
                     ABOUT
@@ -139,7 +143,11 @@ export default function Header() {
                   </Link>
                 </div>
               </div>
-              <div className={`group h-full hover:bg-blue-850 ${router.pathname == '/apply' && "bg-blue-850"}`}>
+              <div
+                className={`group h-full hover:bg-blue-850 ${
+                  router.pathname == '/apply' && 'bg-blue-850'
+                }`}
+              >
                 <div className="md:flex md:flex-col md:justify-center md:h-full">
                   <a className="py-4 px-2 text-white text-sm cursor-pointer">
                     APPLY
@@ -169,7 +177,11 @@ export default function Header() {
                   </Link>
                 </div>
               </div>
-              <div className={`group h-full hover:bg-blue-850 ${router.pathname == '/alumni' && "bg-blue-850"}`}>
+              <div
+                className={`group h-full hover:bg-blue-850 ${
+                  router.pathname == '/alumni' && 'bg-blue-850'
+                }`}
+              >
                 <div className="md:flex md:flex-col md:justify-center md:h-full">
                   <a className="py-4 px-2 text-white text-sm cursor-pointer">
                     ALUMNI
@@ -189,22 +201,26 @@ export default function Header() {
                   </Link>
                 </div>
               </div>
-              <div className={`md:flex md:flex-col md:justify-center h-full hover:bg-blue-850 ${router.pathname == '/resources' && "bg-blue-850"}`}>
+              <div
+                className={`md:flex md:flex-col md:justify-center h-full hover:bg-blue-850 ${
+                  router.pathname == '/resources' && 'bg-blue-850'
+                }`}
+              >
                 <Link href="/resources">
-                  <a className="py-4 px-2 text-white text-sm">
-                    RESOURCES
-                  </a>
+                  <a className="py-4 px-2 text-white text-sm">RESOURCES</a>
                 </Link>
               </div>
             </div>
           </div>
 
           <div className="md:flex md:items-center md:space-x-1">
-            <div className={`flex flex-col justify-center h-full hover:bg-blue-850 ${router.pathname == '/isra' && "bg-blue-850"}`}>
+            <div
+              className={`flex flex-col justify-center h-full hover:bg-blue-850 ${
+                router.pathname == '/isra' && 'bg-blue-850'
+              }`}
+            >
               <Link href="/isra">
-                <a
-                  className="px-2 md:py-4 md:px-1 text-white text-sm"
-                >
+                <a className="px-2 md:py-4 md:px-1 text-white text-sm">
                   International Summer Research Award(ISRA)
                 </a>
               </Link>
@@ -213,5 +229,5 @@ export default function Header() {
         </div>
       </div>
     </nav>
-  );
+  )
 }

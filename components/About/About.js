@@ -1,7 +1,7 @@
-import AdvisoryBoard from "./AdvisoryBoard";
-import DonorAndContributors from "./DonorAndContributors";
-import LeadershipHistory from "./LeadershipHistory";
-import Members from "./Members";
+import AdvisoryBoard from './AdvisoryBoard'
+import DonorAndContributors from './DonorAndContributors'
+import LeadershipHistory from './LeadershipHistory'
+import Members from './Members'
 
 const About = () => {
   return (
@@ -15,7 +15,7 @@ const About = () => {
             The SSGSA team strives hard to further the cause of the Aligarh
             Muslim University on two fronts:
           </p>
-          <ul style={{ listStyle: "disc" }} className="ml-2 p-2">
+          <ul style={{ listStyle: 'disc' }} className="ml-2 p-2">
             <li className="m-2">
               Mentoring meritorious students so they are successful in getting
               admission at prestigious graduate programs across the globe.
@@ -35,7 +35,7 @@ const About = () => {
       <LeadershipHistory />
       <DonorAndContributors />
     </div>
-  );
-};
+  )
+}
 
-export default About;
+export default About

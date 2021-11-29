@@ -5,44 +5,44 @@ export const resources = [
       {
         title: 'Happy Schools',
         text: 'All the information and guidance for abroad studies',
-        link: 'http://www.happyschools.com/'
+        link: 'http://www.happyschools.com/',
       },
       {
         title: 'Applying to US Universities',
         text: 'A resource for students applying to universities in USA',
-        link: 'http://app2us.com/'
+        link: 'http://app2us.com/',
       },
       {
         title: 'SSGSA Guide to Germany',
         text: 'A resource for students applying to universities in Germany',
-        link: 'http://www.ssgsa.us/SSGSA_Admission_guide_Germany.pdf'
+        link: 'http://www.ssgsa.us/SSGSA_Admission_guide_Germany.pdf',
       },
       {
         title: 'Graduate student funding opportunities',
         text: 'Free lists of grants and fellowships around the world available online',
-        link: 'https://research.jhu.edu/rdt/funding-opportunities/graduate/'
+        link: 'https://research.jhu.edu/rdt/funding-opportunities/graduate/',
       },
       {
         title: 'Post Doctoral funding opportunities',
         text: 'Free lists of grants and fellowships around the world available online',
-        link: 'https://research.jhu.edu/rdt/funding-opportunities/postdoctoral/'
+        link: 'https://research.jhu.edu/rdt/funding-opportunities/postdoctoral/',
       },
       {
         title: 'Fully funded programs Directory',
         text: 'Directory of Fully Funded Graduate Programs',
-        link: 'http://ssgsa.us/assets/Scholarship_Network_The_Directory_of_Fully_Funded_Graduate_Programs_and_Full_Funding_Awards_03.pdf'
+        link: 'http://ssgsa.us/assets/Scholarship_Network_The_Directory_of_Fully_Funded_Graduate_Programs_and_Full_Funding_Awards_03.pdf',
       },
       {
         title: 'SSGSA Guide to German universities',
         text: 'How to apply to German universities',
-        link: 'http://ssgsa.us/assets/SSGSA_Germany_Admission_guidelines.pdf'
+        link: 'http://ssgsa.us/assets/SSGSA_Germany_Admission_guidelines.pdf',
       },
       {
         title: 'Resources for Physics Grad schools in US',
         text: 'Browse details of most US Physics Graduate Programs',
-        link: 'https://www.gradschoolshopper.com/'
-      }
-    ]
+        link: 'https://www.gradschoolshopper.com/',
+      },
+    ],
   },
   {
     heading: 'SSGSA webinars',
@@ -50,39 +50,39 @@ export const resources = [
       {
         title: 'SoP writing',
         text: 'Communicating Your True Potential',
-        link: 'https://www.youtube.com/watch?v=ViKVL_UPI3E&list=PLXxPKvcsszvfZqUJj7NTvSG552Yitl8iC&index=3'
+        link: 'https://www.youtube.com/watch?v=ViKVL_UPI3E&list=PLXxPKvcsszvfZqUJj7NTvSG552Yitl8iC&index=3',
       },
       {
         title: 'CV writing',
         text: 'Webinar on CV/Resume Writing',
-        link: 'https://www.youtube.com/watch?v=_Ta-okLyFKE&list=PLXxPKvcsszvfZqUJj7NTvSG552Yitl8iC&index=4'
+        link: 'https://www.youtube.com/watch?v=_Ta-okLyFKE&list=PLXxPKvcsszvfZqUJj7NTvSG552Yitl8iC&index=4',
       },
       {
         title: 'Networking',
         text: 'Networking & Effective Communication For Successful Professional Careers',
-        link: 'https://www.youtube.com/watch?v=w0Dc0TLhvdg&list=PLXxPKvcsszvfZqUJj7NTvSG552Yitl8iC&index=2'
+        link: 'https://www.youtube.com/watch?v=w0Dc0TLhvdg&list=PLXxPKvcsszvfZqUJj7NTvSG552Yitl8iC&index=2',
       },
       {
         title: 'University selection & preparing strong applications',
         text: 'Shortlisting universities & preparing strong applications for MS/PhD',
-        link: 'https://www.youtube.com/watch?v=z0gMANAF2Hc'
+        link: 'https://www.youtube.com/watch?v=z0gMANAF2Hc',
       },
       {
         title: 'Higher Education opportunities in Canada',
         text: 'All the information and guidance for abroad studies',
-        link: 'https://youtu.be/yQttXKpdBv0'
+        link: 'https://youtu.be/yQttXKpdBv0',
       },
       {
         title: 'SSGSA Convention 2020',
         text: 'Watch the full recording of SSGSA Convention',
-        link: 'https://youtu.be/_WvJWvfe9F8?t=1'
+        link: 'https://youtu.be/_WvJWvfe9F8?t=1',
       },
       {
         title: 'Other SSGSA Webinars',
         text: 'Follow the SSGSA Youtube channel for other webinars',
-        link: 'https://www.youtube.com/channel/UCbHygCFd84sJUewBsb9Lqrg'
+        link: 'https://www.youtube.com/channel/UCbHygCFd84sJUewBsb9Lqrg',
       },
-    ]
+    ],
   },
   {
     heading: 'GRE',
@@ -90,89 +90,89 @@ export const resources = [
       {
         title: 'GRE Official Website',
         text: 'Portal to get all the information regarding GRE test from the official agency',
-        link: 'http://www.ets.org/gre/'
+        link: 'http://www.ets.org/gre/',
       },
       {
         title: 'Majortets.com GRE preparation',
         text: 'A portal for GRE preparation & for practice GRE tests',
-        link: 'https://www.majortests.com/gre/'
+        link: 'https://www.majortests.com/gre/',
       },
       {
         title: 'Magoosh Youtube Channel',
         text: 'Great GRE tutorials, specially Vocab Wednesdays',
-        link: 'https://www.youtube.com/user/MagooshGRE'
+        link: 'https://www.youtube.com/user/MagooshGRE',
       },
       {
         title: 'Memrise Vocab Builder',
         text: 'Probably one of the best websites (and app) out there to build vocabulary with lots of GRE flash cards. Highly recommend it',
-        link: 'https://www.memrise.com/'
+        link: 'https://www.memrise.com/',
       },
       {
         title: 'Free GRE Practice Tests',
         text: 'Consolidated list of free online practice tests for GRE',
-        link: 'https://crunchprep.com/gre/2014/free-gre-practice-tests'
+        link: 'https://crunchprep.com/gre/2014/free-gre-practice-tests',
       },
       {
         title: 'Khan Academy Quant Videos',
         text: 'Free Preparation for the GRE Quantitative Reasoning Measure from Khan Academy',
-        link: 'https://www.ets.org/gre/revised_general/prepare/khan_academy'
+        link: 'https://www.ets.org/gre/revised_general/prepare/khan_academy',
       },
       {
         title: 'Study Plans & Guides',
         text: 'Plan your study schedule before starting preparation and revision for GRE with these well formulated Magoosh study plans',
-        link: 'https://magoosh.com/gre/gre-study-plans-and-guides/'
+        link: 'https://magoosh.com/gre/gre-study-plans-and-guides/',
       },
       {
         title: 'AWA Argument Pool',
         text: 'Official and exhaustive list of prompts for Argument essays for AWA section',
-        link: 'https://www.ets.org/gre/revised_general/prepare/analytical_writing/argument/pool'
+        link: 'https://www.ets.org/gre/revised_general/prepare/analytical_writing/argument/pool',
       },
       {
         title: 'AWA Issue Pool',
         text: 'Official and exhaustive list of prompts for Issue essays for AWA section',
-        link: 'https://www.ets.org/gre/revised_general/prepare/analytical_writing/issue/pool'
+        link: 'https://www.ets.org/gre/revised_general/prepare/analytical_writing/issue/pool',
       },
       {
         title: 'Top Section GRE Subreddit',
         text: 'The subreddit is useful if you are stuck on a question or need some advice on preparation strategies',
-        link: 'https://www.reddit.com/r/GRE/top/'
+        link: 'https://www.reddit.com/r/GRE/top/',
       },
       {
         title: 'Magoosh GRE Book Reviews',
         text: 'Check before you buy a book for preparation',
-        link: 'https://magoosh.com/gre/2011/new-gre-book-reviews/'
+        link: 'https://magoosh.com/gre/2011/new-gre-book-reviews/',
       },
       {
         title: 'Quora Topic on GRE',
         text: 'Read about preparation strategies, ask questions and get advice from top writers on Quora',
-        link: 'https://www.quora.com/topic/Graduate-Record-Examination-GRE-1/faq'
+        link: 'https://www.quora.com/topic/Graduate-Record-Examination-GRE-1/faq',
       },
       {
         title: 'Magoosh Flashcards for Vocabulary',
         text: 'The ultimate and most common source for vocabulary preparation for GRE',
-        link: 'https://gre.magoosh.com/flashcards/vocabulary'
+        link: 'https://gre.magoosh.com/flashcards/vocabulary',
       },
       {
         title: 'Magoosh Blog',
         text: 'GRE preparation strategies and section-wise and question-wise solving strategies and much more',
-        link: 'https://magoosh.com/gre/'
+        link: 'https://magoosh.com/gre/',
       },
       {
         title: 'Manhattan Practice Test',
         text: 'One free test, highly recommended. Buy any one Manhattan book to get access to other premium tests',
-        link: 'https://www.manhattanprep.com/gre/store/online-resources/free-gre-practice-test/'
+        link: 'https://www.manhattanprep.com/gre/store/online-resources/free-gre-practice-test/',
       },
       {
         title: 'Vocab Building Tool',
         text: 'Vocab building through mnemonics. Tips to recall the meanings of words through brain mappings & word associations',
-        link: 'http://www.mnemonicdictionary.com/'
+        link: 'http://www.mnemonicdictionary.com/',
       },
       {
         title: 'Quizlet: GRE Wordlists',
         text: 'Make your own deck of flashcards, access others&apos; decks. Large number of wordlists for GRE',
-        link: 'https://quizlet.com/'
+        link: 'https://quizlet.com/',
       },
-    ]
+    ],
   },
   {
     heading: 'TOEFL',
@@ -180,29 +180,29 @@ export const resources = [
       {
         title: 'TOEFL Official Website',
         text: 'Portal to get all the information regarding TOEFL test from the official agency',
-        link: 'http://www.ets.org/toefl/'
+        link: 'http://www.ets.org/toefl/',
       },
       {
         title: 'TOEFL Ebook Sample Questions',
         text: 'Get to know what is asked in TOEFL. Sample questions from real test-makers',
-        link: 'https://www.ets.org/s/toefl/pdf/toefl_student_test_prep_planner.pdf'
+        link: 'https://www.ets.org/s/toefl/pdf/toefl_student_test_prep_planner.pdf',
       },
       {
         title: 'Notefull TOEFL Prep Material',
         text: 'Handouts and other useful resources on TOEFL preparation strategies',
-        link: 'https://www.notefull.com/content.php?pgID=250'
+        link: 'https://www.notefull.com/content.php?pgID=250',
       },
       {
         title: 'Notefull TOEFL Youtube Channel',
         text: 'Tutorial vidoes targetting each section of TOEFL, specially tutorials on speaking section',
-        link: 'https://www.notefull.com/content.php?pgID=250'
+        link: 'https://www.notefull.com/content.php?pgID=250',
       },
       {
         title: 'Top Section TOEFL Subreddit',
         text: 'The subreddit is useful if you are stuck on a question or need some advice on preparation strategies',
-        link: 'https://www.reddit.com/r/ToeflAdvice/top/'
+        link: 'https://www.reddit.com/r/ToeflAdvice/top/',
       },
-    ]
+    ],
   },
   {
     heading: 'Facebook Groups',
@@ -210,33 +210,33 @@ export const resources = [
       {
         title: 'The Daily Beast',
         text: 'Has articles which use some GRE vocabulary. Enable notifications so that you don&apos;t miss any article!',
-        link: 'https://www.facebook.com/thedailybeast'
+        link: 'https://www.facebook.com/thedailybeast',
       },
       {
         title: 'The New Yorker',
         text: 'Useful articles using some GRE vocabulary. Enable notifications so that you don&apos;t miss any article',
-        link: 'https://www.facebook.com/newyorker'
+        link: 'https://www.facebook.com/newyorker',
       },
       {
         title: 'Official Magoosh Group',
         text: 'Needs to be a premium Magoosh member',
-        link: 'https://www.facebook.com/groups/1116326785090011/'
+        link: 'https://www.facebook.com/groups/1116326785090011/',
       },
       {
         title: 'GRE Practice & Prep',
         text: 'A nice group. Frequent questions and 5 new words almost daily',
-        link: 'https://www.facebook.com/groups/drrajusgre/'
+        link: 'https://www.facebook.com/groups/drrajusgre/',
       },
       {
         title: 'GRE Prep Community',
         text: 'GRE preparing community with over 74k members to clear any doubts and answer queries',
-        link: 'https://www.facebook.com/groups/358186544332997/'
+        link: 'https://www.facebook.com/groups/358186544332997/',
       },
       {
         title: 'QnA Forum for Abroad Studies',
         text: 'Forum to ask questions about MS from abroad',
-        link: 'https://www.facebook.com/groups/188030031545963/'
+        link: 'https://www.facebook.com/groups/188030031545963/',
       },
-    ]
+    ],
   },
 ]

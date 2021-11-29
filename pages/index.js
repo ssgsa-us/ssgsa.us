@@ -1,9 +1,9 @@
-import Apply from "../components/Apply";
-import Counter from "../components/Counter";
-import Datetable from "../components/Datetable";
-import MainLayout from "../layouts/Main";
-import Scholar from "../components/Scholar";
-import UpperCarousel from "../components/UpperCarousel";
+import Apply from '../components/Apply'
+import Counter from '../components/Counter'
+import Datetable from '../components/Datetable'
+import MainLayout from '../layouts/Main'
+import Scholar from '../components/Scholar'
+import UpperCarousel from '../components/UpperCarousel'
 
 export default function Home() {
   return (
@@ -20,12 +20,16 @@ export default function Home() {
           <h1 className="text-blue-850 lg:text-3xl mx-2 mb-4 font-extrabold">
             Dates of Full Term 2021-2022
           </h1>
-          <Datetable bgcolor="bg-blue-850" textcolor="text-white" textbold="font-normal" />
+          <Datetable
+            bgcolor="bg-blue-850"
+            textcolor="text-white"
+            textbold="font-normal"
+          />
 
           <Scholar />
         </div>
         <Apply />
       </div>
     </MainLayout>
-  );
+  )
 }

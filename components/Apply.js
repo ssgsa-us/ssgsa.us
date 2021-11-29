@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/dist/client/link";
+import Image from 'next/image'
+import Link from 'next/dist/client/link'
 const Apply = () => {
   return (
     <div className="mt-8 lg:mt-0 lg:ml-4 lg:w-1/3 flex justify-center">
@@ -23,9 +23,10 @@ const Apply = () => {
           </div>
           <p className="text-sm mt-8">
             By supporting students, you are becoming an active participant in
-            building their careers. All donations and contributions directly sponsor the attempts of talented students to 
-            secure admission in an MS/PhD program at a university of international repute. You can easily cancel or upgrade your contribution
-            at any time.
+            building their careers. All donations and contributions directly
+            sponsor the attempts of talented students to secure admission in an
+            MS/PhD program at a university of international repute. You can
+            easily cancel or upgrade your contribution at any time.
           </p>
         </div>
         <Link href="/about_sirsyed">
@@ -33,36 +34,56 @@ const Apply = () => {
             About Sir Syed
           </button>
         </Link>
-      
+
         <a href="https://amu.ac.in/" target="_blank" rel="noopener noreferrer">
-        <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
-          The Aligarh Muslim University
-        </button>
+          <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
+            The Aligarh Muslim University
+          </button>
         </a>
-        <a href="/assets/PressRelease-SSGSA-2021-22.pdf" target="_blank" rel="noopener noreferrer">
-        <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
-          SSGSA results (2021-2022) announced
-        </button>
+        <a
+          href="/assets/PressRelease-SSGSA-2021-22.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
+            SSGSA results (2021-2022) announced
+          </button>
         </a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdZypeiKqTu5AR573bFuVxmw_rZHgWWDAt--8fkWIosNH_-w/viewform" target="_blank" rel="noopener noreferrer">
-        <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
-          Pledge your support to SSGSA
-        </button>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfdZypeiKqTu5AR573bFuVxmw_rZHgWWDAt--8fkWIosNH_-w/viewform"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
+            Pledge your support to SSGSA
+          </button>
         </a>
-        <a href="http://www.aligs.org/" target="_blank" rel="noopener noreferrer">
-        <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
-          Federation of Aligarh Alumni Associations(FAAA)
-        </button>
+        <a
+          href="http://www.aligs.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
+            Federation of Aligarh Alumni Associations(FAAA)
+          </button>
         </a>
-        <a href="https://www.facebook.com/groups/ssesa/" target="_blank" rel="noopener noreferrer">
-        <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
-          Join our Facebook Group
-        </button>
+        <a
+          href="https://www.facebook.com/groups/ssesa/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
+            Join our Facebook Group
+          </button>
         </a>
-        <a href="/assets/SSGSA_Convention_2020_Press_Release.pdf" target="_blank" rel="noopener noreferrer">
-        <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
-          Press Release Statement of SSGSA Convention 2020
-        </button>
+        <a
+          href="/assets/SSGSA_Convention_2020_Press_Release.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
+            Press Release Statement of SSGSA Convention 2020
+          </button>
         </a>
 
         <div className="mx-4">
@@ -72,7 +93,7 @@ const Apply = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Apply;
+export default Apply

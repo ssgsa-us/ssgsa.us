@@ -53,7 +53,7 @@ const LeadershipHistory = () => {
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default LeadershipHistory;
+export default LeadershipHistory
