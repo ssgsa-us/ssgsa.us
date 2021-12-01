@@ -10,6 +10,12 @@ const SignIn = () => {
   const [email, setEmail] = useState<string>('')
   const [passwordOne, setPasswordOne] = useState<string>('')
   const [passwordTwo, setPasswordTwo] = useState<string>('')
+  const [name, setName] = useState<string>('')
+  const [stream, setStream] = useState<string>('')
+  const [sex, setSex] = useState<string>('Male')
+  const [dob, setDOB] = useState<string>('')
+  const [mobile, setMobile] = useState<number>()
+  const [pwd, setPWD] = useState<string>('False')
   const [error, setError] = useState('')
 
   // Listen for changes on authUser, redirect if needed
@@ -54,6 +60,18 @@ const SignIn = () => {
             <div>
               <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
                 <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  Name
+                </p>
+                <input
+                  className="col-span-7 sm:col-span-4 p-1 rounded"
+                  name="Name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
+                <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
                   Email
                 </p>
                 <input
@@ -63,6 +81,70 @@ const SignIn = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
+              </div>
+              <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
+                <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  Stream
+                </p>
+                <input
+                  className="col-span-7 sm:col-span-4 p-1 rounded"
+                  name="Stream"
+                  type="text"
+                  value={stream}
+                  onChange={(e) => setStream(e.target.value)}
+                />
+              </div>
+              <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
+                <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  Sex
+                </p>
+                <select
+                  className="col-span-7 sm:col-span-4 p-1 rounded"
+                  name="Sex"
+                  value={sex}
+                  onChange={(e) => setSex(e.target.value)}
+                >
+                  <option label="Male" />
+                  <option label="Female" />
+                </select>
+              </div>
+              <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
+                <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  Mobile
+                </p>
+                <input
+                  className="col-span-7 sm:col-span-4 p-1 rounded"
+                  name="Mobile"
+                  type="number"
+                  value={mobile}
+                  onChange={(e) => setMobile(Number(e.target.value))}
+                />
+              </div>
+              <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
+                <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  Date Of Birth
+                </p>
+                <input
+                  className="col-span-7 sm:col-span-4 p-1 rounded"
+                  name="Date Of Birth"
+                  type="text"
+                  value={dob}
+                  onChange={(e) => setDOB(e.target.value)}
+                />
+              </div>
+              <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
+                <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  PWD
+                </p>
+                <select
+                  className="col-span-7 sm:col-span-4 p-1 rounded"
+                  name="PWD"
+                  value={pwd}
+                  onChange={(e) => setPWD(e.target.value)}
+                >
+                  <option label="False" />
+                  <option label="True" />
+                </select>
               </div>
               <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
                 <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
