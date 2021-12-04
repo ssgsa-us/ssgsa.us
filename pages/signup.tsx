@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useAuth } from '../context/AuthUserContext'
 import MainLayout from '../layouts/Main'
+import { firestore } from '../firebase'
 
 const SignIn = () => {
   const { authUser, createUserWithEmailAndPassword } = useAuth()
@@ -26,14 +27,26 @@ const SignIn = () => {
   const onSubmit = (event) => {
     setError(null)
     //check if passwords match. If they do, create user in Firebase
-    // and redirect to your logged in page.
+    // and redirect to home page.
     if (passwordOne === passwordTwo)
       createUserWithEmailAndPassword(email, passwordOne)
-        .then(() => {
+        .then(async () => {
+          // add user data to firestore database
+          const user = {
+            name,
+            email,
+            stream,
+            sex,
+            dob,
+            mobile,
+            pwd,
+          }
+
+          firestore.collection('users').add(user)
+
           router.push('/')
         })
         .catch((error) => {
-          // An error occurred. Set error message to be displayed to user
           setError(error.message)
         })
     else setError('Password do not match')
