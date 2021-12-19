@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
-import Firebase from './index'
+import firebase, { auth } from './index'
+import { AuthUser } from '../types'
 
-const formatAuthUser = (user) => ({
+const formatAuthUser = (user: firebase.User) => ({
   id: user.uid,
   email: user.email,
 })
 
 export default function useFirebaseAuth() {
-  const [authUser, setAuthUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [authUser, setAuthUser] = useState<AuthUser>(null)
+  const [loading, setLoading] = useState<boolean>(true)
 
-  const authStateChanged = async (authState) => {
+  const authStateChanged = async (authState: firebase.User) => {
     if (!authState) {
       setAuthUser(null)
       setLoading(false)
@@ -23,23 +24,21 @@ export default function useFirebaseAuth() {
     setLoading(false)
   }
 
-  const signInWithEmailAndPassword = (email, password) =>
-    Firebase.auth().signInWithEmailAndPassword(email, password)
+  const signInWithEmailAndPassword = (email: string, password: string) =>
+    auth.signInWithEmailAndPassword(email, password)
 
-  const createUserWithEmailAndPassword = (email, password) =>
-    Firebase.auth().createUserWithEmailAndPassword(email, password)
+  const createUserWithEmailAndPassword = (email: string, password: string) =>
+    auth.createUserWithEmailAndPassword(email, password)
 
   const signOut = () =>
-    Firebase.auth()
-      .signOut()
-      .then(() => {
-        setAuthUser(null)
-        setLoading(true)
-      })
+    auth.signOut().then(() => {
+      setAuthUser(null)
+      setLoading(true)
+    })
 
-  // listen for Firebase state change
+  // listen for firebase state change
   useEffect(() => {
-    const unsubscribe = Firebase.auth().onAuthStateChanged(authStateChanged)
+    const unsubscribe = auth.onAuthStateChanged(authStateChanged)
     return () => unsubscribe()
   }, [])
 

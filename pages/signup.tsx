@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useAuth } from '../context/AuthUserContext'
 import MainLayout from '../layouts/Main'
-import { firestore } from '../firebase'
+import firebase, { firestore } from '../firebase'
+import path from 'path'
 
 const SignIn = () => {
   const { authUser, createUserWithEmailAndPassword } = useAuth()
@@ -30,7 +31,7 @@ const SignIn = () => {
     // and redirect to home page.
     if (passwordOne === passwordTwo)
       createUserWithEmailAndPassword(email, passwordOne)
-        .then(async () => {
+        .then(async (result: firebase.auth.UserCredential) => {
           // add user data to firestore database
           const user = {
             name,
@@ -42,7 +43,7 @@ const SignIn = () => {
             pwd,
           }
 
-          firestore.collection('users').add(user)
+          firestore.doc(path.join('users', result.user.uid)).set(user)
 
           router.push('/')
         })

@@ -14,7 +14,7 @@ const SignIn = () => {
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
     if (authUser) router.push('/')
-  }, [authUser])
+  }, [authUser, router])
 
   const onSubmit = (event) => {
     setError(null)
@@ -83,7 +83,7 @@ const SignIn = () => {
               <br />
               <div className="flex justify-center">
                 <p className="text-white text-base md:text-lg">
-                  Don't have account,{''}
+                  Don&apos;t have account,{''}
                   <Link href="/signup">
                     <a className="py-4 px-2 text-blue-850">Register Here</a>
                   </Link>

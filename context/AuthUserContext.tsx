@@ -1,12 +1,21 @@
-import { createContext, useContext, Context } from 'react'
+import { createContext, useContext } from 'react'
 import useFirebaseAuth from '../firebase/useFirebaseAuth'
+import firebase, { auth } from '../firebase'
 
 const authUserContext = createContext({
-  authUser: null,
+  authUser: { id: '', email: '' },
   loading: true,
-  signInWithEmailAndPassword: async (email, password) => {},
-  createUserWithEmailAndPassword: async (email, password) => {},
-  signOut: async () => {},
+  signInWithEmailAndPassword: async (
+    email: string,
+    password: string,
+  ): Promise<firebase.auth.UserCredential> =>
+    auth.signInWithEmailAndPassword(email, password),
+  createUserWithEmailAndPassword: async (
+    email: string,
+    password: string,
+  ): Promise<firebase.auth.UserCredential> =>
+    auth.createUserWithEmailAndPassword(email, password),
+  signOut: async () => auth.signOut().then(() => {}),
 })
 
 export function AuthUserProvider({ children }) {
