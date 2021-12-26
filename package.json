@@ -16,6 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.1.16",
     "dotenv": "^10.0.0",
     "emailjs-com": "^3.2.0",
+    "firebase": "^9.5.0",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-countup": "^5.2.0",
