@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useAuth } from '../context/AuthUserContext'
-import MainLayout from '../layouts/Main'
-import firebase, { auth, firestore } from '../firebase'
+import { useAuth } from '../../context/AuthUserContext'
+import PortalLayout from '../../layouts/application-portal'
+import firebase, { auth, firestore } from '../../firebase'
 import path from 'path'
 
 const SignIn = () => {
-  const { authUser, createUserWithEmailAndPassword } = useAuth()
+  const { createUserWithEmailAndPassword } = useAuth()
   const router = useRouter()
   const [email, setEmail] = useState<string>('')
   const [passwordOne, setPasswordOne] = useState<string>('')
@@ -24,7 +24,7 @@ const SignIn = () => {
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
     auth.onAuthStateChanged(() => {
-      if (auth.currentUser) router.push('/')
+      if (auth.currentUser) router.push('/application-portal/application')
       else setPageReady(true)
     })
   }, [])
@@ -49,7 +49,7 @@ const SignIn = () => {
 
           firestore.doc(path.join('users', result.user.uid)).set(user)
 
-          router.push('/')
+          router.push('/application-portal/application')
         })
         .catch((error) => {
           setError(error.message)
@@ -59,7 +59,7 @@ const SignIn = () => {
   }
 
   return (
-    <MainLayout>
+    <PortalLayout>
       {pageReady ? (
         <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 flex justify-center">
           <div>
@@ -203,7 +203,7 @@ const SignIn = () => {
                 <div className="flex justify-center">
                   <p className="text-white text-base md:text-lg">
                     Already have an account,{''}
-                    <Link href="/signin">
+                    <Link href="/application-portal/signin">
                       <a className="py-4 px-2 text-blue-850">Login Here</a>
                     </Link>
                   </p>
@@ -215,7 +215,7 @@ const SignIn = () => {
       ) : (
         <div />
       )}
-    </MainLayout>
+    </PortalLayout>
   )
 }
 

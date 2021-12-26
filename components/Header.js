@@ -3,10 +3,8 @@ import { useState } from 'react'
 import logo from '../public/logo.png'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useAuth } from '../context/AuthUserContext'
 
 export default function Header() {
-  const { authUser, signOut } = useAuth()
   const [active, setActive] = useState(false)
   const router = useRouter()
 
@@ -211,21 +209,6 @@ export default function Header() {
                 <Link href="/resources">
                   <a className="py-4 px-2 text-white text-sm">RESOURCES</a>
                 </Link>
-              </div>
-              <div
-                className={`md:flex md:flex-col md:justify-center h-full hover:bg-blue-850 ${
-                  router.pathname == '/signin' && 'bg-blue-850'
-                }`}
-              >
-                {!authUser ? (
-                  <Link href="/signin">
-                    <a className="py-4 px-2 text-white text-sm">SIGNIN</a>
-                  </Link>
-                ) : (
-                  <p className="py-4 px-2 text-white text-sm" onClick={signOut}>
-                    SIGNOUT
-                  </p>
-                )}
               </div>
             </div>
           </div>

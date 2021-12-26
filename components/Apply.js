@@ -5,9 +5,11 @@ const Apply = () => {
     <div className="mt-8 lg:mt-0 lg:ml-4 lg:w-1/3 flex justify-center">
       <div className="w-4/5 sm:w-3/4 md:w-3/5 lg:w-full bg-gray-100">
         <div className="mx-8 pt-3">
-          <button className="px-10 py-1 block mx-auto bg-red-850 font-black text-lg text-white text-center">
-            APPLY
-          </button>
+          <Link href="/application-portal">
+            <button className="px-10 py-1 block mx-auto bg-red-850 font-black text-lg text-white text-center">
+              APPLY
+            </button>
+          </Link>
           <p className="mx-auto font-black text-sm text-red-850 text-center mt-8">
             Sponsor a student
           </p>

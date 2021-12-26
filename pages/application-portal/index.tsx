@@ -1,32 +1,9 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import Footer from '../../components/Footer'
-import logo from '../../public/logo.png'
+import PortalLayout from '../../layouts/application-portal'
 
 export default function Portal() {
   return (
-    <div>
-      <nav className="sticky top-0 z-50">
-        <div className="w-full flex flex-row bg-white items-center flex">
-          <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 flex items-center font-black text-red-850 ">
-            SIR SYED GLOBAL SCHOLAR AWARD
-          </div>
-          <div className="mr-3 flex-2">
-            <Link href="/">
-              <Image width={110} height={110} src={logo} alt="SSGSA Logo" />
-            </Link>
-          </div>
-        </div>
-      </nav>
-      <div className="flex w-full bg-red-850 py-16 px-5 items-center justify-center text-white text-3xl sm:text-4xl lg:text-5xl">
-        <p className="text-center leading-tight">
-          Welcome to the
-          <br />
-          <span className="font-black">Sir Syed Global Scholar Award</span>
-          <br />
-          Application Portal
-        </p>
-      </div>
+    <PortalLayout>
       <div className="my-10 mx-10 sm:mx-20 lg:mx-28 xl:mx-40">
         <h1 className="text-2xl text-center text-blue-850 font-black">
           Instructions
@@ -73,9 +50,11 @@ export default function Portal() {
         </p>
 
         <div className="flex justify-center">
-          <button className="text-white text-base md:text-lg bg-red-850 py-2 px-4 rounded-3xl">
-            Proceed to the Application Form
-          </button>
+          <Link href="/application-portal/application">
+            <button className="text-white text-base md:text-lg bg-red-850 py-2 px-4 rounded-3xl">
+              Proceed to the Application Form
+            </button>
+          </Link>
         </div>
       </div>
       <p className="text-sm text-center mx-5 sm:mx-10 lg:mx-20">
@@ -89,7 +68,6 @@ export default function Portal() {
         , describing your problem{' '}
         <span className="underline">with a screenshot of the error</span>
       </p>
-      <Footer />
-    </div>
+    </PortalLayout>
   )
 }

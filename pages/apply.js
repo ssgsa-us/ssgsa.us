@@ -48,7 +48,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="mx-4 my-8">
+          <div className="mx-4 my-8 flex flex-col items-center">
             <p>
               See Frequently Asked Questions
               <Link href="">
@@ -57,6 +57,12 @@ export default function Home() {
             </p>
             <br />
             <p>To start your application, click Apply!</p>
+            <br />
+            <Link href="/application-portal">
+              <button className="px-10 py-1 block mx-auto bg-red-850 font-black text-lg text-white text-center rounded-3xl">
+                APPLY
+              </button>
+            </Link>
           </div>
         </div>
 
