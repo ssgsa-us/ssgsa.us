@@ -9,6 +9,7 @@ module.exports = {
         },
         red: {
           850: '#cc0000',
+          860: '#cc0000cc',
         },
       },
     },
