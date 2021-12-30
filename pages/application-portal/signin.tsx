@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useAuth } from '../context/AuthUserContext'
-import { auth } from '../firebase'
-import MainLayout from '../layouts/Main'
+import { useAuth } from '../../context/AuthUserContext'
+import { auth } from '../../firebase'
+import PortalLayout from '../../layouts/application-portal'
 
 const SignIn = () => {
   const { signInWithEmailAndPassword } = useAuth()
@@ -16,7 +16,7 @@ const SignIn = () => {
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
     auth.onAuthStateChanged(() => {
-      if (auth.currentUser) router.push('/')
+      if (auth.currentUser) router.push('/application-portal/application')
       else setPageReady(true)
     })
   }, [])
@@ -25,7 +25,7 @@ const SignIn = () => {
     setError(null)
     signInWithEmailAndPassword(email, password)
       .then(() => {
-        router.push('/')
+        router.push('/application-portal/application')
       })
       .catch((error) => {
         setError(error.message)
@@ -34,7 +34,7 @@ const SignIn = () => {
   }
 
   return (
-    <MainLayout>
+    <PortalLayout>
       {pageReady ? (
         <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 flex justify-center">
           <div>
@@ -90,7 +90,7 @@ const SignIn = () => {
                 <div className="flex justify-center">
                   <p className="text-white text-base md:text-lg">
                     Don&apos;t have account,{''}
-                    <Link href="/signup">
+                    <Link href="/application-portal/signup">
                       <a className="py-4 px-2 text-blue-850">Register Here</a>
                     </Link>
                   </p>
@@ -102,7 +102,7 @@ const SignIn = () => {
       ) : (
         <div />
       )}
-    </MainLayout>
+    </PortalLayout>
   )
 }
 

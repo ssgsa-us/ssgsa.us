@@ -43,6 +43,8 @@ Custom class "bg-blue-850" is created for color of hexcode "#003366".
 
 Custom class "bg-red-850" is created for color of hexcode "#cc0000".
 
+Custom class "bg-red-860" is created for color of hexcode "#cc0000cc".
+
 Variant 'group-hover' is added for 'display' property in this tailwind css config.
 
 ## Icons
