@@ -25,7 +25,7 @@ export default function Apply() {
     >
       {pageReady ? (
         status == 1 ? (
-          <div className="flex flex-col items-center my-10">
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <p>You are at Step 1</p>
             <button
               className="text-white text-base md:text-lg bg-red-850 my-5 py-2 px-4 rounded-3xl"
@@ -42,7 +42,7 @@ export default function Apply() {
             </button>
           </div>
         ) : status == 2 ? (
-          <div className="flex flex-col items-center my-10">
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <p>You are at Step 2</p>
             <button
               className="text-white text-base md:text-lg bg-red-850 my-5 py-2 px-4 rounded-3xl"
@@ -59,7 +59,7 @@ export default function Apply() {
             </button>
           </div>
         ) : status == 3 ? (
-          <div className="flex flex-col items-center my-10">
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <p>You are at Step 3</p>
             <button
               className="text-white text-base md:text-lg bg-red-850 my-5 py-2 px-4 rounded-3xl"
@@ -76,7 +76,7 @@ export default function Apply() {
             </button>
           </div>
         ) : status == 4 ? (
-          <div className="flex flex-col items-center my-10">
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <p>You are at Step 4</p>
             <button
               className="text-white text-base md:text-lg bg-red-850 my-5 py-2 px-4 rounded-3xl"
@@ -93,25 +93,8 @@ export default function Apply() {
             </button>
           </div>
         ) : status == 5 ? (
-          <div className="flex flex-col items-center my-10">
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <p>You are at Step 5</p>
-            <button
-              className="text-white text-base md:text-lg bg-red-850 my-5 py-2 px-4 rounded-3xl"
-              onClick={() => {
-                if (status == formStatus) {
-                  setStatus(6)
-                  setFormStatus(6)
-                } else {
-                  setStatus(6)
-                }
-              }}
-            >
-              Go to Step 6
-            </button>
-          </div>
-        ) : (
-          <div className="flex flex-col items-center my-10">
-            <p>You are at Step )</p>
             <button
               className="text-white text-base md:text-lg bg-red-850 my-5 py-2 px-4 rounded-3xl"
               onClick={() => {
@@ -126,6 +109,8 @@ export default function Apply() {
               Go to Step 1
             </button>
           </div>
+        ) : (
+          <div></div>
         )
       ) : (
         <div />
