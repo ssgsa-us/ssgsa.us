@@ -170,7 +170,7 @@ export default function Header() {
                       FAQs
                     </a>
                   </Link>
-                  <Link href="">
+                  <Link href="/application-portal">
                     <a className="px-4 md:py-4 md:px-2 text-white hover:bg-blue-850 md:hover:bg-red-850 md:bg-red-850 text-white text-sm">
                       Start Your Application!
                     </a>

@@ -14,7 +14,7 @@ const SignIn = () => {
   const [passwordTwo, setPasswordTwo] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [stream, setStream] = useState<string>('')
-  const [sex, setSex] = useState<string>('Male')
+  const [gender, setGender] = useState<string>('Male')
   const [dob, setDOB] = useState<string>('')
   const [mobile, setMobile] = useState<number>()
   const [pwd, setPWD] = useState<string>('False')
@@ -41,7 +41,7 @@ const SignIn = () => {
             name,
             email,
             stream,
-            sex,
+            gender,
             dob,
             mobile,
             pwd,
@@ -115,13 +115,13 @@ const SignIn = () => {
                 </div>
                 <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
                   <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
-                    Sex
+                    Gender
                   </p>
                   <select
                     className="col-span-7 sm:col-span-4 p-1 rounded"
-                    name="Sex"
-                    value={sex}
-                    onChange={(e) => setSex(e.target.value)}
+                    name="Gender"
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
                   >
                     <option label="Male" />
                     <option label="Female" />

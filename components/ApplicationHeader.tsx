@@ -61,7 +61,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
           <div className="flex flex-col w-full md:flex-row md:justify-center">
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
               <button
-                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 h-full w-full cursor-pointer ${
+                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center h-full w-full cursor-pointer ${
                   formStatus >= 1
                     ? status == 1
                       ? 'bg-blue-850'
@@ -74,13 +74,13 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
               >
                 <p className="text-sm md:text-lg lg:text-2xl">Step 1</p>
                 <p className="text-sm md:text-xs lg:text-sm">
-                  Eligibility Criteria
+                  Personal Information
                 </p>
               </button>
             </div>
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
               <button
-                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 h-full w-full cursor-pointer ${
+                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center h-full w-full cursor-pointer ${
                   formStatus >= 2
                     ? status == 2
                       ? 'bg-blue-850'
@@ -92,14 +92,12 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
                 }}
               >
                 <p className="text-sm md:text-lg lg:text-2xl">Step 2</p>
-                <p className="text-sm md:text-xs lg:text-sm">
-                  Personal Information
-                </p>
+                <p className="text-sm md:text-xs lg:text-sm">Qualifications</p>
               </button>
             </div>
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
               <button
-                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 h-full w-full cursor-pointer ${
+                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center h-full w-full cursor-pointer ${
                   formStatus >= 3
                     ? status == 3
                       ? 'bg-blue-850'
@@ -111,12 +109,14 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
                 }}
               >
                 <p className="text-sm md:text-lg lg:text-2xl">Step 3</p>
-                <p className="text-sm md:text-xs lg:text-sm">Qualifications</p>
+                <p className="text-sm md:text-xs lg:text-sm">
+                  Written Responses
+                </p>
               </button>
             </div>
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
               <button
-                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 h-full w-full cursor-pointer ${
+                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center h-full w-full cursor-pointer ${
                   formStatus >= 4
                     ? status == 4
                       ? 'bg-blue-850'
@@ -129,13 +129,13 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
               >
                 <p className="text-sm md:text-lg lg:text-2xl">Step 4</p>
                 <p className="text-sm md:text-xs lg:text-sm">
-                  Written Responses
+                  Documents Upload
                 </p>
               </button>
             </div>
-            <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
+            <div className="bg-white py-0.5 md:py-0 md:px-0.5">
               <button
-                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 h-full w-full cursor-pointer ${
+                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center h-full w-full cursor-pointer ${
                   formStatus >= 5
                     ? status == 5
                       ? 'bg-blue-850'
@@ -147,25 +147,6 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
                 }}
               >
                 <p className="text-sm md:text-lg lg:text-2xl">Step 5</p>
-                <p className="text-sm md:text-xs lg:text-sm">
-                  Documents Upload
-                </p>
-              </button>
-            </div>
-            <div className="bg-white py-0.5 md:py-0 md:px-0.5">
-              <button
-                className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 h-full w-full cursor-pointer ${
-                  formStatus >= 6
-                    ? status == 6
-                      ? 'bg-blue-850'
-                      : 'bg-red-850 hover:bg-blue-850'
-                    : 'bg-red-860 cursor-not-allowed'
-                }`}
-                onClick={() => {
-                  if (formStatus >= 6) setStatus(6)
-                }}
-              >
-                <p className="text-sm md:text-lg lg:text-2xl">Step 6</p>
                 <p className="text-sm md:text-xs lg:text-sm">
                   Review and Submit
                 </p>
