@@ -3,8 +3,9 @@ import { useRouter } from 'next/router'
 import { auth } from '../../firebase'
 import ApplicationLayout from '../../layouts/application-portal/application'
 import Step1 from '../../components/ApplicationSteps/Step1'
+import Step2 from '../../components/ApplicationSteps/Step2'
 
-export default function Apply() {
+export default function Application() {
   const router = useRouter()
   const [pageReady, setPageReady] = useState(false)
   const [formStatus, setFormStatus] = useState(1)
@@ -36,20 +37,12 @@ export default function Apply() {
           </div>
         ) : status == 2 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <p>You are at Step 2</p>
-            <button
-              className="text-white text-base md:text-lg bg-red-850 my-5 py-2 px-4 rounded-3xl"
-              onClick={() => {
-                if (status == formStatus) {
-                  setStatus(3)
-                  setFormStatus(3)
-                } else {
-                  setStatus(3)
-                }
-              }}
-            >
-              Go to Step 3
-            </button>
+            <Step2
+              status={status}
+              formStatus={formStatus}
+              setFormStatus={setFormStatus}
+              setStatus={setStatus}
+            />
           </div>
         ) : status == 3 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">

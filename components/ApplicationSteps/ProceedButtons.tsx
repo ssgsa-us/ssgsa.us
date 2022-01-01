@@ -26,7 +26,7 @@ const ProceedButtons = ({
             className={`text-white text-base md:text-lg ${
               status == 1 ? 'bg-blue-860 cursor-not-allowed' : 'bg-blue-850'
             } mr-2 py-2 px-2 rounded-lg flex flex-row items-center`}
-            onClick={status == 1 ? previousStep : null}
+            onClick={status !== 1 ? previousStep : null}
           >
             <FontAwesomeIcon
               icon={faArrowAltCircleLeft}
