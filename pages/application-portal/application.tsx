@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { auth } from '../../firebase'
 import ApplicationLayout from '../../layouts/application-portal/application'
+import Step1 from '../../components/ApplicationSteps/Step1'
 
 export default function Apply() {
   const router = useRouter()
@@ -26,20 +27,12 @@ export default function Apply() {
       {pageReady ? (
         status == 1 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <p>You are at Step 1</p>
-            <button
-              className="text-white text-base md:text-lg bg-red-850 my-5 py-2 px-4 rounded-3xl"
-              onClick={() => {
-                if (status == formStatus) {
-                  setStatus(2)
-                  setFormStatus(2)
-                } else {
-                  setStatus(2)
-                }
-              }}
-            >
-              Go to Step 2
-            </button>
+            <Step1
+              status={status}
+              formStatus={formStatus}
+              setFormStatus={setFormStatus}
+              setStatus={setStatus}
+            />
           </div>
         ) : status == 2 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
