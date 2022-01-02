@@ -96,10 +96,10 @@ export default function Application() {
             </button>
           </div>
         ) : (
-          <div></div>
+          <div className="mt-96" />
         )
       ) : (
-        <div />
+        <div className="mt-96" />
       )}
     </ApplicationLayout>
   )
