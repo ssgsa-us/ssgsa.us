@@ -89,8 +89,8 @@ const Step1 = ({ status, formStatus, setStatus, setFormStatus }) => {
             onChange={(e) => setGender(e.target.value)}
             className="w-full rounded-xl p-3"
           >
-            <option label="Male" />
-            <option label="Female" />
+            <option label="Male" value="Male" />
+            <option label="Female" value="Female" />
           </select>
         </div>
         <div className="p-2">
