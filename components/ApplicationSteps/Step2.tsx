@@ -113,7 +113,7 @@ const Step2 = ({ status, formStatus, setStatus, setFormStatus }) => {
         </p>
         <div>
           {Object.keys(academicRecords).map((key) => (
-            <div className="my-10">
+            <div className="my-10" key={key}>
               <div className="p-2">
                 <p className="font-bold text-lg md:text-xl">Academic Record</p>
                 <select
