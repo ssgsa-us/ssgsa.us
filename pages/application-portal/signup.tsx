@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useAuth } from '../../context/AuthUserContext'
+import { createApplicationData } from '../api/createApplicationData'
+import { createUser } from '../api/createUser'
+import firebase, { auth } from '../../firebase'
 import PortalLayout from '../../layouts/application-portal'
-import firebase, { auth, firestore } from '../../firebase'
-import path from 'path'
+import { useAuth } from '../../context/AuthUserContext'
 
 const SignIn = () => {
   const { createUserWithEmailAndPassword } = useAuth()
@@ -18,8 +19,8 @@ const SignIn = () => {
   const [dob, setDOB] = useState<string>('')
   const [mobile, setMobile] = useState<number>()
   const [pwd, setPWD] = useState<string>('False')
-  const [error, setError] = useState('')
-  const [pageReady, setPageReady] = useState(false)
+  const [error, setError] = useState<string>('')
+  const [pageReady, setPageReady] = useState<boolean>(false)
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
@@ -37,7 +38,8 @@ const SignIn = () => {
       createUserWithEmailAndPassword(email, passwordOne)
         .then(async (result: firebase.auth.UserCredential) => {
           // add user data to firestore database
-          const user = {
+          createUser(
+            result.user.uid,
             name,
             email,
             stream,
@@ -45,9 +47,8 @@ const SignIn = () => {
             dob,
             mobile,
             pwd,
-          }
-
-          firestore.doc(path.join('users', result.user.uid)).set(user)
+          )
+          createApplicationData(result.user.uid)
 
           router.push('/application-portal/application')
         })
