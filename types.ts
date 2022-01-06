@@ -12,3 +12,13 @@ export type User = {
   mobile: Number
   pwd: string
 }
+
+export type AcademicRecordType = {
+  [category: string]: {
+    branch: string
+    collegeName: string
+    duration: number
+    completionYear: number
+    percentage: string
+  }
+}
