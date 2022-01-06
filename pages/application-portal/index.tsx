@@ -11,11 +11,12 @@ export default function Portal() {
   const [error, setError] = useState<string>('')
 
   const proceed = () => {
+    setError('')
     if (firstCheck && secondCheck && thirdCheck) {
-      setError('')
       router.push('/application-portal/application')
     } else setError('Please check eligibility criteria first.')
   }
+
   return (
     <PortalLayout>
       <div className="my-10 mx-10 sm:mx-20 lg:mx-28 xl:mx-40">
@@ -95,7 +96,7 @@ export default function Portal() {
             Note:{' '}
             <span className="text-sm">
               Be ready with scanned images of original documents supporting your
-              academic credentials or your achievements{' '}
+              academic credentials or your achievements.{' '}
               <span className="text-red-850">
                 If you have not scanned your documents, first scan them and
                 return later.

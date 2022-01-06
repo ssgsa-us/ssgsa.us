@@ -41,6 +41,8 @@ To learn more about this refer [Tailwind CSS Custom Colors Documentation](https:
 
 Custom class "bg-blue-850" is created for color of hexcode "#003366".
 
+Custom class "bg-blue-860" is created for color of hexcode "#003366cc".
+
 Custom class "bg-red-850" is created for color of hexcode "#cc0000".
 
 Custom class "bg-red-860" is created for color of hexcode "#cc0000cc".
