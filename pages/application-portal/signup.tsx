@@ -6,7 +6,7 @@ import PortalLayout from '../../layouts/application-portal'
 import firebase, { auth, firestore } from '../../firebase'
 import path from 'path'
 
-const SignIn = () => {
+const SignUp = () => {
   const { createUserWithEmailAndPassword } = useAuth()
   const router = useRouter()
   const [email, setEmail] = useState<string>('')
@@ -219,4 +219,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default SignUp
