@@ -221,7 +221,7 @@ export default function Header() {
             >
               <Link href="/isra">
                 <a className="px-2 md:py-4 md:px-1 text-white text-sm">
-                  International Summer Research Award(ISRA)
+                  International Summer Research Award (ISRA)
                 </a>
               </Link>
             </div>
