@@ -4,8 +4,10 @@ import Image from 'next/image'
 export default function Footer() {
   return (
     <div className="mt-5">
-      <div className="relative w-full h-32 lg:h-40 hidden sm:block">
-        <Image src="/SirSyedHall.jpg" alt="Sir Syed Hall" layout="fill" />
+      <div className="flex justify-center">
+        <div className="relative w-full xl:w-3/4 h-24 lg:h-28 hidden sm:block">
+          <Image src="/SirSyedHall.jpg" alt="Sir Syed Hall" layout="fill" />
+        </div>
       </div>
       <div className="grid grid-cols-3 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 text-white">
         <div className="sm:col-span-2 hidden sm:flex items-center justify-center p-2">

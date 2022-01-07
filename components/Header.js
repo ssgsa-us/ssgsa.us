@@ -28,7 +28,7 @@ export default function Header() {
         </div>
       </div>
       <div className="w-full flex flex-row bg-white items-center hidden sm:flex">
-        <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 flex items-center font-black text-red-850 ">
+        <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 lg:ml-24 flex items-center font-black text-red-850 ">
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
         <div className="mr-3 flex-2">
