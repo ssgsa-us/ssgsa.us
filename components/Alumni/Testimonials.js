@@ -1,8 +1,12 @@
+import { useRef } from 'react'
 import Carousel from 'react-elastic-carousel'
 import Image from 'next/image'
 import { testimonials } from '../../constants/testimonials'
 
 const Testimonials = () => {
+  const carouselRef = useRef(null)
+  let resetTimeout
+
   return (
     <div id="Testimonials">
       <h1 className="my-8 mx-4 sm:mx-12 lg:mx-20 bg-blue-850 lg:text-3xl text-2xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
@@ -10,7 +14,21 @@ const Testimonials = () => {
       </h1>
 
       <div className="mx-2 sm:mx-6 lg:mx-10 my-8">
-        <Carousel itemsToShow={1} enableAutoPlay={true} autoPlaySpeed={5000}>
+        <Carousel
+          ref={carouselRef}
+          itemsToShow={1}
+          enableAutoPlay={true}
+          autoPlaySpeed={5000}
+          showArrows={false}
+          onNextEnd={({ index }) => {
+            clearTimeout(resetTimeout)
+            if (index === testimonials.length - 1) {
+              resetTimeout = setTimeout(() => {
+                carouselRef.current.goTo(0)
+              }, 5000)
+            }
+          }}
+        >
           {testimonials.map((testimonial, index) => (
             <div
               className="flex flex-col md:flex-row items-center bg-red-850 rounded-tl-3xl rounded-br-3xl"
