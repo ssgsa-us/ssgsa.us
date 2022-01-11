@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useAuth } from '../../context/AuthUserContext'
 import { auth } from '../../firebase'
 import PortalLayout from '../../layouts/application-portal'
+import { useAuth } from '../../context/AuthUserContext'
 
 const SignIn = () => {
   const { signInWithEmailAndPassword } = useAuth()
   const router = useRouter()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [error, setError] = useState('')
-  const [pageReady, setPageReady] = useState(false)
+  const [error, setError] = useState<string>('')
+  const [pageReady, setPageReady] = useState<boolean>(false)
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {

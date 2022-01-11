@@ -1,24 +1,63 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { ApplicationData } from '../../classes/application_data'
 import ProceedButtons from './ProceedButtons'
+import { updateApplicationData } from '../../pages/api/step1'
+import { useAuth } from '../../context/AuthUserContext'
 
-const Step1 = ({ status, formStatus, setStatus, setFormStatus }) => {
+type Props = {
+  applicationData: ApplicationData
+  status: Number
+  setStatus: Dispatch<SetStateAction<Number>>
+}
+
+const Step1 = ({ applicationData, status, setStatus }: Props) => {
+  const { authUser } = useAuth()
   const [name, setName] = useState<string>()
   const [email, setEmail] = useState<string>()
   const [contactNo, setContactNo] = useState<number>()
-  const [gender, setGender] = useState<string>('Male')
+  const [gender, setGender] = useState<string>()
   const [enrollNo, setEnrollNo] = useState<string>()
   const [nationality, setNationality] = useState<string>()
   const [error, setError] = useState<string>('')
 
+  useEffect(() => {
+    setName(applicationData.name || '')
+    setEmail(applicationData.email || '')
+    setContactNo(applicationData.contact || 0)
+    setGender(applicationData.gender || 'Male')
+    setEnrollNo(applicationData.enrollment || '')
+    setNationality(applicationData.nationality || '')
+  }, [applicationData])
+
   const nextStep = () => {
+    setError('')
     if (name && email && contactNo && gender && enrollNo && nationality) {
       const regex =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (regex.test(String(email).toLowerCase())) {
-        if (formStatus == 1) {
+        if (applicationData.form_status == 1) {
+          updateApplicationData(
+            authUser.id,
+            name,
+            email,
+            contactNo,
+            gender,
+            enrollNo,
+            nationality,
+            2,
+          )
           setStatus(2)
-          setFormStatus(2)
         } else {
+          updateApplicationData(
+            authUser.id,
+            name,
+            email,
+            contactNo,
+            gender,
+            enrollNo,
+            nationality,
+            applicationData.form_status,
+          )
           setStatus(2)
         }
       } else setError('Email is incorrect.')
@@ -27,7 +66,17 @@ const Step1 = ({ status, formStatus, setStatus, setFormStatus }) => {
 
   const previousStep = () => setStatus(1)
 
-  const saveInformation = () => {}
+  const saveInformation = () =>
+    updateApplicationData(
+      authUser.id,
+      name,
+      email,
+      contactNo,
+      gender,
+      enrollNo,
+      nationality,
+      applicationData.form_status,
+    )
 
   return (
     <div>

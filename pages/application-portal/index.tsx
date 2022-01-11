@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { auth } from '../../firebase'
 import PortalLayout from '../../layouts/application-portal'
 
 export default function Portal() {
@@ -9,6 +10,17 @@ export default function Portal() {
   const [secondCheck, setSecondCheck] = useState<boolean>(false)
   const [thirdCheck, setThirdCheck] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
+
+  // Listen for changes on authUser, redirect if needed
+  useEffect(() => {
+    auth.onAuthStateChanged(() => {
+      if (auth.currentUser) {
+        setFirstCheck(true)
+        setSecondCheck(true)
+        setThirdCheck(true)
+      }
+    })
+  }, [])
 
   const proceed = () => {
     setError('')
