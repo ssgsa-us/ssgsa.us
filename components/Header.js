@@ -28,7 +28,7 @@ export default function Header() {
         </div>
       </div>
       <div className="w-full flex flex-row bg-white items-center hidden sm:flex">
-        <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 flex items-center font-black text-red-850 ">
+        <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 lg:ml-24 flex items-center font-black text-red-850 ">
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
         <div className="mr-3 flex-2">
@@ -221,7 +221,7 @@ export default function Header() {
             >
               <Link href="/isra">
                 <a className="px-2 md:py-4 md:px-1 text-white text-sm">
-                  International Summer Research Award(ISRA)
+                  International Summer Research Award (ISRA)
                 </a>
               </Link>
             </div>

@@ -1,6 +1,6 @@
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -12,6 +12,13 @@ module.exports = {
           850: '#cc0000',
           860: '#cc0000cc',
         },
+        gray: {
+          350: '#E7E7E7',
+          850: '#595959',
+        },
+      },
+      zIndex: {
+        n10: '-10',
       },
     },
   },

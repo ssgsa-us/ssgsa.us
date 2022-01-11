@@ -138,8 +138,8 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             onChange={(e) => setGender(e.target.value)}
             className="w-full rounded-xl p-3"
           >
-            <option label="Male" />
-            <option label="Female" />
+            <option label="Male" value="Male" />
+            <option label="Female" value="Female" />
           </select>
         </div>
         <div className="p-2">

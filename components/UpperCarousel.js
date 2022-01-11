@@ -1,10 +1,28 @@
+import { useRef } from 'react'
 import Image from 'next/image'
 import Carousel from 'react-elastic-carousel'
 import { CarouselData } from '../constants/upperCarouselData'
 
 const UpperCarousel = () => {
+  const carouselRef = useRef(null)
+  let resetTimeout
+
   return (
-    <Carousel itemsToShow={1}>
+    <Carousel
+      ref={carouselRef}
+      itemsToShow={1}
+      enableAutoPlay={true}
+      autoPlaySpeed={5000}
+      showArrows={false}
+      onNextEnd={({ index }) => {
+        clearTimeout(resetTimeout)
+        if (index === 1) {
+          resetTimeout = setTimeout(() => {
+            carouselRef.current.goTo(0)
+          }, 5000)
+        }
+      }}
+    >
       {CarouselData.map((data, index) => {
         return (
           <div

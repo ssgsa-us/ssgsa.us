@@ -7,7 +7,7 @@ import firebase, { auth } from '../../firebase'
 import PortalLayout from '../../layouts/application-portal'
 import { useAuth } from '../../context/AuthUserContext'
 
-const SignIn = () => {
+const SignUp = () => {
   const { createUserWithEmailAndPassword } = useAuth()
   const router = useRouter()
   const [email, setEmail] = useState<string>('')
@@ -124,8 +124,8 @@ const SignIn = () => {
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
                   >
-                    <option label="Male" />
-                    <option label="Female" />
+                    <option label="Male" value="Male" />
+                    <option label="Female" value="Female" />
                   </select>
                 </div>
                 <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
@@ -162,8 +162,8 @@ const SignIn = () => {
                     value={pwd}
                     onChange={(e) => setPWD(e.target.value)}
                   >
-                    <option label="False" />
-                    <option label="True" />
+                    <option label="False" value="False" />
+                    <option label="True" value="True" />
                   </select>
                 </div>
                 <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
@@ -220,4 +220,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default SignUp
