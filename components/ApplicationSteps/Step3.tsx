@@ -196,7 +196,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
           <div className="pt-2">
             <p className="text-sm">
               Note: You need to have a passport to appear for GRE and TOEFL. We
-              suggest that you apply for a passport if you haven't already.
+              suggest that you apply for a passport if you have not already.
             </p>
           </div>
         </div>
