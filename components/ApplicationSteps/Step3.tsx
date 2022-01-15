@@ -5,23 +5,13 @@ import { AnswerType, TestTakenType } from '../../types'
 import { updateApplicationData } from '../../pages/api/step3'
 import { ApplicationData } from '../../classes/application_data'
 
-type QuestionType = {
-  [key: number]: string
-}
-
 type Props = {
   applicationData: ApplicationData
   status: Number
   setStatus: Dispatch<SetStateAction<Number>>
-  questions?: QuestionType
 }
 
-const Step3 = ({
-  applicationData,
-  status,
-  setStatus,
-  questions = {},
-}: Props) => {
+const Step3 = ({ applicationData, status, setStatus }: Props) => {
   const { authUser } = useAuth()
   const [answers, setAnswers] = useState<AnswerType>({})
   const [testTakens, setTestTakens] = useState<TestTakenType>({
@@ -31,10 +21,31 @@ const Step3 = ({
     gmat: false,
   })
   const [isTestTaken, setIsTestTaken] = useState<boolean>(false)
-  const [questionsComponents, setQuestionsComponents] = useState<
-    Array<JSX.Element>
-  >([])
   const [error, setError] = useState<string>('')
+
+  const questionComponent = (index, question) => (
+    <div className="p-2">
+      <p className="font-bold md:text-lg">
+        {String.fromCharCode(index + 97)}) {question}
+        <span className="text-red-850 font-black">*</span>
+      </p>
+      <textarea
+        name={`SOP${index}`}
+        rows={4}
+        cols={10}
+        value={answers[`SOP${index}`]}
+        onChange={(e) =>
+          setAnswers((prevAnswers: AnswerType) => {
+            return {
+              ...prevAnswers,
+              [`SOP${index}`]: e.target.value,
+            }
+          })
+        }
+        className="w-full rounded-xl p-2 mt-1"
+      />
+    </div>
+  )
 
   useEffect(() => {
     setAnswers(applicationData.sop_answers || {})
@@ -51,36 +62,6 @@ const Step3 = ({
     }
   }, [applicationData])
 
-  useEffect(() => {
-    setQuestionsComponents([])
-    for (let i = 1; i <= Number(process.env.NEXT_PUBLIC_TOTAL_QUESTIONS); i++) {
-      setQuestionsComponents((prevQuestions) => [
-        ...prevQuestions,
-        <div className="p-2" key={i}>
-          <p className="font-bold md:text-lg">
-            {String.fromCharCode(i + 97)}) {questions[i]}
-            <span className="text-red-850 font-black">*</span>
-          </p>
-          <textarea
-            name={`SOP${i}`}
-            rows={4}
-            cols={10}
-            value={answers[`SOP${i}`]}
-            onChange={(e) =>
-              setAnswers((prevAnswers: AnswerType) => {
-                return {
-                  ...prevAnswers,
-                  [`SOP${i}`]: e.target.value,
-                }
-              })
-            }
-            className="w-full rounded-xl p-2 mt-1"
-          />
-        </div>,
-      ])
-    }
-  }, [answers])
-
   const nextStep = () => {
     if (
       isTestTaken ||
@@ -89,37 +70,31 @@ const Step3 = ({
       testTakens.ielts ||
       testTakens.gmat
     ) {
-      let flag: boolean = true
-      for (
-        let i = 1;
-        i <= Number(process.env.NEXT_PUBLIC_TOTAL_QUESTIONS);
-        i++
-      ) {
-        if (!answers[`SOP${i}`] || answers[`SOP${i}`].split(' ').length < 200) {
-          flag = false
-          setError(
-            `Min Length required in Question ${String.fromCharCode(
-              i + 97,
-            )} is 200.`,
-          )
-          break
-        }
-      }
-
-      if (flag) {
-        if (applicationData.form_status == 3) {
-          updateApplicationData(authUser.id, testTakens, answers, 4)
-          setStatus(4)
-        } else {
-          setStatus(4)
-          updateApplicationData(
-            authUser.id,
-            testTakens,
-            answers,
-            applicationData.form_status,
-          )
-        }
-      }
+      if (!answers['SOP1'] || answers['SOP1'].split(' ').length >= 200) {
+        if (!answers['SOP2'] || answers['SOP2'].split(' ').length >= 200) {
+          if (!answers['SOP3'] || answers['SOP3'].split(' ').length >= 200) {
+            if (!answers['SOP4'] || answers['SOP4'].split(' ').length >= 200) {
+              if (
+                !answers['SOP5'] ||
+                answers['SOP5'].split(' ').length >= 200
+              ) {
+                if (applicationData.form_status == 3) {
+                  updateApplicationData(authUser.id, testTakens, answers, 4)
+                  setStatus(4)
+                } else {
+                  setStatus(4)
+                  updateApplicationData(
+                    authUser.id,
+                    testTakens,
+                    answers,
+                    applicationData.form_status,
+                  )
+                }
+              } else setError(`Min Length required in Question f is 200.`)
+            } else setError(`Min Length required in Question e is 200.`)
+          } else setError(`Min Length required in Question d is 200.`)
+        } else setError(`Min Length required in Question c is 200.`)
+      } else setError(`Min Length required in Question b is 200.`)
     } else setError('Question a is mandatory.')
   }
 
@@ -225,7 +200,11 @@ const Step3 = ({
             </p>
           </div>
         </div>
-        {questionsComponents.map((question) => question)}
+        {questionComponent(1, process.env.NEXT_PUBLIC_QUESTION_1)}
+        {questionComponent(2, process.env.NEXT_PUBLIC_QUESTION_2)}
+        {questionComponent(3, process.env.NEXT_PUBLIC_QUESTION_3)}
+        {questionComponent(4, process.env.NEXT_PUBLIC_QUESTION_4)}
+        {questionComponent(5, process.env.NEXT_PUBLIC_QUESTION_5)}
       </div>
       <ProceedButtons
         status={status}
@@ -239,17 +218,3 @@ const Step3 = ({
 }
 
 export default Step3
-
-export async function getServerSideProps() {
-  const questions: QuestionType = {}
-
-  for (let i = 1; i <= Number(process.env.NEXT_PUBLIC_TOTAL_QUESTIONS); i++) {
-    questions[1] = process.env[`NEXT_PUBLIC_QUESTION_${i}`]
-  }
-
-  return {
-    props: {
-      questions,
-    },
-  }
-}
