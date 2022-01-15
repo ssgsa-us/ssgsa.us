@@ -10,9 +10,11 @@ export class ApplicationData {
   nationality: string
   academic_record: AcademicRecordType
   form_status: number
+  isSubmitted: boolean
 
   constructor(form_status: number = 1) {
     this.form_status = form_status
+    this.isSubmitted = false
   }
 
   step1(
@@ -33,6 +35,10 @@ export class ApplicationData {
 
   step2(academic_record: AcademicRecordType) {
     this.academic_record = academic_record
+  }
+
+  step5() {
+    this.isSubmitted = true
   }
 }
 
@@ -57,6 +63,9 @@ export const applicationDataConverter = {
     )
     if (data.form_status >= 2) {
       applicationData.step2(data.academic_record)
+    }
+    if (data.form_status == 5) {
+      applicationData.step5()
     }
     return applicationData
   },
