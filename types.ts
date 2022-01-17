@@ -23,13 +23,6 @@ export type AcademicRecordType = {
   }
 }
 
-export type TestTakenType = {
-  gre: boolean
-  toefl: boolean
-  ielts: boolean
-  gmat: boolean
-}
-
 export type AnswerType = {
   [key: string]: string
 }
