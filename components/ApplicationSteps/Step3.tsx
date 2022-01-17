@@ -45,11 +45,31 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
   }, [applicationData])
 
   const nextStep = () => {
-    if (!answers['SOP1'] || answers['SOP1'].split(' ').length >= 200) {
-      if (!answers['SOP2'] || answers['SOP2'].split(' ').length >= 200) {
-        if (!answers['SOP3'] || answers['SOP3'].split(' ').length >= 200) {
-          if (!answers['SOP4'] || answers['SOP4'].split(' ').length >= 200) {
-            if (!answers['SOP5'] || answers['SOP5'].split(' ').length >= 200) {
+    if (
+      answers['SOP1'] &&
+      answers['SOP1'].split(' ').length >= 20 &&
+      answers['SOP1'].split(' ').length <= 200
+    ) {
+      if (
+        answers['SOP2'] &&
+        answers['SOP2'].split(' ').length >= 20 &&
+        answers['SOP2'].split(' ').length <= 200
+      ) {
+        if (
+          answers['SOP3'] &&
+          answers['SOP3'].split(' ').length >= 20 &&
+          answers['SOP3'].split(' ').length <= 200
+        ) {
+          if (
+            answers['SOP4'] &&
+            answers['SOP4'].split(' ').length >= 20 &&
+            answers['SOP4'].split(' ').length <= 200
+          ) {
+            if (
+              answers['SOP5'] &&
+              answers['SOP5'].split(' ').length >= 20 &&
+              answers['SOP5'].split(' ').length <= 200
+            ) {
               if (applicationData.form_status == 3) {
                 updateApplicationData(authUser.id, answers, 4)
                 setStatus(4)
@@ -61,11 +81,26 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                   applicationData.form_status,
                 )
               }
-            } else setError(`Min Length required in Question f is 200.`)
-          } else setError(`Min Length required in Question e is 200.`)
-        } else setError(`Min Length required in Question d is 200.`)
-      } else setError(`Min Length required in Question c is 200.`)
-    } else setError(`Min Length required in Question b is 200.`)
+            } else
+              setError(
+                `Minimum and maximum Length required in Question e are 20 and 200, respectively.`,
+              )
+          } else
+            setError(
+              `Minimum and maximum Length required in Question d are 20 and 200, respectively.`,
+            )
+        } else
+          setError(
+            `Minimum and maximum Length required in Question c are 20 and 200, respectively.`,
+          )
+      } else
+        setError(
+          `Minimum and maximum Length required in Question b are 20 and 200, respectively.`,
+        )
+    } else
+      setError(
+        `Minimum and maximum Length required in Question a are 20 and 200, respectively.`,
+      )
   }
 
   const previousStep = () => setStatus(1)
