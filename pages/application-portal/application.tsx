@@ -92,7 +92,7 @@ export default function Application() {
               Go to Step 5
             </button>
           </div>
-        ) : status == 5 ? (
+        ) : status == 5 || status == 6 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <Step5
               applicationData={applicationData}
