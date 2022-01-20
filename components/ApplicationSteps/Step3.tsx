@@ -103,7 +103,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
       )
   }
 
-  const previousStep = () => setStatus(status-1)
+  const previousStep = () => setStatus(2)
 
   const saveInformation = () =>
     updateApplicationData(authUser.id, answers, applicationData.form_status)
