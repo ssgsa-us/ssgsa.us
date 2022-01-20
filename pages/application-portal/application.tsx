@@ -7,6 +7,7 @@ import { getApplicationData } from '../api/getApplicationData'
 import Step1 from '../../components/ApplicationSteps/Step1'
 import Step2 from '../../components/ApplicationSteps/Step2'
 import Step3 from '../../components/ApplicationSteps/Step3'
+import Step5 from '../../components/ApplicationSteps/Step5'
 
 export default function Application() {
   const router = useRouter()
@@ -84,21 +85,13 @@ export default function Application() {
               Go to Step 5
             </button>
           </div>
-        ) : status == 5 ? (
+        ) : status == 5 || status == 6 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <p>You are at Step 5</p>
-            <button
-              className="text-white text-base md:text-lg bg-red-850 my-5 py-2 px-4 rounded-3xl"
-              onClick={() => {
-                if (status == applicationData.form_status) {
-                  setStatus(1)
-                } else {
-                  setStatus(1)
-                }
-              }}
-            >
-              Go to Step 1
-            </button>
+            <Step5
+              applicationData={applicationData}
+              status={status}
+              setStatus={setStatus}
+            />
           </div>
         ) : (
           <div className="mt-96" />
