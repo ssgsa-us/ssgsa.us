@@ -22,3 +22,7 @@ export type AcademicRecordType = {
     percentage: string
   }
 }
+
+export type AnswerType = {
+  [key: string]: string
+}
