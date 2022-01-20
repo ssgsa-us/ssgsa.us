@@ -6,6 +6,7 @@ import { auth } from '../../firebase'
 import { getApplicationData } from '../api/getApplicationData'
 import Step1 from '../../components/ApplicationSteps/Step1'
 import Step2 from '../../components/ApplicationSteps/Step2'
+import Step3 from '../../components/ApplicationSteps/Step3'
 import Step5 from '../../components/ApplicationSteps/Step5'
 
 export default function Application() {
@@ -62,19 +63,11 @@ export default function Application() {
           </div>
         ) : status == 3 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <p>You are at Step 3</p>
-            <button
-              className="text-white text-base md:text-lg bg-red-850 my-5 py-2 px-4 rounded-3xl"
-              onClick={() => {
-                if (status == applicationData.form_status) {
-                  setStatus(4)
-                } else {
-                  setStatus(4)
-                }
-              }}
-            >
-              Go to Step 4
-            </button>
+            <Step3
+              applicationData={applicationData}
+              status={status}
+              setStatus={setStatus}
+            />
           </div>
         ) : status == 4 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
