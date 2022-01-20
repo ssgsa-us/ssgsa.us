@@ -22,3 +22,7 @@ export type AcademicRecordType = {
     percentage: string
   }
 }
+
+export type DocumentsType = {
+  [documentType: string]: string
+}

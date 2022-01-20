@@ -1,5 +1,10 @@
 import path from 'path'
-import { ref as StorageRef, uploadBytesResumable } from 'firebase/storage'
+import {
+  getDownloadURL,
+  ref as StorageRef,
+  uploadBytesResumable,
+  UploadTaskSnapshot,
+} from 'firebase/storage'
 import { firestore, storage } from '../../firebase'
 
 export const uploadDocument = (
@@ -11,7 +16,15 @@ export const uploadDocument = (
     storage,
     path.join('documents', userId, documentType),
   )
-  uploadBytesResumable(storageRef, document)
+  uploadBytesResumable(storageRef, document).then(
+    (snapshot: UploadTaskSnapshot) => {
+      getDownloadURL(snapshot.ref).then((downloadURL: string) => {
+        firestore
+          .doc(path.join('applications_data', userId))
+          .update({ [`documents.${documentType}`]: downloadURL })
+      })
+    },
+  )
 }
 
 export const updateFormStatus = (userId: string, formStatus: number) => {

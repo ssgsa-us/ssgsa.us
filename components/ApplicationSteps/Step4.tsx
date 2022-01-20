@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
 import ProceedButtons from './ProceedButtons'
 import { useAuth } from '../../context/AuthUserContext'
@@ -75,7 +75,13 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
         <input
           type="text"
           disabled
-          value={file ? file.name : null}
+          value={
+            file
+              ? file.name
+              : applicationData.documents && applicationData.documents[fileName]
+              ? `${fileName}.pdf`
+              : null
+          }
           className="sm:mr-4 w-full bg-white rounded-r-lg md:text-lg py-2 px-2"
         />
       </div>
@@ -84,9 +90,8 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
         onClick={() => {
           setError('')
           if (file)
-            if (file.size <= 1250000)
-              uploadDocument(authUser.id, fileName, file)
-            else setError('Maximum allowed file size is 10Mb.')
+            if (file.size <= 600000) uploadDocument(authUser.id, fileName, file)
+            else setError('Maximum allowed file size is 500KB.')
         }}
       >
         Upload
@@ -108,7 +113,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             <span className="text-red-850 font-black">*</span>
             <br />
             The maximum allowed file size is{' '}
-            <span className="font-bold">10 Mb</span>
+            <span className="font-bold">500 KB</span>
           </p>
           {fileUploadComponent('Xth', Xth, setXth)}
         </div>
@@ -117,17 +122,21 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             Please attach a <span className="font-bold">single pdf file </span>
             containing marksheet of{' '}
             <span className="font-bold">
-              {applicationData.academic_record['XII Class']
+              {applicationData.academic_record &&
+              applicationData.academic_record['XII Class']
                 ? 'XIIth Class'
                 : 'Diploma'}
             </span>
             <span className="text-red-850 font-black">*</span>
             <br />
             The maximum allowed file size is{' '}
-            <span className="font-bold">10 Mb</span>
+            <span className="font-bold">500 KB</span>
           </p>
           {fileUploadComponent(
-            applicationData.academic_record['XII Class'] ? 'XIIth' : 'Diploma',
+            applicationData.academic_record &&
+              applicationData.academic_record['XII Class']
+              ? 'XIIth'
+              : 'Diploma',
             XIIthOrDiploma,
             setXIIthOrDiploma,
           )}
@@ -140,7 +149,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             <span className="text-red-850 font-black">*</span>
             <br />
             The maximum allowed file size is{' '}
-            <span className="font-bold">10 Mb</span>
+            <span className="font-bold">500 KB</span>
           </p>
           {fileUploadComponent('Bachelors', bachelors, setBachelors)}
         </div>
@@ -151,7 +160,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             <span className="font-bold">your Master's Degree</span> (if any)
             <br />
             The maximum allowed file size is{' '}
-            <span className="font-bold">10 Mb</span>
+            <span className="font-bold">500 KB</span>
           </p>
           {fileUploadComponent('Masters', masters, setMasters)}
         </div>
@@ -165,7 +174,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             (if any)
             <br />
             The maximum allowed file size is{' '}
-            <span className="font-bold">10 Mb</span>
+            <span className="font-bold">500 KB</span>
           </p>
           {fileUploadComponent('Others', others, setOthers)}
         </div>
@@ -176,7 +185,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             <span className="text-red-850 font-black">*</span>
             <br />
             The maximum allowed file size is{' '}
-            <span className="font-bold">10 Mb</span>
+            <span className="font-bold">500 KB</span>
           </p>
           {fileUploadComponent('Resume', resume, setResume)}
         </div>
@@ -190,7 +199,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             </span>
             <br />
             The maximum allowed file size is{' '}
-            <span className="font-bold">10 Mb</span>
+            <span className="font-bold">500 KB</span>
           </p>
           {fileUploadComponent('Certificates', certificates, setCertificates)}
         </div>

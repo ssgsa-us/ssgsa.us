@@ -1,4 +1,4 @@
-import { AcademicRecordType } from '../types'
+import { AcademicRecordType, DocumentsType } from '../types'
 import firebase from '../firebase'
 
 export class ApplicationData {
@@ -9,6 +9,7 @@ export class ApplicationData {
   enrollment: string
   nationality: string
   academic_record: AcademicRecordType
+  documents: DocumentsType
   form_status: number
 
   constructor(form_status: number = 1) {
@@ -34,6 +35,10 @@ export class ApplicationData {
   step2(academic_record: AcademicRecordType) {
     this.academic_record = academic_record
   }
+
+  step4(documents: DocumentsType) {
+    this.documents = documents
+  }
 }
 
 export const applicationDataConverter = {
@@ -57,6 +62,9 @@ export const applicationDataConverter = {
     )
     if (data.form_status >= 2) {
       applicationData.step2(data.academic_record)
+    }
+    if (data.form_status >= 4) {
+      applicationData.step4(data.documents)
     }
     return applicationData
   },
