@@ -137,7 +137,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
             </div>
             <div className="mb-10">
               {Object.keys(applicationData.academic_record).map((key) => (
-                <div className="mb-10">
+                <div className="mb-10" key={key}>
                   <p className="text-black text-xl font-extrabold w-48 mr-5 mb-4">
                     Academic Record
                   </p>
