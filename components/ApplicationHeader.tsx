@@ -22,7 +22,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
           </Link>
         </div>
       </div>
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="mx-auto md:mx-0 px-4 md:px-1">
         <div className="md:hidden flex justify-between">
           <div className="text-white m-1 text-xl font-bold">SSGSA</div>
 
@@ -56,7 +56,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
         <div
           className={`${
             active ? 'pt-1 pb-3 md:py-0' : 'hidden'
-          } md:flex md:justify-center`}
+          } md:flex md:justify-between`}
         >
           <div className="flex flex-col w-full md:flex-row md:justify-center">
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
@@ -137,7 +137,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
               <button
                 className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer ${
                   formStatus >= 5
-                    ? status == 5
+                    ? status == 5 || status == 6
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                     : 'bg-red-860 cursor-not-allowed'
@@ -150,6 +150,13 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
                 <p className="text-sm md:text-xs lg:text-sm">
                   Review and Submit
                 </p>
+              </button>
+            </div>
+          </div>
+          <div className="flex items-center justify-center mt-3 md:mt-0 ml-2 mr-3">
+            <div className="bg-white py-0.5 px-0.5 my-2">
+              <button className="py-2 px-2 bg-red-850 hover:bg-blue-850 text-white text-sm md:text-lg lg:text-xl w-max">
+                Sign Out
               </button>
             </div>
           </div>

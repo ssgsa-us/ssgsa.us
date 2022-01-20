@@ -15,7 +15,7 @@ export default function ApplicationLayout({
         formStatus={formStatus}
         setStatus={setStatus}
       />
-      {children}
+      <div className="md:px-12 lg:px-24 xl:px-40">{children}</div>
       <Footer />
     </div>
   )

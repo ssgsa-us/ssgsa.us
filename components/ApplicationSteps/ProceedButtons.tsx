@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ProceedButtons = ({
   status,
+  formStatus,
   previousStep,
   nextStep,
   saveInformation,
@@ -39,7 +40,7 @@ const ProceedButtons = ({
             className="text-white text-base md:text-lg bg-blue-850 ml-2 py-2 px-2 rounded-lg flex flex-row items-center"
             onClick={nextStep}
           >
-            <p className="mr-2">Next Step</p>
+            <p className="mr-2">Save And Proceed</p>
             <FontAwesomeIcon
               icon={faArrowAltCircleRight}
               size="lg"
@@ -48,8 +49,12 @@ const ProceedButtons = ({
           </button>
         </div>
         <button
-          className="text-white text-base md:text-lg bg-red-850 mb-4 sm:mb-0 py-2 px-2 rounded-lg order-1 sm:order-2"
-          onClick={saveInformation}
+          className={`text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg order-1 sm:order-2 ${
+            status == formStatus ? null : 'bg-red-860 cursor-not-allowed'
+          }`}
+          onClick={() => {
+            if (status == formStatus) saveInformation()
+          }}
         >
           Save Information
         </button>
