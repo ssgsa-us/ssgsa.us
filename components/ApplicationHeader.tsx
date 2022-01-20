@@ -2,8 +2,10 @@ import Image from 'next/image'
 import { useState } from 'react'
 import logo from '../public/logo.png'
 import Link from 'next/link'
+import { useAuth } from '../context/AuthUserContext'
 
 export default function ApplicationHeader({ status, formStatus, setStatus }) {
+  const { signOut } = useAuth()
   const [active, setActive] = useState(false)
 
   const handleClick = () => {
@@ -155,7 +157,10 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
           </div>
           <div className="flex items-center justify-center mt-3 md:mt-0 ml-2 mr-3">
             <div className="bg-white py-0.5 px-0.5 my-2">
-              <button className="py-2 px-2 bg-red-850 hover:bg-blue-850 text-white text-sm md:text-lg lg:text-xl w-max">
+              <button
+                className="py-2 px-2 bg-red-850 hover:bg-blue-850 text-white text-sm md:text-lg lg:text-xl w-max"
+                onClick={signOut}
+              >
                 Sign Out
               </button>
             </div>
