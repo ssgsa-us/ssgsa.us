@@ -206,6 +206,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
       </div>
       <ProceedButtons
         status={status}
+        formStatus={applicationData.form_status}
         previousStep={previousStep}
         nextStep={nextStep}
         saveInformation={saveInformation}
