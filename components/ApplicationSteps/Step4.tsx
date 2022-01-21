@@ -13,20 +13,46 @@ type Props = {
 const Step4 = ({ applicationData, status, setStatus }: Props) => {
   const { authUser } = useAuth()
   const [Xth, setXth] = useState<File>()
+  const [XthUploaded, setXthUploaded] = useState<boolean>(false)
   const [XIIthOrDiploma, setXIIthOrDiploma] = useState<File>()
+  const [XIIthOrDiplomaUploaded, setXIIthOrDiplomaUploaded] =
+    useState<boolean>(false)
   const [bachelors, setBachelors] = useState<File>()
+  const [bachelorsUploaded, setBachelorsUploaded] = useState<boolean>(false)
   const [masters, setMasters] = useState<File>()
+  const [mastersUploaded, setMastersUploaded] = useState<boolean>(false)
   const [others, setOthers] = useState<File>()
+  const [othersUploaded, setOthersUploaded] = useState<boolean>(false)
   const [resume, setResume] = useState<File>()
+  const [resumeUploaded, setResumeUploaded] = useState<boolean>(false)
   const [certificates, setCertificates] = useState<File>()
+  const [certificatesUploaded, setCertificatesUploaded] =
+    useState<boolean>(false)
   const [error, setError] = useState<string>('')
+
+  useEffect(() => {
+    if (applicationData.documents) {
+      if (applicationData.documents['Xth']) setXthUploaded(true)
+      if (
+        applicationData.documents['XIIth'] ||
+        applicationData.documents['Diploma']
+      )
+        setXIIthOrDiplomaUploaded(true)
+      if (applicationData.documents['Bachelors']) setBachelorsUploaded(true)
+      if (applicationData.documents['Masters']) setMastersUploaded(true)
+      if (applicationData.documents['Others']) setOthersUploaded(true)
+      if (applicationData.documents['Resume']) setResumeUploaded(true)
+      if (applicationData.documents['Certificates'])
+        setCertificatesUploaded(true)
+    }
+  }, [applicationData])
 
   const nextStep = () => {
     setError('')
-    if (Xth) {
-      if (XIIthOrDiploma) {
-        if (bachelors) {
-          if (resume) {
+    if (XthUploaded) {
+      if (XIIthOrDiplomaUploaded) {
+        if (bachelorsUploaded) {
+          if (resumeUploaded) {
             if (applicationData.form_status == 4) {
               updateFormStatus(authUser.id, 5)
               setStatus(5)
@@ -54,6 +80,8 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
     fileName: string,
     file: File,
     setFile: Dispatch<SetStateAction<File>>,
+    isFileUploaded: boolean,
+    setIsFileUploaded: Dispatch<SetStateAction<boolean>>,
   ) => (
     <div
       className="flex flex-col items-center sm:flex-row sm:justify-between mt-1"
@@ -75,13 +103,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
         <input
           type="text"
           disabled
-          value={
-            file
-              ? file.name
-              : applicationData.documents && applicationData.documents[fileName]
-              ? `${fileName}.pdf`
-              : null
-          }
+          value={file ? file.name : isFileUploaded ? `${fileName}.pdf` : ''}
           className="sm:mr-4 w-full bg-white rounded-r-lg md:text-lg py-2 px-2"
         />
       </div>
@@ -90,7 +112,10 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
         onClick={() => {
           setError('')
           if (file)
-            if (file.size <= 600000) uploadDocument(authUser.id, fileName, file)
+            if (file.size <= 600000)
+              uploadDocument(authUser.id, fileName, file).then(() =>
+                setIsFileUploaded(true),
+              )
             else setError('Maximum allowed file size is 500KB.')
         }}
       >
@@ -115,7 +140,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             The maximum allowed file size is{' '}
             <span className="font-bold">500 KB</span>
           </p>
-          {fileUploadComponent('Xth', Xth, setXth)}
+          {fileUploadComponent('Xth', Xth, setXth, XthUploaded, setXthUploaded)}
         </div>
         <div className="p-2">
           <p className="md:text-lg">
@@ -139,6 +164,8 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
               : 'Diploma',
             XIIthOrDiploma,
             setXIIthOrDiploma,
+            XIIthOrDiplomaUploaded,
+            setXIIthOrDiplomaUploaded,
           )}
         </div>
         <div className="p-2">
@@ -151,18 +178,31 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             The maximum allowed file size is{' '}
             <span className="font-bold">500 KB</span>
           </p>
-          {fileUploadComponent('Bachelors', bachelors, setBachelors)}
+          {fileUploadComponent(
+            'Bachelors',
+            bachelors,
+            setBachelors,
+            bachelorsUploaded,
+            setBachelorsUploaded,
+          )}
         </div>
         <div className="p-2">
           <p className="md:text-lg">
             Please attach a <span className="font-bold">single pdf file </span>
             containing all marksheets of{' '}
-            <span className="font-bold">your Master&apos;s Degree</span> (if any)
+            <span className="font-bold">your Master&apos;s Degree</span> (if
+            any)
             <br />
             The maximum allowed file size is{' '}
             <span className="font-bold">500 KB</span>
           </p>
-          {fileUploadComponent('Masters', masters, setMasters)}
+          {fileUploadComponent(
+            'Masters',
+            masters,
+            setMasters,
+            mastersUploaded,
+            setMastersUploaded,
+          )}
         </div>
         <div className="p-2">
           <p className="md:text-lg">
@@ -176,7 +216,13 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             The maximum allowed file size is{' '}
             <span className="font-bold">500 KB</span>
           </p>
-          {fileUploadComponent('Others', others, setOthers)}
+          {fileUploadComponent(
+            'Others',
+            others,
+            setOthers,
+            othersUploaded,
+            setOthersUploaded,
+          )}
         </div>
         <div className="p-2">
           <p className="md:text-lg">
@@ -187,7 +233,13 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             The maximum allowed file size is{' '}
             <span className="font-bold">500 KB</span>
           </p>
-          {fileUploadComponent('Resume', resume, setResume)}
+          {fileUploadComponent(
+            'Resume',
+            resume,
+            setResume,
+            resumeUploaded,
+            setResumeUploaded,
+          )}
         </div>
         <div className="p-2">
           <p className="md:text-lg">
@@ -201,7 +253,13 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             The maximum allowed file size is{' '}
             <span className="font-bold">500 KB</span>
           </p>
-          {fileUploadComponent('Certificates', certificates, setCertificates)}
+          {fileUploadComponent(
+            'Certificates',
+            certificates,
+            setCertificates,
+            certificatesUploaded,
+            setCertificatesUploaded,
+          )}
         </div>
       </div>
       <ProceedButtons
