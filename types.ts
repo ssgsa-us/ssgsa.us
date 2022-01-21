@@ -26,3 +26,7 @@ export type AcademicRecordType = {
 export type AnswerType = {
   [key: string]: string
 }
+
+export type DocumentsType = {
+  [documentType: string]: string
+}
