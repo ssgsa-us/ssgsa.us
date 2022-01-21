@@ -145,7 +145,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           <p className="md:text-lg">
             Please attach a <span className="font-bold">single pdf file </span>
             containing all marksheets of{' '}
-            <span className="font-bold">your Bachelor's Degree</span>
+            <span className="font-bold">your Bachelor&apos;s Degree</span>
             <span className="text-red-850 font-black">*</span>
             <br />
             The maximum allowed file size is{' '}
@@ -157,7 +157,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           <p className="md:text-lg">
             Please attach a <span className="font-bold">single pdf file </span>
             containing all marksheets of{' '}
-            <span className="font-bold">your Master's Degree</span> (if any)
+            <span className="font-bold">your Master&apos;s Degree</span> (if any)
             <br />
             The maximum allowed file size is{' '}
             <span className="font-bold">500 KB</span>
