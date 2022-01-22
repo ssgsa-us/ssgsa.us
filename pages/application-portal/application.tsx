@@ -46,7 +46,18 @@ export default function Application() {
       setStatus={setStatus}
     >
       {pageReady ? (
-        status == 1 ? (
+        new Date() <
+        new Date(process.env.NEXT_PUBLIC_APPLICATION_START_DATE) ? (
+          <div className="mt-10 bg-red-200 text-2xl text-red-850 text-center font-bold rounded-3xl p-2 pl-6 mb-5">
+            Application has not started yet. Please check eligibility criteria
+            and be ready with your documents.
+          </div>
+        ) : new Date() >
+          new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE) ? (
+          <div className="mt-10 bg-red-200 text-2xl text-red-850 text-center font-bold rounded-3xl p-2 pl-6 mb-5">
+            Application Portal is closed. We are not accepting more responses!
+          </div>
+        ) : status == 1 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <Step1
               applicationData={applicationData}

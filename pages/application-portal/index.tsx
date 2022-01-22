@@ -33,6 +33,20 @@ export default function Portal() {
     <PortalLayout>
       <div className="my-10 mx-10 sm:mx-20 lg:mx-28 xl:mx-40">
         <div className="mb-10">
+          {new Date() <
+          new Date(process.env.NEXT_PUBLIC_APPLICATION_START_DATE) ? (
+            <div className="bg-red-200 text-2xl text-red-850 text-center font-bold rounded-3xl p-2 pl-6 mb-5">
+              Application has not started yet. Please check eligibility criteria
+              and be ready with your documents.
+            </div>
+          ) : new Date() >
+            new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE) ? (
+            <div className="bg-red-200 text-2xl text-red-850 text-center font-bold rounded-3xl p-2 pl-6 mb-5">
+              Application Portal is closed. We are not accepting more responses!
+            </div>
+          ) : null}
+        </div>
+        <div className="mb-10">
           <h1 className="text-2xl text-center text-blue-850 font-black">
             Eligibility Criteria
           </h1>
@@ -172,8 +186,22 @@ export default function Portal() {
             </div>
           ) : null}
           <button
-            className="text-white text-base md:text-lg bg-red-850 py-2 px-4 rounded-3xl"
-            onClick={proceed}
+            className={`text-white text-base md:text-lg py-2 px-4 rounded-3xl ${
+              new Date() <
+                new Date(process.env.NEXT_PUBLIC_APPLICATION_START_DATE) ||
+              new Date() >
+                new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE)
+                ? 'bg-red-860 cursor-not-allowed'
+                : 'bg-red-850'
+            }`}
+            onClick={
+              new Date() <
+                new Date(process.env.NEXT_PUBLIC_APPLICATION_START_DATE) ||
+              new Date() >
+                new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE)
+                ? null
+                : proceed
+            }
           >
             Proceed to the Application Form
           </button>
