@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationLayout from '../../layouts/application-portal/application'
@@ -78,7 +79,7 @@ export default function Application() {
               setStatus={setStatus}
             />
           </div>
-        ) : status == 5 || status == 6 ? (
+        ) : status == 5 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <Step5
               applicationData={applicationData}
@@ -87,7 +88,29 @@ export default function Application() {
             />
           </div>
         ) : (
-          <div className="mt-96" />
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <div>
+              <div className="bg-green-850 text-white text-center font-bold rounded-3xl py-10 px-10 sm:py-20 sm:px-20">
+                <p className="text-xl sm:text-3xl mb-10">
+                  Your application has been submitted.
+                </p>
+                <p className="sm:text-lg">Thank you for applying to SSGSA.</p>
+              </div>
+              <div className="flex flex-col items-center sm:items-start sm:flex-row sm:justify-between mt-10">
+                <Link href="/">
+                  <a className="text-white text-lg md:text-xl bg-blue-850 font-bold mb-4 sm:mb-0 py-2 px-5 rounded-lg flex flex-row items-center">
+                    SSGSA HOME PAGE
+                  </a>
+                </Link>
+                <button
+                  className="text-white text-lg md:text-xl bg-red-850 font-bold py-2 px-5 rounded-lg flex flex-row items-center"
+                  onClick={() => {}}
+                >
+                  Print Application
+                </button>
+              </div>
+            </div>
+          </div>
         )
       ) : (
         <div className="mt-96" />

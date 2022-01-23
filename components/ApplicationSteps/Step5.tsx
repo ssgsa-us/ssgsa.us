@@ -1,7 +1,6 @@
 import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import Link from 'next/link'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
 import { useAuth } from '../../context/AuthUserContext'
 import { updateFormStatus } from '../../pages/api/step5'
@@ -18,10 +17,6 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
   const [name, setName] = useState<string>('')
   const [error, setError] = useState<string>('')
 
-  useEffect(() => {
-    if (applicationData.form_status == 6) setStepStatus('submitted')
-  })
-
   const reviewApplication = () => {
     setError('')
     if (name === applicationData.name) {
@@ -34,7 +29,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
 
   const submitApplication = () => {
     updateFormStatus(authUser.id, 6)
-    setStepStatus('submitted')
+    setStatus(6)
   }
 
   const previousStep = () => setStatus(status - 1)
@@ -94,7 +89,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
             </div>
           </div>
         </div>
-      ) : stepStatus == 'submit' ? (
+      ) : (
         <div>
           <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
             <div className="mb-10">
@@ -212,10 +207,13 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
           <div className="mt-10">
             <div className="flex flex-col items-center sm:items-start sm:flex-row sm:justify-between mt-10">
               <button
-                className="text-white text-lg md:text-xl bg-blue-850 font-bold mb-4 sm:mb-0 py-2 px-5 rounded-lg flex flex-row items-center"
+                className="text-white text-lg md:text-xl bg-blue-850 font-bold mb-4 sm:mb-0 py-2 px-5 mr-2 rounded-lg flex flex-row items-center"
                 onClick={() => setStatus(1)}
               >
                 Edit Information
+              </button>
+              <button className="text-white text-lg md:text-xl bg-blue-850 font-bold mb-4 sm:mb-0 py-2 px-5 mr-2 rounded-lg flex flex-row items-center">
+                Save Later
               </button>
               <div className="flex flex-col items-center w-60 sm:w-64 md:w-80">
                 <button
@@ -225,33 +223,12 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
                   Submit Application
                 </button>
                 <p className="text-center">
-                  Note: You will still be able to make changes to your
-                  application until the deadline.
+                  Note: You can make changes before submitting application, but
+                  you will not be able to make changes to your application after
+                  submission.
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <div className="bg-green-850 text-white text-center font-bold rounded-3xl py-10 px-10 sm:py-20 sm:px-20">
-            <p className="text-xl sm:text-3xl mb-10">
-              Your application has been submitted.
-            </p>
-            <p className="sm:text-lg">Thank you for applying to SSGSA.</p>
-          </div>
-          <div className="flex flex-col items-center sm:items-start sm:flex-row sm:justify-between mt-10">
-            <Link href="/">
-              <a className="text-white text-lg md:text-xl bg-blue-850 font-bold mb-4 sm:mb-0 py-2 px-5 rounded-lg flex flex-row items-center">
-                SSGSA HOME PAGE
-              </a>
-            </Link>
-            <button
-              className="text-white text-lg md:text-xl bg-red-850 font-bold py-2 px-5 rounded-lg flex flex-row items-center"
-              onClick={() => {}}
-            >
-              Print Application
-            </button>
           </div>
         </div>
       )}
