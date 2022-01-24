@@ -20,7 +20,13 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
     <div className="p-2">
       <p className="font-bold md:text-lg">
         {String.fromCharCode(index + 96)}) {question}
-        <span className="text-red-850 font-black">*</span>
+        <span className="text-red-850 font-black">
+          *{' '}
+          {answers[`SOP${index}`]
+            ? answers[`SOP${index}`].split(' ').length
+            : null}
+          /200
+        </span>
       </p>
       <textarea
         name={`SOP${index}`}
@@ -113,6 +119,8 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
         <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2">
           Note: Remember to save your information at frequent intervals.
+          <br />
+          Your response must be between 20 and 200 words for each question.
         </p>
         <br />
         {questionComponent(1, process.env.NEXT_PUBLIC_QUESTION_1)}

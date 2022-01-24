@@ -64,14 +64,14 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
               <button
                 className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer ${
-                  formStatus >= 1
+                  formStatus >= 1 && formStatus !== 6
                     ? status == 1
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                     : 'bg-red-860 cursor-not-allowed'
                 }`}
                 onClick={() => {
-                  if (formStatus >= 1) setStatus(1)
+                  if (formStatus >= 1 && formStatus !== 6) setStatus(1)
                 }}
               >
                 <p className="text-sm md:text-lg lg:text-2xl">Step 1</p>
@@ -83,14 +83,14 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
               <button
                 className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer ${
-                  formStatus >= 2
+                  formStatus >= 2 && formStatus !== 6
                     ? status == 2
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                     : 'bg-red-860 cursor-not-allowed'
                 }`}
                 onClick={() => {
-                  if (formStatus >= 2) setStatus(2)
+                  if (formStatus >= 2 && formStatus !== 6) setStatus(2)
                 }}
               >
                 <p className="text-sm md:text-lg lg:text-2xl">Step 2</p>
@@ -100,14 +100,14 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
               <button
                 className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer ${
-                  formStatus >= 3
+                  formStatus >= 3 && formStatus !== 6
                     ? status == 3
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                     : 'bg-red-860 cursor-not-allowed'
                 }`}
                 onClick={() => {
-                  if (formStatus >= 3) setStatus(3)
+                  if (formStatus >= 3 && formStatus !== 6) setStatus(3)
                 }}
               >
                 <p className="text-sm md:text-lg lg:text-2xl">Step 3</p>
@@ -119,14 +119,14 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
               <button
                 className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer ${
-                  formStatus >= 4
+                  formStatus >= 4 && formStatus !== 6
                     ? status == 4
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                     : 'bg-red-860 cursor-not-allowed'
                 }`}
                 onClick={() => {
-                  if (formStatus >= 4) setStatus(4)
+                  if (formStatus >= 4 && formStatus !== 6) setStatus(4)
                 }}
               >
                 <p className="text-sm md:text-lg lg:text-2xl">Step 4</p>
@@ -138,14 +138,14 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
             <div className="bg-white py-0.5 md:py-0 md:px-0.5">
               <button
                 className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer ${
-                  formStatus >= 5
-                    ? status == 5 || status == 6
+                  formStatus >= 5 && formStatus !== 6
+                    ? status == 5
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                     : 'bg-red-860 cursor-not-allowed'
                 }`}
                 onClick={() => {
-                  if (formStatus >= 5) setStatus(5)
+                  if (formStatus >= 5 && formStatus !== 6) setStatus(5)
                 }}
               >
                 <p className="text-sm md:text-lg lg:text-2xl">Step 5</p>
