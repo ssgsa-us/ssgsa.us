@@ -21,6 +21,8 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
   const [bachelorsUploaded, setBachelorsUploaded] = useState<boolean>(false)
   const [masters, setMasters] = useState<File>()
   const [mastersUploaded, setMastersUploaded] = useState<boolean>(false)
+  const [doctoral, setDoctoral] = useState<File>()
+  const [doctoralUploaded, setDoctoralUploaded] = useState<boolean>(false)
   const [others, setOthers] = useState<File>()
   const [othersUploaded, setOthersUploaded] = useState<boolean>(false)
   const [resume, setResume] = useState<File>()
@@ -33,10 +35,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
   useEffect(() => {
     if (applicationData.documents) {
       if (applicationData.documents['Xth']) setXthUploaded(true)
-      if (
-        applicationData.documents['XIIth'] ||
-        applicationData.documents['Diploma']
-      )
+      if (applicationData.documents['XIIth-Diploma'])
         setXIIthOrDiplomaUploaded(true)
       if (applicationData.documents['Bachelors']) setBachelorsUploaded(true)
       if (applicationData.documents['Masters']) setMastersUploaded(true)
@@ -49,25 +48,25 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
 
   const nextStep = () => {
     setError('')
-      if (XIIthOrDiplomaUploaded) {
-        if (bachelorsUploaded) {
-          if (resumeUploaded) {
-            if (applicationData.form_status == 4) {
-              updateFormStatus(authUser.id, 5)
-              setStatus(5)
-            } else {
-              setStatus(5)
-            }
-          } else setError('Resume is required')
-        } else setError('Bachelor Marksheets are required')
-      } else
-        setError(
-          `${
-            applicationData.academic_record['XII Class']
-              ? 'XIIth Class'
-              : 'Diploma'
-          } Marksheet is required`,
-        )
+    if (XIIthOrDiplomaUploaded) {
+      if (bachelorsUploaded) {
+        if (resumeUploaded) {
+          if (applicationData.form_status == 4) {
+            updateFormStatus(authUser.id, 5)
+            setStatus(5)
+          } else {
+            setStatus(5)
+          }
+        } else setError('Resume is required')
+      } else setError('Bachelor Marksheets are required')
+    } else
+      setError(
+        `${
+          applicationData.academic_record['XII Class']
+            ? 'XIIth Class'
+            : 'Diploma'
+        } Marksheet is required`,
+      )
   }
 
   const previousStep = () => setStatus(status - 1)
@@ -155,10 +154,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             <span className="font-bold">500 KB</span>
           </p>
           {fileUploadComponent(
-            applicationData.academic_record &&
-              applicationData.academic_record['XII Class']
-              ? 'XIIth'
-              : 'Diploma',
+            'XIIth-Diploma',
             XIIthOrDiploma,
             setXIIthOrDiploma,
             XIIthOrDiplomaUploaded,
@@ -183,24 +179,49 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
             setBachelorsUploaded,
           )}
         </div>
-        <div className="p-2">
-          <p className="md:text-lg">
-            Please attach a <span className="font-bold">single pdf file </span>
-            containing all marksheets of{' '}
-            <span className="font-bold">your Master&apos;s Degree</span> (if
-            any)
-            <br />
-            The maximum allowed file size is{' '}
-            <span className="font-bold">500 KB</span>
-          </p>
-          {fileUploadComponent(
-            'Masters',
-            masters,
-            setMasters,
-            mastersUploaded,
-            setMastersUploaded,
+        {applicationData.academic_record &&
+          applicationData.academic_record["Master's Degree"] && (
+            <div className="p-2">
+              <p className="md:text-lg">
+                Please attach a{' '}
+                <span className="font-bold">single pdf file </span>
+                containing all marksheets of{' '}
+                <span className="font-bold">your Master&apos;s Degree</span> (if
+                any)
+                <br />
+                The maximum allowed file size is{' '}
+                <span className="font-bold">500 KB</span>
+              </p>
+              {fileUploadComponent(
+                'Masters',
+                masters,
+                setMasters,
+                mastersUploaded,
+                setMastersUploaded,
+              )}
+            </div>
           )}
-        </div>
+        {applicationData.academic_record &&
+          applicationData.academic_record['Doctoral Degree'] && (
+            <div className="p-2">
+              <p className="md:text-lg">
+                Please attach a{' '}
+                <span className="font-bold">single pdf file </span>
+                containing all marksheets of{' '}
+                <span className="font-bold">your Doctoral Degree</span> (if any)
+                <br />
+                The maximum allowed file size is{' '}
+                <span className="font-bold">500 KB</span>
+              </p>
+              {fileUploadComponent(
+                'Doctoral',
+                doctoral,
+                setDoctoral,
+                doctoralUploaded,
+                setDoctoralUploaded,
+              )}
+            </div>
+          )}
         <div className="p-2">
           <p className="md:text-lg">
             Please attach a <span className="font-bold">single pdf file </span>

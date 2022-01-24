@@ -158,26 +158,17 @@ const ReviewApplication = ({ applicationData }: Props) => {
             </Link>
           </div>
         )}
-        {applicationData.documents['XIIth'] && (
+        {applicationData.documents['XIIth-Diploma'] && (
           <div className="flex justify-start mt-4">
             <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-              Marksheet of XIIth Class
+              Marksheet of{' '}
+              {applicationData.academic_record['XII Class']
+                ? 'XIIth Class'
+                : 'Diploma'}
             </p>
-            <Link href={applicationData.documents['XIIth']}>
+            <Link href={applicationData.documents['XIIth-Diploma']}>
               <a className="sm:text-lg" target="_blank">
-                XIIth.pdf
-              </a>
-            </Link>
-          </div>
-        )}
-        {applicationData.documents['Diploma'] && (
-          <div className="flex justify-start mt-4">
-            <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-              Marksheet of Diploma
-            </p>
-            <Link href={applicationData.documents['Diploma']}>
-              <a className="sm:text-lg" target="_blank">
-                Diploma.pdf
+                XIIth-Diploma.pdf
               </a>
             </Link>
           </div>
