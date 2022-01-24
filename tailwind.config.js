@@ -9,8 +9,8 @@ module.exports = {
           860: '#003366cc',
         },
         red: {
-          850: '#cc0000',
-          860: '#cc0000cc',
+          850: '#BB2119',
+          860: '#BB2119cc',
         },
         gray: {
           350: '#E7E7E7',
@@ -23,6 +23,9 @@ module.exports = {
       zIndex: {
         n10: '-10',
       },
+    },
+    fontFamily: {
+      lora: ['Lora'],
     },
   },
   variants: {

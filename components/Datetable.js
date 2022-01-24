@@ -1,6 +1,6 @@
 const DateTable = ({ bgcolor, textcolor, textbold }) => {
   return (
-    <div className="m-2 text-sm">
+    <div className="m-2 text-xs md:text-sm">
       <table className="w-full">
         <tbody>
           <tr>

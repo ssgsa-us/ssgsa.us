@@ -4,7 +4,7 @@ import scholar_one from '../public/scholar_one.jpg'
 const Scholar = () => {
   return (
     <div>
-      <div className="text-blue-850 font-bold lg:text-3xl mt-10">
+      <div className="text-blue-850 font-bold text-xl lg:text-2xl mt-10">
         Our Scholars
       </div>
       <div className="container max-w-full m-auto flex flex-wrap flex-col sm:flex-row items-center justify-start">
@@ -18,7 +18,7 @@ const Scholar = () => {
               />
             </div>
             <div className="flex-col leading-normal bg-blue-850 sm:w-1/2 sm:border-l-2 sm:border-gray-300">
-              <div className="justify-self-stretch text-blue-850 bg-white font-bold text-2xl lg:text-3xl p-4">
+              <div className="justify-self-stretch text-blue-850 bg-white font-bold text-lg lg:text-xl p-4">
                 Wasikul Islam
               </div>
               <div className="justify-self-stretch text-sm lg:text-xs text-white mt-2 mb-2 p-2">
