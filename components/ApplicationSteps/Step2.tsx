@@ -12,7 +12,7 @@ type RecordDataType = {
     collegeName: string
     duration: number
     completionYear: number
-    percentage: string
+    percentage: number
   }
 }
 
@@ -28,7 +28,7 @@ const defaultRecord = {
   collegeName: '',
   duration: 1,
   completionYear: 2022,
-  percentage: '',
+  percentage: 0,
 }
 
 const Step2 = ({ applicationData, status, setStatus }: Props) => {
@@ -65,7 +65,6 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
 
   // return True if category is bachelor's, diploma, XII or X
   const requiredCondition = (key: number) =>
-    academicData[key].category == 1 ||
     academicData[key].category == 2 ||
     academicData[key].category == 3 ||
     academicData[key].category == 4
@@ -103,20 +102,13 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
     setError('')
     if (totalDegree >= 3) {
       // flag checks degrees X, XII/Diploma and Bachelor's are filled or not
-      // flag ranges from 0 to 7 acc to it's boolean format as shown:
-      // <X digit    XII/Diploma digit    Bachelor's digit>
-      // <   1             1                   1          > indicates flag = 7 and all 3 degree's are filled
+      // flag ranges from 0 to 3 acc to it's boolean format as shown:
+      // <XII/Diploma digit    Bachelor's digit>
+      // <        1                   1          > indicates flag = 3 and all 2 degree's are filled
       let flag = 0
       let totalCourseDuration = 0
       for (let key = 0; key < totalDegree; key++) {
-        if (academicData[key].category == 1) {
-          if (checkAllFields(key)) flag += 4
-          else {
-            setError('All fields in X are required')
-            flag = -1
-            break
-          }
-        } else if (
+        if (
           academicData[key].category == 2 ||
           academicData[key].category == 3
         ) {
@@ -142,7 +134,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
       }
 
       if (flag == -1) return
-      if (flag == 7) {
+      if (flag == 3) {
         if (totalCourseDuration >= 4) {
           let academicRecord: AcademicRecordType = getAcademicRecord()
           if (applicationData.form_status == 2) {
@@ -158,8 +150,8 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
           }
         } else
           setError('Please check eligibility criteria or provide correct data')
-      } else setError("X, XII/Diploma and bachelor's degrees are required")
-    } else setError("X, XII/Diploma and bachelor's degrees are required")
+      } else setError("XII/Diploma and Bachelor's degree are required")
+    } else setError("XII/Diploma and Bachelor's degree are required")
   }
 
   const previousStep = () => {
@@ -304,25 +296,26 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
               </div>
               <div className="p-2">
                 <p className="md:text-lg">
-                  Percentage/CGPA
+                  Percentage
                   {requiredCondition(Number(key)) ? (
                     <span className="text-red-850 font-black">*</span>
                   ) : null}{' '}
                   <span className="text-xs md:text-sm">
-                    (Please write your score as numerator and maximum score as
-                    denominator)
+                    (Please convert your CPI/GPA according to the appropriate
+                    formula given on the back of your marksheet and provide
+                    final percentage here.)
                   </span>
                 </p>
                 <input
                   name="Percentage"
-                  type="text"
+                  type="number"
                   value={academicData[Number(key)].percentage}
                   onChange={(e) =>
                     setAcademicData((prevDegree: RecordDataType) => ({
                       ...prevDegree,
                       [Number(key)]: {
                         ...prevDegree[Number(key)],
-                        percentage: e.target.value,
+                        percentage: Number(e.target.value),
                       },
                     }))
                   }

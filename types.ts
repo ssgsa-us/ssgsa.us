@@ -15,7 +15,7 @@ export type AcademicRecordType = {
     collegeName: string
     duration: number
     completionYear: number
-    percentage: string
+    percentage: number
   }
 }
 
