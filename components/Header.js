@@ -19,7 +19,7 @@ export default function Header() {
           <Link href="/newsletters">
             <a className="px-1 sm:px-4">Newsletters</a>
           </Link>
-          <Link href="/">
+          <Link href="/news">
             <a className="px-1 sm:px-4">News &amp; Events</a>
           </Link>
           <Link href="/contact">
