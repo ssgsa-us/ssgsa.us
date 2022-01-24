@@ -1,7 +1,7 @@
 const DonorAndContributors = () => {
   return (
     <div id="Donors">
-      <h1 className="my-8 bg-blue-850 lg:text-3xl text-2xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
+      <h1 className="my-8 bg-blue-850 lg:text-2xl text-xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
         Donor And Contributors
       </h1>
       <div className="text-gray-800 text-center text-sm sm:text-base mx-2 sm:mx-8">

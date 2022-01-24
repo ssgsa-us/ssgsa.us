@@ -9,7 +9,7 @@ export default function Home() {
       <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 lg:flex justify-around text-black">
         <div>
           <div id="WhoCanApply">
-            <h1 className="mb-8 bg-blue-850 lg:text-3xl text-2xl text-white font-extrabold py-2 pl-6 sm:pl-12 rounded-tl-3xl rounded-br-3xl">
+            <h1 className="mb-8 bg-blue-850 lg:text-2xl text-xl text-white font-extrabold py-2 pl-6 sm:pl-12 rounded-tl-3xl rounded-br-3xl">
               Who Can Apply?
             </h1>
 
@@ -55,7 +55,7 @@ export default function Home() {
           </div>
 
           <div id="Timeline">
-            <h1 className="my-8 bg-blue-850 lg:text-3xl text-2xl text-white font-extrabold py-2 pl-6 sm:pl-12 rounded-tl-3xl rounded-br-3xl">
+            <h1 className="my-8 bg-blue-850 lg:text-2xl text-xl text-white font-extrabold py-2 pl-6 sm:pl-12 rounded-tl-3xl rounded-br-3xl">
               Application Timeline: 2022-2023
             </h1>
 

@@ -7,7 +7,7 @@ const About = () => {
   return (
     <div className="mx-8 sm:mx-12 md:mx-20 text-black">
       <div id="Mission">
-        <h1 className="my-8 bg-blue-850 lg:text-3xl text-2xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
+        <h1 className="my-8 bg-blue-850 lg:text-2xl text-xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
           Mission
         </h1>
         <div className="mx-2 sm:mx-8">

@@ -1,7 +1,7 @@
 const LeadershipHistory = () => {
   return (
     <div id="Leadership">
-      <h1 className="my-8 bg-blue-850 lg:text-3xl text-2xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
+      <h1 className="my-8 bg-blue-850 lg:text-2xl text-xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
         Leadership History
       </h1>
       <table className="flex justify-center mx-4 text-sm sm:text-base">

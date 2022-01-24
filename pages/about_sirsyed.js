@@ -6,7 +6,7 @@ export default function Home() {
     <MainLayout>
       <div className="flex">
         <div className="mx-4 sm:mx-12 lg:mx-20 mt-10">
-          <h1 className="mb-8 bg-blue-850 lg:text-3xl text-2xl text-white font-extrabold py-2 pl-6 sm:pl-12 rounded-tl-3xl rounded-br-3xl">
+          <h1 className="mb-8 bg-blue-850 lg:text-2xl text-xl text-white font-extrabold py-2 pl-6 sm:pl-12 rounded-tl-3xl rounded-br-3xl">
             Sir Syed Ahmad Khan
           </h1>
 

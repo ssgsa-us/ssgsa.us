@@ -1,7 +1,7 @@
 const Isra = () => {
   return (
     <div className="text-black">
-      <h1 className="mb-8 bg-blue-850 text-xl sm:text-2xl lg:text-3xl text-white text-center font-extrabold py-2 px-2 rounded-tl-3xl rounded-br-3xl">
+      <h1 className="mb-8 bg-blue-850 text-xl lg:text-2xl text-white text-center font-extrabold py-2 px-2 rounded-tl-3xl rounded-br-3xl">
         About the International Summer Research Award (ISRA)
       </h1>
 
