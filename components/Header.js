@@ -13,8 +13,8 @@ export default function Header() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 bg-red-850">
-      <div className="flex justify-end bg-white">
+    <nav className="sm:sticky top-0 z-50 bg-red-850">
+      <div className="flex justify-end bg-white sm:absolute sm:top-0 sm:right-0 sm:z-50">
         <div className="flex bg-blue-850 text-white text-xs sm:text-sm md:text-base font-bold px-4 py-2">
           <Link href="/newsletters">
             <a className="px-1 sm:px-4">Newsletters</a>
@@ -27,14 +27,19 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      <div className="w-full flex flex-row bg-white items-center hidden sm:flex">
-        <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 lg:ml-24 flex items-center font-black text-red-850 ">
-          SIR SYED GLOBAL SCHOLAR AWARD
-        </div>
-        <div className="mr-3 flex-2">
+      <div className="w-full flex flex-row bg-white items-center">
+        <div className="ml-3 flex-2 sm:hidden">
           <Link href="/">
-            <Image width={110} height={110} src={logo} alt="SSGSA Logo" />
+            <Image width={100} height={100} src={logo} alt="SSGSA Logo" />
           </Link>
+        </div>
+        <div className="ml-3 flex-2 hidden sm:flex">
+          <Link href="/">
+            <Image width={160} height={160} src={logo} alt="SSGSA Logo" />
+          </Link>
+        </div>
+        <div className="flex-1 text-lg text-center sm:text-2xl md:text-3xl justify-center px-4 sm:mt-12 sm:mb-6 lg:mr-24 items-center font-black text-red-850">
+          SIR SYED GLOBAL SCHOLAR AWARD
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-4">

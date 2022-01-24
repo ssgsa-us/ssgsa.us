@@ -89,24 +89,22 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
               }
             } else
               setError(
-                `Minimum and maximum Length required in Question e are 20 and 200, respectively.`,
+                `For Question e, your response must be between 20 and 200 words`,
               )
           } else
             setError(
-              `Minimum and maximum Length required in Question d are 20 and 200, respectively.`,
+              `For Question d, your response must be between 20 and 200 words`,
             )
         } else
           setError(
-            `Minimum and maximum Length required in Question c are 20 and 200, respectively.`,
+            `For Question c, your response must be between 20 and 200 words`,
           )
       } else
         setError(
-          `Minimum and maximum Length required in Question b are 20 and 200, respectively.`,
+          `For Question b, your response must be between 20 and 200 words`,
         )
     } else
-      setError(
-        `Minimum and maximum Length required in Question a are 20 and 200, respectively.`,
-      )
+      setError(`For Question a, your response must be between 20 and 200 words`)
   }
 
   const previousStep = () => setStatus(2)

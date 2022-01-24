@@ -41,12 +41,12 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
         <div>
           <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
             <p className="md:text-lg">
-              All the information provided by me in this application are true to
-              the best of my knowledge, and all the answers written by me are my
-              original responses. I understand that if any part of my
-              application is found to be false or plagiarized, I will be
-              disqualified and barred from applying to the Sir Syed Global
-              Scholar Award in the future.
+              I declare that all the information provided by me in this
+              application is true to the best of my knowledge, and all the
+              answers written by me are my original responses. I understand that
+              if any part of my application is found to be false or plagiarized,
+              I will be disqualified and barred from applying to the Sir Syed
+              Global Scholar Award in the future.
             </p>
             <br />
             <p className="md:text-lg">

@@ -7,7 +7,7 @@ export default function Home() {
     <MainLayout>
       <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 flex justify-center">
         <div>
-          <h1 className="mb-8 bg-blue-850 text-xl sm:text-2xl lg:text-3xl text-center text-white font-extrabold py-2 px-6 sm:px-12 rounded-tl-3xl rounded-br-3xl">
+          <h1 className="mb-8 bg-blue-850 text-xl sm:text-xl lg:text-xl text-center text-white font-extrabold py-2 px-6 sm:px-12 rounded-tl-3xl rounded-br-3xl">
             Resources
           </h1>
 
@@ -25,7 +25,7 @@ export default function Home() {
                     >
                       <Link href={resource.link}>
                         <a
-                          className={`flex justify-center items-center text-center bg-gray-400 text-white font-bold w-52 h-24 ${
+                          className={`flex justify-center items-center text-center bg-gray-200 text-white font-bold w-52 h-24 ${
                             index % 3 == 2
                               ? 'bg-red-850'
                               : index % 3 == 1

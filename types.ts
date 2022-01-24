@@ -6,11 +6,7 @@ export type AuthUser = {
 export type User = {
   name: string
   email: string
-  stream: string
-  gender: string
-  dob: string
   mobile: Number
-  pwd: string
 }
 
 export type AcademicRecordType = {
@@ -19,7 +15,7 @@ export type AcademicRecordType = {
     collegeName: string
     duration: number
     completionYear: number
-    percentage: string
+    percentage: number
   }
 }
 

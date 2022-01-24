@@ -15,7 +15,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
   return (
     <nav className="sticky top-0 z-50 bg-red-850">
       <div className="w-full flex flex-row bg-white items-center flex">
-        <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 flex items-center font-black text-red-850 ">
+        <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 lg:ml-24 flex items-center font-black text-red-850 ">
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
         <div className="mr-3 flex-2">
@@ -26,7 +26,9 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
       </div>
       <div className="mx-auto md:mx-0 px-4 md:px-1">
         <div className="md:hidden flex justify-between">
-          <div className="text-white m-1 text-xl font-bold">SSGSA</div>
+          <div className="text-white m-1 text-xl font-bold">
+            SSGSA APPLICATIONS
+          </div>
 
           <div className="flex items-center">
             <button
@@ -60,7 +62,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
             active ? 'pt-1 pb-3 md:py-0' : 'hidden'
           } md:flex md:justify-between`}
         >
-          <div className="flex flex-col w-full md:flex-row md:justify-center">
+          <div className="flex flex-col w-full md:flex-row md:justify-center lg:ml-28">
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
               <button
                 className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer ${

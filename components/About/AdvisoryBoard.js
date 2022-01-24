@@ -1,7 +1,7 @@
 const AdvisoryBoard = () => {
   return (
     <div id="Advisory">
-      <h1 className="my-8 bg-blue-850 lg:text-3xl text-2xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
+      <h1 className="my-8 bg-blue-850 lg:text-2xl text-xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
         Advisory Board
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-800 text-sm sm:text-base sm:text-left mx-2 sm:mx-8">

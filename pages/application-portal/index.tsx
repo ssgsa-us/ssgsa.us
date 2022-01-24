@@ -69,7 +69,11 @@ export default function Portal() {
               />
               <label className="pl-5 text-blue-850">
                 I am currently enrolled at Aligarh Muslim University or an
-                alumnus
+                alumnus{' '}
+                <span className="text-xs">
+                  (Students who have completed Senior Secondary School
+                  Certificate OR Diploma from AMU are eligible)
+                </span>
               </label>
             </div>
             <br />
@@ -85,17 +89,12 @@ export default function Portal() {
                 className="my-5 text-lg"
               />
               <label className="pl-5 text-blue-850">
-                I am registered for the final or penultimate year of a 4 (or
-                more) year Bachelors program
+                I am registered for the final or penultimate year of a four (or
+                more) year Bachelor&apos;s program
                 <br />
                 <span className="flex justify-center">OR</span>I have completed
-                a 3 year Bachelor&apos;s program and am currently enrolled in a
-                master&apos;s program.
-                <br />
-                <span className="flex justify-center text-sm">
-                  Note: At least one of your Bachelor&apos;s or master&apos;s
-                  degree must be from AMU.
-                </span>
+                a three year Bachelor&apos;s program and am currently enrolled
+                in a Master&apos;s program.
               </label>
             </div>
             <br />
@@ -136,7 +135,7 @@ export default function Portal() {
             Instructions
           </h1>
           <p className="my-5 text-lg">
-            The application form is divided into 6 parts.
+            The application form is divided into 5 parts.
             <br />
             <br />
             You can view a step only after you have successfully completed all
@@ -145,20 +144,16 @@ export default function Portal() {
             changes before final submission.
             <br />
             <br />
-            Note that once you submit the application in Step 6, you can still
-            edit it before the deadline.
-            <br />
-            <br />
             Questions marked <span className="text-red-850 font-black">
               *
             </span>{' '}
             are mandatory.
             <br />
             <br />
-            Your entered information will be saved after successful completion
-            of each step. However, if you go back{' '}
+            You will be able to save your information at each step. However, if
+            you press the back button{' '}
             <span className="underline">without saving your information</span>,
-            your entered data may be lost.
+            your entered data will be lost.
             <br />
             <br />
             You will be able to review the information entered by you before
@@ -167,12 +162,14 @@ export default function Portal() {
             <br />
             <span className="text-sm">
               Note: The SSGSA portal functions best with Google Chrome and
-              Firefox browsers. Please read the{' '}
-              <Link href="/portal">
+              Firefox browsers. Please watch our{' '}
+              <Link href="/faq">
                 {/* Add link for faq portal */}
-                <a className="text-blue-800 underline font-black">FAQs</a>
+                <a className="text-blue-800 underline font-black">
+                  SSGSA application video tutorial
+                </a>
               </Link>{' '}
-              before contacting the SSGSA team.
+              in case of any doubt.
             </span>
           </p>
         </div>

@@ -9,23 +9,23 @@ const Testimonials = () => {
 
   return (
     <div id="Testimonials">
-      <h1 className="my-8 mx-4 sm:mx-12 lg:mx-20 bg-blue-850 lg:text-3xl text-2xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
+      <h1 className="my-8 mx-4 sm:mx-12 lg:mx-20 bg-blue-850 lg:text-2xl text-xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
         Testimonials
       </h1>
 
-      <div className="mx-2 sm:mx-6 lg:mx-10 my-8">
+      <div className=" mx-4 sm:mx-12 lg:mx-20 my-8">
         <Carousel
           ref={carouselRef}
           itemsToShow={1}
           enableAutoPlay={true}
-          autoPlaySpeed={5000}
+          autoPlaySpeed={30000}
           showArrows={false}
           onNextEnd={({ index }) => {
             clearTimeout(resetTimeout)
             if (index === testimonials.length - 1) {
               resetTimeout = setTimeout(() => {
                 carouselRef.current.goTo(0)
-              }, 5000)
+              }, 30000)
             }
           }}
         >

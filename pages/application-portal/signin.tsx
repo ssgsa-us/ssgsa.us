@@ -43,17 +43,17 @@ const SignIn = () => {
             </h1>
 
             {error ? (
-              <div className="bg-red-200 rounded-3xl p-2 pl-6 mb-2">
+              <div className="bg-red-200 rounded-3xl text-sm p-2 pl-6 mb-2">
                 <p>
                   <span className="font-bold">Error:</span> {error}
                 </p>
               </div>
             ) : null}
 
-            <div className="bg-red-850 rounded-3xl p-2">
+            <div className="bg-gray-200 rounded-3xl p-2">
               <div>
                 <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  <p className="col-span-2 sm:text-right text-blue-850 text-base md:text-lg">
                     Email
                   </p>
                   <input
@@ -65,7 +65,7 @@ const SignIn = () => {
                   />
                 </div>
                 <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  <p className="col-span-2 sm:text-right text-blue-850 text-base md:text-lg">
                     Password
                   </p>
                   <input
@@ -88,10 +88,10 @@ const SignIn = () => {
 
                 <br />
                 <div className="flex justify-center">
-                  <p className="text-white text-base md:text-lg">
+                  <p className="text-blue-850 text-sm md:text-base">
                     Don&apos;t have account,{''}
                     <Link href="/application-portal/signup">
-                      <a className="py-4 px-2 text-blue-850">Register Here</a>
+                      <a className="py-4 px-2 text-red-850">Register Here</a>
                     </Link>
                   </p>
                 </div>

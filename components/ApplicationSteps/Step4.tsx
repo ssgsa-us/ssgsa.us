@@ -49,7 +49,6 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
 
   const nextStep = () => {
     setError('')
-    if (XthUploaded) {
       if (XIIthOrDiplomaUploaded) {
         if (bachelorsUploaded) {
           if (resumeUploaded) {
@@ -69,7 +68,6 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
               : 'Diploma'
           } Marksheet is required`,
         )
-    } else setError('Xth Class Marksheet is required')
   }
 
   const previousStep = () => setStatus(status - 1)
@@ -135,7 +133,6 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           <p className="md:text-lg">
             Please attach a <span className="font-bold">single pdf file </span>
             containing marksheet of <span className="font-bold">Xth Class</span>
-            <span className="text-red-850 font-black">*</span>
             <br />
             The maximum allowed file size is{' '}
             <span className="font-bold">500 KB</span>
