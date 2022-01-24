@@ -93,6 +93,45 @@ const ReviewApplication = ({ applicationData }: Props) => {
           </div>
         ))}
       </div>
+      <div>
+        <p className="text-black text-2xl font-extrabold w-48 mr-5">
+          Written Responses
+        </p>
+        <div className="flex justify-start mt-4">
+          <p className="text-red-850 text-xl font-extrabold w-48 mr-5">
+            {process.env.NEXT_PUBLIC_QUESTION_1}
+          </p>
+          <p className="text-lg">{applicationData.sop_answers.SOP1}</p>
+        </div>
+
+        <div className="flex justify-start mt-4">
+          <p className="text-red-850 text-xl font-extrabold w-48 mr-5">
+            {process.env.NEXT_PUBLIC_QUESTION_2}
+          </p>
+          <p className="text-lg">{applicationData.sop_answers.SOP2}</p>
+        </div>
+
+        <div className="flex justify-start mt-4">
+          <p className="text-red-850 text-xl font-extrabold w-48 mr-5">
+            {process.env.NEXT_PUBLIC_QUESTION_3}
+          </p>
+          <p className="text-lg">{applicationData.sop_answers.SOP3}</p>
+        </div>
+
+        <div className="flex justify-start mt-4">
+          <p className="text-red-850 text-xl font-extrabold w-48 mr-5">
+            {process.env.NEXT_PUBLIC_QUESTION_4}
+          </p>
+          <p className="text-lg">{applicationData.sop_answers.SOP4}</p>
+        </div>
+
+        <div className="flex justify-start mt-4">
+          <p className="text-red-850 text-xl font-extrabold w-48 mr-5">
+            {process.env.NEXT_PUBLIC_QUESTION_5}
+          </p>
+          <p className="text-lg">{applicationData.sop_answers.SOP5}</p>
+        </div>
+      </div>
       <div className="mt-5">
         <p className="text-black text-2xl text-red-850 font-extrabold mb-4">
           Declaration
