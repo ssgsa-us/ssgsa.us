@@ -120,8 +120,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
         <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2">
           Note: Remember to save your information at frequent intervals.
           <br />
-          Minimum and maximum word limit allowed for each question are 20 and
-          200.
+          Your response must be between 20 and 200 words for each question.
         </p>
         <br />
         {questionComponent(1, process.env.NEXT_PUBLIC_QUESTION_1)}
