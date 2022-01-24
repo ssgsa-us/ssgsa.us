@@ -101,8 +101,8 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           <p className="md:text-lg leading-none">
             E-mail address<span className="text-red-850 font-black">*</span>{' '}
             <span className="text-xs md:text-sm">
-              (this email will stay in the SSGSA record and used for future
-              correspondence)
+              (this email ID will stay in the SSGSA records and be used for
+              future correspondence)
             </span>
           </p>
           <input
@@ -115,10 +115,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
         </div>
         <div className="p-2">
           <p className="md:text-lg leading-none">
-            Contact Number<span className="text-red-850 font-black">*</span>{' '}
-            <span className="text-xs md:text-sm">
-              (only 10 digit mobile number)
-            </span>
+            Contact Number<span className="text-red-850 font-black">*</span>
           </p>
           <input
             name="ContactNumber"
@@ -140,6 +137,11 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           >
             <option label="Male" value="Male" />
             <option label="Female" value="Female" />
+            <option label="Transgender" value="Transgender" />
+            <option
+              label="Prefer Not To Disclose"
+              value="Prefer Not To Disclose"
+            />
           </select>
         </div>
         <div className="p-2">
