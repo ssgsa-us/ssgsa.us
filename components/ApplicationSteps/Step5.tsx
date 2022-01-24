@@ -186,6 +186,48 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
                   </div>
                 </div>
               ))}
+              <p className="text-black text-xl font-extrabold w-48 mr-5 mb-4">
+                Written Responses
+              </p>
+              <div className="flex justify-start mt-4">
+                <p className="text-red-850 text-xl font-extrabold w-48 mr-5">
+                  Academic Achievements
+                </p>
+                <p className="text-lg">{applicationData.sop_answers.SOP1}</p>
+              </div>
+
+              <div className="flex justify-start mt-4">
+                <p className="text-red-850 text-xl font-extrabold w-48 mr-5">
+                  Co-Curricular Achievements
+                </p>
+                <p className="text-lg">{applicationData.sop_answers.SOP2}</p>
+              </div>
+
+              <div className="flex justify-start mt-4">
+                <p className="text-red-850 text-xl font-extrabold w-48 mr-5">
+                  If you become an SSGSA scholar, how would this award help you
+                  achieve your goals?
+                </p>
+                <p className="text-lg">{applicationData.sop_answers.SOP3}</p>
+              </div>
+
+              <div className="flex justify-start mt-4">
+                <p className="text-red-850 text-xl font-extrabold w-48 mr-5">
+                  Share an example of something you have been a part of,
+                  created, or led that you are proud of. How did this experience
+                  contribute to your personal and professional growth?
+                </p>
+                <p className="text-lg">{applicationData.sop_answers.SOP4}</p>
+              </div>
+
+              <div className="flex justify-start mt-4">
+                <p className="text-red-850 text-xl font-extrabold w-48 mr-5">
+                  Provide an example of an academic concept/question/idea that
+                  interests you and that you would like to explore further
+                  during your graduate studies. Why?
+                </p>
+                <p className="text-lg">{applicationData.sop_answers.SOP5}</p>
+              </div>
             </div>
             <div className="mt-5">
               <p className="text-black text-xl font-extrabold mb-4">
