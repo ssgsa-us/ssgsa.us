@@ -6,11 +6,7 @@ export type AuthUser = {
 export type User = {
   name: string
   email: string
-  stream: string
-  gender: string
-  dob: string
   mobile: Number
-  pwd: string
 }
 
 export type AcademicRecordType = {

@@ -38,16 +38,7 @@ const SignUp = () => {
       createUserWithEmailAndPassword(email, passwordOne)
         .then(async (result: firebase.auth.UserCredential) => {
           // add user data to firestore database
-          createUser(
-            result.user.uid,
-            name,
-            email,
-            stream,
-            gender,
-            dob,
-            mobile,
-            pwd,
-          )
+          createUser(result.user.uid, name, email, mobile)
           createApplicationData(result.user.uid)
 
           router.push('/application-portal/application')
@@ -69,17 +60,17 @@ const SignUp = () => {
             </h1>
 
             {error ? (
-              <div className="bg-red-200 rounded-3xl p-2 pl-6 mb-2">
+              <div className="bg-red-200 rounded-3xl text-sm p-2 pl-6 mb-2">
                 <p>
                   <span className="font-bold">Error:</span> {error}
                 </p>
               </div>
             ) : null}
 
-            <div className="bg-red-850 rounded-3xl p-2">
+            <div className="bg-gray-200 rounded-3xl p-2">
               <div>
                 <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  <p className="col-span-2 sm:text-right text-blue-850 text-base md:text-lg">
                     Name
                   </p>
                   <input
@@ -91,7 +82,7 @@ const SignUp = () => {
                   />
                 </div>
                 <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  <p className="col-span-2 sm:text-right text-blue-850 text-base md:text-lg">
                     Email
                   </p>
                   <input
@@ -103,33 +94,7 @@ const SignUp = () => {
                   />
                 </div>
                 <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
-                    Stream
-                  </p>
-                  <input
-                    className="col-span-7 sm:col-span-4 p-1 rounded"
-                    name="Stream"
-                    type="text"
-                    value={stream}
-                    onChange={(e) => setStream(e.target.value)}
-                  />
-                </div>
-                <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
-                    Gender
-                  </p>
-                  <select
-                    className="col-span-7 sm:col-span-4 p-1 rounded"
-                    name="Gender"
-                    value={gender}
-                    onChange={(e) => setGender(e.target.value)}
-                  >
-                    <option label="Male" value="Male" />
-                    <option label="Female" value="Female" />
-                  </select>
-                </div>
-                <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  <p className="col-span-2 sm:text-right text-blue-850 text-base md:text-lg">
                     Mobile
                   </p>
                   <input
@@ -141,33 +106,7 @@ const SignUp = () => {
                   />
                 </div>
                 <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
-                    Date Of Birth
-                  </p>
-                  <input
-                    className="col-span-7 sm:col-span-4 p-1 rounded"
-                    name="Date Of Birth"
-                    type="text"
-                    value={dob}
-                    onChange={(e) => setDOB(e.target.value)}
-                  />
-                </div>
-                <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
-                    PWD
-                  </p>
-                  <select
-                    className="col-span-7 sm:col-span-4 p-1 rounded"
-                    name="PWD"
-                    value={pwd}
-                    onChange={(e) => setPWD(e.target.value)}
-                  >
-                    <option label="False" value="False" />
-                    <option label="True" value="True" />
-                  </select>
-                </div>
-                <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  <p className="col-span-2 sm:text-right text-blue-850 text-base md:text-lg">
                     Password
                   </p>
                   <input
@@ -179,7 +118,7 @@ const SignUp = () => {
                   />
                 </div>
                 <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
-                  <p className="col-span-2 sm:text-right text-white text-base md:text-lg">
+                  <p className="col-span-2 sm:text-right text-blue-850 text-base md:text-lg">
                     Confirm Password
                   </p>
                   <input
@@ -202,10 +141,10 @@ const SignUp = () => {
 
                 <br />
                 <div className="flex justify-center">
-                  <p className="text-white text-base md:text-lg">
+                  <p className="text-blue-850 text-sm md:text-base">
                     Already have an account,{''}
                     <Link href="/application-portal/signin">
-                      <a className="py-4 px-2 text-blue-850">Login Here</a>
+                      <a className="py-4 px-2 text-red-850">Login Here</a>
                     </Link>
                   </p>
                 </div>
