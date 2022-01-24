@@ -10,7 +10,7 @@ const Awardees = () => {
         Awardees
       </h1>
       <div
-        className="flex flex-wrap justify-around my-8 mx-8 sm:mx-16 lg:mx-24 bg-gray-200"
+        className="flex flex-wrap justify-around my-8 mx-4 sm:mx-12 lg:mx-20 bg-gray-200"
         style={{ fontFamily: 'Lora' }}
       >
         {awardees.map((session, index) => (
@@ -25,7 +25,7 @@ const Awardees = () => {
           </h3>
         ))}
       </div>
-      <div className=" my-8 mx-8 sm:mx-16 lg:mx-24">
+      <div className=" my-8 mx-4 sm:mx-12 lg:mx-20">
         {awardees.map((session, index) => (
           <table
             className="w-full"

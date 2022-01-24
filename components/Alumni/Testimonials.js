@@ -13,12 +13,12 @@ const Testimonials = () => {
         Testimonials
       </h1>
 
-      <div className="mx-2 sm:mx-6 lg:mx-10 my-8">
+      <div className=" mx-4 sm:mx-12 lg:mx-20 my-8">
         <Carousel
           ref={carouselRef}
           itemsToShow={1}
           enableAutoPlay={true}
-          autoPlaySpeed={5000}
+          autoPlaySpeed={30000}
           showArrows={false}
           onNextEnd={({ index }) => {
             clearTimeout(resetTimeout)

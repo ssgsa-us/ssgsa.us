@@ -44,13 +44,7 @@ export const testimonials = [
       what shapes our lives, something which dictates the path of our \
       destiny and SSGSA is doing a wonderful job of providing the \
       opportunity to young aspiring students when the dream of higher \
-      studies in USA seems a distant dream at beginning. As it is said that \
-      the first step takes all the courage, mentoring and guidance by SSGSA \
-      in the beginning matters a lot when people don't even know an iota of \
-      the application process.\n I would like to be a part of SSGSA family \
-      to help and mentor new students as a sort of payback to whatever it \
-      (SSGSA) has done for me and as a human who takes pride in helping \
-      others out.",
+      studies in USA seems a distant dream at beginning.",
   },
   {
     name: 'Wasikul Islam',
