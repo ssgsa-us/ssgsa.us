@@ -122,22 +122,31 @@ export default function Home() {
                   style={{ listStyle: 'disc' }}
                   className="text-sm sm:text-base text-white ml-5"
                 >
-                  <li>You have to be a student or an alumnus of AMU.</li>
-                  <li>
-                    You will have to be enrolled in at least a 4+ years of
-                    Undergraduate program (after 12th grade).
+                  <li className="my-2">
+                    You have completed your Senior Secondary School Certificate
+                    (XIth and XIIth Classes) OR Diploma OR Bachelor&apos;s
+                    degree OR Master&apos;s degree from Aligarh Muslim
+                    University. Students from all streams and faculties are
+                    welcome to apply.
                   </li>
-                  <li>
-                    For applicants currently with a three years&apos;
-                    bachelor&apos;s degree, you have to be already enrolled in a
-                    Master&apos;s program inorder to be eligible for the award.
+                  <li className="my-2">
+                    You are currently registered for the final or penultimate
+                    year of a four (or more) years&apos; Bachelors program.
+                    <br />
+                    <span className="text-xs">
+                      Note: Students holding a three-years&apos; Bachelor&apos;s
+                      degree are encouraged to apply after enrolling in the
+                      first year of a Master&apos;s program. This is a
+                      requirement for North American Universities.
+                    </span>
                   </li>
-                  <li>
-                    For more information, check the details
-                    <Link href="/">
-                      <a className="text-blue-400"> here</a>
-                    </Link>
-                    .
+                  <li className="my-2">
+                    You have an outstanding academic record
+                  </li>
+                  <li className="my-2">
+                    You wish to apply for a Master&apos;s or PhD degree at a
+                    university of international repute outside India within the
+                    next 2 academic years.
                   </li>
                 </ul>
               </div>

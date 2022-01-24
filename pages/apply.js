@@ -13,25 +13,43 @@ export default function Home() {
               Who Can Apply?
             </h1>
 
-            <div className="mx-4 sm:mx-8 md:mx-16">
+            <div className="mx-4 sm:mx-8 md:mx-12 text-sm md:text-base">
               <p>
-                Current students or alumni from all faculties of Aligarh Muslim
-                University who satisfy the following conditions may apply:
+                We welcome you to apply to the Sir Syed Global Scholar Award if
+                you fulfill all of the following requirements:
               </p>
-              <ul style={{ listStyle: 'disc' }} className="ml-2 p-2">
-                <li>Hold a Bachelor’s degree,</li>
-                <li>Have an outstanding academic record, and</li>
-                <li>
-                  Wish to apply for a Master’s or PhD degree at a university of
-                  international repute outside India within the next 2 academic
-                  years.
+              <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
+                <li className="my-2">
+                  You have completed your Senior Secondary School Certificate
+                  (XIth and XIIth Classes) OR Diploma OR Bachelor&apos;s degree
+                  OR Master&apos;s degree from Aligarh Muslim University.
+                  Students from all streams and faculties are welcome to apply.
+                </li>
+                <li className="my-2">
+                  You are currently registered for the final or penultimate year
+                  of a four (or more) years&apos; Bachelors program.
+                  <br />
+                  <span className="text-xs text-red-850">
+                    Note: Students holding a three-years&apos; Bachelor&apos;s
+                    degree are encouraged to apply after enrolling in the first
+                    year of a Master&apos;s program. This is a requirement for
+                    North American Universities.
+                  </span>
+                </li>
+                <li className="my-2">
+                  You have an outstanding academic record
+                </li>
+                <li className="my-2">
+                  You wish to apply for a Master&apos;s or PhD degree at a
+                  university of international repute outside India within the
+                  next 2 academic years.
                 </li>
               </ul>
               <p>
                 The Sir Syed Global Scholar Award is an equal opportunity
                 scholarship. We strongly encourage women, people with
                 disabilities and those from economically and socially excluded
-                communities that satisfy the above conditions to apply.
+                communities to apply.
               </p>
             </div>
           </div>
@@ -51,7 +69,7 @@ export default function Home() {
           <div className="mx-4 my-8 flex flex-col items-center">
             <p>
               See Frequently Asked Questions
-              <Link href="">
+              <Link href="/faq">
                 <a className="text-blue-500">&nbsp;here</a>
               </Link>
             </p>
