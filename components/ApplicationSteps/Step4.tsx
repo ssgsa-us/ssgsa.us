@@ -23,27 +23,25 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
 
   const nextStep = () => {
     setError('')
-    if (Xth) {
-      if (XIIthOrDiploma) {
-        if (bachelors) {
-          if (resume) {
-            if (applicationData.form_status == 4) {
-              updateFormStatus(authUser.id, 5)
-              setStatus(5)
-            } else {
-              setStatus(5)
-            }
-          } else setError('Resume is required')
-        } else setError('Bachelor Marksheets are required')
-      } else
-        setError(
-          `${
-            applicationData.academic_record['XII Class']
-              ? 'XIIth Class'
-              : 'Diploma'
-          } Marksheet is required`,
-        )
-    } else setError('Xth Class Marksheet is required')
+    if (XIIthOrDiploma) {
+      if (bachelors) {
+        if (resume) {
+          if (applicationData.form_status == 4) {
+            updateFormStatus(authUser.id, 5)
+            setStatus(5)
+          } else {
+            setStatus(5)
+          }
+        } else setError('Resume is required')
+      } else setError("Bachelor's Marksheets are required")
+    } else
+      setError(
+        `${
+          applicationData.academic_record['XII Class']
+            ? 'XIIth Class'
+            : 'Diploma'
+        } Marksheet is required`,
+      )
   }
 
   const previousStep = () => setStatus(status - 1)
@@ -110,7 +108,6 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           <p className="md:text-lg">
             Please attach a <span className="font-bold">single pdf file </span>
             containing marksheet of <span className="font-bold">Xth Class</span>
-            <span className="text-red-850 font-black">*</span>
             <br />
             The maximum allowed file size is{' '}
             <span className="font-bold">500 KB</span>
@@ -157,7 +154,8 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           <p className="md:text-lg">
             Please attach a <span className="font-bold">single pdf file </span>
             containing all marksheets of{' '}
-            <span className="font-bold">your Master&apos;s Degree</span> (if any)
+            <span className="font-bold">your Master&apos;s Degree</span> (if
+            any)
             <br />
             The maximum allowed file size is{' '}
             <span className="font-bold">500 KB</span>
