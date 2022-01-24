@@ -28,7 +28,12 @@ export default function Header() {
         </div>
       </div>
       <div className="w-full flex flex-row bg-white items-center">
-        <div className="ml-3 flex-2">
+        <div className="ml-3 flex-2 sm:hidden">
+          <Link href="/">
+            <Image width={100} height={100} src={logo} alt="SSGSA Logo" />
+          </Link>
+        </div>
+        <div className="ml-3 flex-2 hidden sm:flex">
           <Link href="/">
             <Image width={160} height={160} src={logo} alt="SSGSA Logo" />
           </Link>

@@ -25,7 +25,7 @@ const Testimonials = () => {
             if (index === testimonials.length - 1) {
               resetTimeout = setTimeout(() => {
                 carouselRef.current.goTo(0)
-              }, 5000)
+              }, 30000)
             }
           }}
         >
