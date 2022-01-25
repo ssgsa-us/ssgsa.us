@@ -5,7 +5,7 @@ import worldMap from '../public/worldMap.png'
 const Counter = () => {
   return (
     <div
-      className="flex mx-2 my-28 sm:my-32 md:my-40 lg:my-44 lg:mx-20 justify-around items-center lg:text-5xl md:text-3xl sm:text-2xl text-blue-850 font-black text-center"
+      className="flex mx-2 my-20 sm:my-28 md:my-36 lg:my-40 xl:my-52 lg:mx-20 justify-around items-center lg:text-5xl md:text-3xl sm:text-2xl text-blue-850 font-black text-center"
       style={{
         display: 'flex',
         flexWrap: 'wrap',

@@ -100,7 +100,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
 
   const nextStep = () => {
     setError('')
-    if (totalDegree >= 3) {
+    if (totalDegree >= 2) {
       // flag checks degrees X, XII/Diploma and Bachelor's are filled or not
       // flag ranges from 0 to 3 acc to it's boolean format as shown:
       // <XII/Diploma digit    Bachelor's digit>
