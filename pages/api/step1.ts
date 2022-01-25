@@ -11,13 +11,17 @@ export const updateApplicationData = (
   nationality: string,
   formStatus: number,
 ) => {
-  firestore.doc(path.join('applications_data', userId)).update({
-    name: name,
-    email: email,
-    contact: contactNo,
-    gender: gender,
-    enrollment: enrollNo,
-    nationality: nationality,
-    form_status: formStatus,
-  })
+  firestore
+    .doc(path.join('applications_data', userId))
+    .update({
+      name: name,
+      email: email,
+      contact: contactNo,
+      gender: gender,
+      enrollment: enrollNo,
+      nationality: nationality,
+      form_status: formStatus,
+    })
+    .then(() => alert('Your data is saved!'))
+    .catch(() => alert('Try again, network error!'))
 }
