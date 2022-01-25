@@ -43,36 +43,29 @@ export default function Application() {
   }, [status])
 
   const printApplication = () => {
-    if (!document.getElementsByTagName('iframe').length) {
-      const application = document.getElementById('application').innerHTML
-      const head = document.getElementsByTagName('head')[0].innerHTML
-      const bodyScript = document
-        .getElementsByTagName('body')[0]
-        .innerHTML.split('</div>')
-        .slice(-1)[0]
-      const content =
-        '<html>' +
-        head +
-        '<body>' +
-        application +
-        bodyScript +
-        '<iframe style="position: absolute; top: -1000px; left: -1000px;"></iframe></body></html>'
+    const application = document.getElementById('application').innerHTML
+    const head = document.getElementsByTagName('head')[0].innerHTML
+    const bodyScript = document
+      .getElementsByTagName('body')[0]
+      .innerHTML.split('</div>')
+      .slice(-1)[0]
+    const content =
+      '<html>' +
+      head +
+      '<body>' +
+      application +
+      bodyScript +
+      '<iframe style="position: absolute; top: -1000px; left: -1000px;"></iframe></body></html>'
 
-      const print: HTMLIFrameElement = document.createElement('iframe')
-      print.style.position = 'absolute'
-      print.style.top = '-1000px'
-      print.style.left = '-1000px'
-      document.body.appendChild(print)
-      print.contentWindow.document.open()
-      print.contentWindow.document.write(content)
-      print.contentWindow.document.close()
-      print.onload = () => {
-        print.contentWindow.focus()
-        print.contentWindow.print()
-      }
-    } else {
-      const print: HTMLIFrameElement =
-        document.getElementsByTagName('iframe')[0]
+    const print: HTMLIFrameElement = document.createElement('iframe')
+    print.style.position = 'absolute'
+    print.style.top = '-1000px'
+    print.style.left = '-1000px'
+    document.body.appendChild(print)
+    print.contentWindow.document.open()
+    print.contentWindow.document.write(content)
+    print.contentWindow.document.close()
+    print.onload = () => {
       print.contentWindow.focus()
       print.contentWindow.print()
     }
