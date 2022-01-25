@@ -14,11 +14,7 @@ const SignUp = () => {
   const [passwordOne, setPasswordOne] = useState<string>('')
   const [passwordTwo, setPasswordTwo] = useState<string>('')
   const [name, setName] = useState<string>('')
-  const [stream, setStream] = useState<string>('')
-  const [gender, setGender] = useState<string>('Male')
-  const [dob, setDOB] = useState<string>('')
   const [mobile, setMobile] = useState<number>()
-  const [pwd, setPWD] = useState<string>('False')
   const [error, setError] = useState<string>('')
   const [pageReady, setPageReady] = useState<boolean>(false)
 
@@ -32,21 +28,31 @@ const SignUp = () => {
 
   const onSubmit = (event) => {
     setError(null)
-    //check if passwords match. If they do, create user in Firebase
-    // and redirect to home page.
-    if (passwordOne === passwordTwo)
-      createUserWithEmailAndPassword(email, passwordOne)
-        .then(async (result: firebase.auth.UserCredential) => {
-          // add user data to firestore database
-          createUser(result.user.uid, name, email, mobile)
-          createApplicationData(result.user.uid)
+    if (name && email && mobile && passwordOne && passwordTwo) {
+      const regex =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (regex.test(String(email).toLowerCase())) {
+        //check if passwords match. If they do, create user in Firebase
+        // and redirect to home page.
+        if (passwordOne === passwordTwo) {
+          createUserWithEmailAndPassword(email, passwordOne)
+            .then(async (result: firebase.auth.UserCredential) => {
+              // add user data to firestore database
+              createUser(result.user.uid, name, email, mobile)
+              createApplicationData(result.user.uid)
 
-          router.push('/application-portal/application')
-        })
-        .catch((error) => {
-          setError(error.message)
-        })
-    else setError('Password do not match')
+              router.push('/application-portal/application')
+            })
+            .catch((error) => {
+              if (error.code === 'auth/weak-password') {
+                setError('The password is too weak.')
+              } else {
+                setError(error.message.replace('Firebase', ''))
+              }
+            })
+        } else setError('Password do not match.')
+      } else setError('Email is incorrect.')
+    } else setError('All fields are required.')
     event.preventDefault()
   }
 

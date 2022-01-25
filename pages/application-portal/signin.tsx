@@ -23,13 +23,23 @@ const SignIn = () => {
 
   const onSubmit = (event) => {
     setError(null)
-    signInWithEmailAndPassword(email, password)
-      .then(() => {
-        router.push('/application-portal/application')
-      })
-      .catch((error) => {
-        setError(error.message)
-      })
+    if (email && password) {
+      const regex =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (regex.test(String(email).toLowerCase())) {
+        signInWithEmailAndPassword(email, password)
+          .then(() => {
+            router.push('/application-portal/application')
+          })
+          .catch((error) => {
+            if (error.code === 'auth/wrong-password') {
+              setError('Wrong password.')
+            } else {
+              setError(error.message.replace('Firebase', ''))
+            }
+          })
+      } else setError('Email is incorrect.')
+    } else setError('All fields are required.')
     event.preventDefault()
   }
 
