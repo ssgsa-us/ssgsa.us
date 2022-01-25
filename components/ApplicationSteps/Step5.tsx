@@ -112,9 +112,11 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
                   Submit Application
                 </button>
                 <p className="text-center">
-                  Note: You can make changes before submitting application, but
-                  you will not be able to make changes to your application after
-                  submission.
+                  Note: Please click on &apos;Submit Application&apos; button
+                  only if you are confident your application is complete in all
+                  respects. Upon clicking the &apos;Submit Application&apos;
+                  button, you will not be able to make any changes to your
+                  application.
                 </p>
               </div>
             </div>
