@@ -53,7 +53,12 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
         if (resumeUploaded) {
           if (applicationData.form_status == 4) {
             updateFormStatus(authUser.id, 5)
-            setStatus(5)
+              .then(() => {
+                setStatus(5)
+              })
+              .catch(() => {
+                setError('Try again, network error!')
+              })
           } else {
             setStatus(5)
           }
@@ -69,9 +74,9 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
       )
   }
 
-  const previousStep = () => setStatus(status - 1)
+  const previousStep = () => setStatus(3)
 
-  const saveInformation = () => {}
+  const saveInformation = () => new Promise(null)
 
   const fileUploadComponent = (
     fileName: string,
@@ -105,14 +110,23 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
         />
       </div>
       <button
-        className="text-white text-base font-bold md:text-lg bg-red-850 mb-4 sm:mb-0 px-5 py-2 rounded-lg w-min"
+        className={`text-white text-base font-bold md:text-lg mb-4 sm:mb-0 px-5 py-2 rounded-lg w-min ${
+          isFileUploaded
+            ? 'bg-green-850'
+            : file
+            ? 'bg-red-850'
+            : 'bg-red-860 cursor-not-allowed'
+        }`}
         onClick={() => {
           setError('')
           if (file)
             if (file.size <= 600000)
-              uploadDocument(authUser.id, fileName, file).then(() =>
-                setIsFileUploaded(true),
-              )
+              uploadDocument(authUser.id, fileName, file)
+                .then(() => {
+                  setIsFileUploaded(true)
+                  alert('Your file is uploaded.')
+                })
+                .catch(() => alert('Try again, network error!'))
             else setError('Maximum allowed file size is 500KB.')
         }}
       >
@@ -287,6 +301,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
         nextStep={nextStep}
         saveInformation={saveInformation}
         error={error}
+        setError={setError}
       />
     </div>
   )

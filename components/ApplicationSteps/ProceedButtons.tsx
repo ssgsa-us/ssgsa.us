@@ -11,6 +11,7 @@ const ProceedButtons = ({
   nextStep,
   saveInformation,
   error,
+  setError,
 }) => {
   return (
     <div className="mt-10">
@@ -53,7 +54,10 @@ const ProceedButtons = ({
             status == formStatus ? null : 'bg-red-860 cursor-not-allowed'
           }`}
           onClick={() => {
-            if (status == formStatus) saveInformation()
+            if (status == formStatus)
+              saveInformation()
+                .then(() => alert('Your data is saved!'))
+                .catch(() => setError('Try again, network error!'))
           }}
         >
           Save Information

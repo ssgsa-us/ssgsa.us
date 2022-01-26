@@ -7,7 +7,7 @@ export const updateApplicationData = (
   SOPAnswers: AnswerType,
   formStatus: number,
 ) => {
-  firestore.doc(path.join('applications_data', userId)).update({
+  return firestore.doc(path.join('applications_data', userId)).update({
     sop_answers: SOPAnswers,
     form_status: formStatus,
   })

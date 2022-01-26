@@ -7,7 +7,7 @@ export const updateApplicationData = (
   academicRecord: AcademicRecordType,
   formStatus: number,
 ) => {
-  firestore
+  return firestore
     .doc(path.join('applications_data', userId))
     .update({ academic_record: academicRecord, form_status: formStatus })
 }

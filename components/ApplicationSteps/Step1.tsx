@@ -46,7 +46,12 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             nationality,
             2,
           )
-          setStatus(2)
+            .then(() => {
+              setStatus(2)
+            })
+            .catch(() => {
+              setError('Try again, network error!')
+            })
         } else {
           updateApplicationData(
             authUser.id,
@@ -58,7 +63,12 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             nationality,
             applicationData.form_status,
           )
-          setStatus(2)
+            .then(() => {
+              setStatus(2)
+            })
+            .catch(() => {
+              setError('Try again, network error!')
+            })
         }
       } else setError('Email is incorrect.')
     } else setError('All fields are required.')
@@ -177,6 +187,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
         nextStep={nextStep}
         saveInformation={saveInformation}
         error={error}
+        setError={setError}
       />
     </div>
   )

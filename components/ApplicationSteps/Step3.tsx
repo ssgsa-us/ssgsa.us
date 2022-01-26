@@ -78,14 +78,24 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
             ) {
               if (applicationData.form_status == 3) {
                 updateApplicationData(authUser.id, answers, 4)
-                setStatus(4)
+                  .then(() => {
+                    setStatus(4)
+                  })
+                  .catch(() => {
+                    setError('Try again, network error!')
+                  })
               } else {
-                setStatus(4)
                 updateApplicationData(
                   authUser.id,
                   answers,
                   applicationData.form_status,
                 )
+                  .then(() => {
+                    setStatus(4)
+                  })
+                  .catch(() => {
+                    setError('Try again, network error!')
+                  })
               }
             } else
               setError(
@@ -134,6 +144,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
         nextStep={nextStep}
         saveInformation={saveInformation}
         error={error}
+        setError={setError}
       />
     </div>
   )
