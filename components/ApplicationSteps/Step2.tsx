@@ -18,7 +18,7 @@ type RecordDataType = {
 
 type Props = {
   applicationData: ApplicationData
-  status: Number
+  status: number
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
@@ -169,6 +169,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
   }
 
   const saveInformation = () => {
+    setError('')
     let academicRecord: AcademicRecordType = getAcademicRecord()
     return updateApplicationData(
       authUser.id,

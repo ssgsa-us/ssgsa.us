@@ -3,6 +3,17 @@ import {
   faArrowAltCircleRight,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Dispatch, SetStateAction } from 'react'
+
+type Props = {
+  status: number
+  formStatus: number
+  previousStep: () => void
+  nextStep: () => void
+  saveInformation: () => Promise<void>
+  error: string
+  setError: Dispatch<SetStateAction<string>>
+}
 
 const ProceedButtons = ({
   status,
@@ -12,7 +23,7 @@ const ProceedButtons = ({
   saveInformation,
   error,
   setError,
-}) => {
+}: Props) => {
   return (
     <div className="mt-10">
       {error ? (

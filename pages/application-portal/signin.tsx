@@ -34,6 +34,10 @@ const SignIn = () => {
           .catch((error) => {
             if (error.code === 'auth/wrong-password') {
               setError('Wrong password.')
+            } else if (error.code === 'auth/user-not-found') {
+              setError(
+                'There is no user record corresponding to these credentials.',
+              )
             } else {
               setError(error.message.replace('Firebase', ''))
             }

@@ -6,7 +6,7 @@ import { useAuth } from '../../context/AuthUserContext'
 
 type Props = {
   applicationData: ApplicationData
-  status: Number
+  status: number
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
@@ -76,8 +76,9 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
 
   const previousStep = () => setStatus(1)
 
-  const saveInformation = () =>
-    updateApplicationData(
+  const saveInformation = () => {
+    setError('')
+    return updateApplicationData(
       authUser.id,
       name,
       email,
@@ -87,6 +88,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       nationality,
       applicationData.form_status,
     )
+  }
 
   return (
     <div>

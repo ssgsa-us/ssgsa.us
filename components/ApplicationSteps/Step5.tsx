@@ -29,6 +29,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
   }
 
   const submitApplication = () => {
+    setError('')
     updateFormStatus(authUser.id, 6)
       .then(() => {
         setStatus(6)

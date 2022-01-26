@@ -76,7 +76,10 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
 
   const previousStep = () => setStatus(3)
 
-  const saveInformation = () => new Promise(null)
+  const saveInformation = () => {
+    setError('')
+    return new Promise<void>(null)
+  }
 
   const fileUploadComponent = (
     fileName: string,
