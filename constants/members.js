@@ -36,12 +36,12 @@ export const members = [
       },
       {
         name: 'Mr. Ali Muzaffar',
-        place: 'Irvine, CA, USA',
+        place: 'Atlanta, GA, USA',
         imageUrl: '/members/AliMuzaffar.jpg',
       },
       {
-        name: 'Mr. Wasikul Islam',
-        place: 'Stillwater, Oklahoma, USA',
+        name: 'Dr. Wasikul Islam',
+        place: 'Geneva, Switzerland',
         imageUrl: '/members/WasikulIslam.jpg',
       },
     ],
@@ -148,7 +148,7 @@ export const members = [
     name: 'Promotions',
     members: [
       {
-        name: 'Mr. Mohd Zubair',
+        name: 'Dr. Mohd Zubair',
         position: 'Team Lead',
         scholar: 'SSGSA Scholar 2013-14',
         university: 'University of Arkansas',
@@ -180,7 +180,7 @@ export const members = [
         imageUrl: '/members/ToahaUmar.jpg',
       },
       {
-        name: 'Mr. Salman Khan',
+        name: 'Dr. Salman Khan',
         place: 'Aligarh, India',
         imageUrl: '/members/SalmanKhan.jpg',
       },
@@ -203,7 +203,7 @@ export const members = [
         imageUrl: '/members/TanweeKausar.jpg',
       },
       {
-        name: 'Mr. Sabahuddin Ahmad',
+        name: 'Dr. Sabahuddin Ahmad',
         position: 'Team Lead',
         scholar: 'ISRA scholar 2013-14',
         university: 'Heinrich Heine University',

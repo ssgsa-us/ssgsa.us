@@ -11,13 +11,13 @@ const LeadershipHistory = () => {
               2021-Present
             </td>
             <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Mr. Salman Bin Kashif
+              Mr. Salman Bin Kashif, Chairman
             </td>
           </tr>
           <tr>
             <td className="text-left sm:text-right pr-4 sm:pr-12">2019-21</td>
             <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Mr. Wasikul Islam
+              Dr. Wasikul Islam, Chairman
             </td>
           </tr>
           <tr>
