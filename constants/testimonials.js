@@ -1,7 +1,7 @@
 export const testimonials = [
   {
     name: 'Dr. Mohsin Jahan Qazi',
-    position: 'Postdoctoral Researcher, Harvard University, USA',
+    position: 'Postdoctoral Researcher, Cornell University, USA',
     imageUrl: '/members/MohsinJahanQazi.jpg',
     words:
       'Realizing the role which SSGSA award played in moving towards \
@@ -47,8 +47,8 @@ export const testimonials = [
       studies in USA seems a distant dream at beginning.",
   },
   {
-    name: 'Wasikul Islam',
-    position: 'PhD, Oklahoma State University,USA',
+    name: 'Dr. Wasikul Islam',
+    position: 'Postdoctoral Researcher, University of Wisconsin-Madison, USA',
     imageUrl: '/members/WasikulIslam.jpg',
     words:
       "Being a SSGSA awardee and a proud member of the family, I feel \
@@ -88,7 +88,7 @@ export const testimonials = [
   },
   {
     name: 'Kashif Ahmad',
-    position: 'MS, Purdue University, USA',
+    position: 'Operations Research Engineer at Tesla',
     imageUrl: '/members/DrKashifAhmad.jpg',
     words:
       'SSGSA makes it easy for a student by not only paying for tests \
