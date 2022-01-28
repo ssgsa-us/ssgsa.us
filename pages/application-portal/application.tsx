@@ -26,11 +26,13 @@ export default function Application() {
     auth.onAuthStateChanged(() => {
       if (!auth.currentUser) router.push('/application-portal/signin')
       else {
-        setPageReady(true)
-        getApplicationData(auth.currentUser.uid).then((data) => {
-          setStatus(data.form_status)
-          setApplicationData(data)
-        })
+        getApplicationData(auth.currentUser.uid)
+          .then((data) => {
+            setStatus(data.form_status)
+            setApplicationData(data)
+            setPageReady(true)
+          })
+          .catch(() => alert('Try again, network error!'))
       }
     })
   }, [])

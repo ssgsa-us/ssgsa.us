@@ -7,7 +7,7 @@ import { ApplicationData } from '../../classes/application_data'
 
 type Props = {
   applicationData: ApplicationData
-  status: Number
+  status: number
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
@@ -51,6 +51,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
   }, [applicationData])
 
   const nextStep = () => {
+    setError('')
     if (
       answers['SOP1'] &&
       answers['SOP1'].split(' ').length >= 20 &&
@@ -78,14 +79,24 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
             ) {
               if (applicationData.form_status == 3) {
                 updateApplicationData(authUser.id, answers, 4)
-                setStatus(4)
+                  .then(() => {
+                    setStatus(4)
+                  })
+                  .catch(() => {
+                    setError('Try again, network error!')
+                  })
               } else {
-                setStatus(4)
                 updateApplicationData(
                   authUser.id,
                   answers,
                   applicationData.form_status,
                 )
+                  .then(() => {
+                    setStatus(4)
+                  })
+                  .catch(() => {
+                    setError('Try again, network error!')
+                  })
               }
             } else
               setError(
@@ -109,8 +120,14 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
 
   const previousStep = () => setStatus(2)
 
-  const saveInformation = () =>
-    updateApplicationData(authUser.id, answers, applicationData.form_status)
+  const saveInformation = () => {
+    setError('')
+    return updateApplicationData(
+      authUser.id,
+      answers,
+      applicationData.form_status,
+    )
+  }
 
   return (
     <div>
@@ -134,6 +151,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
         nextStep={nextStep}
         saveInformation={saveInformation}
         error={error}
+        setError={setError}
       />
     </div>
   )

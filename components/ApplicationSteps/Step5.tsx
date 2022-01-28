@@ -29,11 +29,17 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
   }
 
   const submitApplication = () => {
+    setError('')
     updateFormStatus(authUser.id, 6)
-    setStatus(6)
+      .then(() => {
+        setStatus(6)
+      })
+      .catch(() => {
+        setError('Try again, network error!')
+      })
   }
 
-  const previousStep = () => setStatus(status - 1)
+  const previousStep = () => setStatus(4)
 
   return (
     <div>

@@ -6,7 +6,7 @@ import { useAuth } from '../../context/AuthUserContext'
 
 type Props = {
   applicationData: ApplicationData
-  status: Number
+  status: number
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
@@ -46,7 +46,12 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             nationality,
             2,
           )
-          setStatus(2)
+            .then(() => {
+              setStatus(2)
+            })
+            .catch(() => {
+              setError('Try again, network error!')
+            })
         } else {
           updateApplicationData(
             authUser.id,
@@ -58,7 +63,12 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             nationality,
             applicationData.form_status,
           )
-          setStatus(2)
+            .then(() => {
+              setStatus(2)
+            })
+            .catch(() => {
+              setError('Try again, network error!')
+            })
         }
       } else setError('Email is incorrect.')
     } else setError('All fields are required.')
@@ -66,8 +76,9 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
 
   const previousStep = () => setStatus(1)
 
-  const saveInformation = () =>
-    updateApplicationData(
+  const saveInformation = () => {
+    setError('')
+    return updateApplicationData(
       authUser.id,
       name,
       email,
@@ -77,6 +88,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       nationality,
       applicationData.form_status,
     )
+  }
 
   return (
     <div>
@@ -177,6 +189,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
         nextStep={nextStep}
         saveInformation={saveInformation}
         error={error}
+        setError={setError}
       />
     </div>
   )

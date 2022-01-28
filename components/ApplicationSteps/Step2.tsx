@@ -18,7 +18,7 @@ type RecordDataType = {
 
 type Props = {
   applicationData: ApplicationData
-  status: Number
+  status: number
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
@@ -139,14 +139,24 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
           let academicRecord: AcademicRecordType = getAcademicRecord()
           if (applicationData.form_status == 2) {
             updateApplicationData(authUser.id, academicRecord, 3)
-            setStatus(3)
+              .then(() => {
+                setStatus(3)
+              })
+              .catch(() => {
+                setError('Try again, network error!')
+              })
           } else {
             updateApplicationData(
               authUser.id,
               academicRecord,
               applicationData.form_status,
             )
-            setStatus(3)
+              .then(() => {
+                setStatus(3)
+              })
+              .catch(() => {
+                setError('Try again, network error!')
+              })
           }
         } else
           setError('Please check eligibility criteria or provide correct data')
@@ -159,8 +169,9 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
   }
 
   const saveInformation = () => {
+    setError('')
     let academicRecord: AcademicRecordType = getAcademicRecord()
-    updateApplicationData(
+    return updateApplicationData(
       authUser.id,
       academicRecord,
       applicationData.form_status,
@@ -351,6 +362,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
         nextStep={nextStep}
         saveInformation={saveInformation}
         error={error}
+        setError={setError}
       />
     </div>
   )

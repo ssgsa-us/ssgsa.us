@@ -3,6 +3,17 @@ import {
   faArrowAltCircleRight,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Dispatch, SetStateAction } from 'react'
+
+type Props = {
+  status: number
+  formStatus: number
+  previousStep: () => void
+  nextStep: () => void
+  saveInformation: () => Promise<void>
+  error: string
+  setError: Dispatch<SetStateAction<string>>
+}
 
 const ProceedButtons = ({
   status,
@@ -11,7 +22,8 @@ const ProceedButtons = ({
   nextStep,
   saveInformation,
   error,
-}) => {
+  setError,
+}: Props) => {
   return (
     <div className="mt-10">
       {error ? (
@@ -53,7 +65,10 @@ const ProceedButtons = ({
             status == formStatus ? null : 'bg-red-860 cursor-not-allowed'
           }`}
           onClick={() => {
-            if (status == formStatus) saveInformation()
+            if (status == formStatus)
+              saveInformation()
+                .then(() => alert('Your data is saved!'))
+                .catch(() => setError('Try again, network error!'))
           }}
         >
           Save Information
