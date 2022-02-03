@@ -24,16 +24,16 @@ export default function Footer() {
         </div>
         <div className="flex flex-col items-end sm:items-start bg-blue-850 p-3">
           <p className="text-sm font-bold mb-1">Social</p>
-          <Link href="https://twitter.com/">
+          <Link href="https://www.twitter.com/SirSyedGSA">
             <a className="text-xs">Twitter</a>
           </Link>
-          <Link href="https://www.facebook.com/">
+          <Link href="https://www.facebook.com/ssesapage">
             <a className="text-xs">Facebook</a>
           </Link>
-          <Link href="https://www.linkedin.com/">
+          <Link href="https://www.linkedin.com/company/sir-syed-global-scholar-award-ssgsa">
             <a className="text-xs">Linkedin</a>
           </Link>
-          <Link href="https://www.instagram.com/">
+          <Link href="https://www.instagram.com/sirsyedgsa">
             <a className="text-xs">Instagram</a>
           </Link>
         </div>
