@@ -8,7 +8,6 @@ const DonorAndContributors = () => {
         <div>Aligarh Alumni Association of Atlanta</div>
         <div>Aligarh Alumni Association of Chicago</div>
         <div>Aligarh Alumni Association of Houston</div>
-        <div>Aligarh Alumni Association of Texas</div>
         <div>Aligarh Education Endowment Fund</div>
         <div>Indian Muslim Relief and Charities (IMRC)</div>
         <div className="mt-6 mb-10">All donors, students and alumni.</div>
