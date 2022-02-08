@@ -42,7 +42,7 @@ export default function Portal() {
           ) : new Date() >
             new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE) ? (
             <div className="bg-red-200 text-2xl text-red-850 text-center font-bold rounded-3xl p-2 pl-6 mb-5">
-              Application Portal is closed. We are not accepting more responses!
+              Applications for the session 2022-23 will be launched soon. Stay tuned for the further updates.
             </div>
           ) : null}
         </div>
