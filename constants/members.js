@@ -29,21 +29,6 @@ export const members = [
         place: 'Kashmir, India',
         imageUrl: '/members/ShaidaAndrabi.jpg',
       },
-      {
-        name: 'Dr. Mohsin Khan',
-        place: 'Washington DC, USA',
-        imageUrl: '/members/MohsinKhan.jpg',
-      },
-      {
-        name: 'Mr. Ali Muzaffar',
-        place: 'Atlanta, GA, USA',
-        imageUrl: '/members/AliMuzaffar.jpg',
-      },
-      {
-        name: 'Dr. Wasikul Islam',
-        place: 'Geneva, Switzerland',
-        imageUrl: '/members/WasikulIslam.jpg',
-      },
     ],
   },
   {
