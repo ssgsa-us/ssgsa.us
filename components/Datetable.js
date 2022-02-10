@@ -8,20 +8,16 @@ const DateTable = ({ bgcolor, textcolor, textbold }) => {
               Opening date of Applications
             </td>
             <td className="border-2 border-gray-300 p-2 w-3/5">
-              To be announced
+              Feb 12, 2022
             </td>
-          </tr>
-          <tr>
-            <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
-              Closing date for queries
-            </td>
-            <td className="border-2 border-gray-300 p-2">To be announced</td>
           </tr>
           <tr>
             <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
               Closing date of Applications
             </td>
-            <td className="border-2 border-gray-300 p-2">To be announced</td>
+            <td className="border-2 border-gray-300 p-2">
+              Mar 15, 2022
+            </td>
           </tr>
           <tr>
             <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
