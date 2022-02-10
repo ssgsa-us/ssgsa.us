@@ -1,14 +1,5 @@
 export const CarouselData = [
   {
-    imgSrc: '/Convention_photo5.png',
-    imgAlt: 'Convention Photo',
-    heading: 'SSGSA scholars are spread across the globe',
-    width: 475,
-    height: 250,
-    content:
-      '120  SSGSA scholars are successfully placed in 110 universities in 20 countries till date',
-  },
-  {
     imgSrc: '/Convention_Collage.png',
     imgAlt: 'Convention Photo',
     heading: 'SSGSA Convention 2020',
