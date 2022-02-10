@@ -13,13 +13,16 @@ export default function Footer() {
         <div className="sm:col-span-2 hidden sm:flex items-center justify-center p-2">
           <Image src="/logo.png" alt="Logo" width={110} height={110} />
         </div>
-        <div className="col-span-2 md:col-span-4 lg:col-span-6 flex items-center bg-blue-850 p-3">
+        <div className="col-span-2 md:col-span-4 lg:col-span-6 flex flex-col justify-center bg-blue-850 p-3">
           <p className="text-sm font-bold">
             Sir Syed
             <br />
             Education Society
             <br />
             Of North America
+          </p>
+          <p className="text-xs mt-2">
+            237 Worthen Road East, Lexington, MA 02421, USA
           </p>
         </div>
         <div className="flex flex-col items-end sm:items-start bg-blue-850 p-3">

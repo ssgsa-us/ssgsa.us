@@ -29,6 +29,9 @@ module.exports = {
       zIndex: {
         n10: '-10',
       },
+      spacing: {
+        '2/5': '40%',
+      },
     },
     fontFamily: {
       lora: ['Lora'],

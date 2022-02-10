@@ -118,7 +118,7 @@ export default function Header() {
                       </a>
                     </div>
 
-                    <div className="flex-col md:absolute md:left-full md:top-1/2 bg-red-850 md:bg-gray-200 hidden navgroup-box w-full">
+                    <div className="flex-col md:absolute md:left-full md:top-2/5 bg-red-850 md:bg-gray-200 hidden navgroup-box w-full">
                       <Link href="/about#Members">
                         <a className="px-6 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                           Executive Committee
@@ -144,6 +144,11 @@ export default function Header() {
                   <Link href="/about#Alumni">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Our Alumni
+                    </a>
+                  </Link>
+                  <Link href="/about_sirsyed">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
+                      About Sir Syed
                     </a>
                   </Link>
                 </div>
