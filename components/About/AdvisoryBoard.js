@@ -15,7 +15,7 @@ const AdvisoryBoard = () => {
           Prof. Shakir Husain, Youngstown, Ohio, USA
         </div>
         <div className="lg:ml-0 lg:mr-32 xl:mr-48">
-          Dr. Shahid Jameel, ICGEB-New Delhi, India
+          Dr. Shahid Jameel, University of Oxford
         </div>
         <div className="lg:mr-0 lg:ml-32 xl:ml-48">
           Dr. Moyeen Haque, Houston, Texas, USA
