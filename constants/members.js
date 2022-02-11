@@ -164,7 +164,7 @@ export const members = [
         name: 'Mr. Mohd Toaha Umar',
         position: 'Team Lead',
         scholar: 'SSGSA Scholar 2017-18',
-        university: 'Techincal University of Munich'
+        university: 'Techincal University of Munich',
         place: 'Munich, Germany',
         imageUrl: '/members/ToahaUmar.jpg',
       },
