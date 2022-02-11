@@ -81,7 +81,7 @@ export const members = [
         position: 'Team Co-Lead',
         scholar: 'SSGSA Scholar 2017-18',
         university: 'University of Massachusetts, Boston',
-        place:'Boston, MA, USA'
+        place:'Boston, MA, USA',
         imageUrl: '/members/SachinGupta.jpeg',
       },
     ],
