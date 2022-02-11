@@ -113,18 +113,6 @@ export const members = [
         place: 'Aligarh, India',
         imageUrl: '/members/HimanshuVarandani.jpg',
       },
-      {
-        name: 'Maaz Bin Asad',
-        university: 'Aligarh Muslim University',
-        place: 'Aligarh, India',
-        imageUrl: '/members/MaazBinAsad.png',
-      },
-      {
-        name: 'Sanjana Maheshwari',
-        university: 'Aligarh Muslim University',
-        place: 'Aligarh, India',
-        imageUrl: '/members/SanjanaMaheshwari.png',
-      },
     ],
   },
   {
