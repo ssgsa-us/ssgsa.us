@@ -95,6 +95,8 @@ export default function Portal() {
                 <span className="flex justify-center">OR</span>I have completed
                 a three year Bachelor&apos;s program and am currently enrolled
                 in a Master&apos;s program.
+                <span className="flex justify-center">OR</span>I have completed
+                a four(or more) year Bachelor&apos;s program
               </label>
             </div>
             <br />
