@@ -172,7 +172,7 @@ export const members = [
         name: 'Ms. Sadia Tanweer',
         position: 'Diversity, Equity and Inclusion Head', 
         scholar: 'SSGSA Scholar 2016-17',
-        university: 'University of Oulu'
+        university: 'University of Oulu',
         place: 'Oulu, Finland',
         imageUrl: '/members/SadiaTanweer.png',
       },
@@ -192,7 +192,7 @@ export const members = [
       {
         name: 'Mr. Hashir Ahmad',
         scholar: 'SSGSA Scholar 2018-19',
-        university: 'Techincal University of Munich'
+        university: 'Techincal University of Munich',
         place: 'Munich, Germany',
         imageUrl: '/members/HashirAhmad.jpeg',
       },
