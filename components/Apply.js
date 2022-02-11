@@ -14,14 +14,26 @@ const Apply = () => {
             Sponsor a student
           </p>
           <div className="mt-3 text-center">
-            <Image src="/donate1.png" alt="Donate" width={280} height={30} />
+            <a
+              href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src="/donate1.png" alt="Donate" width={280} height={30} />
+            </a>
           </div>
           <a href="#"></a>
           <p className="mx-auto font-black text-sm text-red-850 text-center mt-8">
             Become a regular Patron
           </p>
           <div className="mt-3 text-center">
-            <Image src="/donate2.png" alt="Donate" width={250} height={30} />
+            <a
+              href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image src="/donate2.png" alt="Donate" width={280} height={30} />
+            </a>
           </div>
           <p className="text-sm mt-8">
             By supporting students, you are becoming an active participant in

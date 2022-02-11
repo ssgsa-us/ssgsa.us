@@ -5,7 +5,7 @@ export const newsletters = [
   },
   {
     title: '2020 Centenary Edition',
-    link: 'http://ssgsa.us/Newsletters/Newsletter_2020_Centenary_Edition.pdf',
+    link: '/assets/Newsletters/Newsletter_2020_Centenary_Edition.pdf',
   },
   {
     title: '2020 Issue 1',
@@ -25,14 +25,14 @@ export const newsletters = [
   },
   {
     title: '2017',
-    link: 'http://ssgsa.us/Newsletters/Newsletter_2017_anniversary_edition.pdf',
+    link: '/assets/Newsletters/Newsletter_2017_anniversary_edition.pdf',
   },
   {
     title: '2015',
-    link: 'http://ssgsa.us/Newsletters/Newsletter_2015_(Vol4).pdf',
+    link: '/assets/Newsletters/Newsletter_2015_(Vol4).pdf',
   },
   {
     title: '2013',
-    link: 'http://ssgsa.us/Newsletters/Newsletter_2013.pdf',
+    link: '/assets/Newsletters/Newsletter_2013.pdf',
   },
 ]
