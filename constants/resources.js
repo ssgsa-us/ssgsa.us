@@ -15,7 +15,7 @@ export const resources = [
       {
         title: 'SSGSA Guide to Germany',
         text: 'A resource for students applying to universities in Germany',
-        link: 'http://www.ssgsa.us/SSGSA_Admission_guide_Germany.pdf',
+        link: '/assets/SSGSA_Admission_guide_Germany.pdf',
       },
       {
         title: 'Graduate student funding opportunities',
@@ -30,12 +30,12 @@ export const resources = [
       {
         title: 'Fully funded programs Directory',
         text: 'Directory of Fully Funded Graduate Programs',
-        link: 'http://ssgsa.us/assets/Scholarship_Network_The_Directory_of_Fully_Funded_Graduate_Programs_and_Full_Funding_Awards_03.pdf',
+        link: '/assets/Scholarship_Network_The_Directory_of_Fully_Funded_Graduate_Programs_and_Full_Funding_Awards_03.pdf',
       },
       {
         title: 'SSGSA Guide to German universities',
         text: 'How to apply to German universities',
-        link: 'http://ssgsa.us/assets/SSGSA_Germany_Admission_guidelines.pdf',
+        link: '/assets/SSGSA_Germany_Admission_guidelines.pdf',
       },
       {
         title: 'Resources for Physics Grad schools in US',
