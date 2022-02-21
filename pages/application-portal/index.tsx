@@ -90,11 +90,11 @@ export default function Portal() {
               />
               <label className="pl-5 text-blue-850">
                 I am registered for the final or penultimate year of a four (or
-                more) year Bachelor&apos;s program
+                more) year Bachelor&apos;s program or have completed the program
                 <br />
                 <span className="flex justify-center">OR</span>I have completed
                 a three year Bachelor&apos;s program and am currently enrolled
-                in a Master&apos;s program.
+                in a Master&apos;s program or have completed the Master&apos;s program.
               </label>
             </div>
             <br />
