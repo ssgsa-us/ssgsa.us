@@ -79,7 +79,7 @@ export default function ResetPassword() {
               </div>
 
               {emailSent && (
-                <div class="border rounded-lg p-2 my-6 mb-1 border-green-400 text-sm bg-green-300 text-green-900">
+                <div className="border rounded-lg p-2 my-6 mb-1 border-green-400 text-sm bg-green-300 text-green-900">
                   <b>Email sent!</b>
                   <br />
                   Please follow the instructions there to reset your password.
