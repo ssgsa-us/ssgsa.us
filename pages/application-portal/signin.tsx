@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../../context/AuthUserContext'
 import { auth } from '../../firebase'
 import PortalLayout from '../../layouts/application-portal'
-import { useAuth } from '../../context/AuthUserContext'
 
 const SignIn = () => {
   const { signInWithEmailAndPassword } = useAuth()
@@ -100,12 +100,24 @@ const SignIn = () => {
                   </button>
                 </div>
 
+                <div className="flex justify-end">
+                  <p className="text-blue-850 text-sm md:text-base">
+                    <Link href="/application-portal/reset">
+                      <a className="py-4 px-2 text-red-850 text-sm">
+                        Forgot password?
+                      </a>
+                    </Link>
+                  </p>
+                </div>
+
                 <br />
                 <div className="flex justify-center">
-                  <p className="text-blue-850 text-sm md:text-base">
-                    Don&apos;t have account,{''}
+                  <p className="text-blue-850 text-xs md:text-base">
+                    Don&apos;t have an account?
                     <Link href="/application-portal/signup">
-                      <a className="py-4 px-2 text-red-850">Register Here</a>
+                      <a className="py-4 px-1 text-red-850 font-bold">
+                        Register here.
+                      </a>
                     </Link>
                   </p>
                 </div>
