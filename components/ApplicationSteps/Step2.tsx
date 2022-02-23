@@ -128,7 +128,12 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
             break
           }
         } else if (academicData[key].category == 5) {
-          if (checkAllFields(key))
+          if (
+            academicData[key].branch &&
+            academicData[key].collegeName &&
+            academicData[key].completionYear &&
+            academicData[key].duration
+          )
             totalCourseDuration += academicData[key].duration
         }
       }
