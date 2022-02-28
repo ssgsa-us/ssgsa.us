@@ -10,6 +10,15 @@ export default function Home() {
           <h1 className="mb-8 bg-blue-850 text-xl sm:text-xl lg:text-2xl text-center text-white font-extrabold py-2 px-6 sm:px-12 rounded-tl-3xl rounded-br-3xl">
             Newsletters
           </h1>
+          <div className="bg-gray-350 text-red-850 text-center">
+            <p>
+              Want to receive the newsletters directly in your inbox? Please{' '}
+              <a href="https://forms.gle/NyFDHo66BbufZdyu6" target="_blank">
+                <font color="blue">sign up</font>
+              </a>
+              .
+            </p>
+          </div>
 
           <div className="flex justify-center flex-wrap">
             {newsletters.map((newsletter, index) => (
