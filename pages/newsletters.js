@@ -14,7 +14,9 @@ export default function Home() {
             <p>
               Want to receive the newsletters directly in your inbox? Please{' '}
               <a href="https://forms.gle/NyFDHo66BbufZdyu6" target="_blank">
-                <font color="blue">sign up</font>
+                <font color="#003366">
+                  <u>sign up</u>
+                </font>
               </a>
               .
             </p>
