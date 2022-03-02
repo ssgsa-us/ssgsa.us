@@ -44,6 +44,7 @@ export const members = [
       },
       {
         name: 'Mr. Shiva Agarwal',
+        position: 'Team Co-Lead',
         scholar: 'SSGSA Scholar 2018-19',
         university: 'Western Michigan University',
         place: 'Kalamazoo, MI, USA',
@@ -81,7 +82,7 @@ export const members = [
         position: 'Team Co-Lead',
         scholar: 'SSGSA Scholar 2017-18',
         university: 'University of Massachusetts, Boston',
-        place:'Boston, MA, USA',
+        place: 'Boston, MA, USA',
         imageUrl: '/members/SachinGupta.jpeg',
       },
     ],
@@ -110,7 +111,7 @@ export const members = [
         imageUrl: '/members/RoshanSharma.jpeg',
       },
       {
-        name: 'Himanshu Varandani',
+        name: 'Mr. Himanshu Varandani',
         university: 'Aligarh Muslim University',
         place: 'Aligarh, India',
         imageUrl: '/members/HimanshuVarandani.jpg',
@@ -138,13 +139,14 @@ export const members = [
         name: 'Mr. Kashif Ahmad',
         scholar: 'SSGSA Scholar 2015-16',
         university: 'Tesla Inc.',
-        place: 'Nevada,United States',
+        place: 'Reno, NV, USA',
         imageUrl: '/members/KashifAhmad.jpeg',
       },
       {
         name: 'Ms. Ifra Ilyas',
         scholar: 'SSGSA Scholar 2020-21',
-        university: 'Aligarh Muslim University',
+        university:
+          'Aligarh Muslim University, admitted to Georgetown University, USA',
         place: 'Aligarh, India',
         imageUrl: '/members/IfraIlyas.jpg',
       },
@@ -175,6 +177,15 @@ export const members = [
         university: 'University of Oulu',
         place: 'Oulu, Finland',
         imageUrl: '/members/SadiaTanweer.jpg',
+      },
+      {
+        name: 'Mr. Azhar Hasan',
+        position: 'Diversity, Equity and Inclusion Head',
+        scholar: 'SSGSA Scholar 2020-21',
+        university:
+          'Aligarh Muslim University, admitted to Clemson Univesity, USA',
+        place: 'Aligarh, India',
+        imageUrl: '/members/AzharHasan.jpg',
       },
     ],
   },
