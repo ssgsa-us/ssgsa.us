@@ -180,7 +180,7 @@ export const members = [
         imageUrl: '/members/SadiaTanweer.jpg',
       },
       {
-        name: 'Mr. Azhar Hasan',
+        name: 'Mr. Mohd Azhar Hasan Ansari',
         position: 'Campus coordinator',
         scholar: 'SSGSA Scholar 2020-21',
         university:
