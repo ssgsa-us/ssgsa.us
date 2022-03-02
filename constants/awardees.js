@@ -365,7 +365,7 @@ export const awardees = [
       { name: 'Faraha Javed', field: 'Medicine' },
       { name: 'Shahrukh Khan', field: 'Electrical Engineering' },
       { name: 'Tayyibah Khanam', field: 'Electrical Engineering' },
-      { name: 'Yusra Meraj Electronics', field: 'Engineering' },
+      { name: 'Yusra Meraj', field: 'Electronics Engineering' },
       { name: 'Madiha Noman', field: 'English' },
       { name: 'Kunwar Mohammed Saaim', field: 'Computer Engineering' },
       { name: 'Saba Sarwar', field: 'Computer Science' },
