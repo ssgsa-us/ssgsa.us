@@ -180,7 +180,7 @@ export const members = [
       },
       {
         name: 'Mr. Azhar Hasan',
-        position: 'Diversity, Equity and Inclusion Head',
+        position: 'Campus coordinator',
         scholar: 'SSGSA Scholar 2020-21',
         university:
           'Aligarh Muslim University, admitted to Clemson Univesity, USA',
