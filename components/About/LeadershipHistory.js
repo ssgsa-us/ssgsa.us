@@ -11,43 +11,43 @@ const LeadershipHistory = () => {
               2021-Present
             </td>
             <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Mr. Salman Bin Kashif, Chairman
+              Mr. Salman Bin Kashif, Chairperson
             </td>
           </tr>
           <tr>
             <td className="text-left sm:text-right pr-4 sm:pr-12">2019-21</td>
             <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Dr. Wasikul Islam, Chairman
+              Dr. Wasikul Islam, Chairperson
             </td>
           </tr>
           <tr>
             <td className="text-left sm:text-right pr-4 sm:pr-12">2016-18</td>
             <td className=" bg-gray-100 text-gray-700 font-black p-2">
-              Mr. Ali Muzaffar, Chairman
+              Mr. Ali Muzaffar, Chairperson
             </td>
           </tr>
           <tr>
             <td className="text-left sm:text-right pr-4 sm:pr-12">2013-15</td>
             <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Dr. Mohsin Khan, Chairman
+              Dr. Mohsin Khan, Chairperson
             </td>
           </tr>
           <tr>
             <td className="text-left sm:text-right pr-4 sm:pr-12">2011-13</td>
             <td className=" bg-gray-100 text-gray-700 font-black p-2">
-              Dr. Saif Sheikh, Chairman
+              Dr. Saif Sheikh, Chairperson
             </td>
           </tr>
           <tr>
             <td className="text-left sm:text-right pr-4 sm:pr-12">2008-11</td>
             <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Dr. Rehan Baqri, Chairman
+              Dr. Rehan Baqri, Chairperson
             </td>
           </tr>
           <tr>
             <td className="text-left sm:text-right pr-4 sm:pr-12">2006-08</td>
             <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Dr. Shaida Andrabi, Chairman
+              Dr. Shaida Andrabi, Chairperson
             </td>
           </tr>
         </tbody>
