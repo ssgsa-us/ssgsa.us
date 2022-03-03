@@ -32,10 +32,10 @@ export default function ApplicationsTable({
               Phone Number
             </th>
             <th className="border border-blue-850 border-seperate p-2">
-              Bachelor's Major/Branch
+              Bachelor&apos;s Major/Branch
             </th>
             <th className="border border-blue-850 border-seperate p-2">
-              Master's Major/Branch
+              Master&apos;s Major/Branch
             </th>
             <th className="border border-blue-850 border-seperate p-2">
               View Completed Applications
