@@ -6,7 +6,7 @@ export default function ApplicationLayout({ children }) {
   return (
     <div className={styles.container}>
       <AdminHeader />
-      <div className="md:px-12 lg:px-24 xl:px-40">{children}</div>
+      <div className="md:px-12">{children}</div>
       <Footer />
     </div>
   )

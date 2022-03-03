@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { ApplicationData } from '../../../classes/application_data'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
 import AdminLayout from '../../../layouts/admin/admin-layout'
+import { auth } from '../../../firebase'
 import { getApplicationDataForAdmin } from '../../api/getApplicationDataForAdmin'
 import { updateApplicationStatus } from '../../api/updateApplicationStatus'
 
@@ -12,13 +13,34 @@ export default function ViewApplication() {
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
 
+  // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    getApplicationDataForAdmin(String(router.query['applId']))
-      .then((data) => {
-        setApplicationData(data)
-        setPageReady(true)
-      })
-      .catch(() => alert('Try again, network error!'))
+    auth.onAuthStateChanged(() => {
+      if (!auth.currentUser) router.push('/admin/signin')
+      else {
+        if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
+          getApplicationDataForAdmin(String(router.query['applId']))
+            .then((data) => {
+              setApplicationData(data)
+              setPageReady(true)
+            })
+            .catch(() => alert('Try again, network error!'))
+        else router.push('/404')
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+    if (
+      auth.currentUser &&
+      auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
+    )
+      getApplicationDataForAdmin(String(router.query['applId']))
+        .then((data) => {
+          setApplicationData(data)
+          setPageReady(true)
+        })
+        .catch(() => alert('Try again, network error!'))
   }, [router.query, changeOccured])
 
   return (
