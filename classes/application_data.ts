@@ -12,7 +12,7 @@ export class ApplicationData {
   documents: DocumentsType
   sop_answers: AnswerType
   form_status: number
-  application_status: string // values are: 'removed', 'finalised for review', 'finalised for interview'
+  application_status: string // values are: 'removed', 'finalised for review' and 'finalised for interview'
   review_marks: number
   interview_marks: number
 
