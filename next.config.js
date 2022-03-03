@@ -20,6 +20,7 @@ module.exports = {
       process.env.NEXT_PUBLIC_APPLICATION_START_DATE,
     NEXT_PUBLIC_APPLICATION_END_DATE:
       process.env.NEXT_PUBLIC_APPLICATION_END_DATE,
+    NEXT_PUBLIC_ADMIN_EMAIL: process.env.NEXT_PUBLIC_ADMIN_EMAIL,
   },
   reactStrictMode: true,
 }
