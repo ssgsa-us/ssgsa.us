@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import AdminLayout from '../../layouts/admin/admin-layout'
+import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationsTable from '../../components/Admin/ApplicationsTable'
-import AdminLayout from '../../layouts/admin/admin-layout'
 import { auth } from '../../firebase'
 import { getApplicationsWithGivenStatus } from '../api/getCompletedApplications'
 
 type Applications = {
-  [key: string]: ApplicationData
+  [key: string]: {
+    applicationData: ApplicationData
+    adminPortalData: AdminPortalData
+  }
 }
 
 export default function FinalisedApplicationsForReview() {

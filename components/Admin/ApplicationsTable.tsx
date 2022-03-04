@@ -1,11 +1,15 @@
 import Link from 'next/link'
 import { Dispatch, SetStateAction } from 'react'
+import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import { updateApplicationStatus } from '../../pages/api/updateApplicationStatus'
 
 type Props = {
   applications: {
-    [key: string]: ApplicationData
+    [key: string]: {
+      applicationData: ApplicationData
+      adminPortalData: AdminPortalData
+    }
   }
   changeOccured: boolean
   setChangeOccured: Dispatch<SetStateAction<boolean>>
@@ -64,24 +68,28 @@ export default function ApplicationsTable({
                 {index + 1}
               </td>
               <td className="border border-blue-850 border-seperate p-2">
-                {applications[applId].name}
+                {applications[applId].applicationData.name}
               </td>
               <td className="border border-blue-850 border-seperate p-2">
-                {applications[applId].email}
+                {applications[applId].applicationData.email}
               </td>
               <td className="border border-blue-850 border-seperate p-2">
-                {applications[applId].contact}
+                {applications[applId].applicationData.contact}
               </td>
               <td className="border border-blue-850 border-seperate p-2">
                 {
-                  applications[applId].academic_record["Bachelor's Degree"]
-                    .branch
+                  applications[applId].applicationData.academic_record[
+                    "Bachelor's Degree"
+                  ].branch
                 }
               </td>
               <td className="border border-blue-850 border-seperate p-2">
-                {applications[applId].academic_record["Master's Degree"]
-                  ? applications[applId].academic_record["Master's Degree"]
-                      .branch
+                {applications[applId].applicationData.academic_record[
+                  "Master's Degree"
+                ]
+                  ? applications[applId].applicationData.academic_record[
+                      "Master's Degree"
+                    ].branch
                   : '-'}
               </td>
               <td className="border border-blue-850 border-seperate p-2 text-center">
@@ -94,16 +102,17 @@ export default function ApplicationsTable({
               <td className="border border-blue-850 border-seperate p-2 text-center">
                 <button
                   className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-                    applications[applId].application_status ==
+                    applications[applId].adminPortalData.application_status ==
                     'finalised for interview'
                       ? 'bg-red-860 cursor-not-allowed'
                       : 'bg-red-850'
                   }`}
                   onClick={() =>
-                    applications[applId].application_status ==
+                    applications[applId].adminPortalData.application_status ==
                     'finalised for interview'
                       ? null
-                      : applications[applId].application_status == 'removed'
+                      : applications[applId].adminPortalData
+                          .application_status == 'removed'
                       ? updateApplicationStatus(applId, '')
                           .then(() => setChangeOccured(!changeOccured))
                           .catch(() => alert('Try again, network error!'))
@@ -112,25 +121,26 @@ export default function ApplicationsTable({
                           .catch(() => alert('Try again, network error!'))
                   }
                 >
-                  {applications[applId].application_status == 'removed'
+                  {applications[applId].adminPortalData.application_status ==
+                  'removed'
                     ? 'Unremove'
                     : 'Remove'}
                 </button>
               </td>
               <td className="border border-blue-850 border-seperate p-2 text-center">
-                {applications[applId].application_status ==
+                {applications[applId].adminPortalData.application_status ==
                 'finalised for review' ? (
                   <p className="text-red">Already Finalised</p>
                 ) : (
                   <button
                     className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-                      applications[applId].application_status ==
+                      applications[applId].adminPortalData.application_status ==
                       'finalised for interview'
                         ? 'bg-red-860 cursor-not-allowed'
                         : 'bg-red-850'
                     }`}
                     onClick={() =>
-                      applications[applId].application_status ==
+                      applications[applId].adminPortalData.application_status ==
                       'finalised for interview'
                         ? null
                         : updateApplicationStatus(
@@ -146,25 +156,25 @@ export default function ApplicationsTable({
                 )}
               </td>
               <td className="border border-blue-850 border-seperate p-2 text-center">
-                {applications[applId].review_marks}
+                {applications[applId].adminPortalData.review_marks}
               </td>
               <td className="border border-blue-850 border-seperate p-2 text-center">
-                {applications[applId].application_status ==
+                {applications[applId].adminPortalData.application_status ==
                 'finalised for interview' ? (
                   <p className="text-red">Already Finalised</p>
                 ) : (
                   <button
                     className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-                      applications[applId].application_status ==
+                      applications[applId].adminPortalData.application_status ==
                         'finalised for review' &&
-                      applications[applId].review_marks
+                      applications[applId].adminPortalData.review_marks
                         ? 'bg-red-850'
                         : 'bg-red-860 cursor-not-allowed'
                     }`}
                     onClick={() =>
-                      applications[applId].application_status ==
+                      applications[applId].adminPortalData.application_status ==
                         'finalised for review' &&
-                      applications[applId].review_marks
+                      applications[applId].adminPortalData.review_marks
                         ? updateApplicationStatus(
                             applId,
                             'finalised for interview',
@@ -179,7 +189,7 @@ export default function ApplicationsTable({
                 )}
               </td>
               <td className="border border-blue-850 border-seperate p-2 text-center">
-                {applications[applId].interview_marks}
+                {applications[applId].adminPortalData.interview_marks}
               </td>
             </tr>
           ))}

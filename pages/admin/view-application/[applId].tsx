@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
-import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import { auth } from '../../../firebase'
-import { getApplicationDataForAdmin } from '../../api/getApplicationDataForAdmin'
+import { getAdminPortalData } from '../../api/getAdminPortalData'
+import { getApplicationData } from '../../api/getApplicationData'
+import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
 import { updateApplicationStatus } from '../../api/updateApplicationStatus'
 
 export default function ViewApplication() {
+  const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>()
   const [applicationData, setApplicationData] = useState<ApplicationData>()
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
+  const applId = String(router.query['applId'])
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
@@ -19,10 +23,15 @@ export default function ViewApplication() {
       if (!auth.currentUser) router.push('/admin/signin')
       else {
         if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          getApplicationDataForAdmin(String(router.query['applId']))
+          getApplicationData(applId)
             .then((data) => {
               setApplicationData(data)
-              setPageReady(true)
+              getAdminPortalData(applId)
+                .then((data) => {
+                  setAdminPortalData(data)
+                  setPageReady(true)
+                })
+                .catch(() => alert('Try again, network error!'))
             })
             .catch(() => alert('Try again, network error!'))
         else router.push('/404')
@@ -35,10 +44,15 @@ export default function ViewApplication() {
       auth.currentUser &&
       auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
     )
-      getApplicationDataForAdmin(String(router.query['applId']))
+      getApplicationData(applId)
         .then((data) => {
           setApplicationData(data)
-          setPageReady(true)
+          getAdminPortalData(applId)
+            .then((data) => {
+              setAdminPortalData(data)
+              setPageReady(true)
+            })
+            .catch(() => alert('Try again, network error!'))
         })
         .catch(() => alert('Try again, network error!'))
   }, [router.query, changeOccured])
@@ -59,67 +73,58 @@ export default function ViewApplication() {
                     Application Status
                   </p>
                   <p className="sm:text-lg font-bold">
-                    {applicationData.application_status}
+                    {adminPortalData.application_status}
                   </p>
                 </div>
-                {applicationData.review_marks ? (
+                {adminPortalData.review_marks ? (
                   <div className="flex justify-around">
                     <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                       Review Marks
                     </p>
                     <p className="sm:text-lg font-bold">
-                      {applicationData.review_marks}
+                      {adminPortalData.review_marks}
                     </p>
                   </div>
                 ) : null}
-                {applicationData.interview_marks ? (
+                {adminPortalData.interview_marks ? (
                   <div className="flex justify-around">
                     <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                       Interview Marks
                     </p>
                     <p className="sm:text-lg font-bold">
-                      {applicationData.interview_marks}
+                      {adminPortalData.interview_marks}
                     </p>
                   </div>
                 ) : null}
               </div>
               <div className="flex flex-col sm:flex-row items-center sm:justify-between my-10">
-                {applicationData.application_status ==
+                {adminPortalData.application_status ==
                 'finalised for interview' ? null : (
                   <button
                     className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
                     onClick={() =>
-                      applicationData.application_status == 'removed'
-                        ? updateApplicationStatus(
-                            String(router.query['applId']),
-                            '',
-                          )
+                      adminPortalData.application_status == 'removed'
+                        ? updateApplicationStatus(applId, '')
                             .then(() => setChangeOccured(!changeOccured))
                             .catch(() => alert('Try again, network error!'))
-                        : updateApplicationStatus(
-                            String(router.query['applId']),
-                            'removed',
-                          )
+                        : updateApplicationStatus(applId, 'removed')
                             .then(() => setChangeOccured(!changeOccured))
                             .catch(() => alert('Try again, network error!'))
                     }
                   >
-                    {applicationData.application_status == 'removed'
+                    {adminPortalData.application_status == 'removed'
                       ? 'Unremove'
                       : 'Remove'}
                   </button>
                 )}
-                {applicationData.application_status ==
+                {adminPortalData.application_status ==
                   'finalised for interview' ||
-                applicationData.application_status ==
+                adminPortalData.application_status ==
                   'finalised for review' ? null : (
                   <button
                     className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
                     onClick={() =>
-                      updateApplicationStatus(
-                        String(router.query['applId']),
-                        'finalised for review',
-                      )
+                      updateApplicationStatus(applId, 'finalised for review')
                         .then(() => setChangeOccured(!changeOccured))
                         .catch(() => alert('Try again, network error!'))
                     }
@@ -127,15 +132,12 @@ export default function ViewApplication() {
                     Finalise For Review
                   </button>
                 )}
-                {applicationData.application_status == 'finalised for review' &&
-                applicationData.review_marks ? (
+                {adminPortalData.application_status == 'finalised for review' &&
+                adminPortalData.review_marks ? (
                   <button
                     className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
                     onClick={() =>
-                      updateApplicationStatus(
-                        String(router.query['applId']),
-                        'finalised for interview',
-                      )
+                      updateApplicationStatus(applId, 'finalised for interview')
                         .then(() => setChangeOccured(!changeOccured))
                         .catch(() => alert('Try again, network error!'))
                     }

@@ -83,7 +83,7 @@ export default function AdminHeader() {
                 </a>
               </Link>
             </div>
-            <div className="bg-white py-0.5 md:py-0 md:px-0.5">
+            <div className="bg-white py-0.5 md:py-0 md:pl-0.5">
               <Link href={'/admin/removed-applications'}>
                 <a
                   className={`py-2 px-2 text-white flex md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
