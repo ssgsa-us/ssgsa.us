@@ -12,9 +12,6 @@ export class ApplicationData {
   documents: DocumentsType
   sop_answers: AnswerType
   form_status: number
-  application_status: string // values are: 'removed', 'finalised for review' and 'finalised for interview'
-  review_marks: number
-  interview_marks: number
 
   constructor(form_status: number = 1) {
     this.form_status = form_status
@@ -47,16 +44,6 @@ export class ApplicationData {
   step4(documents: DocumentsType) {
     this.documents = documents
   }
-
-  updateDetailsForAdmin(
-    application_status: string,
-    review_marks: number,
-    interview_marks: number,
-  ) {
-    this.application_status = application_status
-    this.review_marks = review_marks
-    this.interview_marks = interview_marks
-  }
 }
 
 export const applicationDataConverter = {
@@ -87,37 +74,6 @@ export const applicationDataConverter = {
     if (data.form_status >= 4) {
       applicationData.step4(data.documents)
     }
-    return applicationData
-  },
-}
-
-export const applicationDataConverterForAdmin = {
-  toFirestore: (application_data: ApplicationData) => {
-    return {}
-  },
-
-  fromFirestore: (
-    snapshot: firebase.firestore.QueryDocumentSnapshot,
-    options: firebase.firestore.SnapshotOptions,
-  ) => {
-    let data = snapshot.data(options)
-    let applicationData = new ApplicationData(data.form_status)
-    applicationData.step1(
-      data.name,
-      data.email,
-      data.contact,
-      data.gender,
-      data.enrollment,
-      data.nationality,
-    )
-    applicationData.step2(data.academic_record)
-    applicationData.step3(data.sop_answers)
-    applicationData.step4(data.documents)
-    applicationData.updateDetailsForAdmin(
-      data.application_status,
-      data.review_marks,
-      data.interview_marks,
-    )
     return applicationData
   },
 }

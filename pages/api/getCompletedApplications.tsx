@@ -1,30 +1,65 @@
 import {
+  AdminPortalData,
+  adminPortalDataConverter,
+} from '../../classes/admin_portal_data'
+import {
   ApplicationData,
-  applicationDataConverterForAdmin,
+  applicationDataConverter,
 } from '../../classes/application_data'
 import firebase, { firestore } from '../../firebase'
 
 type Applications = {
-  [key: string]: ApplicationData
+  [key: string]: {
+    applicationData: ApplicationData
+    adminPortalData: AdminPortalData
+  }
 }
 
 export const getCompletedApplications = async () => {
   let completedApplications: Applications = await firestore
     .collection('applications_data')
     .where('form_status', '==', 6)
-    .withConverter(applicationDataConverterForAdmin)
+    .withConverter(applicationDataConverter)
     .get()
-    .then((value: firebase.firestore.QuerySnapshot) => {
-      let applications: Applications = {}
-      value.forEach(
-        (
-          document: firebase.firestore.QueryDocumentSnapshot<ApplicationData>,
-        ) => {
-          applications[document.id] = document.data()
-        },
-      )
-      return applications
-    })
+    .then(
+      async (
+        applications_data: firebase.firestore.QuerySnapshot<ApplicationData>,
+      ) => {
+        let applications: Applications = await firestore
+          .collection('admin_portal_data')
+          .withConverter(adminPortalDataConverter)
+          .get()
+          .then(
+            (
+              admin_portal_data: firebase.firestore.QuerySnapshot<AdminPortalData>,
+            ) => {
+              let applications: Applications = {}
+              applications_data.forEach(
+                (
+                  document: firebase.firestore.QueryDocumentSnapshot<ApplicationData>,
+                ) => {
+                  applications[document.id] = {
+                    applicationData: document.data(),
+                    adminPortalData: new AdminPortalData(),
+                  }
+                },
+              )
+
+              admin_portal_data.forEach(
+                (
+                  document: firebase.firestore.QueryDocumentSnapshot<AdminPortalData>,
+                ) => {
+                  if (applications[document.id])
+                    applications[document.id].adminPortalData = document.data()
+                },
+              )
+
+              return applications
+            },
+          )
+        return applications
+      },
+    )
 
   return completedApplications
 }
@@ -35,20 +70,49 @@ export const getApplicationsWithGivenStatus = async (
   let applicationsWithGivenStatus: Applications = await firestore
     .collection('applications_data')
     .where('form_status', '==', 6)
-    .where('application_status', '==', application_status)
-    .withConverter(applicationDataConverterForAdmin)
+    .withConverter(applicationDataConverter)
     .get()
-    .then((value: firebase.firestore.QuerySnapshot) => {
-      let applications: Applications = {}
-      value.forEach(
-        (
-          document: firebase.firestore.QueryDocumentSnapshot<ApplicationData>,
-        ) => {
-          applications[document.id] = document.data()
-        },
-      )
-      return applications
-    })
+    .then(
+      async (
+        applications_data: firebase.firestore.QuerySnapshot<ApplicationData>,
+      ) => {
+        let applications: Applications = await firestore
+          .collection('admin_portal_data')
+          .where('application_status', '==', application_status)
+          .withConverter(adminPortalDataConverter)
+          .get()
+          .then(
+            (
+              admin_portal_data: firebase.firestore.QuerySnapshot<AdminPortalData>,
+            ) => {
+              let applications: Applications = {}
+
+              admin_portal_data.forEach(
+                (
+                  document: firebase.firestore.QueryDocumentSnapshot<AdminPortalData>,
+                ) => {
+                  applications[document.id] = {
+                    applicationData: new ApplicationData(),
+                    adminPortalData: document.data(),
+                  }
+                },
+              )
+
+              applications_data.forEach(
+                (
+                  document: firebase.firestore.QueryDocumentSnapshot<ApplicationData>,
+                ) => {
+                  if (applications[document.id])
+                    applications[document.id].applicationData = document.data()
+                },
+              )
+
+              return applications
+            },
+          )
+        return applications
+      },
+    )
 
   return applicationsWithGivenStatus
 }
