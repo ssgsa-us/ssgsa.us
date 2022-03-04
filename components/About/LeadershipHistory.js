@@ -1,59 +1,53 @@
-const LeadershipHistory = () => {
+import Image from 'next/image'
+import { members } from '../../constants/leadership'
+
+const Leadership = () => {
   return (
-    <div id="Leadership">
+    <div id="Leaders">
       <h1 className="my-8 bg-blue-850 lg:text-2xl text-xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
         Leadership History
       </h1>
-      <table className="flex justify-center mx-4 text-sm sm:text-base">
-        <tbody>
-          <tr>
-            <td className="text-left sm:text-right pr-4 sm:pr-12">
-              2021-Present
-            </td>
-            <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Mr. Salman Bin Kashif, Chairperson
-            </td>
-          </tr>
-          <tr>
-            <td className="text-left sm:text-right pr-4 sm:pr-12">2019-21</td>
-            <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Dr. Wasikul Islam, Chairperson
-            </td>
-          </tr>
-          <tr>
-            <td className="text-left sm:text-right pr-4 sm:pr-12">2016-18</td>
-            <td className=" bg-gray-100 text-gray-700 font-black p-2">
-              Mr. Ali Muzaffar, Chairperson
-            </td>
-          </tr>
-          <tr>
-            <td className="text-left sm:text-right pr-4 sm:pr-12">2013-15</td>
-            <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Dr. Mohsin Khan, Chairperson
-            </td>
-          </tr>
-          <tr>
-            <td className="text-left sm:text-right pr-4 sm:pr-12">2011-13</td>
-            <td className=" bg-gray-100 text-gray-700 font-black p-2">
-              Dr. Saif Sheikh, Chairperson
-            </td>
-          </tr>
-          <tr>
-            <td className="text-left sm:text-right pr-4 sm:pr-12">2008-11</td>
-            <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Dr. Rehan Baqri, Chairperson
-            </td>
-          </tr>
-          <tr>
-            <td className="text-left sm:text-right pr-4 sm:pr-12">2006-08</td>
-            <td className="bg-gray-100 text-gray-700 font-black p-2">
-              Dr. Shaida Andrabi, Chairperson
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      {members.map((committee, ind) => (
+        <div className="mx-8 my-8" key={ind}>
+          <h3 className="text-red-850 font-extrabold text-center text-xl lg:text-2xl">
+            {committee.name}
+          </h3>
+          <div className="flex justify-center mt-4 flex-wrap">
+            {committee.members.map((member, index) => (
+              <div
+                className="flex flex-col items-center text-center m-2 p-2 transform duration-200 hover:scale-110 cursor-pointer"
+                style={{ maxWidth: 220 }}
+                key={ind * 10 + index}
+              >
+                <Image
+                  src={member.imageUrl}
+                  alt={member.name}
+                  width={100}
+                  height={100}
+                  className="rounded-full"
+                />
+                <p className="font-bold text-sm lg:text-base">{member.name}</p>
+                {member.position && (
+                  <p className="text-red-850 font-bold text-xs lg:text-sm">
+                    {member.position}
+                  </p>
+                )}
+                {member.scholar && (
+                  <p className="text-xs lg:text-sm">{member.scholar}</p>
+                )}
+                {member.place && (
+                  <p className="text-xs lg:text-sm">{member.place}</p>
+                )}
+                {member.term && (
+                  <p className="text-xs lg:text-sm">{member.term}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
 
-export default LeadershipHistory
+export default Leadership
