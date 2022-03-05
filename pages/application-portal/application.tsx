@@ -11,6 +11,7 @@ import Step3 from '../../components/ApplicationSteps/Step3'
 import Step4 from '../../components/ApplicationSteps/Step4'
 import Step5 from '../../components/ApplicationSteps/Step5'
 import ReviewApplication from '../../components/ApplicationSteps/ReviewApplication'
+import ApplyFacultyModal from '../../components/modals/AddFacultyModal'
 
 export default function Application() {
   const router = useRouter()
@@ -93,6 +94,7 @@ export default function Application() {
           </div>
         ) : status == 1 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <ApplyFacultyModal />
             <Step1
               applicationData={applicationData}
               status={status}
