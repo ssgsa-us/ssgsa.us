@@ -49,7 +49,7 @@ export const members = [
         scholar: 'SSGSA Scholar 2018-19',
         university: 'Western Michigan University',
         place: 'Kalamazoo, MI, USA',
-        imageUrl: '/members/ShivaAgarwal.jpeg',
+        imageUrl: '/members/ShivaAgarwal.jpg',
       },
       {
         name: 'Mr. Sajad Sheikh',

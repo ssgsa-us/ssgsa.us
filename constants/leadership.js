@@ -14,7 +14,7 @@ export const members = [
         scholar: 'SSGSA Scholar 2014-15',
         place: 'Geneva, Switzerland',
         term: '2019-2021',
-        imageUrl: '/members/WasikulIslam.jpg',
+        imageUrl: '/members/WasikulIslam.png',
       },
       {
         name: 'Mr. Ali Muzaffar',
