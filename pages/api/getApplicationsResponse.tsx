@@ -15,6 +15,36 @@ type Applications = {
   }
 }
 
+type PartialApplications = {
+  [key: string]: ApplicationData
+}
+
+export const getPartialApplications = async () => {
+  let partialApplications: PartialApplications = await firestore
+    .collection('applications_data')
+    .where('form_status', '!=', 6)
+    .withConverter(applicationDataConverter)
+    .get()
+    .then(
+      async (
+        applications_data: firebase.firestore.QuerySnapshot<ApplicationData>,
+      ) => {
+        let partialApplications: PartialApplications = {}
+        applications_data.forEach(
+          (
+            document: firebase.firestore.QueryDocumentSnapshot<ApplicationData>,
+          ) => {
+            partialApplications[document.id] = document.data()
+          },
+        )
+
+        return partialApplications
+      },
+    )
+
+  return partialApplications
+}
+
 export const getCompletedApplications = async () => {
   let completedApplications: Applications = await firestore
     .collection('applications_data')

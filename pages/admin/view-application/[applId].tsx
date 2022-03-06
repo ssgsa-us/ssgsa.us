@@ -67,85 +67,95 @@ export default function ViewApplication() {
           {applicationData ? (
             <div>
               <ReviewApplication applicationData={applicationData} />
-              <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10">
-                <div className="flex justify-around">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                    Application Status
-                  </p>
-                  <p className="sm:text-lg font-bold">
-                    {adminPortalData.application_status}
-                  </p>
+              {applicationData.form_status == 6 ? (
+                <div>
+                  <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10">
+                    <div className="flex justify-around">
+                      <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                        Application Status
+                      </p>
+                      <p className="sm:text-lg font-bold">
+                        {adminPortalData.application_status}
+                      </p>
+                    </div>
+                    {adminPortalData.review_marks ? (
+                      <div className="flex justify-around">
+                        <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                          Review Marks
+                        </p>
+                        <p className="sm:text-lg font-bold">
+                          {adminPortalData.review_marks}
+                        </p>
+                      </div>
+                    ) : null}
+                    {adminPortalData.interview_marks ? (
+                      <div className="flex justify-around">
+                        <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                          Interview Marks
+                        </p>
+                        <p className="sm:text-lg font-bold">
+                          {adminPortalData.interview_marks}
+                        </p>
+                      </div>
+                    ) : null}
+                  </div>
+                  <div className="flex flex-col sm:flex-row items-center sm:justify-between my-10">
+                    {adminPortalData.application_status ==
+                    'finalised for interview' ? null : (
+                      <button
+                        className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
+                        onClick={() =>
+                          adminPortalData.application_status == 'removed'
+                            ? updateApplicationStatus(applId, '')
+                                .then(() => setChangeOccured(!changeOccured))
+                                .catch(() => alert('Try again, network error!'))
+                            : updateApplicationStatus(applId, 'removed')
+                                .then(() => setChangeOccured(!changeOccured))
+                                .catch(() => alert('Try again, network error!'))
+                        }
+                      >
+                        {adminPortalData.application_status == 'removed'
+                          ? 'Unremove'
+                          : 'Remove'}
+                      </button>
+                    )}
+                    {adminPortalData.application_status ==
+                      'finalised for interview' ||
+                    adminPortalData.application_status ==
+                      'finalised for review' ? null : (
+                      <button
+                        className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
+                        onClick={() =>
+                          updateApplicationStatus(
+                            applId,
+                            'finalised for review',
+                          )
+                            .then(() => setChangeOccured(!changeOccured))
+                            .catch(() => alert('Try again, network error!'))
+                        }
+                      >
+                        Finalise For Review
+                      </button>
+                    )}
+                    {adminPortalData.application_status ==
+                      'finalised for review' && adminPortalData.review_marks ? (
+                      <button
+                        className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
+                        onClick={() =>
+                          updateApplicationStatus(
+                            applId,
+                            'finalised for interview',
+                          )
+                            .then(() => setChangeOccured(!changeOccured))
+                            .catch(() => alert('Try again, network error!'))
+                        }
+                      >
+                        Finalise For Interview
+                      </button>
+                    ) : null}
+                  </div>
                 </div>
-                {adminPortalData.review_marks ? (
-                  <div className="flex justify-around">
-                    <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                      Review Marks
-                    </p>
-                    <p className="sm:text-lg font-bold">
-                      {adminPortalData.review_marks}
-                    </p>
-                  </div>
-                ) : null}
-                {adminPortalData.interview_marks ? (
-                  <div className="flex justify-around">
-                    <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                      Interview Marks
-                    </p>
-                    <p className="sm:text-lg font-bold">
-                      {adminPortalData.interview_marks}
-                    </p>
-                  </div>
-                ) : null}
-              </div>
-              <div className="flex flex-col sm:flex-row items-center sm:justify-between my-10">
-                {adminPortalData.application_status ==
-                'finalised for interview' ? null : (
-                  <button
-                    className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
-                    onClick={() =>
-                      adminPortalData.application_status == 'removed'
-                        ? updateApplicationStatus(applId, '')
-                            .then(() => setChangeOccured(!changeOccured))
-                            .catch(() => alert('Try again, network error!'))
-                        : updateApplicationStatus(applId, 'removed')
-                            .then(() => setChangeOccured(!changeOccured))
-                            .catch(() => alert('Try again, network error!'))
-                    }
-                  >
-                    {adminPortalData.application_status == 'removed'
-                      ? 'Unremove'
-                      : 'Remove'}
-                  </button>
-                )}
-                {adminPortalData.application_status ==
-                  'finalised for interview' ||
-                adminPortalData.application_status ==
-                  'finalised for review' ? null : (
-                  <button
-                    className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
-                    onClick={() =>
-                      updateApplicationStatus(applId, 'finalised for review')
-                        .then(() => setChangeOccured(!changeOccured))
-                        .catch(() => alert('Try again, network error!'))
-                    }
-                  >
-                    Finalise For Review
-                  </button>
-                )}
-                {adminPortalData.application_status == 'finalised for review' &&
-                adminPortalData.review_marks ? (
-                  <button
-                    className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
-                    onClick={() =>
-                      updateApplicationStatus(applId, 'finalised for interview')
-                        .then(() => setChangeOccured(!changeOccured))
-                        .catch(() => alert('Try again, network error!'))
-                    }
-                  >
-                    Finalise For Interview
-                  </button>
-                ) : null}
-              </div>
+              ) : null}
             </div>
           ) : null}
         </div>

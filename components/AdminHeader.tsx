@@ -71,6 +71,19 @@ export default function AdminHeader() {
         >
           <div className="flex flex-col w-full md:flex-row md:justify-center lg:ml-28">
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
+              <Link href="/admin/partial-applications">
+                <a
+                  className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
+                    router.pathname == '/admin/partial-applications'
+                      ? 'bg-blue-850'
+                      : 'bg-red-850 hover:bg-blue-850'
+                  }`}
+                >
+                  Partial Applications
+                </a>
+              </Link>
+            </div>
+            <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
               <Link href="/admin">
                 <a
                   className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${

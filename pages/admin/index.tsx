@@ -5,7 +5,7 @@ import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationsTable from '../../components/Admin/ApplicationsTable'
 import { auth } from '../../firebase'
-import { getCompletedApplications } from '../api/getCompletedApplications'
+import { getCompletedApplications } from '../api/getApplicationsResponse'
 
 type Applications = {
   [key: string]: {
