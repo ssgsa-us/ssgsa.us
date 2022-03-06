@@ -1,6 +1,6 @@
 import AdvisoryBoard from './AdvisoryBoard'
 import DonorAndContributors from './DonorAndContributors'
-import LeadershipHistory from './LeadershipHistory'
+import Leadership from './LeadershipHistory'
 import Members from './Members'
 
 const About = () => {
@@ -32,7 +32,7 @@ const About = () => {
 
       <Members />
       <AdvisoryBoard />
-      <LeadershipHistory />
+      <Leadership />
       <DonorAndContributors />
     </div>
   )
