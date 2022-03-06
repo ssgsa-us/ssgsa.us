@@ -152,7 +152,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
               Marksheet of Xth Class
             </p>
             <Link href={applicationData.documents['Xth']}>
-              <a className="sm:text-lg" target="_blank">
+              <a className="sm:text-lg text-blue-500" target="_blank">
                 Xth.pdf
               </a>
             </Link>
@@ -167,7 +167,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
                 : 'Diploma'}
             </p>
             <Link href={applicationData.documents['XIIth-Diploma']}>
-              <a className="sm:text-lg" target="_blank">
+              <a className="sm:text-lg text-blue-500" target="_blank">
                 XIIth-Diploma.pdf
               </a>
             </Link>
@@ -179,7 +179,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
               Marksheets of Bachelor&apos;s Degree
             </p>
             <Link href={applicationData.documents['Bachelors']}>
-              <a className="sm:text-lg" target="_blank">
+              <a className="sm:text-lg text-blue-500" target="_blank">
                 Bachelors.pdf
               </a>
             </Link>
@@ -191,7 +191,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
               Marksheets of Master&apos;s Degree
             </p>
             <Link href={applicationData.documents['Masters']}>
-              <a className="sm:text-lg" target="_blank">
+              <a className="sm:text-lg text-blue-500" target="_blank">
                 Masters.pdf
               </a>
             </Link>
@@ -203,7 +203,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
               Marksheets of Doctoral Degree
             </p>
             <Link href={applicationData.documents['Doctoral']}>
-              <a className="sm:text-lg" target="_blank">
+              <a className="sm:text-lg text-blue-500" target="_blank">
                 Doctoral.pdf
               </a>
             </Link>
@@ -215,7 +215,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
               Marksheets of any other degrees/ diplomas you hold
             </p>
             <Link href={applicationData.documents['Others']}>
-              <a className="sm:text-lg" target="_blank">
+              <a className="sm:text-lg text-blue-500" target="_blank">
                 Others.pdf
               </a>
             </Link>
@@ -227,7 +227,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
               Resume
             </p>
             <Link href={applicationData.documents['Resume']}>
-              <a className="sm:text-lg" target="_blank">
+              <a className="sm:text-lg text-blue-500" target="_blank">
                 Resume.pdf
               </a>
             </Link>
@@ -240,12 +240,18 @@ const ReviewApplication = ({ applicationData }: Props) => {
               documents that may support your SSGSA application
             </p>
             <Link href={applicationData.documents['Certificates']}>
-              <a className="sm:text-lg" target="_blank">
+              <a className="sm:text-lg text-blue-500" target="_blank">
                 Certificates.pdf
               </a>
             </Link>
           </div>
         )}
+      </div>
+      <div className="flex justify-start mt-4">
+        <p className="text-lg sm:text-xl font-extrabold w-2/5 mr-5">Faculty</p>
+        <p className="sm:text-lg w-3/5 text-red-850">
+          {applicationData.faculty}
+        </p>
       </div>
       <div className="mt-5">
         <p className="text-black text-xl sm:text-2xl text-red-850 font-extrabold mb-4">
