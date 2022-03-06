@@ -1,5 +1,9 @@
 export const newsletters = [
   {
+    title: '2022',
+    link: 'https://sh1.sendinblue.com/vgziqbtz9pfe.html?t=1646506260',
+  },
+  {
     title: '2021',
     link: 'https://mailchi.mp/996026631169/ssgsa-bi-annual-e-newsletter-september-5695206',
   },
