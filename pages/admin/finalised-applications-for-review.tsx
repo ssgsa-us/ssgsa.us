@@ -5,7 +5,7 @@ import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationsTable from '../../components/Admin/ApplicationsTable'
 import { auth } from '../../firebase'
-import { getCompletedApplications } from '../api/getApplicationsResponse'
+import { getApplicationsWithGivenStatus } from '../api/getApplicationsResponse'
 
 type Applications = {
   [key: string]: {
@@ -14,7 +14,7 @@ type Applications = {
   }
 }
 
-export default function CompletedApplications() {
+export default function FinalisedApplicationsForReview() {
   const [applications, setApplications] = useState<Applications>()
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
@@ -26,7 +26,7 @@ export default function CompletedApplications() {
       if (!auth.currentUser) router.push('/admin/signin')
       else {
         if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          getCompletedApplications()
+          getApplicationsWithGivenStatus('finalised for review')
             .then((data) => {
               setApplications(data)
               setPageReady(true)
@@ -42,7 +42,7 @@ export default function CompletedApplications() {
       auth.currentUser &&
       auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
     )
-      getCompletedApplications()
+      getApplicationsWithGivenStatus('finalised for review')
         .then((data) => {
           setApplications(data)
           setPageReady(true)
