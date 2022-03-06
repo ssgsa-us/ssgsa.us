@@ -57,8 +57,8 @@ export default function PartialApplications() {
               </tr>
             </thead>
             <tbody>
-              {Object.keys(applications).map(
-                (applId: string, index: number) => (
+              {Object.keys(applications).map((applId: string, index: number) =>
+                !applications[applId].email ? null : (
                   <tr key={index}>
                     <td className="border border-blue-850 border-seperate p-2 text-center">
                       {index + 1}
