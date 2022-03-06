@@ -1,14 +1,21 @@
 import firebase from '../firebase'
 
+type Marks = {
+  A: number
+  B: number
+  C: number
+  D: number
+}
+
 export class AdminPortalData {
   application_status: string // values are: 'removed', 'finalised for review' and 'finalised for interview'
-  review_marks: number
-  interview_marks: number
+  review_marks: Marks
+  interview_marks: Marks
 
   updateDetails(
     application_status: string,
-    review_marks: number,
-    interview_marks: number,
+    review_marks: Marks,
+    interview_marks: Marks,
   ) {
     this.application_status = application_status
     this.review_marks = review_marks
