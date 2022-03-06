@@ -1,8 +1,12 @@
 import path from 'path'
 import { firestore } from '../../firebase'
 
-export const updateFormStatus = (userId: string, formStatus: number) => {
+export const updateApplicationData = (
+  userId: string,
+  faculty: string,
+  formStatus: number,
+) => {
   return firestore
     .doc(path.join('applications_data', userId))
-    .update({ form_status: formStatus })
+    .update({ faculty: faculty, form_status: formStatus })
 }

@@ -1,8 +1,38 @@
-import React from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { faculties } from '../../constants/faculties'
+import { updateApplicationData } from '../../pages/api/step5'
+import { useAuth } from '../../context/AuthUserContext'
 
-export default function ApplyFacultyModal() {
-  const [showModal, setShowModal] = React.useState(true)
+type Props = {
+  showModal: Boolean
+  setShowModal: Dispatch<SetStateAction<Boolean>>
+  setStatus: Dispatch<SetStateAction<number>>
+  setError: Dispatch<SetStateAction<string>>
+}
+
+export default function ApplyFacultyModal({
+  showModal,
+  setShowModal,
+  setStatus,
+  setError,
+}: Props) {
+  const { authUser } = useAuth()
+  const [selectedFaculty, setSelectedFaculty] = useState<string>('')
+
+  const submitApplication = () => {
+    if (!selectedFaculty) setError('Please select one faculty!')
+    else
+      updateApplicationData(authUser.id, selectedFaculty, 6)
+        .then(() => {
+          setShowModal(false)
+          setStatus(6)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+          setShowModal(false)
+        })
+  }
+
   return (
     <>
       {showModal ? (
@@ -20,14 +50,19 @@ export default function ApplyFacultyModal() {
                 {/*body*/}
                 {faculties.map((faculty, index) => {
                   return (
-                    <div className="relative p-6 flex-auto" key="index">
+                    <div
+                      className="relative m-6 flex-auto cursor-pointer"
+                      key="index"
+                      onClick={() => setSelectedFaculty(faculty.label)}
+                    >
                       <input
-                        className="my-2 text-lg"
+                        className="my-2 text-lg cursor-pointer"
                         type="radio"
                         id={faculty.label}
                         value={faculty.label}
+                        checked={selectedFaculty == faculty.label}
                       />
-                      <label className="pl-5 text-blue-850">
+                      <label className="pl-5 text-blue-850 cursor-pointer">
                         {faculty.value}
                       </label>
                     </div>
@@ -38,9 +73,9 @@ export default function ApplyFacultyModal() {
                   <button
                     className="text-white text-lg md:text-xl bg-blue-850 font-bold py-2 px-5 rounded-lg flex flex-row items-center"
                     type="button"
-                    onClick={() => setShowModal(false)}
+                    onClick={submitApplication}
                   >
-                    Save and Proceed
+                    Submit
                   </button>
                 </div>
               </div>
