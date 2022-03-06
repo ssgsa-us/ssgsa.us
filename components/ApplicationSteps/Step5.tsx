@@ -2,9 +2,8 @@ import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
-import { useAuth } from '../../context/AuthUserContext'
-import { updateFormStatus } from '../../pages/api/step5'
 import ReviewApplication from './ReviewApplication'
+import ApplyFacultyModal from '../../components/modals/AddFacultyModal'
 
 type Props = {
   applicationData: ApplicationData
@@ -13,10 +12,10 @@ type Props = {
 }
 
 const Step5 = ({ applicationData, status, setStatus }: Props) => {
-  const { authUser } = useAuth()
   const [stepStatus, setStepStatus] = useState<string>('review')
   const [name, setName] = useState<string>('')
   const [error, setError] = useState<string>('')
+  const [showModal, setShowModal] = useState(false)
 
   const reviewApplication = () => {
     setError('')
@@ -26,17 +25,6 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
       setError(
         'Name given should be similar to the name provided in application.',
       )
-  }
-
-  const submitApplication = () => {
-    setError('')
-    updateFormStatus(authUser.id, 6)
-      .then(() => {
-        setStatus(6)
-      })
-      .catch(() => {
-        setError('Try again, network error!')
-      })
   }
 
   const previousStep = () => setStatus(4)
@@ -113,7 +101,10 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
               <div className="flex flex-col items-center w-60 sm:w-64 md:w-80">
                 <button
                   className="text-white text-lg md:text-xl bg-red-850 font-bold py-2 px-5 mb-2 rounded-lg flex flex-row items-center"
-                  onClick={submitApplication}
+                  onClick={() => {
+                    setError('')
+                    setShowModal(true)
+                  }}
                 >
                   Submit Application
                 </button>
@@ -127,6 +118,12 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
               </div>
             </div>
           </div>
+          <ApplyFacultyModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            setStatus={setStatus}
+            setError={setError}
+          />
         </div>
       )}
     </div>

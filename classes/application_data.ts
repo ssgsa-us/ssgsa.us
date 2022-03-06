@@ -8,6 +8,7 @@ export class ApplicationData {
   gender: string
   enrollment: string
   nationality: string
+  faculty: string
   academic_record: AcademicRecordType
   documents: DocumentsType
   sop_answers: AnswerType
@@ -44,6 +45,10 @@ export class ApplicationData {
   step4(documents: DocumentsType) {
     this.documents = documents
   }
+
+  step5(faculty: string) {
+    this.faculty = faculty
+  }
 }
 
 export const applicationDataConverter = {
@@ -73,6 +78,9 @@ export const applicationDataConverter = {
     }
     if (data.form_status >= 4) {
       applicationData.step4(data.documents)
+    }
+    if (data.form_status >= 5) {
+      applicationData.step5(data.faculty)
     }
     return applicationData
   },
