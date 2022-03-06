@@ -36,11 +36,11 @@ export class ApplicationData {
   step2(academic_record: AcademicRecordType) {
     this.academic_record = academic_record
   }
-  
+
   step3(sop_answers: AnswerType) {
     this.sop_answers = sop_answers
   }
-  
+
   step4(documents: DocumentsType) {
     this.documents = documents
   }
