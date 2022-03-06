@@ -36,6 +36,9 @@ export default function ApplicationsTable({
               Phone Number
             </th>
             <th className="border border-blue-850 border-seperate p-2">
+              Faculty
+            </th>
+            <th className="border border-blue-850 border-seperate p-2">
               Bachelor&apos;s Major/Branch
             </th>
             <th className="border border-blue-850 border-seperate p-2">
@@ -95,6 +98,9 @@ export default function ApplicationsTable({
                 </td>
                 <td className="border border-blue-850 border-seperate p-2">
                   {applications[applId].applicationData.contact}
+                </td>
+                <td className="border border-blue-850 border-seperate p-2">
+                  {applications[applId].applicationData.faculty}
                 </td>
                 <td className="border border-blue-850 border-seperate p-2">
                   {
