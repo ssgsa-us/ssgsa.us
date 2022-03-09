@@ -26,7 +26,7 @@ export default function FinalisedApplicationsForInterview() {
       if (!auth.currentUser) router.push('/admin/signin')
       else {
         if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          getApplicationsWithGivenStatus('finalised for interview')
+          getApplicationsWithGivenStatus(4)
             .then((data) => {
               setApplications(data)
               setPageReady(true)
@@ -42,7 +42,7 @@ export default function FinalisedApplicationsForInterview() {
       auth.currentUser &&
       auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
     )
-      getApplicationsWithGivenStatus('finalised for interview')
+      getApplicationsWithGivenStatus(4)
         .then((data) => {
           setApplications(data)
           setPageReady(true)

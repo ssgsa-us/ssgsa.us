@@ -26,7 +26,7 @@ export default function RemovedApplications() {
       if (!auth.currentUser) router.push('/admin/signin')
       else {
         if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          getApplicationsWithGivenStatus('removed')
+          getApplicationsWithGivenStatus(1)
             .then((data) => {
               setApplications(data)
               setPageReady(true)
@@ -42,7 +42,7 @@ export default function RemovedApplications() {
       auth.currentUser &&
       auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
     )
-      getApplicationsWithGivenStatus('removed')
+      getApplicationsWithGivenStatus(1)
         .then((data) => {
           setApplications(data)
           setPageReady(true)

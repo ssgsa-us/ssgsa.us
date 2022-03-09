@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import { updateApplicationStatus } from '../../pages/api/updateApplicationStatus'
+import { updateReviewSet } from '../../pages/api/updateReviewSet'
 
 type Props = {
   applications: {
@@ -51,6 +52,9 @@ export default function ApplicationsTable({
               Finalise For Review
             </th>
             <th className="border border-blue-850 border-seperate p-2">
+              Add to set
+            </th>
+            <th className="border border-blue-850 border-seperate p-2">
               Reviewer Marks
             </th>
             <th className="border border-blue-850 border-seperate p-2">
@@ -81,6 +85,10 @@ export default function ApplicationsTable({
               if (interview_marks.C) totalInterviewMarks += interview_marks.C
               if (interview_marks.D) totalInterviewMarks += interview_marks.D
             }
+
+            const [reviewSet, setReviewSet] = useState<string>(
+              applications[applId].adminPortalData.review_set,
+            )
 
             return (
               <tr key={index}>
@@ -122,53 +130,45 @@ export default function ApplicationsTable({
                 <td className="border border-blue-850 border-seperate p-2 text-center">
                   <button
                     className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-                      applications[applId].adminPortalData.application_status ==
-                      'finalised for interview'
+                      applications[applId].adminPortalData.application_status >=
+                      3
                         ? 'bg-red-860 cursor-not-allowed'
                         : 'bg-red-850'
                     }`}
                     onClick={() =>
-                      applications[applId].adminPortalData.application_status ==
-                      'finalised for interview'
+                      applications[applId].adminPortalData.application_status >=
+                      3
                         ? null
                         : applications[applId].adminPortalData
-                            .application_status == 'removed'
-                        ? updateApplicationStatus(applId, '')
+                            .application_status == 1
+                        ? updateApplicationStatus(applId, 0)
                             .then(() => setChangeOccured(!changeOccured))
                             .catch(() => alert('Try again, network error!'))
-                        : updateApplicationStatus(applId, 'removed')
+                        : updateApplicationStatus(applId, 1)
                             .then(() => setChangeOccured(!changeOccured))
                             .catch(() => alert('Try again, network error!'))
                     }
                   >
                     {applications[applId].adminPortalData.application_status ==
-                    'removed'
+                    1
                       ? 'Unremove'
                       : 'Remove'}
                   </button>
                 </td>
                 <td className="border border-blue-850 border-seperate p-2 text-center">
                   {applications[applId].adminPortalData.application_status ==
-                  'finalised for review' ? (
+                  2 ? (
                     <p className="text-red">Already Finalised</p>
+                  ) : applications[applId].adminPortalData.application_status >=
+                    3 ? (
+                    <p className="text-red">Reviewed</p>
                   ) : (
                     <button
-                      className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-                        applications[applId].adminPortalData
-                          .application_status == 'finalised for interview'
-                          ? 'bg-red-860 cursor-not-allowed'
-                          : 'bg-red-850'
-                      }`}
+                      className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
                       onClick={() =>
-                        applications[applId].adminPortalData
-                          .application_status == 'finalised for interview'
-                          ? null
-                          : updateApplicationStatus(
-                              applId,
-                              'finalised for review',
-                            )
-                              .then(() => setChangeOccured(!changeOccured))
-                              .catch(() => alert('Try again, network error!'))
+                        updateApplicationStatus(applId, 2)
+                          .then(() => setChangeOccured(!changeOccured))
+                          .catch(() => alert('Try again, network error!'))
                       }
                     >
                       Finalise
@@ -176,29 +176,88 @@ export default function ApplicationsTable({
                   )}
                 </td>
                 <td className="border border-blue-850 border-seperate p-2 text-center">
-                  {totalReviewMarks}
+                  <select
+                    className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-blue-850"
+                    value={reviewSet}
+                    disabled={
+                      applications[applId].adminPortalData.application_status !=
+                      2
+                    }
+                    onChange={(e) => {
+                      let set = e.target.value
+                      updateReviewSet(applId, set)
+                        .then(() => {
+                          setReviewSet(set)
+                        })
+                        .catch(() => alert('Try again, network error!'))
+                    }}
+                  >
+                    <option
+                      label="Select"
+                      value={undefined || null || ''}
+                      className="bg-gray-400 hover:bg-blue-850"
+                    />
+                    {[
+                      'A',
+                      'B',
+                      'C',
+                      'D',
+                      'E',
+                      'F',
+                      'G',
+                      'H',
+                      'I',
+                      'J',
+                      'K',
+                      'L',
+                      'M',
+                      'N',
+                      'O',
+                      'P',
+                      'Q',
+                      'R',
+                      'S',
+                      'T',
+                      'U',
+                      'V',
+                      'W',
+                      'X',
+                      'Y',
+                      'Z',
+                    ].map((char) => (
+                      <option
+                        label={char}
+                        value={char}
+                        className="bg-gray-400 hover:bg-blue-850"
+                      />
+                    ))}
+                  </select>
+                </td>
+                <td className="border border-blue-850 border-seperate p-2 text-center">
+                  {!applications[applId].adminPortalData.application_status ||
+                  applications[applId].adminPortalData.application_status < 3
+                    ? '-'
+                    : totalReviewMarks}
                 </td>
                 <td className="border border-blue-850 border-seperate p-2 text-center">
                   {applications[applId].adminPortalData.application_status ==
-                  'finalised for interview' ? (
+                  4 ? (
                     <p className="text-red">Already Finalised</p>
+                  ) : applications[applId].adminPortalData.application_status >=
+                    5 ? (
+                    <p className="text-red">Interviewed</p>
                   ) : (
                     <button
                       className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
                         applications[applId].adminPortalData
-                          .application_status == 'finalised for review' &&
-                        applications[applId].adminPortalData.review_marks
+                          .application_status == 3
                           ? 'bg-red-850'
                           : 'bg-red-860 cursor-not-allowed'
                       }`}
                       onClick={() =>
                         applications[applId].adminPortalData
-                          .application_status == 'finalised for review' &&
-                        applications[applId].adminPortalData.review_marks
-                          ? updateApplicationStatus(
-                              applId,
-                              'finalised for interview',
-                            )
+                          .application_status == 3
+                          ? updateApplicationStatus(applId, 4)
                               .then(() => setChangeOccured(!changeOccured))
                               .catch(() => alert('Try again, network error!'))
                           : null
@@ -209,7 +268,10 @@ export default function ApplicationsTable({
                   )}
                 </td>
                 <td className="border border-blue-850 border-seperate p-2 text-center">
-                  {totalInterviewMarks}
+                  {!applications[applId].adminPortalData.application_status ||
+                  applications[applId].adminPortalData.application_status < 5
+                    ? '-'
+                    : totalInterviewMarks}
                 </td>
               </tr>
             )

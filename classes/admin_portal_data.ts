@@ -7,18 +7,29 @@ type Marks = {
   D: number
 }
 
+// Values of application status are:
+//   0 or undefined for 'unremoved' or not checked
+//   1 for 'removed'
+//   2 for 'finalised for review'
+//   3 for 'reviewed'
+//   4 for 'finalised for interview'
+//   5 for 'interviewed'
+
 export class AdminPortalData {
-  application_status: string // values are: 'removed', 'finalised for review' and 'finalised for interview'
+  application_status: number
   review_marks: Marks
+  review_set: string
   interview_marks: Marks
 
   updateDetails(
-    application_status: string,
+    application_status: number,
     review_marks: Marks,
+    review_set: string,
     interview_marks: Marks,
   ) {
     this.application_status = application_status
     this.review_marks = review_marks
+    this.review_set = review_set
     this.interview_marks = interview_marks
   }
 }
@@ -38,6 +49,7 @@ export const adminPortalDataConverter = {
     adminPortalData.updateDetails(
       data.application_status,
       data.review_marks,
+      data.review_set,
       data.interview_marks,
     )
     return adminPortalData
