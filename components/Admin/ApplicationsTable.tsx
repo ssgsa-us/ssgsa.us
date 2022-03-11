@@ -74,6 +74,7 @@ export default function ApplicationsTable({
               if (review_marks.B) totalReviewMarks += review_marks.B
               if (review_marks.C) totalReviewMarks += review_marks.C
               if (review_marks.D) totalReviewMarks += review_marks.D
+              if (review_marks.E) totalReviewMarks += review_marks.E
             }
 
             let interview_marks =

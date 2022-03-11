@@ -18,23 +18,27 @@ export default function ViewApplication() {
   const router = useRouter()
   const applId = String(router.query['applId'])
 
+  const updateData = () => {
+    getApplicationData(applId)
+      .then((data) => {
+        setApplicationData(data)
+        getAdminPortalData(applId)
+          .then((data) => {
+            setAdminPortalData(data)
+            setPageReady(true)
+          })
+          .catch(() => alert('Try again, network error!'))
+      })
+      .catch(() => alert('Try again, network error!'))
+  }
+
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
     auth.onAuthStateChanged(() => {
       if (!auth.currentUser) router.push('/admin/signin')
       else {
         if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          getApplicationData(applId)
-            .then((data) => {
-              setApplicationData(data)
-              getAdminPortalData(applId)
-                .then((data) => {
-                  setAdminPortalData(data)
-                  setPageReady(true)
-                })
-                .catch(() => alert('Try again, network error!'))
-            })
-            .catch(() => alert('Try again, network error!'))
+          updateData()
         else router.push('/404')
       }
     })
@@ -45,17 +49,7 @@ export default function ViewApplication() {
       auth.currentUser &&
       auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
     )
-      getApplicationData(applId)
-        .then((data) => {
-          setApplicationData(data)
-          getAdminPortalData(applId)
-            .then((data) => {
-              setAdminPortalData(data)
-              setPageReady(true)
-            })
-            .catch(() => alert('Try again, network error!'))
-        })
-        .catch(() => alert('Try again, network error!'))
+      updateData()
   }, [router.query, changeOccured])
 
   return (
@@ -90,23 +84,106 @@ export default function ViewApplication() {
                       </p>
                     </div>
                     {adminPortalData.review_marks ? (
-                      <div className="flex justify-around">
-                        <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                          Review Marks
-                        </p>
-                        <p className="sm:text-lg font-bold">
-                          {adminPortalData.review_marks}
-                        </p>
+                      <div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Review Marks Based on A
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.review_marks.A}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Review Marks Based on B
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.review_marks.B}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Review Marks Based on C
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.review_marks.C}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Review Marks Based on D
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.review_marks.D}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Review Marks Based on E
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.review_marks.E}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Total Review Marks
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.review_marks.A +
+                              adminPortalData.review_marks.B +
+                              adminPortalData.review_marks.C +
+                              adminPortalData.review_marks.D +
+                              adminPortalData.review_marks.E}
+                          </p>
+                        </div>
                       </div>
                     ) : null}
                     {adminPortalData.interview_marks ? (
-                      <div className="flex justify-around">
-                        <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                          Interview Marks
-                        </p>
-                        <p className="sm:text-lg font-bold">
-                          {adminPortalData.interview_marks}
-                        </p>
+                      <div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Interview Marks Based on A
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.interview_marks.A}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Interview Marks Based on B
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.interview_marks.B}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Interview Marks Based on C
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.interview_marks.C}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Interview Marks Based on D
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.interview_marks.D}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Total Interview Marks
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.interview_marks.A +
+                              adminPortalData.interview_marks.B +
+                              adminPortalData.interview_marks.C +
+                              adminPortalData.interview_marks.D}
+                          </p>
+                        </div>
                       </div>
                     ) : null}
                     {adminPortalData.application_status != 2 ? null : (
