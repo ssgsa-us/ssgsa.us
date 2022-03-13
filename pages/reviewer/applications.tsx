@@ -130,6 +130,7 @@ export default function ReviewerApplications() {
                     applicationId={applId}
                     application={applications[applId]}
                     index={index}
+                    key={index}
                   />
                 ),
               )}
