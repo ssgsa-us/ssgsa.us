@@ -9,7 +9,6 @@ import { getReviewerDetails } from '../../api/getReviewerDetails'
 import { Reviewer } from '../../../classes/reviewer'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
 import ReviewerLayout from '../../../layouts/reviewer/reviewer-layout'
-import { updateApplicationStatus } from '../../api/updateApplicationStatus'
 import { updateReviewMarks } from '../../api/updateReviewMarks'
 
 export default function ViewApplication() {
@@ -39,12 +38,12 @@ export default function ViewApplication() {
             if (data) {
               setAdminPortalData(data)
               let review_marks = data.review_marks
-              if (review_marks) {
-                if (review_marks.A) setA(review_marks.A)
-                if (review_marks.B) setB(review_marks.B)
-                if (review_marks.C) setC(review_marks.C)
-                if (review_marks.D) setD(review_marks.D)
-                if (review_marks.E) setE(review_marks.E)
+              if (review_marks && review_marks[auth.currentUser.uid]) {
+                setA(review_marks[auth.currentUser.uid].A)
+                setB(review_marks[auth.currentUser.uid].B)
+                setC(review_marks[auth.currentUser.uid].C)
+                setD(review_marks[auth.currentUser.uid].D)
+                setE(review_marks[auth.currentUser.uid].E)
               }
             }
             setPageReady(true)
@@ -178,7 +177,16 @@ export default function ViewApplication() {
                           adminPortalData.application_status >= 5 ||
                           (!A && !B && !C && !D && !E)
                             ? null
-                            : updateReviewMarks(applId, A, B, C, D, E, 3)
+                            : updateReviewMarks(
+                                applId,
+                                auth.currentUser.uid,
+                                A,
+                                B,
+                                C,
+                                D,
+                                E,
+                                3,
+                              )
                                 .then(() => {
                                   alert('Succesfully Updated!')
                                   setChangeOccured(!changeOccured)

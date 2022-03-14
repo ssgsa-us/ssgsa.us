@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
+import { auth } from '../../firebase'
 import { updateReviewMarks } from '../../pages/api/updateReviewMarks'
 
 type Application = {
@@ -29,23 +30,13 @@ export default function ApplicationRow({
 
   useEffect(() => {
     let review_marks = application.adminPortalData.review_marks
-    if (review_marks) {
-      if (review_marks.A) setA(review_marks.A)
-      if (review_marks.B) setB(review_marks.B)
-      if (review_marks.C) setC(review_marks.C)
-      if (review_marks.D) setD(review_marks.D)
-      if (review_marks.E) setE(review_marks.E)
+    if (review_marks && review_marks[auth.currentUser.uid]) {
+      setA(review_marks[auth.currentUser.uid].A)
+      setB(review_marks[auth.currentUser.uid].B)
+      setC(review_marks[auth.currentUser.uid].C)
+      setD(review_marks[auth.currentUser.uid].D)
+      setE(review_marks[auth.currentUser.uid].E)
     }
-
-    setUpdateCondition(
-      application.adminPortalData.application_status < 5 &&
-        !!review_marks &&
-        !!review_marks.A &&
-        !!review_marks.B &&
-        !!review_marks.C &&
-        !!review_marks.D &&
-        !!review_marks.E,
-    )
   }, [])
 
   return (
@@ -132,12 +123,25 @@ export default function ApplicationRow({
       <td className="border border-blue-850 border-seperate p-2 text-center">
         <button
           className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-            !updateCondition ? 'bg-red-860 cursor-not-allowed' : 'bg-red-850'
+            application.adminPortalData.application_status >= 5 ||
+            (!A && !B && !C && !D && !E)
+              ? 'bg-red-860 cursor-not-allowed'
+              : 'bg-red-850'
           }`}
           onClick={() =>
-            !updateCondition
+            application.adminPortalData.application_status >= 5 ||
+            (!A && !B && !C && !D && !E)
               ? null
-              : updateReviewMarks(applicationId, A, B, C, D, E, 3)
+              : updateReviewMarks(
+                  applicationId,
+                  auth.currentUser.uid,
+                  A,
+                  B,
+                  C,
+                  D,
+                  E,
+                  3,
+                )
                   .then(() => alert('Succesfully Updated'))
                   .catch(() => alert('Try again, network error!'))
           }

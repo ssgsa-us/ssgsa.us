@@ -1,11 +1,14 @@
 import firebase from '../firebase'
 
+// key will be reviewer Id
 type ReviewMarks = {
-  A: number
-  B: number
-  C: number
-  D: number
-  E: number
+  [key: string]: {
+    A: number
+    B: number
+    C: number
+    D: number
+    E: number
+  }
 }
 
 type InterviewMarks = {

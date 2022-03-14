@@ -1,3 +1,4 @@
+import path from 'path'
 import firebase, { firestore } from '../../firebase'
 import { Reviewer, reviewerController } from '../../classes/reviewer'
 
@@ -18,6 +19,18 @@ export const getReviewerDetails = async (email: string) => {
         return reviewer
       }
       return null
+    })
+
+  return reviewer
+}
+
+export const getReviewerDetailsById = async (reviewerId: string) => {
+  let reviewer: Reviewer = await firestore
+    .doc(path.join('reviewer', reviewerId))
+    .withConverter(reviewerController)
+    .get()
+    .then((reviewer: firebase.firestore.QueryDocumentSnapshot<Reviewer>) => {
+      return reviewer.data()
     })
 
   return reviewer

@@ -6,13 +6,18 @@ import AdminLayout from '../../../layouts/admin/admin-layout'
 import { auth } from '../../../firebase'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
+import { getReviewerDetailsById } from '../../api/getReviewerDetails'
+import { Reviewer } from '../../../classes/reviewer'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
+import ReviewMarksModal from '../../../components/modals/ReviewMarksModal'
 import { updateApplicationStatus } from '../../api/updateApplicationStatus'
 import { updateReviewSet } from '../../api/updateReviewSet'
 
 export default function ViewApplication() {
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>()
   const [applicationData, setApplicationData] = useState<ApplicationData>()
+  const [reviewers, setReviewers] = useState<{ [key: string]: Reviewer }>({})
+  const [showModal, setShowModal] = useState<boolean>(false)
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
@@ -26,6 +31,16 @@ export default function ViewApplication() {
           .then((data) => {
             setAdminPortalData(data)
             setPageReady(true)
+            if (data.review_marks)
+              Object.keys(data.review_marks).map((reviewerId: string) => {
+                getReviewerDetailsById(reviewerId)
+                  .then((reviewer: Reviewer) =>
+                    setReviewers((prevReviewers) => {
+                      return { ...prevReviewers, [reviewerId]: reviewer }
+                    }),
+                  )
+                  .catch(() => {})
+              })
           })
           .catch(() => alert('Try again, network error!'))
       })
@@ -85,58 +100,33 @@ export default function ViewApplication() {
                     </div>
                     {adminPortalData.review_marks ? (
                       <div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Review Marks Based on A
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.review_marks.A}
-                          </p>
-                        </div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Review Marks Based on B
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.review_marks.B}
-                          </p>
-                        </div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Review Marks Based on C
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.review_marks.C}
-                          </p>
-                        </div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Review Marks Based on D
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.review_marks.D}
-                          </p>
-                        </div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Review Marks Based on E
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.review_marks.E}
-                          </p>
-                        </div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Total Review Marks
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.review_marks.A +
-                              adminPortalData.review_marks.B +
-                              adminPortalData.review_marks.C +
-                              adminPortalData.review_marks.D +
-                              adminPortalData.review_marks.E}
-                          </p>
-                        </div>
+                        <h3 className="text-center text-2xl text-red-850 my-5">
+                          Total Review Marks
+                        </h3>
+                        {Object.keys(reviewers).map((reviewerId: string) => (
+                          <div
+                            className="flex justify-around my-5"
+                            key={reviewerId}
+                          >
+                            <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                              Given by {reviewers[reviewerId].name}
+                            </p>
+                            <div className="sm:text-lg font-bold navgroup relative cursor-pointer">
+                              <p className="navbar-text px-2 rounded-lg">
+                                {adminPortalData.review_marks[reviewerId].A +
+                                  adminPortalData.review_marks[reviewerId].B +
+                                  adminPortalData.review_marks[reviewerId].C +
+                                  adminPortalData.review_marks[reviewerId].D +
+                                  adminPortalData.review_marks[reviewerId].E}
+                              </p>
+                              <ReviewMarksModal
+                                reviewMarks={
+                                  adminPortalData.review_marks[reviewerId]
+                                }
+                              />
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     ) : null}
                     {adminPortalData.interview_marks ? (

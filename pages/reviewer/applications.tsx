@@ -99,7 +99,7 @@ export default function ReviewerApplications() {
                   className="border border-blue-850 border-seperate p-2"
                   rowSpan={2}
                 >
-                  Update Status to Reviewed
+                  Update Marks
                 </th>
               </tr>
               <tr>
