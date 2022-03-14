@@ -222,11 +222,12 @@ export default function ViewApplication() {
                             'X',
                             'Y',
                             'Z',
-                          ].map((char) => (
+                          ].map((char, index) => (
                             <option
                               label={char}
                               value={char}
                               className="bg-gray-400 hover:bg-blue-850"
+                              key={index}
                             />
                           ))}
                         </select>
