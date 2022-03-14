@@ -49,6 +49,7 @@ export const getCompletedApplications = async () => {
   let completedApplications: Applications = await firestore
     .collection('applications_data')
     .where('form_status', '==', 6)
+    .orderBy('faculty')
     .withConverter(applicationDataConverter)
     .get()
     .then(

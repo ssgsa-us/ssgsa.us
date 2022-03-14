@@ -19,4 +19,8 @@ export const faculties = [
     label: 'Medicine',
     value: 'Medicine',
   },
+  {
+    label: 'Commerce/Management',
+    value: 'Commerce/Management',
+  },
 ]

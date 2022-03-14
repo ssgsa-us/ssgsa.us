@@ -82,6 +82,9 @@ export default function ApplicationRow({
         {application.applicationData.contact}
       </td>
       <td className="border border-blue-850 border-seperate p-2">
+        {application.applicationData.faculty}
+      </td>
+      <td className="border border-blue-850 border-seperate p-2">
         {
           application.applicationData.academic_record["Bachelor's Degree"]
             .branch

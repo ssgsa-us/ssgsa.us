@@ -52,6 +52,12 @@ export default function ApplicationsTable({
               className="border border-blue-850 border-seperate p-2"
               rowSpan={3}
             >
+              Faculty
+            </th>
+            <th
+              className="border border-blue-850 border-seperate p-2"
+              rowSpan={3}
+            >
               Bachelor&apos;s Major/Branch
             </th>
             <th

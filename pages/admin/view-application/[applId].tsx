@@ -31,7 +31,7 @@ export default function ViewApplication() {
           .then((data) => {
             setAdminPortalData(data)
             setPageReady(true)
-            if (data.review_marks)
+            if (data && data.review_marks)
               Object.keys(data.review_marks).map((reviewerId: string) => {
                 getReviewerDetailsById(reviewerId)
                   .then((reviewer: Reviewer) =>
