@@ -12,7 +12,7 @@ export default function Home() {
       <div className="bg-gray-350 text-red-850 font-black w-screen -ml-2 sm:-ml-5 md:-ml-10 lg:-ml-20 xl:-ml-40 mt-8 lg:mr-2 lg:p-3 p-2">
         <marquee className="flex items-center">
           <Link href="/application-portal">
-            <a>We are now accepting applications for the SSGSA award. The portal will close on March 15, 2022 at 11:59 PM</a>
+            <a>We are no longer accepting applications for the session 2022-23. The deadline was March 15, 2022 at 11:59 PM (IST)</a>
           </Link>
         </marquee>
       </div>
