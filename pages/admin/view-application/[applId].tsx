@@ -17,34 +17,39 @@ export default function ViewApplication() {
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>()
   const [applicationData, setApplicationData] = useState<ApplicationData>()
   const [reviewers, setReviewers] = useState<{ [key: string]: Reviewer }>({})
-  const [showModal, setShowModal] = useState<boolean>(false)
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
   const applId = String(router.query['applId'])
 
+  const updateReviewerDetails = (data: AdminPortalData) => {
+    Object.keys(data.review_marks).map((reviewerId: string) => {
+      getReviewerDetailsById(reviewerId)
+        .then((reviewer: Reviewer) =>
+          setReviewers((prevReviewers) => {
+            return { ...prevReviewers, [reviewerId]: reviewer }
+          }),
+        )
+        .catch(() => {})
+    })
+  }
+
   const updateData = () => {
-    getApplicationData(applId)
-      .then((data) => {
-        setApplicationData(data)
-        getAdminPortalData(applId)
-          .then((data) => {
-            setAdminPortalData(data)
-            setPageReady(true)
-            if (data && data.review_marks)
-              Object.keys(data.review_marks).map((reviewerId: string) => {
-                getReviewerDetailsById(reviewerId)
-                  .then((reviewer: Reviewer) =>
-                    setReviewers((prevReviewers) => {
-                      return { ...prevReviewers, [reviewerId]: reviewer }
-                    }),
-                  )
-                  .catch(() => {})
-              })
-          })
-          .catch(() => alert('Try again, network error!'))
-      })
-      .catch(() => alert('Try again, network error!'))
+    if (applId) {
+      getApplicationData(applId)
+        .then((data) => {
+          setApplicationData(data)
+        })
+        .catch(() => alert('Try again, network error!'))
+
+      getAdminPortalData(applId)
+        .then((data) => {
+          setAdminPortalData(data)
+          setPageReady(true)
+          if (data && data.review_marks) updateReviewerDetails(data)
+        })
+        .catch(() => alert('Try again, network error!'))
+    }
   }
 
   // Listen for changes on authUser, redirect if needed
@@ -65,7 +70,7 @@ export default function ViewApplication() {
       auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
     )
       updateData()
-  }, [router.query, changeOccured])
+  }, [router.query, changeOccured, auth.currentUser])
 
   return (
     <AdminLayout>
@@ -85,7 +90,8 @@ export default function ViewApplication() {
                         Application Status
                       </p>
                       <p className="sm:text-lg font-bold">
-                        {adminPortalData.application_status == 1
+                        {!adminPortalData ||
+                        adminPortalData.application_status == 1
                           ? 'Removed'
                           : adminPortalData.application_status == 2
                           ? 'Finalised For Review'
@@ -98,7 +104,7 @@ export default function ViewApplication() {
                           : 'Not Checked'}
                       </p>
                     </div>
-                    {adminPortalData.review_marks ? (
+                    {adminPortalData && adminPortalData.review_marks ? (
                       <div>
                         <h3 className="text-center text-2xl text-red-850 my-5">
                           Total Review Marks
@@ -129,7 +135,7 @@ export default function ViewApplication() {
                         ))}
                       </div>
                     ) : null}
-                    {adminPortalData.interview_marks ? (
+                    {adminPortalData && adminPortalData.interview_marks ? (
                       <div>
                         <div className="flex justify-around my-5">
                           <p className="text-red-850 text-lg sm:text-xl font-extrabold">
@@ -176,7 +182,8 @@ export default function ViewApplication() {
                         </div>
                       </div>
                     ) : null}
-                    {adminPortalData.application_status != 2 ? null : (
+                    {!adminPortalData ||
+                    adminPortalData.application_status != 2 ? null : (
                       <div className="flex flex-col sm:flex-row items-center sm:justify-around my-10">
                         <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                           Select Review Set
@@ -234,7 +241,8 @@ export default function ViewApplication() {
                       </div>
                     )}
                     <div className="flex flex-col sm:flex-row items-center sm:justify-around my-10">
-                      {adminPortalData.application_status >= 3 ? null : (
+                      {!adminPortalData ||
+                      adminPortalData.application_status >= 3 ? null : (
                         <button
                           className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
                           onClick={() =>
@@ -256,7 +264,8 @@ export default function ViewApplication() {
                             : 'Remove'}
                         </button>
                       )}
-                      {adminPortalData.application_status >= 2 ? null : (
+                      {!adminPortalData ||
+                      adminPortalData.application_status >= 2 ? null : (
                         <button
                           className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
                           onClick={() =>
@@ -268,7 +277,8 @@ export default function ViewApplication() {
                           Finalise For Review
                         </button>
                       )}
-                      {adminPortalData.application_status != 3 ? null : (
+                      {!adminPortalData ||
+                      adminPortalData.application_status != 3 ? null : (
                         <button
                           className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
                           onClick={() =>

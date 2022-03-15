@@ -29,28 +29,35 @@ export default function ViewApplication() {
   const router = useRouter()
   const applId = String(router.query['applId'])
 
+  const setReviewerMarks = (data: AdminPortalData) => {
+    let review_marks = data.review_marks
+    if (review_marks && review_marks[auth.currentUser.uid]) {
+      setA(review_marks[auth.currentUser.uid].A)
+      setB(review_marks[auth.currentUser.uid].B)
+      setC(review_marks[auth.currentUser.uid].C)
+      setD(review_marks[auth.currentUser.uid].D)
+      setE(review_marks[auth.currentUser.uid].E)
+    }
+  }
+
   const updateData = () => {
-    getApplicationData(applId)
-      .then((data) => {
-        setApplicationData(data)
-        getAdminPortalData(applId)
-          .then((data: AdminPortalData) => {
-            if (data) {
-              setAdminPortalData(data)
-              let review_marks = data.review_marks
-              if (review_marks && review_marks[auth.currentUser.uid]) {
-                setA(review_marks[auth.currentUser.uid].A)
-                setB(review_marks[auth.currentUser.uid].B)
-                setC(review_marks[auth.currentUser.uid].C)
-                setD(review_marks[auth.currentUser.uid].D)
-                setE(review_marks[auth.currentUser.uid].E)
-              }
-            }
-            setPageReady(true)
-          })
-          .catch(() => alert('Try again, network error!'))
-      })
-      .catch(() => alert('Try again, network error!'))
+    if (applId) {
+      getApplicationData(applId)
+        .then((data) => {
+          setApplicationData(data)
+        })
+        .catch(() => alert('Try again, network error!'))
+
+      getAdminPortalData(applId)
+        .then((data: AdminPortalData) => {
+          if (data) {
+            setAdminPortalData(data)
+            setReviewerMarks(data)
+          }
+          setPageReady(true)
+        })
+        .catch(() => alert('Try again, network error!'))
+    }
   }
 
   // Listen for changes on authUser, redirect if needed
@@ -72,7 +79,7 @@ export default function ViewApplication() {
 
   useEffect(() => {
     if (auth.currentUser && reviewer) updateData()
-  }, [router.query, changeOccured])
+  }, [router.query, changeOccured, auth.currentUser])
 
   return (
     <ReviewerLayout>
