@@ -12,7 +12,7 @@ export default function Admin() {
   const [error, setError] = useState<string>('')
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
-  const { signInWithEmailAndPassword } = useAuth()
+  const { signInWithEmailAndPassword, signOut } = useAuth()
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
@@ -34,30 +34,32 @@ export default function Admin() {
       const regex =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (regex.test(String(email).toLowerCase())) {
-        getReviewerDetails(email)
-          .then((reviewer: Reviewer) => {
-            if (reviewer) {
-              signInWithEmailAndPassword(email, password)
-                .then(() => {
+        signInWithEmailAndPassword(email, password)
+          .then(() => {
+            getReviewerDetails(email)
+              .then((reviewer: Reviewer) => {
+                if (reviewer) {
                   router.push('/reviewer')
-                })
-                .catch((error) => {
-                  if (error.code === 'auth/wrong-password') {
-                    setError('Wrong password.')
-                  } else if (error.code === 'auth/user-not-found') {
-                    setError(
-                      'There is no user record corresponding to these credentials.',
-                    )
-                  } else {
-                    setError(error.message.replace('Firebase', ''))
-                  }
-                })
-            } else
+                } else {
+                  setError(
+                    'There is no user record corresponding to these credentials.',
+                  )
+                  signOut()
+                }
+              })
+              .catch(() => alert('Try again, network error!'))
+          })
+          .catch((error) => {
+            if (error.code === 'auth/wrong-password') {
+              setError('Wrong password.')
+            } else if (error.code === 'auth/user-not-found') {
               setError(
                 'There is no user record corresponding to these credentials.',
               )
+            } else {
+              setError(error.message.replace('Firebase', ''))
+            }
           })
-          .catch(() => alert('Try again, network error!'))
       } else setError('Email is incorrect.')
     } else setError('All fields are required.')
     event.preventDefault()
