@@ -96,77 +96,153 @@ export default function ViewApplication() {
                   <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10">
                     <div className="flex justify-around my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                        Review Marks Based on A
+                        {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_A} (Out of{' '}
+                        {process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS})
                       </p>
                       <p className="sm:text-lg font-bold">
                         <input
                           name="Name"
                           type="number"
                           value={A}
-                          onChange={(e) => setA(Number(e.target.value))}
+                          min={0}
+                          max={Number(
+                            process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS,
+                          )}
+                          onChange={(e) =>
+                            Number(e.target.value) >
+                            Number(
+                              process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS,
+                            )
+                              ? null
+                              : setA(Number(e.target.value))
+                          }
                           className="w-full rounded-xl p-2 mt-1"
                         />
                       </p>
                     </div>
                     <div className="flex justify-around my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                        Review Marks Based on B
+                        {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_B} (Out of{' '}
+                        {process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS})
                       </p>
                       <p className="sm:text-lg font-bold">
                         <input
                           name="Name"
                           type="number"
                           value={B}
-                          onChange={(e) => setB(Number(e.target.value))}
+                          min={0}
+                          max={Number(
+                            process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS,
+                          )}
+                          onChange={(e) =>
+                            Number(e.target.value) >
+                            Number(
+                              process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS,
+                            )
+                              ? null
+                              : setB(Number(e.target.value))
+                          }
                           className="w-full rounded-xl p-2 mt-1"
                         />
                       </p>
                     </div>
                     <div className="flex justify-around my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                        Review Marks Based on C
+                        {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_C} (Out of{' '}
+                        {process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS})
                       </p>
                       <p className="sm:text-lg font-bold">
                         <input
                           name="Name"
                           type="number"
                           value={C}
-                          onChange={(e) => setC(Number(e.target.value))}
+                          min={0}
+                          max={Number(
+                            process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS,
+                          )}
+                          onChange={(e) =>
+                            Number(e.target.value) >
+                            Number(
+                              process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS,
+                            )
+                              ? null
+                              : setC(Number(e.target.value))
+                          }
                           className="w-full rounded-xl p-2 mt-1"
                         />
                       </p>
                     </div>
                     <div className="flex justify-around my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                        Review Marks Based on D
+                        {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_D} (Out of{' '}
+                        {process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS})
                       </p>
                       <p className="sm:text-lg font-bold">
                         <input
                           name="Name"
                           type="number"
                           value={D}
-                          onChange={(e) => setD(Number(e.target.value))}
+                          min={0}
+                          max={Number(
+                            process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS,
+                          )}
+                          onChange={(e) =>
+                            Number(e.target.value) >
+                            Number(
+                              process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS,
+                            )
+                              ? null
+                              : setD(Number(e.target.value))
+                          }
                           className="w-full rounded-xl p-2 mt-1"
                         />
                       </p>
                     </div>
                     <div className="flex justify-around my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                        Review Marks Based on E
+                        {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_E} (Out of{' '}
+                        {process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS})
                       </p>
                       <p className="sm:text-lg font-bold">
                         <input
                           name="Name"
                           type="number"
                           value={E}
-                          onChange={(e) => setE(Number(e.target.value))}
+                          min={0}
+                          max={Number(
+                            process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS,
+                          )}
+                          onChange={(e) =>
+                            Number(e.target.value) >
+                            Number(
+                              process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS,
+                            )
+                              ? null
+                              : setE(Number(e.target.value))
+                          }
                           className="w-full rounded-xl p-2 mt-1"
                         />
                       </p>
                     </div>
                     <div className="flex justify-around my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                        Total Review Marks
+                        Total Review Marks (Out of{' '}
+                        {Number(
+                          process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS,
+                        ) +
+                          Number(
+                            process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS,
+                          ) +
+                          Number(
+                            process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS,
+                          ) +
+                          Number(
+                            process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS,
+                          ) +
+                          Number(
+                            process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS,
+                          )}
+                        )
                       </p>
                       <p className="sm:text-lg font-bold">
                         {A + B + C + D + E}

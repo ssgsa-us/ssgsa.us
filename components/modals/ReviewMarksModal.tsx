@@ -25,37 +25,48 @@ export default function ReviewMarksModal({ reviewMarks }: Props) {
           <div>
             <div className="flex justify-around my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                Based on A
+                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_A} (Out of{' '}
+                {process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS})
               </p>
               <p className="sm:text-lg font-bold">{reviewMarks.A}</p>
             </div>
             <div className="flex justify-around my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                Based on B
+                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_B} (Out of{' '}
+                {process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS})
               </p>
               <p className="sm:text-lg font-bold">{reviewMarks.B}</p>
             </div>
             <div className="flex justify-around my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                Based on C
+                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_C} (Out of{' '}
+                {process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS})
               </p>
               <p className="sm:text-lg font-bold">{reviewMarks.C}</p>
             </div>
             <div className="flex justify-around my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                Based on D
+                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_D} (Out of{' '}
+                {process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS})
               </p>
               <p className="sm:text-lg font-bold">{reviewMarks.D}</p>
             </div>
             <div className="flex justify-around my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                Based on E
+                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_E} (Out of{' '}
+                {process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS})
               </p>
               <p className="sm:text-lg font-bold">{reviewMarks.E}</p>
             </div>
             <div className="flex justify-around my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                Total Marks
+                Total Marks (Out of{' '}
+                {Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS) +
+                  Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS) +
+                  Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS) +
+                  Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS) +
+                  Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS)}
+                )
               </p>
               <p className="sm:text-lg font-bold">
                 {reviewMarks.A +

@@ -104,22 +104,40 @@ export default function ReviewerApplications() {
               </tr>
               <tr>
                 <th className="border border-blue-850 border-seperate py-2 px-10">
-                  A
+                  {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_A}
+                  <br />
+                  (Out of {process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS})
                 </th>
                 <th className="border border-blue-850 border-seperate py-2 px-10">
-                  B
+                  {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_B}
+                  <br />
+                  (Out of {process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS})
                 </th>
                 <th className="border border-blue-850 border-seperate py-2 px-10">
-                  C
+                  {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_C}
+                  <br />
+                  (Out of {process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS})
                 </th>
                 <th className="border border-blue-850 border-seperate py-2 px-10">
-                  D
+                  {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_D}
+                  <br />
+                  (Out of {process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS})
                 </th>
                 <th className="border border-blue-850 border-seperate py-2 px-10">
-                  E
+                  {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_E}
+                  <br />
+                  (Out of {process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS})
                 </th>
                 <th className="border border-blue-850 border-seperate p-2">
                   Total
+                  <br />
+                  (Out of{' '}
+                  {Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS) +
+                    Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS) +
+                    Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS) +
+                    Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS) +
+                    Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS)}
+                  )
                 </th>
               </tr>
             </thead>

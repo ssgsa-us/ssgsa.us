@@ -77,7 +77,14 @@ export default function ApplicationRow({
           name="Name"
           type="number"
           value={A}
-          onChange={(e) => setA(Number(e.target.value))}
+          min={0}
+          max={Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS)}
+          onChange={(e) =>
+            Number(e.target.value) >
+            Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS)
+              ? null
+              : setA(Number(e.target.value))
+          }
           className="w-full rounded-xl p-2"
         />
       </td>
@@ -86,7 +93,14 @@ export default function ApplicationRow({
           name="Name"
           type="number"
           value={B}
-          onChange={(e) => setB(Number(e.target.value))}
+          min={0}
+          max={Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS)}
+          onChange={(e) =>
+            Number(e.target.value) >
+            Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS)
+              ? null
+              : setB(Number(e.target.value))
+          }
           className="w-full rounded-xl p-2"
         />
       </td>
@@ -95,7 +109,14 @@ export default function ApplicationRow({
           name="Name"
           type="number"
           value={C}
-          onChange={(e) => setC(Number(e.target.value))}
+          min={0}
+          max={Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS)}
+          onChange={(e) =>
+            Number(e.target.value) >
+            Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS)
+              ? null
+              : setC(Number(e.target.value))
+          }
           className="w-full rounded-xl p-2"
         />
       </td>
@@ -104,7 +125,14 @@ export default function ApplicationRow({
           name="Name"
           type="number"
           value={D}
-          onChange={(e) => setD(Number(e.target.value))}
+          min={0}
+          max={Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS)}
+          onChange={(e) =>
+            Number(e.target.value) >
+            Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS)
+              ? null
+              : setD(Number(e.target.value))
+          }
           className="w-full rounded-xl p-2"
         />
       </td>
@@ -113,7 +141,14 @@ export default function ApplicationRow({
           name="Name"
           type="number"
           value={E}
-          onChange={(e) => setE(Number(e.target.value))}
+          min={0}
+          max={Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS)}
+          onChange={(e) =>
+            Number(e.target.value) >
+            Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS)
+              ? null
+              : setE(Number(e.target.value))
+          }
           className="w-full rounded-xl p-2"
         />
       </td>
