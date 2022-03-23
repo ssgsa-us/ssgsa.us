@@ -69,41 +69,41 @@ export default function ApplicationRow({
 
   return (
     <tr key={index}>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center sticky left-0 z-10 bg-gray-200">
         {index + 1}
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2 sticky left-12 z-10 bg-gray-200">
         {application.applicationData.name}
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2">
         {application.applicationData.email}
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2">
         {application.applicationData.contact}
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2">
         {application.applicationData.faculty}
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2">
         {
           application.applicationData.academic_record["Bachelor's Degree"]
             .branch
         }
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2">
         {application.applicationData.academic_record["Master's Degree"]
           ? application.applicationData.academic_record["Master's Degree"]
               .branch
           : '-'}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         <Link href={`/admin/view-application/${applicationId}`}>
           <a className="text-white text-base md:text-lg bg-blue-850 py-1 px-3 rounded-lg">
             View
           </a>
         </Link>
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         <button
           className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
             application.adminPortalData.application_status >= 3
@@ -127,7 +127,7 @@ export default function ApplicationRow({
             : 'Remove'}
         </button>
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         {application.adminPortalData.application_status == 2 ? (
           <p className="text-red">Already Finalised</p>
         ) : application.adminPortalData.application_status >= 3 ? (
@@ -145,7 +145,7 @@ export default function ApplicationRow({
           </button>
         )}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         <select
           className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-blue-850"
           value={reviewSet}
@@ -201,10 +201,10 @@ export default function ApplicationRow({
           ))}
         </select>
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         {reviewerMarks[1].name}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
         <p className="navgroup-text">
           {reviewerMarks[1].marks.A +
             reviewerMarks[1].marks.B +
@@ -216,10 +216,10 @@ export default function ApplicationRow({
           <ReviewMarksModal reviewMarks={reviewerMarks[1].marks} />
         )}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         {reviewerMarks[2].name}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
         <p className="navgroup-text">
           {reviewerMarks[2].marks.A +
             reviewerMarks[2].marks.B +
@@ -231,10 +231,10 @@ export default function ApplicationRow({
           <ReviewMarksModal reviewMarks={reviewerMarks[2].marks} />
         )}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         {reviewerMarks[3].name}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
         <p className="navgroup-text">
           {reviewerMarks[3].marks.A +
             reviewerMarks[3].marks.B +
@@ -246,10 +246,10 @@ export default function ApplicationRow({
           <ReviewMarksModal reviewMarks={reviewerMarks[3].marks} />
         )}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         {reviewerMarks[4].name}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
         <p className="navgroup-text">
           {reviewerMarks[4].marks.A +
             reviewerMarks[4].marks.B +
@@ -261,7 +261,7 @@ export default function ApplicationRow({
           <ReviewMarksModal reviewMarks={reviewerMarks[4].marks} />
         )}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         {application.adminPortalData.application_status == 4 ? (
           <p className="text-red">Already Finalised</p>
         ) : application.adminPortalData.application_status >= 5 ? (
@@ -285,7 +285,7 @@ export default function ApplicationRow({
           </button>
         )}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         {!application.adminPortalData.application_status ||
         application.adminPortalData.application_status < 5 ||
         !application.adminPortalData.interview_marks

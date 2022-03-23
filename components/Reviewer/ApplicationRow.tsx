@@ -41,38 +41,38 @@ export default function ApplicationRow({
 
   return (
     <tr key={index}>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center sticky left-0 z-10 bg-gray-200">
         {index + 1}
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2 sticky left-12 z-10 bg-gray-200">
         {application.applicationData.name}
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2">
         {application.applicationData.email}
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2">
         {application.applicationData.contact}
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2">
         {
           application.applicationData.academic_record["Bachelor's Degree"]
             .branch
         }
       </td>
-      <td className="border border-blue-850 border-seperate p-2">
+      <td className="border border-blue-850 p-2">
         {application.applicationData.academic_record["Master's Degree"]
           ? application.applicationData.academic_record["Master's Degree"]
               .branch
           : '-'}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         <Link href={`/reviewer/view-application/${applicationId}`}>
           <a className="text-white text-base md:text-lg bg-blue-850 py-1 px-3 rounded-lg">
             View
           </a>
         </Link>
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         <input
           name="Name"
           type="number"
@@ -88,7 +88,7 @@ export default function ApplicationRow({
           className="w-full rounded-xl p-2"
         />
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         <input
           name="Name"
           type="number"
@@ -104,7 +104,7 @@ export default function ApplicationRow({
           className="w-full rounded-xl p-2"
         />
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         <input
           name="Name"
           type="number"
@@ -120,7 +120,7 @@ export default function ApplicationRow({
           className="w-full rounded-xl p-2"
         />
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         <input
           name="Name"
           type="number"
@@ -136,7 +136,7 @@ export default function ApplicationRow({
           className="w-full rounded-xl p-2"
         />
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         <input
           name="Name"
           type="number"
@@ -152,10 +152,10 @@ export default function ApplicationRow({
           className="w-full rounded-xl p-2"
         />
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         {A + B + C + D + E}
       </td>
-      <td className="border border-blue-850 border-seperate p-2 text-center">
+      <td className="border border-blue-850 p-2 text-center">
         <button
           className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
             application.adminPortalData.application_status >= 5 ||
