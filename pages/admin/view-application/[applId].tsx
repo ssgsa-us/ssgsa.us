@@ -6,16 +6,51 @@ import AdminLayout from '../../../layouts/admin/admin-layout'
 import { auth } from '../../../firebase'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
+import { getReviewerDetailsById } from '../../api/getReviewerDetails'
+import { Reviewer } from '../../../classes/reviewer'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
+import ReviewMarksModal from '../../../components/modals/ReviewMarksModal'
 import { updateApplicationStatus } from '../../api/updateApplicationStatus'
+import { updateReviewSet } from '../../api/updateReviewSet'
 
 export default function ViewApplication() {
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>()
   const [applicationData, setApplicationData] = useState<ApplicationData>()
+  const [reviewers, setReviewers] = useState<{ [key: string]: Reviewer }>({})
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
   const applId = String(router.query['applId'])
+
+  const updateReviewerDetails = (data: AdminPortalData) => {
+    Object.keys(data.review_marks).map((reviewerId: string) => {
+      getReviewerDetailsById(reviewerId)
+        .then((reviewer: Reviewer) =>
+          setReviewers((prevReviewers) => {
+            return { ...prevReviewers, [reviewerId]: reviewer }
+          }),
+        )
+        .catch(() => {})
+    })
+  }
+
+  const updateData = () => {
+    if (applId) {
+      getApplicationData(applId)
+        .then((data) => {
+          setApplicationData(data)
+        })
+        .catch(() => alert('Try again, network error!'))
+
+      getAdminPortalData(applId)
+        .then((data) => {
+          setAdminPortalData(data)
+          setPageReady(true)
+          if (data && data.review_marks) updateReviewerDetails(data)
+        })
+        .catch(() => alert('Try again, network error!'))
+    }
+  }
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
@@ -23,17 +58,7 @@ export default function ViewApplication() {
       if (!auth.currentUser) router.push('/admin/signin')
       else {
         if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          getApplicationData(applId)
-            .then((data) => {
-              setApplicationData(data)
-              getAdminPortalData(applId)
-                .then((data) => {
-                  setAdminPortalData(data)
-                  setPageReady(true)
-                })
-                .catch(() => alert('Try again, network error!'))
-            })
-            .catch(() => alert('Try again, network error!'))
+          updateData()
         else router.push('/404')
       }
     })
@@ -44,18 +69,8 @@ export default function ViewApplication() {
       auth.currentUser &&
       auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
     )
-      getApplicationData(applId)
-        .then((data) => {
-          setApplicationData(data)
-          getAdminPortalData(applId)
-            .then((data) => {
-              setAdminPortalData(data)
-              setPageReady(true)
-            })
-            .catch(() => alert('Try again, network error!'))
-        })
-        .catch(() => alert('Try again, network error!'))
-  }, [router.query, changeOccured])
+      updateData()
+  }, [router.query, changeOccured, auth.currentUser])
 
   return (
     <AdminLayout>
@@ -75,84 +90,207 @@ export default function ViewApplication() {
                         Application Status
                       </p>
                       <p className="sm:text-lg font-bold">
-                        {adminPortalData.application_status}
+                        {!adminPortalData ||
+                        adminPortalData.application_status == 1
+                          ? 'Removed'
+                          : adminPortalData.application_status == 2
+                          ? 'Finalised For Review'
+                          : adminPortalData.application_status == 3
+                          ? 'Reviewed'
+                          : adminPortalData.application_status == 4
+                          ? 'Finalised For Interview'
+                          : adminPortalData.application_status == 5
+                          ? 'Inteviewed'
+                          : 'Not Checked'}
                       </p>
                     </div>
-                    {adminPortalData.review_marks ? (
-                      <div className="flex justify-around">
-                        <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                          Review Marks
-                        </p>
-                        <p className="sm:text-lg font-bold">
-                          {adminPortalData.review_marks}
-                        </p>
+                    {adminPortalData && adminPortalData.review_marks ? (
+                      <div>
+                        <h3 className="text-center text-2xl text-red-850 my-5">
+                          Total Review Marks
+                        </h3>
+                        {Object.keys(reviewers).map((reviewerId: string) => (
+                          <div
+                            className="flex justify-around my-5"
+                            key={reviewerId}
+                          >
+                            <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                              Given by {reviewers[reviewerId].name}
+                            </p>
+                            <div className="sm:text-lg font-bold navgroup relative cursor-pointer">
+                              <p className="navbar-text px-2 rounded-lg">
+                                {adminPortalData.review_marks[reviewerId].A +
+                                  adminPortalData.review_marks[reviewerId].B +
+                                  adminPortalData.review_marks[reviewerId].C +
+                                  adminPortalData.review_marks[reviewerId].D +
+                                  adminPortalData.review_marks[reviewerId].E}
+                              </p>
+                              <ReviewMarksModal
+                                reviewMarks={
+                                  adminPortalData.review_marks[reviewerId]
+                                }
+                              />
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     ) : null}
-                    {adminPortalData.interview_marks ? (
-                      <div className="flex justify-around">
-                        <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                          Interview Marks
-                        </p>
-                        <p className="sm:text-lg font-bold">
-                          {adminPortalData.interview_marks}
-                        </p>
+                    {adminPortalData && adminPortalData.interview_marks ? (
+                      <div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Interview Marks Based on A
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.interview_marks.A}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Interview Marks Based on B
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.interview_marks.B}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Interview Marks Based on C
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.interview_marks.C}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Interview Marks Based on D
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.interview_marks.D}
+                          </p>
+                        </div>
+                        <div className="flex justify-around my-5">
+                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                            Total Interview Marks
+                          </p>
+                          <p className="sm:text-lg font-bold">
+                            {adminPortalData.interview_marks.A +
+                              adminPortalData.interview_marks.B +
+                              adminPortalData.interview_marks.C +
+                              adminPortalData.interview_marks.D}
+                          </p>
+                        </div>
                       </div>
                     ) : null}
-                  </div>
-                  <div className="flex flex-col sm:flex-row items-center sm:justify-between my-10">
-                    {adminPortalData.application_status ==
-                    'finalised for interview' ? null : (
-                      <button
-                        className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
-                        onClick={() =>
-                          adminPortalData.application_status == 'removed'
-                            ? updateApplicationStatus(applId, '')
-                                .then(() => setChangeOccured(!changeOccured))
-                                .catch(() => alert('Try again, network error!'))
-                            : updateApplicationStatus(applId, 'removed')
-                                .then(() => setChangeOccured(!changeOccured))
-                                .catch(() => alert('Try again, network error!'))
-                        }
-                      >
-                        {adminPortalData.application_status == 'removed'
-                          ? 'Unremove'
-                          : 'Remove'}
-                      </button>
+                    {!adminPortalData ||
+                    adminPortalData.application_status != 2 ? null : (
+                      <div className="flex flex-col sm:flex-row items-center sm:justify-around my-10">
+                        <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                          Select Review Set
+                        </p>
+                        <select
+                          className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-blue-850"
+                          value={adminPortalData.review_set}
+                          onChange={(e) =>
+                            updateReviewSet(applId, e.target.value)
+                              .then(() => setChangeOccured(!changeOccured))
+                              .catch(() => alert('Try again, network error!'))
+                          }
+                        >
+                          <option
+                            label="Select"
+                            value={undefined || null || ''}
+                            className="bg-gray-400 hover:bg-blue-850"
+                          />
+                          {[
+                            'A',
+                            'B',
+                            'C',
+                            'D',
+                            'E',
+                            'F',
+                            'G',
+                            'H',
+                            'I',
+                            'J',
+                            'K',
+                            'L',
+                            'M',
+                            'N',
+                            'O',
+                            'P',
+                            'Q',
+                            'R',
+                            'S',
+                            'T',
+                            'U',
+                            'V',
+                            'W',
+                            'X',
+                            'Y',
+                            'Z',
+                          ].map((char, index) => (
+                            <option
+                              label={char}
+                              value={char}
+                              className="bg-gray-400 hover:bg-blue-850"
+                              key={index}
+                            />
+                          ))}
+                        </select>
+                      </div>
                     )}
-                    {adminPortalData.application_status ==
-                      'finalised for interview' ||
-                    adminPortalData.application_status ==
-                      'finalised for review' ? null : (
-                      <button
-                        className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
-                        onClick={() =>
-                          updateApplicationStatus(
-                            applId,
-                            'finalised for review',
-                          )
-                            .then(() => setChangeOccured(!changeOccured))
-                            .catch(() => alert('Try again, network error!'))
-                        }
-                      >
-                        Finalise For Review
-                      </button>
-                    )}
-                    {adminPortalData.application_status ==
-                      'finalised for review' && adminPortalData.review_marks ? (
-                      <button
-                        className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
-                        onClick={() =>
-                          updateApplicationStatus(
-                            applId,
-                            'finalised for interview',
-                          )
-                            .then(() => setChangeOccured(!changeOccured))
-                            .catch(() => alert('Try again, network error!'))
-                        }
-                      >
-                        Finalise For Interview
-                      </button>
-                    ) : null}
+                    <div className="flex flex-col sm:flex-row items-center sm:justify-around my-10">
+                      {!adminPortalData ||
+                      adminPortalData.application_status >= 3 ? null : (
+                        <button
+                          className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
+                          onClick={() =>
+                            adminPortalData.application_status == 1
+                              ? updateApplicationStatus(applId, 0)
+                                  .then(() => setChangeOccured(!changeOccured))
+                                  .catch(() =>
+                                    alert('Try again, network error!'),
+                                  )
+                              : updateApplicationStatus(applId, 1)
+                                  .then(() => setChangeOccured(!changeOccured))
+                                  .catch(() =>
+                                    alert('Try again, network error!'),
+                                  )
+                          }
+                        >
+                          {adminPortalData.application_status == 1
+                            ? 'Unremove'
+                            : 'Remove'}
+                        </button>
+                      )}
+                      {!adminPortalData ||
+                      adminPortalData.application_status >= 2 ? null : (
+                        <button
+                          className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
+                          onClick={() =>
+                            updateApplicationStatus(applId, 2)
+                              .then(() => setChangeOccured(!changeOccured))
+                              .catch(() => alert('Try again, network error!'))
+                          }
+                        >
+                          Finalise For Review
+                        </button>
+                      )}
+                      {!adminPortalData ||
+                      adminPortalData.application_status != 3 ? null : (
+                        <button
+                          className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
+                          onClick={() =>
+                            updateApplicationStatus(applId, 4)
+                              .then(() => setChangeOccured(!changeOccured))
+                              .catch(() => alert('Try again, network error!'))
+                          }
+                        >
+                          Finalise For Interview
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               ) : null}

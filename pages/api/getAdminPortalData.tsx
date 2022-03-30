@@ -7,7 +7,7 @@ import firebase, { firestore } from '../../firebase'
 
 export const getAdminPortalData = async (userId: string) => {
   let admin_portal_data: AdminPortalData = await firestore
-    .doc(path.join('applications_data', userId))
+    .doc(path.join('admin_portal_data', userId))
     .withConverter(adminPortalDataConverter)
     .get()
     .then((snapshot: firebase.firestore.DocumentSnapshot<AdminPortalData>) => {

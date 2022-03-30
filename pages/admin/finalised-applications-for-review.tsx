@@ -26,7 +26,7 @@ export default function FinalisedApplicationsForReview() {
       if (!auth.currentUser) router.push('/admin/signin')
       else {
         if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          getApplicationsWithGivenStatus('finalised for review')
+          getApplicationsWithGivenStatus(2)
             .then((data) => {
               setApplications(data)
               setPageReady(true)
@@ -42,7 +42,7 @@ export default function FinalisedApplicationsForReview() {
       auth.currentUser &&
       auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
     )
-      getApplicationsWithGivenStatus('finalised for review')
+      getApplicationsWithGivenStatus(2)
         .then((data) => {
           setApplications(data)
           setPageReady(true)

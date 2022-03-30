@@ -123,7 +123,20 @@ export default function AdminHeader() {
                 </a>
               </Link>
             </div>
-            <div className="bg-white py-0.5 md:py-0 md:px-0.5">
+            <div className="bg-white py-0.5 md:py-0 md:pl-0.5">
+              <Link href={'/admin/reviewed-applications'}>
+                <a
+                  className={`py-2 px-2 text-white flex md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
+                    router.pathname == '/admin/reviewed-applications'
+                      ? 'bg-blue-850'
+                      : 'bg-red-850 hover:bg-blue-850'
+                  }`}
+                >
+                  Reviewed Applications
+                </a>
+              </Link>
+            </div>
+            <div className="bg-white py-0.5 md:py-0 md:pl-0.5">
               <Link href={'/admin/finalised-applications-for-interview'}>
                 <a
                   className={`py-2 px-2 text-white flex md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
@@ -137,6 +150,19 @@ export default function AdminHeader() {
                 </a>
               </Link>
             </div>
+          </div>
+          <div className="bg-white py-0.5 md:py-0 md:px-0.5">
+            <Link href={'/admin/interviewed-applications'}>
+              <a
+                className={`py-2 px-2 text-white flex md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
+                  router.pathname == '/admin/interviewed-applications'
+                    ? 'bg-blue-850'
+                    : 'bg-red-850 hover:bg-blue-850'
+                }`}
+              >
+                Interviewed Applications
+              </a>
+            </Link>
           </div>
           <div className="flex items-center justify-center mt-3 md:mt-0 ml-2 mr-3">
             <div className="bg-white py-0.5 px-0.5 my-2">

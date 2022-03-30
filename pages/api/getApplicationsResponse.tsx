@@ -96,7 +96,7 @@ export const getCompletedApplications = async () => {
 }
 
 export const getApplicationsWithGivenStatus = async (
-  application_status: string,
+  application_status: number,
 ) => {
   let applicationsWithGivenStatus: Applications = await firestore
     .collection('applications_data')
