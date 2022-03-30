@@ -52,15 +52,17 @@ export default function ApplicationRow({
         async (reviewerId: string, index: number) => {
           await getReviewerDetailsById(reviewerId)
             .then((reviewer: Reviewer) => {
-              setReviewerMarks((prevReviewerMarks) => {
-                return {
-                  ...prevReviewerMarks,
-                  [index + 1]: {
-                    name: reviewer.name,
-                    marks: application.adminPortalData.review_marks[reviewerId],
-                  },
-                }
-              })
+              if (reviewer)
+                setReviewerMarks((prevReviewerMarks) => {
+                  return {
+                    ...prevReviewerMarks,
+                    [index + 1]: {
+                      name: reviewer.name,
+                      marks:
+                        application.adminPortalData.review_marks[reviewerId],
+                    },
+                  }
+                })
             })
             .catch(() => {})
         },

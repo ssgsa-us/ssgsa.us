@@ -149,8 +149,8 @@ export default function AddReviewer() {
                   </tr>
                 </thead>
                 <tbody>
-                  {addedReviewers.map((reviewer: Reviewer) => (
-                    <tr>
+                  {addedReviewers.map((reviewer: Reviewer, index: number) => (
+                    <tr key={index}>
                       <td className="border p-2">{reviewer.name}</td>
                       <td className="border p-2">{reviewer.email}</td>
                       <td className="border p-2">{reviewer.set}</td>
@@ -179,8 +179,8 @@ export default function AddReviewer() {
                   </tr>
                 </thead>
                 <tbody>
-                  {removedReviewers.map((reviewer: Reviewer) => (
-                    <tr>
+                  {removedReviewers.map((reviewer: Reviewer, index: number) => (
+                    <tr key={index}>
                       <td className="border p-2">{reviewer.name}</td>
                       <td className="border p-2">{reviewer.email}</td>
                       <td className="border p-2">{reviewer.set}</td>
