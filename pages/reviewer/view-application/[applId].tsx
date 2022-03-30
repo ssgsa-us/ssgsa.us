@@ -94,7 +94,7 @@ export default function ViewApplication() {
               {applicationData.form_status == 6 ? (
                 <div>
                   <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10">
-                    <div className="flex justify-around my-5">
+                    <div className="flex justify-between my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                         {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_A} (Out of{' '}
                         {process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS})
@@ -120,7 +120,7 @@ export default function ViewApplication() {
                         />
                       </p>
                     </div>
-                    <div className="flex justify-around my-5">
+                    <div className="flex justify-between my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                         {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_B} (Out of{' '}
                         {process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS})
@@ -146,7 +146,7 @@ export default function ViewApplication() {
                         />
                       </p>
                     </div>
-                    <div className="flex justify-around my-5">
+                    <div className="flex justify-between my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                         {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_C} (Out of{' '}
                         {process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS})
@@ -172,7 +172,7 @@ export default function ViewApplication() {
                         />
                       </p>
                     </div>
-                    <div className="flex justify-around my-5">
+                    <div className="flex justify-between my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                         {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_D} (Out of{' '}
                         {process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS})
@@ -198,7 +198,7 @@ export default function ViewApplication() {
                         />
                       </p>
                     </div>
-                    <div className="flex justify-around my-5">
+                    <div className="flex justify-between my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                         {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_E} (Out of{' '}
                         {process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS})
@@ -224,7 +224,7 @@ export default function ViewApplication() {
                         />
                       </p>
                     </div>
-                    <div className="flex justify-around my-5">
+                    <div className="flex justify-between my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                         Total Review Marks (Out of{' '}
                         {Number(
@@ -244,7 +244,7 @@ export default function ViewApplication() {
                           )}
                         )
                       </p>
-                      <p className="sm:text-lg font-bold">
+                      <p className="sm:text-lg font-bold mr-10">
                         {A + B + C + D + E}
                       </p>
                     </div>
