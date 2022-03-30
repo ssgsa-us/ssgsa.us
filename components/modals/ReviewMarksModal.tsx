@@ -25,8 +25,7 @@ export default function ReviewMarksModal({ reviewMarks }: Props) {
           <div className="px-5">
             <div className="flex justify-between space-x-5 my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_A}
-                bbbbbbbbbbbbbbbbbbbb (Out of{' '}
+                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_A} (Out of{' '}
                 {process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS})
               </p>
               <p className="sm:text-lg font-bold w-1/6">{reviewMarks.A}</p>
