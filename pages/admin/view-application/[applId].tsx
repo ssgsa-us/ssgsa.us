@@ -90,8 +90,9 @@ export default function ViewApplication() {
                         Application Status
                       </p>
                       <p className="sm:text-lg font-bold">
-                        {!adminPortalData ||
-                        adminPortalData.application_status == 1
+                        {!adminPortalData
+                          ? 'Not Checked'
+                          : adminPortalData.application_status == 1
                           ? 'Removed'
                           : adminPortalData.application_status == 2
                           ? 'Finalised For Review'
@@ -241,7 +242,7 @@ export default function ViewApplication() {
                       </div>
                     )}
                     <div className="flex flex-col sm:flex-row items-center sm:justify-around my-10">
-                      {!adminPortalData ||
+                      {adminPortalData &&
                       adminPortalData.application_status >= 3 ? null : (
                         <button
                           className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
@@ -259,12 +260,13 @@ export default function ViewApplication() {
                                   )
                           }
                         >
-                          {adminPortalData.application_status == 1
+                          {adminPortalData &&
+                          adminPortalData.application_status == 1
                             ? 'Unremove'
                             : 'Remove'}
                         </button>
                       )}
-                      {!adminPortalData ||
+                      {adminPortalData &&
                       adminPortalData.application_status >= 2 ? null : (
                         <button
                           className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850"
