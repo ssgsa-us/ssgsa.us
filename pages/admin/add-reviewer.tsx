@@ -16,6 +16,12 @@ export default function AddReviewer() {
       .auth()
       .createUserWithEmailAndPassword(reviewer[0], password)
       .then(async (result: firebase.auth.UserCredential) => {
+        try {
+          secondaryFirebaseApp.auth().signOut()
+        } catch {
+          console.log('Not able to sign out', reviewer[1])
+        }
+
         // add reviewer data to firestore database
         createReviewer(
           result.user.uid,
