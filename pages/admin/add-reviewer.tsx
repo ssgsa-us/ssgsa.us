@@ -77,8 +77,9 @@ export default function AddReviewer() {
       // Get all reviewer details as array from worksheet
       let reviewers = XLSX.utils.sheet_to_json(sheet, { header: 1 })
 
-      reviewers.forEach(async (reviewer, index) => {
+      reviewers.forEach(async (reviewer: Array<string>, index) => {
         if (!index) return // leave first row
+        if (!reviewer[0]) return
 
         // reviewer details
         // reviewer[0] represents email from which account is created
@@ -92,6 +93,7 @@ export default function AddReviewer() {
         let password = ''
         for (let i = 0; i < 8; i++)
           password += charset.charAt(Math.floor(Math.random() * 62))
+        reviewer.push(password)
 
         // Create account of reviewer using signup on new firebase app
         await createAccount(secondaryFirebaseApp, reviewer, password)
@@ -102,6 +104,10 @@ export default function AddReviewer() {
           secondaryFirebaseApp.delete()
         }
       })
+
+      let newSheet = XLSX.utils.json_to_sheet(reviewers)
+      XLSX.utils.book_append_sheet(readedData, newSheet, 'New Sheet')
+      XLSX.writeFile(readedData, 'NewReviewers.xlsx')
     }
 
     reader.readAsBinaryString(file)
