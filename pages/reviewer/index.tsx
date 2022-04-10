@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { auth } from '../../firebase'
 import { getReviewerDetails } from '../api/getReviewerDetails'
@@ -50,9 +51,11 @@ export default function ReviewerPortal() {
               </span>
             </p>
             <div className="flex justify-center">
-              <button className="text-white text-lg py-2 px-4 my-10 rounded-3xl bg-red-850">
-                Download the Rubric here
-              </button>
+              <Link href={process.env.NEXT_PUBLIC_REVIEWER_RUBRIC_URL}>
+                <a className="text-white text-lg py-2 px-4 my-10 rounded-3xl bg-red-850">
+                  Download the Rubric here
+                </a>
+              </Link>
             </div>
           </div>
         </div>
