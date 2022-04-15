@@ -45,7 +45,27 @@ export default function ApplicationRow({
     2: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
     3: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
     4: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
+    5: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
+    6: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
   })
+
+  const reviewMarkComponent = (reviewMarks: {
+    name: string
+    marks: ReviewMarks
+  }) => (
+    <div>
+      <p className="navgroup-text">
+        {reviewMarks.marks.A +
+          reviewMarks.marks.B +
+          reviewMarks.marks.C +
+          reviewMarks.marks.D +
+          reviewMarks.marks.E}
+      </p>
+      {reviewMarks.name == '-' ? null : (
+        <ReviewMarksModal reviewMarks={reviewMarks.marks} />
+      )}
+    </div>
+  )
 
   useEffect(() => {
     if (application.adminPortalData.review_marks)
@@ -208,61 +228,37 @@ export default function ApplicationRow({
         {reviewerMarks[1].name}
       </td>
       <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
-        <p className="navgroup-text">
-          {reviewerMarks[1].marks.A +
-            reviewerMarks[1].marks.B +
-            reviewerMarks[1].marks.C +
-            reviewerMarks[1].marks.D +
-            reviewerMarks[1].marks.E}
-        </p>
-        {reviewerMarks[1].name == '-' ? null : (
-          <ReviewMarksModal reviewMarks={reviewerMarks[1].marks} />
-        )}
+        {reviewMarkComponent(reviewerMarks[1])}
       </td>
       <td className="border border-blue-850 p-2 text-center">
         {reviewerMarks[2].name}
       </td>
       <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
-        <p className="navgroup-text">
-          {reviewerMarks[2].marks.A +
-            reviewerMarks[2].marks.B +
-            reviewerMarks[2].marks.C +
-            reviewerMarks[2].marks.D +
-            reviewerMarks[2].marks.E}
-        </p>
-        {reviewerMarks[2].name == '-' ? null : (
-          <ReviewMarksModal reviewMarks={reviewerMarks[2].marks} />
-        )}
+        {reviewMarkComponent(reviewerMarks[2])}
       </td>
       <td className="border border-blue-850 p-2 text-center">
         {reviewerMarks[3].name}
       </td>
       <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
-        <p className="navgroup-text">
-          {reviewerMarks[3].marks.A +
-            reviewerMarks[3].marks.B +
-            reviewerMarks[3].marks.C +
-            reviewerMarks[3].marks.D +
-            reviewerMarks[3].marks.E}
-        </p>
-        {reviewerMarks[3].name == '-' ? null : (
-          <ReviewMarksModal reviewMarks={reviewerMarks[3].marks} />
-        )}
+        {reviewMarkComponent(reviewerMarks[3])}
       </td>
       <td className="border border-blue-850 p-2 text-center">
         {reviewerMarks[4].name}
       </td>
       <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
-        <p className="navgroup-text">
-          {reviewerMarks[4].marks.A +
-            reviewerMarks[4].marks.B +
-            reviewerMarks[4].marks.C +
-            reviewerMarks[4].marks.D +
-            reviewerMarks[4].marks.E}
-        </p>
-        {reviewerMarks[4].name == '-' ? null : (
-          <ReviewMarksModal reviewMarks={reviewerMarks[4].marks} />
-        )}
+        {reviewMarkComponent(reviewerMarks[4])}
+      </td>
+      <td className="border border-blue-850 p-2 text-center">
+        {reviewerMarks[5].name}
+      </td>
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+        {reviewMarkComponent(reviewerMarks[5])}
+      </td>
+      <td className="border border-blue-850 p-2 text-center">
+        {reviewerMarks[6].name}
+      </td>
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+        {reviewMarkComponent(reviewerMarks[6])}
       </td>
       <td className="border border-blue-850 p-2 text-center">
         {application.adminPortalData.application_status == 4 ? (
