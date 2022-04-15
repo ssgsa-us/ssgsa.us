@@ -12,7 +12,11 @@ export const updateReviewMarks = (
   application_status: number,
 ) => {
   return firestore.doc(path.join('admin_portal_data', userId)).update({
-    [`review_marks.${reviewerId}`]: { A: A, B: B, C: C, D: D, E: E },
+    [`review_marks.${reviewerId}.A`]: A,
+    [`review_marks.${reviewerId}.B`]: B,
+    [`review_marks.${reviewerId}.C`]: C,
+    [`review_marks.${reviewerId}.D`]: D,
+    [`review_marks.${reviewerId}.E`]: E,
     application_status: application_status,
   })
 }

@@ -25,6 +25,7 @@ type ReviewMarks = {
   C: number
   D: number
   E: number
+  remark: string
 }
 
 type ReviewerMarks = { [key: number]: { name: string; marks: ReviewMarks } }
@@ -40,10 +41,10 @@ export default function ApplicationRow({
     application.adminPortalData.review_set,
   )
   const [reviewerMarks, setReviewerMarks] = useState<ReviewerMarks>({
-    1: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0 } },
-    2: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0 } },
-    3: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0 } },
-    4: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0 } },
+    1: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
+    2: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
+    3: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
+    4: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
   })
 
   useEffect(() => {

@@ -10,6 +10,7 @@ import { Reviewer } from '../../../classes/reviewer'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
 import ReviewerLayout from '../../../layouts/reviewer/reviewer-layout'
 import { updateReviewMarks } from '../../api/updateReviewMarks'
+import { updateReviewRemark } from '../../api/updateReviewRemark'
 
 export default function ViewApplication() {
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>(
@@ -24,6 +25,7 @@ export default function ViewApplication() {
   const [C, setC] = useState<number>(0)
   const [D, setD] = useState<number>(0)
   const [E, setE] = useState<number>(0)
+  const [remark, setRemark] = useState<string>('')
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
@@ -32,11 +34,12 @@ export default function ViewApplication() {
   const setReviewerMarks = (data: AdminPortalData) => {
     let review_marks = data.review_marks
     if (review_marks && review_marks[auth.currentUser.uid]) {
-      setA(review_marks[auth.currentUser.uid].A)
-      setB(review_marks[auth.currentUser.uid].B)
-      setC(review_marks[auth.currentUser.uid].C)
-      setD(review_marks[auth.currentUser.uid].D)
-      setE(review_marks[auth.currentUser.uid].E)
+      setA(review_marks[auth.currentUser.uid].A || 0)
+      setB(review_marks[auth.currentUser.uid].B || 0)
+      setC(review_marks[auth.currentUser.uid].C || 0)
+      setD(review_marks[auth.currentUser.uid].D || 0)
+      setE(review_marks[auth.currentUser.uid].E || 0)
+      setRemark(review_marks[auth.currentUser.uid].remark || '')
     }
   }
 
@@ -278,6 +281,48 @@ export default function ViewApplication() {
                         }
                       >
                         Update Marks
+                      </button>
+                    </div>
+                  </div>
+                  <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10">
+                    <div className="flex justify-between items-center my-5">
+                      <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                        Remark
+                      </p>
+                      <div className="sm:text-lg font-bold ml-20">
+                        <textarea
+                          name="Remark"
+                          rows={5}
+                          cols={100}
+                          value={remark}
+                          onChange={(e) => setRemark(e.target.value)}
+                          className="w-full rounded-xl p-2 mt-1"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-center my-5">
+                      <button
+                        className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
+                          adminPortalData.application_status >= 5 || !remark
+                            ? 'bg-red-860 cursor-not-allowed'
+                            : 'bg-red-850'
+                        }`}
+                        onClick={() =>
+                          adminPortalData.application_status >= 5 || !remark
+                            ? null
+                            : updateReviewRemark(
+                                applId,
+                                auth.currentUser.uid,
+                                remark,
+                              )
+                                .then(() => {
+                                  alert('Succesfully Updated!')
+                                  setChangeOccured(!changeOccured)
+                                })
+                                .catch(() => alert('Try again, network error!'))
+                        }
+                      >
+                        Update
                       </button>
                     </div>
                   </div>
