@@ -77,11 +77,15 @@ export default function ReviewMarksModal({ reviewMarks }: Props) {
                   reviewMarks.E}
               </p>
             </div>
-            <div className="flex items-center space-x-5 my-5">
+            <div className="flex items-center justify-between space-x-5 my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                 Remark
               </p>
-              <p className="sm:text-sm font-bold">{reviewMarks.remark}</p>
+              <div className="w-3/4">
+                <p className="sm:text-sm text-justify font-bold whitespace-normal">
+                  {reviewMarks.remark}
+                </p>
+              </div>
             </div>
           </div>
         </div>
