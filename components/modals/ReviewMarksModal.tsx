@@ -4,6 +4,7 @@ type ReviewMarks = {
   C: number
   D: number
   E: number
+  remark: string
 }
 
 type Props = {
@@ -28,7 +29,7 @@ export default function ReviewMarksModal({ reviewMarks }: Props) {
                 {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_A} (Out of{' '}
                 {process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS})
               </p>
-              <p className="sm:text-lg font-bold w-1/6">{reviewMarks.A}</p>
+              <p className="sm:text-lg font-bold">{reviewMarks.A}</p>
             </div>
             <div className="flex justify-between space-x-5 my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
@@ -75,6 +76,16 @@ export default function ReviewMarksModal({ reviewMarks }: Props) {
                   reviewMarks.D +
                   reviewMarks.E}
               </p>
+            </div>
+            <div className="flex items-center justify-between space-x-5 my-5">
+              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                Remark
+              </p>
+              <div className="w-3/4">
+                <p className="sm:text-sm text-justify font-bold whitespace-normal">
+                  {reviewMarks.remark}
+                </p>
+              </div>
             </div>
           </div>
         </div>

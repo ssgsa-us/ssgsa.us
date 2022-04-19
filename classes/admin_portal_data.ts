@@ -8,6 +8,7 @@ type ReviewMarks = {
     C: number
     D: number
     E: number
+    remark: string
   }
 }
 

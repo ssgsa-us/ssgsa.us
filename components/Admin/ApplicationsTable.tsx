@@ -64,7 +64,7 @@ export default function ApplicationsTable({
               <th className="border border-blue-850 p-2" rowSpan={3}>
                 Review Set
               </th>
-              <th className="border border-blue-850 p-2" colSpan={8}>
+              <th className="border border-blue-850 p-2" colSpan={12}>
                 Reviewer Marks
               </th>
               <th className="border border-blue-850 p-2" rowSpan={3}>
@@ -87,8 +87,18 @@ export default function ApplicationsTable({
               <th className="border border-blue-850 p-2" colSpan={2}>
                 Reviewer 4
               </th>
+              <th className="border border-blue-850 p-2" colSpan={2}>
+                Reviewer 5
+              </th>
+              <th className="border border-blue-850 p-2" colSpan={2}>
+                Reviewer 6
+              </th>
             </tr>
             <tr>
+              <th className="border border-blue-850 p-2">Name</th>
+              <th className="border border-blue-850 p-2">Marks</th>
+              <th className="border border-blue-850 p-2">Name</th>
+              <th className="border border-blue-850 p-2">Marks</th>
               <th className="border border-blue-850 p-2">Name</th>
               <th className="border border-blue-850 p-2">Marks</th>
               <th className="border border-blue-850 p-2">Name</th>

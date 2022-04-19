@@ -7,25 +7,19 @@ const DateTable = ({ bgcolor, textcolor, textbold }) => {
             <td className={`${bgcolor} ${textcolor} ${textbold} p-2 w-2/5`}>
               Opening date of Applications
             </td>
-            <td className="border-2 border-gray-300 p-2 w-3/5">
-              Feb 12, 2022
-            </td>
+            <td className="border-2 border-gray-300 p-2 w-3/5">Feb 12, 2022</td>
           </tr>
           <tr>
             <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
               Closing date of Applications
             </td>
-            <td className="border-2 border-gray-300 p-2">
-              Mar 15, 2022
-            </td>
+            <td className="border-2 border-gray-300 p-2">Mar 15, 2022</td>
           </tr>
           <tr>
             <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
               Announcement of Shortlisted candidates
             </td>
-            <td className="border-2 border-gray-300 p-2">
-              April 25, 2022
-            </td>
+            <td className="border-2 border-gray-300 p-2">May 5, 2022</td>
           </tr>
           <tr>
             <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
