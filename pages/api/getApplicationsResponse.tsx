@@ -119,7 +119,7 @@ export const getApplicationsWithGivenStatus = async (
             ) => {
               let applications: Applications = {}
               let adminPortalData: { [key: string]: AdminPortalData } = {}
-
+               // collect complete data
               admin_portal_data.forEach(
                 (
                   document: firebase.firestore.QueryDocumentSnapshot<AdminPortalData>,
