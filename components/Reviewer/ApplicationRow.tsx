@@ -26,7 +26,6 @@ export default function ApplicationRow({
   const [C, setC] = useState<number>(0)
   const [D, setD] = useState<number>(0)
   const [E, setE] = useState<number>(0)
-  const [updateCondition, setUpdateCondition] = useState<boolean>(false)
 
   useEffect(() => {
     let review_marks = application.adminPortalData.review_marks

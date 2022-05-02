@@ -1,5 +1,5 @@
 import Footer from '../../components/Footer'
-import ReviewerHeader from '../../components/ReviewerHeader'
+import ReviewerHeader from '../../components/Reviewer/ReviewerHeader'
 import styles from '../../styles/Home.module.css'
 
 export default function ReviewerLayout({ children }) {
