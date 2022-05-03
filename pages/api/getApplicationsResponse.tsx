@@ -101,6 +101,7 @@ export const getApplicationsWithGivenStatus = async (
   let applicationsWithGivenStatus: Applications = await firestore
     .collection('applications_data')
     .where('form_status', '==', 6)
+    .orderBy('faculty')
     .withConverter(applicationDataConverter)
     .get()
     .then(
@@ -117,15 +118,13 @@ export const getApplicationsWithGivenStatus = async (
               admin_portal_data: firebase.firestore.QuerySnapshot<AdminPortalData>,
             ) => {
               let applications: Applications = {}
-
+              let adminPortalData: { [key: string]: AdminPortalData } = {}
+               // collect complete data
               admin_portal_data.forEach(
                 (
                   document: firebase.firestore.QueryDocumentSnapshot<AdminPortalData>,
                 ) => {
-                  applications[document.id] = {
-                    applicationData: new ApplicationData(),
-                    adminPortalData: document.data(),
-                  }
+                  adminPortalData[document.id] = document.data()
                 },
               )
 
@@ -133,8 +132,11 @@ export const getApplicationsWithGivenStatus = async (
                 (
                   document: firebase.firestore.QueryDocumentSnapshot<ApplicationData>,
                 ) => {
-                  if (applications[document.id])
-                    applications[document.id].applicationData = document.data()
+                  if (adminPortalData[document.id])
+                    applications[document.id] = {
+                      applicationData: document.data(),
+                      adminPortalData: adminPortalData[document.id],
+                    }
                 },
               )
 
