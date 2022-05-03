@@ -1,22 +1,30 @@
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
-import AdminLayout from '../../../layouts/admin/admin-layout'
+import { Interviewer } from '../../../classes/interviewer'
+import { Reviewer } from '../../../classes/reviewer'
+import SetDropdown from '../../../components/Admin/SetDropdown'
+import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
+import InterviewMarksModal from '../../../components/modals/InterviewerMarksModel'
+import ReviewMarksModal from '../../../components/modals/ReviewMarksModal'
 import { auth } from '../../../firebase'
+import AdminLayout from '../../../layouts/admin/admin-layout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
+import { getInterviewerDetailsById } from '../../api/getInterviewerDetails'
 import { getReviewerDetailsById } from '../../api/getReviewerDetails'
-import { Reviewer } from '../../../classes/reviewer'
-import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
-import ReviewMarksModal from '../../../components/modals/ReviewMarksModal'
 import { updateApplicationStatus } from '../../api/updateApplicationStatus'
+import { updateInterviewSet } from '../../api/updateInterviewSet'
 import { updateReviewSet } from '../../api/updateReviewSet'
 
 export default function ViewApplication() {
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>()
   const [applicationData, setApplicationData] = useState<ApplicationData>()
   const [reviewers, setReviewers] = useState<{ [key: string]: Reviewer }>({})
+  const [interviewers, setInterviewers] = useState<{ [key: string]: Reviewer }>(
+    {},
+  )
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
@@ -28,6 +36,18 @@ export default function ViewApplication() {
         .then((reviewer: Reviewer) =>
           setReviewers((prevReviewers) => {
             return { ...prevReviewers, [reviewerId]: reviewer }
+          }),
+        )
+        .catch(() => {})
+    })
+  }
+
+  const updateInterviewerDetails = (data: AdminPortalData) => {
+    Object.keys(data.interview_marks).map((interviewerId: string) => {
+      getInterviewerDetailsById(interviewerId)
+        .then((interviewer: Interviewer) =>
+          setInterviewers((prevInterviewers) => {
+            return { ...prevInterviewers, [interviewerId]: interviewer }
           }),
         )
         .catch(() => {})
@@ -47,6 +67,7 @@ export default function ViewApplication() {
           setAdminPortalData(data)
           setPageReady(true)
           if (data && data.review_marks) updateReviewerDetails(data)
+          if (data && data.interview_marks) updateInterviewerDetails(data)
         })
         .catch(() => alert('Try again, network error!'))
     }
@@ -136,109 +157,80 @@ export default function ViewApplication() {
                         ))}
                       </div>
                     ) : null}
-                    {adminPortalData && adminPortalData.interview_marks ? (
-                      <div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Interview Marks Based on A
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.interview_marks.A}
-                          </p>
-                        </div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Interview Marks Based on B
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.interview_marks.B}
-                          </p>
-                        </div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Interview Marks Based on C
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.interview_marks.C}
-                          </p>
-                        </div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Interview Marks Based on D
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.interview_marks.D}
-                          </p>
-                        </div>
-                        <div className="flex justify-around my-5">
-                          <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                            Total Interview Marks
-                          </p>
-                          <p className="sm:text-lg font-bold">
-                            {adminPortalData.interview_marks.A +
-                              adminPortalData.interview_marks.B +
-                              adminPortalData.interview_marks.C +
-                              adminPortalData.interview_marks.D}
-                          </p>
-                        </div>
-                      </div>
-                    ) : null}
                     {!adminPortalData ||
                     adminPortalData.application_status != 2 ? null : (
                       <div className="flex flex-col sm:flex-row items-center sm:justify-around my-10">
                         <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                           Select Review Set
                         </p>
-                        <select
-                          className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-blue-850"
-                          value={adminPortalData.review_set}
+                        <SetDropdown
+                          set={adminPortalData.review_set}
                           onChange={(e) =>
                             updateReviewSet(applId, e.target.value)
                               .then(() => setChangeOccured(!changeOccured))
                               .catch(() => alert('Try again, network error!'))
                           }
-                        >
-                          <option
-                            label="Select"
-                            value={undefined || null || ''}
-                            className="bg-gray-400 hover:bg-blue-850"
-                          />
-                          {[
-                            'A',
-                            'B',
-                            'C',
-                            'D',
-                            'E',
-                            'F',
-                            'G',
-                            'H',
-                            'I',
-                            'J',
-                            'K',
-                            'L',
-                            'M',
-                            'N',
-                            'O',
-                            'P',
-                            'Q',
-                            'R',
-                            'S',
-                            'T',
-                            'U',
-                            'V',
-                            'W',
-                            'X',
-                            'Y',
-                            'Z',
-                          ].map((char, index) => (
-                            <option
-                              label={char}
-                              value={char}
-                              className="bg-gray-400 hover:bg-blue-850"
-                              key={index}
-                            />
-                          ))}
-                        </select>
+                          disabled={false}
+                        />
+                      </div>
+                    )}
+                    {adminPortalData && adminPortalData.interview_marks ? (
+                      <div>
+                        <h3 className="text-center text-2xl text-red-850 my-5">
+                          Total Interview Marks
+                        </h3>
+                        {Object.keys(interviewers).map(
+                          (interviewerId: string) => (
+                            <div
+                              className="flex justify-around my-5"
+                              key={interviewerId}
+                            >
+                              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                                Given by {interviewers[interviewerId].name}
+                              </p>
+                              <div className="sm:text-lg font-bold navgroup relative cursor-pointer">
+                                <p className="navbar-text px-2 rounded-lg">
+                                  {adminPortalData.interview_marks[
+                                    interviewerId
+                                  ].A +
+                                    adminPortalData.interview_marks[
+                                      interviewerId
+                                    ].B +
+                                    adminPortalData.interview_marks[
+                                      interviewerId
+                                    ].C +
+                                    adminPortalData.interview_marks[
+                                      interviewerId
+                                    ].D}
+                                </p>
+                                <InterviewMarksModal
+                                  interviewMarks={
+                                    adminPortalData.interview_marks[
+                                      interviewerId
+                                    ]
+                                  }
+                                />
+                              </div>
+                            </div>
+                          ),
+                        )}
+                      </div>
+                    ) : null}
+                    {!adminPortalData ||
+                    adminPortalData.application_status != 2 ? null : (
+                      <div className="flex flex-col sm:flex-row items-center sm:justify-around my-10">
+                        <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                          Select Interview Set
+                        </p>
+                        <SetDropdown
+                          set={adminPortalData.interview_set}
+                          onChange={(e) =>
+                            updateInterviewSet(applId, e.target.value)
+                              .then(() => setChangeOccured(!changeOccured))
+                              .catch(() => alert('Try again, network error!'))
+                          }
+                          disabled={false}
+                        />
                       </div>
                     )}
                     <div className="flex flex-col sm:flex-row items-center sm:justify-around my-10">
