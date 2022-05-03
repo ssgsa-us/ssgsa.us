@@ -28,7 +28,7 @@ export const getInterviewerSetApplications = async (interviewerSet: string) => {
         let applications: Applications = await firestore
           .collection('admin_portal_data')
           .where('interview_set', '==', interviewerSet)
-          .where('application_status', 'in', [2, 3])
+          .where('application_status', 'in', [4, 5])
           .withConverter(adminPortalDataConverter)
           .get()
           .then(

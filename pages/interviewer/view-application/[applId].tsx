@@ -209,7 +209,7 @@ export default function ViewApplication() {
                     </div>
                     <div className="flex justify-between my-5">
                       <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                        Total Review Marks (Out of{' '}
+                        Total Interview Marks (Out of{' '}
                         {Number(
                           process.env.NEXT_PUBLIC_INTERVIEW_INDEX_A_MAX_MARKS,
                         ) +
@@ -250,7 +250,7 @@ export default function ViewApplication() {
                                 B,
                                 C,
                                 D,
-                                3,
+                                5,
                               )
                                 .then(() => {
                                   alert('Succesfully Updated!')
@@ -282,12 +282,12 @@ export default function ViewApplication() {
                     <div className="flex justify-center my-5">
                       <button
                         className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-                          adminPortalData.application_status >= 5 || !remark
+                          adminPortalData.application_status >= 6 || !remark
                             ? 'bg-red-860 cursor-not-allowed'
                             : 'bg-red-850'
                         }`}
                         onClick={() =>
-                          adminPortalData.application_status >= 5 || !remark
+                          adminPortalData.application_status >= 6 || !remark
                             ? null
                             : updateInterviewRemark(
                                 applId,
