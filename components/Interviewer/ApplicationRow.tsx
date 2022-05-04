@@ -139,13 +139,13 @@ export default function ApplicationRow({
       <td className="border border-blue-850 p-2 text-center">
         <button
           className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-            application.adminPortalData.application_status >= 5 ||
+            application.adminPortalData.application_status >= 6 ||
             (!A && !B && !C && !D)
               ? 'bg-red-860 cursor-not-allowed'
               : 'bg-red-850'
           }`}
           onClick={() =>
-            application.adminPortalData.application_status >= 5 ||
+            application.adminPortalData.application_status >= 6 ||
             (!A && !B && !C && !D)
               ? null
               : updateInterviewMarks(

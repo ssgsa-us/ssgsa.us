@@ -234,13 +234,13 @@ export default function ViewApplication() {
                     <div className="flex justify-center my-5">
                       <button
                         className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-                          adminPortalData.application_status >= 5 ||
+                          adminPortalData.application_status >= 6 ||
                           (!A && !B && !C && !D)
                             ? 'bg-red-860 cursor-not-allowed'
                             : 'bg-red-850'
                         }`}
                         onClick={() =>
-                          adminPortalData.application_status >= 5 ||
+                          adminPortalData.application_status >= 6 ||
                           (!A && !B && !C && !D)
                             ? null
                             : updateInterviewMarks(
