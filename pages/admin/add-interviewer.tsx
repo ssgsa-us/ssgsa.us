@@ -48,6 +48,11 @@ export default function AddInterviewer() {
           personal_email: interviewer[1],
           name: interviewer[2],
           set: interviewer[3],
+          zoom_link: interviewer[4],
+          day: interviewer[5],
+          date: interviewer[6],
+          begin_time: interviewer[7],
+          end_time: interviewer[8],
           password: password,
         }
         emailjs.send(
