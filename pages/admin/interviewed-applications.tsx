@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import AdminLayout from '../../layouts/admin/admin-layout'
+import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationsTable from '../../components/Admin/ApplicationsTable'
 import { auth } from '../../firebase'
+import AdminLayout from '../../layouts/admin/admin-layout'
 import { getApplicationsWithGivenStatus } from '../api/getApplicationsResponse'
 
 type Applications = {
@@ -14,7 +14,7 @@ type Applications = {
   }
 }
 
-export default function RemovedApplications() {
+export default function InterviewedApplications() {
   const [applications, setApplications] = useState<Applications>()
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
@@ -42,7 +42,7 @@ export default function RemovedApplications() {
       auth.currentUser &&
       auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
     )
-      getApplicationsWithGivenStatus(1)
+      getApplicationsWithGivenStatus(5)
         .then((data) => {
           setApplications(data)
           setPageReady(true)

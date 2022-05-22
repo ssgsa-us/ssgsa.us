@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import { auth } from '../../firebase'
-import { updateReviewMarks } from '../../pages/api/updateReviewMarks'
+import { updateInterviewMarks } from '../../pages/api/updateInterviewMarks'
 
 type Application = {
   applicationData: ApplicationData
@@ -25,16 +25,14 @@ export default function ApplicationRow({
   const [B, setB] = useState<number>(0)
   const [C, setC] = useState<number>(0)
   const [D, setD] = useState<number>(0)
-  const [E, setE] = useState<number>(0)
 
   useEffect(() => {
-    let review_marks = application.adminPortalData.review_marks
-    if (review_marks && review_marks[auth.currentUser.uid]) {
-      setA(review_marks[auth.currentUser.uid].A)
-      setB(review_marks[auth.currentUser.uid].B)
-      setC(review_marks[auth.currentUser.uid].C)
-      setD(review_marks[auth.currentUser.uid].D)
-      setE(review_marks[auth.currentUser.uid].E)
+    let interview_marks = application.adminPortalData.interview_marks
+    if (interview_marks && interview_marks[auth.currentUser.uid]) {
+      setA(interview_marks[auth.currentUser.uid].A)
+      setB(interview_marks[auth.currentUser.uid].B)
+      setC(interview_marks[auth.currentUser.uid].C)
+      setD(interview_marks[auth.currentUser.uid].D)
     }
   }, [])
 
@@ -65,7 +63,7 @@ export default function ApplicationRow({
           : '-'}
       </td>
       <td className="border border-blue-850 p-2 text-center">
-        <Link href={`/reviewer/view-application/${applicationId}`}>
+        <Link href={`/interviewer/view-application/${applicationId}`}>
           <a className="text-white text-base md:text-lg bg-blue-850 py-1 px-3 rounded-lg">
             View
           </a>
@@ -77,10 +75,10 @@ export default function ApplicationRow({
           type="number"
           value={A}
           min={0}
-          max={Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS)}
+          max={Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_A_MAX_MARKS)}
           onChange={(e) =>
             Number(e.target.value) >
-            Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS)
+            Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_A_MAX_MARKS)
               ? null
               : setA(Number(e.target.value))
           }
@@ -93,10 +91,10 @@ export default function ApplicationRow({
           type="number"
           value={B}
           min={0}
-          max={Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS)}
+          max={Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_B_MAX_MARKS)}
           onChange={(e) =>
             Number(e.target.value) >
-            Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS)
+            Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_B_MAX_MARKS)
               ? null
               : setB(Number(e.target.value))
           }
@@ -109,10 +107,10 @@ export default function ApplicationRow({
           type="number"
           value={C}
           min={0}
-          max={Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS)}
+          max={Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_C_MAX_MARKS)}
           onChange={(e) =>
             Number(e.target.value) >
-            Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS)
+            Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_C_MAX_MARKS)
               ? null
               : setC(Number(e.target.value))
           }
@@ -125,10 +123,10 @@ export default function ApplicationRow({
           type="number"
           value={D}
           min={0}
-          max={Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS)}
+          max={Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_D_MAX_MARKS)}
           onChange={(e) =>
             Number(e.target.value) >
-            Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS)
+            Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_D_MAX_MARKS)
               ? null
               : setD(Number(e.target.value))
           }
@@ -136,45 +134,28 @@ export default function ApplicationRow({
         />
       </td>
       <td className="border border-blue-850 p-2 text-center">
-        <input
-          name="Name"
-          type="number"
-          value={E}
-          min={0}
-          max={Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS)}
-          onChange={(e) =>
-            Number(e.target.value) >
-            Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS)
-              ? null
-              : setE(Number(e.target.value))
-          }
-          className="w-full rounded-xl p-2"
-        />
-      </td>
-      <td className="border border-blue-850 p-2 text-center">
-        {A + B + C + D + E}
+        {A + B + C + D}
       </td>
       <td className="border border-blue-850 p-2 text-center">
         <button
           className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-            application.adminPortalData.application_status >= 5 ||
-            (!A && !B && !C && !D && !E)
+            application.adminPortalData.application_status >= 6 ||
+            (!A && !B && !C && !D)
               ? 'bg-red-860 cursor-not-allowed'
               : 'bg-red-850'
           }`}
           onClick={() =>
-            application.adminPortalData.application_status >= 5 ||
-            (!A && !B && !C && !D && !E)
+            application.adminPortalData.application_status >= 6 ||
+            (!A && !B && !C && !D)
               ? null
-              : updateReviewMarks(
+              : updateInterviewMarks(
                   applicationId,
                   auth.currentUser.uid,
                   A,
                   B,
                   C,
                   D,
-                  E,
-                  3,
+                  5,
                 )
                   .then(() => alert('Succesfully Updated'))
                   .catch(() => alert('Try again, network error!'))

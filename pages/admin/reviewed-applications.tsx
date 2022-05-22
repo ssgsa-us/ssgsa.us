@@ -14,7 +14,7 @@ type Applications = {
   }
 }
 
-export default function RemovedApplications() {
+export default function ReviewedApplications() {
   const [applications, setApplications] = useState<Applications>()
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
@@ -42,7 +42,7 @@ export default function RemovedApplications() {
       auth.currentUser &&
       auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
     )
-      getApplicationsWithGivenStatus(1)
+      getApplicationsWithGivenStatus(3)
         .then((data) => {
           setApplications(data)
           setPageReady(true)

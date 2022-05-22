@@ -2,10 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import logo from '../public/logo.png'
-import { useAuth } from '../context/AuthUserContext'
+import logo from '../../public/logo.png'
+import { useAuth } from '../../context/AuthUserContext'
 
-export default function ReviewerHeader() {
+export default function InterviewerHeader() {
   const [active, setActive] = useState(false)
   const router = useRouter()
   const { signOut } = useAuth()
@@ -37,7 +37,7 @@ export default function ReviewerHeader() {
       <div className="mx-auto md:mx-0 px-4 md:px-1">
         <div className="md:hidden flex justify-between">
           <div className="text-white m-1 text-xl font-bold">
-            SSGSA Reviewer Portal
+            SSGSA Interviewer Portal
           </div>
 
           <div className="flex items-center">
@@ -74,10 +74,10 @@ export default function ReviewerHeader() {
         >
           <div className="flex flex-col w-full md:flex-row md:justify-center lg:ml-28">
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
-              <Link href="/reviewer">
+              <Link href="/interviewer">
                 <a
                   className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
-                    router.pathname == '/reviewer'
+                    router.pathname == '/interviewer'
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                   }`}
@@ -87,10 +87,10 @@ export default function ReviewerHeader() {
               </Link>
             </div>
             <div className="bg-white pt-0.5 md:pt-0 md:px-0.5">
-              <Link href="/reviewer/applications">
+              <Link href="/interviewer/applications">
                 <a
                   className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
-                    router.pathname == '/reviewer/applications'
+                    router.pathname == '/interviewer/applications'
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                   }`}

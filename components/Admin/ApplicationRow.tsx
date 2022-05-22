@@ -3,10 +3,14 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import { Reviewer } from '../../classes/reviewer'
+import { getInterviewerDetailsById } from '../../pages/api/getInterviewerDetails'
 import { getReviewerDetailsById } from '../../pages/api/getReviewerDetails'
 import { updateApplicationStatus } from '../../pages/api/updateApplicationStatus'
+import { updateInterviewSet } from '../../pages/api/updateInterviewSet'
 import { updateReviewSet } from '../../pages/api/updateReviewSet'
+import InterviewMarksModal from '../modals/InterviewerMarksModel'
 import ReviewMarksModal from '../modals/ReviewMarksModal'
+import SetDropdown from './SetDropdown'
 
 type Props = {
   applicationId: string
@@ -27,8 +31,18 @@ type ReviewMarks = {
   E: number
   remark: string
 }
+type InterviewMarks = {
+  A: number
+  B: number
+  C: number
+  D: number
+  remark: string
+}
 
 type ReviewerMarks = { [key: number]: { name: string; marks: ReviewMarks } }
+type InterviewerMarks = {
+  [key: number]: { name: string; marks: InterviewMarks }
+}
 
 export default function ApplicationRow({
   applicationId,
@@ -47,6 +61,17 @@ export default function ApplicationRow({
     4: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
     5: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
     6: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
+  })
+  const [interviewSet, setInterviewSet] = useState<string>(
+    application.adminPortalData.interview_set,
+  )
+  const [interviewerMarks, setInterviewerMarks] = useState<InterviewerMarks>({
+    1: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
+    2: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
+    3: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
+    4: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
+    5: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
+    6: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
   })
 
   const reviewMarkComponent = (reviewMarks: {
@@ -67,6 +92,23 @@ export default function ApplicationRow({
     </div>
   )
 
+  const interviewMarkComponent = (interviewMarks: {
+    name: string
+    marks: InterviewMarks
+  }) => (
+    <div>
+      <p className="navgroup-text">
+        {interviewMarks.marks.A +
+          interviewMarks.marks.B +
+          interviewMarks.marks.C +
+          interviewMarks.marks.D}
+      </p>
+      {interviewMarks.name == '-' ? null : (
+        <InterviewMarksModal interviewMarks={interviewMarks.marks} />
+      )}
+    </div>
+  )
+
   useEffect(() => {
     if (application.adminPortalData.review_marks)
       Object.keys(application.adminPortalData.review_marks).map(
@@ -81,6 +123,29 @@ export default function ApplicationRow({
                       name: reviewer.name,
                       marks:
                         application.adminPortalData.review_marks[reviewerId],
+                    },
+                  }
+                })
+            })
+            .catch(() => {})
+        },
+      )
+
+    if (application.adminPortalData.interview_marks)
+      Object.keys(application.adminPortalData.interview_marks).map(
+        async (interviewerId: string, index: number) => {
+          await getInterviewerDetailsById(interviewerId)
+            .then((interview: Reviewer) => {
+              if (interview)
+                setInterviewerMarks((prevInterviewerMarks) => {
+                  return {
+                    ...prevInterviewerMarks,
+                    [index + 1]: {
+                      name: interview.name,
+                      marks:
+                        application.adminPortalData.interview_marks[
+                          interviewerId
+                        ],
                     },
                   }
                 })
@@ -169,10 +234,8 @@ export default function ApplicationRow({
         )}
       </td>
       <td className="border border-blue-850 p-2 text-center">
-        <select
-          className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-blue-850"
-          value={reviewSet}
-          disabled={application.adminPortalData.application_status != 2}
+        <SetDropdown
+          set={reviewSet}
           onChange={(e) => {
             let set = e.target.value
             updateReviewSet(applicationId, set)
@@ -181,48 +244,8 @@ export default function ApplicationRow({
               })
               .catch(() => alert('Try again, network error!'))
           }}
-        >
-          <option
-            label="Select"
-            value={undefined || null || ''}
-            className="bg-gray-400 hover:bg-blue-850"
-          />
-          {[
-            'A',
-            'B',
-            'C',
-            'D',
-            'E',
-            'F',
-            'G',
-            'H',
-            'I',
-            'J',
-            'K',
-            'L',
-            'M',
-            'N',
-            'O',
-            'P',
-            'Q',
-            'R',
-            'S',
-            'T',
-            'U',
-            'V',
-            'W',
-            'X',
-            'Y',
-            'Z',
-          ].map((char: string, index: number) => (
-            <option
-              label={char}
-              value={char}
-              className="bg-gray-400 hover:bg-blue-850"
-              key={index}
-            />
-          ))}
-        </select>
+          disabled={application.adminPortalData.application_status != 2}
+        />
       </td>
       <td className="border border-blue-850 p-2 text-center">
         {reviewerMarks[1].name}
@@ -285,14 +308,54 @@ export default function ApplicationRow({
         )}
       </td>
       <td className="border border-blue-850 p-2 text-center">
-        {!application.adminPortalData.application_status ||
-        application.adminPortalData.application_status < 5 ||
-        !application.adminPortalData.interview_marks
-          ? '-'
-          : application.adminPortalData.interview_marks.A +
-            application.adminPortalData.interview_marks.B +
-            application.adminPortalData.interview_marks.C +
-            application.adminPortalData.interview_marks.D}
+        <SetDropdown
+          set={interviewSet}
+          onChange={(e) => {
+            let set = e.target.value
+            updateInterviewSet(applicationId, set)
+              .then(() => {
+                setInterviewSet(set)
+              })
+              .catch(() => alert('Try again, network error!'))
+          }}
+          disabled={application.adminPortalData.application_status != 4}
+        />
+      </td>
+      <td className="border border-blue-850 p-2 text-center">
+        {interviewerMarks[1].name}
+      </td>
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+        {interviewMarkComponent(interviewerMarks[1])}
+      </td>
+      <td className="border border-blue-850 p-2 text-center">
+        {interviewerMarks[2].name}
+      </td>
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+        {interviewMarkComponent(interviewerMarks[2])}
+      </td>
+      <td className="border border-blue-850 p-2 text-center">
+        {interviewerMarks[3].name}
+      </td>
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+        {interviewMarkComponent(interviewerMarks[3])}
+      </td>
+      <td className="border border-blue-850 p-2 text-center">
+        {interviewerMarks[4].name}
+      </td>
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+        {interviewMarkComponent(interviewerMarks[4])}
+      </td>
+      <td className="border border-blue-850 p-2 text-center">
+        {interviewerMarks[5].name}
+      </td>
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+        {interviewMarkComponent(interviewerMarks[5])}
+      </td>
+      <td className="border border-blue-850 p-2 text-center">
+        {interviewerMarks[6].name}
+      </td>
+      <td className="border border-blue-850 p-2 text-center navgroup relative hover:bg-blue-850 cursor-pointer">
+        {interviewMarkComponent(interviewerMarks[6])}
       </td>
     </tr>
   )

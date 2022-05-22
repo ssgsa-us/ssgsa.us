@@ -13,10 +13,13 @@ type ReviewMarks = {
 }
 
 type InterviewMarks = {
-  A: number
-  B: number
-  C: number
-  D: number
+  [key: string]: {
+    A: number
+    B: number
+    C: number
+    D: number
+    remark: string
+  }
 }
 
 // Values of application status are:
@@ -32,17 +35,20 @@ export class AdminPortalData {
   review_marks: ReviewMarks
   review_set: string
   interview_marks: InterviewMarks
+  interview_set: string
 
   updateDetails(
     application_status: number,
     review_marks: ReviewMarks,
     review_set: string,
     interview_marks: InterviewMarks,
+    interview_set: string,
   ) {
     this.application_status = application_status
     this.review_marks = review_marks
     this.review_set = review_set
     this.interview_marks = interview_marks
+    this.interview_set = interview_set
   }
 }
 
@@ -63,6 +69,7 @@ export const adminPortalDataConverter = {
       data.review_marks,
       data.review_set,
       data.interview_marks,
+      data.interview_set,
     )
     return adminPortalData
   },

@@ -71,6 +71,9 @@ export default function ApplicationsTable({
                 Finalise For Interview
               </th>
               <th className="border border-blue-850 p-2" rowSpan={3}>
+                Interview Set
+              </th>
+              <th className="border border-blue-850 p-2" colSpan={12}>
                 Interviewer Marks
               </th>
             </tr>
@@ -93,8 +96,38 @@ export default function ApplicationsTable({
               <th className="border border-blue-850 p-2" colSpan={2}>
                 Reviewer 6
               </th>
+              <th className="border border-blue-850 p-2" colSpan={2}>
+                Interviewer 1
+              </th>
+              <th className="border border-blue-850 p-2" colSpan={2}>
+                Interviewer 2
+              </th>
+              <th className="border border-blue-850 p-2" colSpan={2}>
+                Interviewer 3
+              </th>
+              <th className="border border-blue-850 p-2" colSpan={2}>
+                Interviewer 4
+              </th>
+              <th className="border border-blue-850 p-2" colSpan={2}>
+                Interviewer 5
+              </th>
+              <th className="border border-blue-850 p-2" colSpan={2}>
+                Interviewer 6
+              </th>
             </tr>
             <tr>
+              <th className="border border-blue-850 p-2">Name</th>
+              <th className="border border-blue-850 p-2">Marks</th>
+              <th className="border border-blue-850 p-2">Name</th>
+              <th className="border border-blue-850 p-2">Marks</th>
+              <th className="border border-blue-850 p-2">Name</th>
+              <th className="border border-blue-850 p-2">Marks</th>
+              <th className="border border-blue-850 p-2">Name</th>
+              <th className="border border-blue-850 p-2">Marks</th>
+              <th className="border border-blue-850 p-2">Name</th>
+              <th className="border border-blue-850 p-2">Marks</th>
+              <th className="border border-blue-850 p-2">Name</th>
+              <th className="border border-blue-850 p-2">Marks</th>
               <th className="border border-blue-850 p-2">Name</th>
               <th className="border border-blue-850 p-2">Marks</th>
               <th className="border border-blue-850 p-2">Name</th>
