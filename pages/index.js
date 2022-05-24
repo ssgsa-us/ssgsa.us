@@ -13,8 +13,9 @@ export default function Home() {
         <marquee className="flex items-center">
           <Link href="/application-portal">
             <a>
-              The decisions for the first round of review will be communicated
-              by Sunday, May 8 at 11:59 PM EST via email.
+              The interviews for the current session will take place on May 28
+              and 29. The final list of awardees will be released soon. Stay
+              tuned
             </a>
           </Link>
         </marquee>
