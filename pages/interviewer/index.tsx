@@ -83,7 +83,7 @@ export default function InterviewerPortal() {
             <p className="my-5 text-lg text-blue-850">
               After interviewing each candidate, each panelist is expected to
               record the points based on their own impartial and rational
-              judgment of the candidate's aforementioned abilities. To this end,
+              judgment of the candidate&apos;s aforementioned abilities. To this end,
               use our web-portal where you can easily enter and record the
               points. This has been already discussed in item-2: Candidate
               Background. We recommend you to record the points on an excel
