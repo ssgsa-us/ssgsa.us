@@ -141,7 +141,7 @@ export default function Header() {
                       </Link>
                     </div>
                   </div>
-                 
+
                   <Link href="/about_sirsyed">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       About Sir Syed
@@ -203,6 +203,11 @@ export default function Header() {
                   <Link href="/alumni#Awardees">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
                       Awardees
+                    </a>
+                  </Link>
+                  <Link href="/alumni#Scholars">
+                    <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
+                      Successful Scholars
                     </a>
                   </Link>
                 </div>
