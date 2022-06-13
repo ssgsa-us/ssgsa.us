@@ -33,19 +33,19 @@ const DateTable = ({ bgcolor, textcolor, textbold }) => {
             <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
               Announcement of Sir Syed Global Scholar Awardees 2022-23
             </td>
-            <td className="border-2 border-gray-300 p-2">To be announced</td>
+            <td className="border-2 border-gray-300 p-2">June 6, 2022</td>
           </tr>
           <tr>
             <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
               Orientation
             </td>
-            <td className="border-2 border-gray-300 p-2">To be announced</td>
+            <td className="border-2 border-gray-300 p-2">June 11, 2022</td>
           </tr>
           <tr>
             <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
               Allotment of Mentors
             </td>
-            <td className="border-2 border-gray-300 p-2">To be announced</td>
+            <td className="border-2 border-gray-300 p-2">June 18, 2022</td>
           </tr>
           <tr>
             <td className={`${bgcolor} ${textcolor} ${textbold} p-2`}>
