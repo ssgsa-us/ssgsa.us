@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/dist/client/link'
+
 const Apply = () => {
   return (
     <div className="mt-8 lg:mt-0 lg:ml-4 lg:w-1/3 flex justify-center">
@@ -35,9 +36,11 @@ const Apply = () => {
               <Image src="/donate2.png" alt="Donate" width={280} height={30} />
             </a>
           </div>
-          <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
-             target="_blank"
-             rel="noopener noreferrer">
+          <a
+            href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <button className="px-10 py-1 block mx-auto bg-red-850 font-black text-lg text-white text-center">
               Donate Now
             </button>
@@ -98,12 +101,12 @@ const Apply = () => {
           </button>
         </a>
         <a
-          href="/assets/SSGSA_Convention_2020_Press_Release.pdf"
+          href="/assets/PressRelease_SSGSA_2022_23.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
           <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
-            Press Release Statement of SSGSA Convention 2020
+            Press Release of SSGSA 2022-2023
           </button>
         </a>
 

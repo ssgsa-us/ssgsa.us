@@ -1,5 +1,14 @@
 export const CarouselData = [
   {
+    imgSrc: '/Scholars_Orientation_2022.png',
+    imgAlt: 'Scholars Orientation 2022 Photo',
+    heading: 'SSGSA Results announced',
+    width: 1000,
+    height: 550,
+    content:
+      "In the scholar's orientation (session 2022-23), 27 new members of the SSGSA family were given a brief introduction to the SSGSA. They were provided with the general guidelines on the application and mentorship process. Amongst 13 successful SSGSA scholars from the previous year, a few shared their success stories. It also featured a talk from Dr. Zafeer Ahmad, who represented the AMU Alumni Association of Greater Chicago, one of our major donors.",
+  },
+  {
     imgSrc: '/Convention_Collage.png',
     imgAlt: 'Convention Photo',
     heading: 'SSGSA Convention 2020',
