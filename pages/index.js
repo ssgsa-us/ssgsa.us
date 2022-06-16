@@ -11,9 +11,9 @@ export default function Home() {
     <MainLayout>
       <div className="bg-gray-350 text-red-850 font-black w-screen -ml-2 sm:-ml-5 md:-ml-10 lg:-ml-20 xl:-ml-40 mt-8 lg:mr-2 lg:p-3 p-2">
         <marquee className="flex items-center">
-          <Link href="/assets/PressRelease-SSGSA-2021-22.pdf">
+          <Link href="/assets/PressRelease_SSGSA_2022_23.pdf">
             <a>
-              SSGSA results (2021-2022) announced
+              SSGSA results (2022-2023) announced
             </a>
           </Link>
         </marquee>
