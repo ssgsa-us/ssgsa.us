@@ -2,7 +2,7 @@ export const CarouselData = [
   {
     imgSrc: '/Scholars_Orientation_2022.png',
     imgAlt: 'Scholars Orientation 2022 Photo',
-    heading: 'SSGSA Results announced',
+    heading: 'SSGSA Orientation Session 2022-23',
     width: 1000,
     height: 550,
     content:
