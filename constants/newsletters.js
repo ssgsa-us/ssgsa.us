@@ -1,3 +1,10 @@
+export const monthStories = [
+  {
+    title: 'June 2022',
+    link: 'https://sh1.sendinblue.com/w221ebtz9pfe.html?t=1656205080',
+  },
+]
+
 export const newsletters = [
   {
     title: '2022',
