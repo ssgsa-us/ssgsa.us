@@ -138,11 +138,6 @@ export const resources = [
         link: 'https://www.reddit.com/r/GRE/top/',
       },
       {
-        title: 'Magoosh GRE Book Reviews',
-        text: 'Check before you buy a book for preparation',
-        link: 'https://magoosh.com/gre/2011/new-gre-book-reviews/',
-      },
-      {
         title: 'Quora Topic on GRE',
         text: 'Read about preparation strategies, ask questions and get advice from top writers on Quora',
         link: 'https://www.quora.com/topic/Graduate-Record-Examination-GRE-1/faq',
@@ -190,12 +185,7 @@ export const resources = [
       {
         title: 'Notefull TOEFL Prep Material',
         text: 'Handouts and other useful resources on TOEFL preparation strategies',
-        link: 'https://www.notefull.com/content.php?pgID=250',
-      },
-      {
-        title: 'Notefull TOEFL Youtube Channel',
-        text: 'Tutorial vidoes targetting each section of TOEFL, specially tutorials on speaking section',
-        link: 'https://www.notefull.com/content.php?pgID=250',
+        link: 'https://www.notefull.com/',
       },
       {
         title: 'Top Section TOEFL Subreddit',
