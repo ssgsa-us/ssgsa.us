@@ -45,18 +45,6 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            <div className="flex justify-center">
-              <Link href="https://drive.google.com/drive/folders/0B7sWQEWGG8KVNzV4UUlnMTNxenc?usp=sharing">
-                <a
-                  className={
-                    'flex justify-center items-center text-center text-white font-bold w-52 h-24 bg-red-850 rounded-full'
-                  }
-                  target="_blank"
-                >
-                  CONSOLIDATED PREP MATERIAL
-                </a>
-              </Link>
-            </div>
           </div>
         </div>
       </div>
