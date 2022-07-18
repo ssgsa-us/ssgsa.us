@@ -42,7 +42,7 @@ export default function Header() {
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
       </div>
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="mx-2 md:mx-5 lg:mx-10 px-4">
         <div className="md:hidden flex justify-between">
           <div className="text-white m-1 text-xl font-bold">SSGSA</div>
 
@@ -90,7 +90,7 @@ export default function Header() {
                 </Link>
               </div>
               <div
-                className={`group w-full h-full hover:bg-blue-850 ${
+                className={`group h-full hover:bg-blue-850 ${
                   router.pathname == '/about' && 'bg-blue-850'
                 }`}
               >
@@ -219,6 +219,17 @@ export default function Header() {
               >
                 <Link href="/resources">
                   <a className="py-4 px-2 text-white text-sm">RESOURCES</a>
+                </Link>
+              </div>
+              <div
+                className={`md:flex md:flex-col md:justify-center h-full hover:bg-blue-850 ${
+                  router.pathname == '/policiesAndProcedures' && 'bg-blue-850'
+                }`}
+              >
+                <Link href="/policiesAndProcedures">
+                  <a className="py-4 px-2 text-white text-sm">
+                    POLICIES AND PROCEDURES
+                  </a>
                 </Link>
               </div>
             </div>
