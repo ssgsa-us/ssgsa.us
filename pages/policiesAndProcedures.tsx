@@ -6,7 +6,7 @@ export default function Home() {
       <div>
         <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 flex flex-col justify-center">
           <h1 className="mb-8 bg-blue-850 text-xl lg:text-2xl text-center text-white font-extrabold py-2 px-6 sm:px-12 rounded-tl-3xl rounded-br-3xl">
-            What is SSGSA
+            Policies and Procedures
           </h1>
           <div className="text-justify">
             <div className="my-5">
