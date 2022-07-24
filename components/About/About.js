@@ -17,8 +17,8 @@ const About = () => {
           </p>
           <ul style={{ listStyle: 'disc' }} className="ml-2 p-2">
             <li className="m-2">
-              Mentoring meritorious students so they are successful in getting
-              admission at prestigious graduate programs across the globe.
+              Mentoring and financially supporting meritorious students so they are successful
+              in getting admission at prestigious graduate programs across the globe.
             </li>
             <li className="m-2">
               Expanding our strong formal network of academic mentors who also
