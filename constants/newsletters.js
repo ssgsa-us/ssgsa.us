@@ -3,6 +3,10 @@ export const monthStories = [
     title: 'June 2022',
     link: 'https://sh1.sendinblue.com/w221ebtz9pfe.html?t=1656205080',
   },
+  {
+    title: 'July 2022',
+    link: 'https://7luxg.r.ag.d.sendibm3.com/mk/mr/sG9VbVvqL5lGF81YSozQhDBFipf0Gsr9y9MwXgnuD7oJ0m_uI1h2SuiJQEICQ6VyusMyp-ILuorw_0ht1AJpswQ3aZfyj21kn2ZlqmmRQQnWxiguOqasYvHWg383CVsUZoEF',
+  },
 ]
 
 export const newsletters = [
