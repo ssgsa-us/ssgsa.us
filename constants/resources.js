@@ -28,16 +28,6 @@ export const resources = [
         link: 'https://research.jhu.edu/rdt/funding-opportunities/postdoctoral/',
       },
       {
-        title: 'Fully funded programs Directory',
-        text: 'Directory of Fully Funded Graduate Programs',
-        link: '/assets/Scholarship_Network_The_Directory_of_Fully_Funded_Graduate_Programs_and_Full_Funding_Awards_03.pdf',
-      },
-      {
-        title: 'SSGSA Guide to German universities',
-        text: 'How to apply to German universities',
-        link: '/assets/SSGSA_Germany_Admission_guidelines.pdf',
-      },
-      {
         title: 'Resources for Physics Grad schools in US',
         text: 'Browse details of most US Physics Graduate Programs',
         link: 'https://www.gradschoolshopper.com/',
