@@ -39,6 +39,7 @@ const UpperCarousel = () => {
                     alt={data.imgAlt}
                     width={data.width}
                     height={data.height}
+                    priority={true}
                   />
                 </div>
               </div>

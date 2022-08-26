@@ -39,6 +39,7 @@ const Scholar = () => {
                     src={scholar.imageUrl}
                     alt={scholar.name}
                     layout="fill"
+                    priority={true}
                   />
                 </div>
               </div>

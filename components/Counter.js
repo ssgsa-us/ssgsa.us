@@ -12,7 +12,12 @@ const Counter = () => {
       }}
     >
       <div className="absolute overflow-hidden z-n10 w-5/6 lg:w-3/4 xl:w-2/3">
-        <Image layout="responsive" src={worldMap} alt="World Map" />
+        <Image
+          layout="responsive"
+          src={worldMap}
+          alt="World Map"
+          priority={true}
+        />
       </div>
       <div>
         <CountUp start={0} end={22} duration={1} />
