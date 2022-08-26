@@ -13,11 +13,6 @@ export const resources = [
         link: 'http://app2us.com/',
       },
       {
-        title: 'SSGSA Guide to Germany',
-        text: 'A resource for students applying to universities in Germany',
-        link: '/assets/SSGSA_Admission_guide_Germany.pdf',
-      },
-      {
         title: 'Graduate student funding opportunities',
         text: 'Free lists of grants and fellowships around the world available online',
         link: 'https://research.jhu.edu/rdt/funding-opportunities/graduate/',
@@ -31,6 +26,21 @@ export const resources = [
         title: 'Resources for Physics Grad schools in US',
         text: 'Browse details of most US Physics Graduate Programs',
         link: 'https://www.gradschoolshopper.com/',
+      },
+    ],
+  },
+  {
+    heading: 'SSGSA country-specific guides',
+    resources: [
+      {
+        title: 'SSGSA Guide to Germany',
+        text: 'A resource for students applying to universities in Germany',
+        link: '/assets/SSGSA_Admission_guide_Germany.pdf',
+      },
+      {
+        title: 'SSGSA Guide to France',
+        text: 'A resource for students applying to universities in Germany',
+        link: '/assets/SSGSA_Gudie_to_France.pdf',
       },
     ],
   },
