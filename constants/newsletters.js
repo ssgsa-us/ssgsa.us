@@ -7,6 +7,10 @@ export const monthStories = [
     title: 'July 2022',
     link: 'https://7luxg.r.ag.d.sendibm3.com/mk/mr/sG9VbVvqL5lGF81YSozQhDBFipf0Gsr9y9MwXgnuD7oJ0m_uI1h2SuiJQEICQ6VyusMyp-ILuorw_0ht1AJpswQ3aZfyj21kn2ZlqmmRQQnWxiguOqasYvHWg383CVsUZoEF',
   },
+  {
+    title: 'August 2022',
+    link: 'https://7luxg.r.ag.d.sendibm3.com/mk/mr/e09ctahXzdXXsrFbn00u6GjVxB5rljOeaYZyQv7kBHg0YhHZ_3Pg4cYZzWU5Sbs26Q1bA0ni2wxJEVTZcDwIBy83Q0AVz7kkTxhNg4p5iIu0UDGjTkDQfjefeXIPWfFQsn_G',
+  },
 ]
 
 export const newsletters = [
