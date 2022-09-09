@@ -45,6 +45,16 @@ export const resources = [
     ],
   },
   {
+    heading: 'SSGSA document-specific guides',
+    resources: [
+      {
+        title: 'Statement of Purpose',
+        text: 'Essential components of the statement of purpose',
+        link: '/assets/SSGSA_SOP_Guide.pdf',
+      },
+    ],
+  },
+  {
     heading: 'SSGSA webinars',
     resources: [
       {
