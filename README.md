@@ -50,14 +50,22 @@ The Sir Syed Global Scholar Award (SSGSA) is annually administered by the Sir Sy
      - Classname bg-green-860 mention color "#00a200"
   
   ### Contribution
-   - Create a branch with the specific name (according to the changes)
+   - First fork the repository and setup it if you have not done yet, otherwise make sure that your forked repo is up to date with this repo.
+   - Next find an issue that you are interested in addressing or a feature that you would like to add.
+   - Open that issue on github if not already open.
+   - Create a branch with the specific name (according to the changes) for your fix
       ```
         git checkout -b <branch name>
       ```
    - Make required changes and stage them
-      ```
-        git add .
-      ```
+     - To add all files
+        ```
+          git add .
+        ```
+     - To add specific files
+        ```
+          git add <changed file paths>
+        ```
    - Commit all changes with the specific commit message and description (if required)
      - Without description
         ```
@@ -71,4 +79,9 @@ The Sir Syed Global Scholar Award (SSGSA) is annually administered by the Sir Sy
       ```
         git push origin <branch name>
       ```
-   - Create a pull request to this repository and mention the issue (if required)
+   - Create a pull request to this repository and mention the respective github issue.
+   - Title the pull request with a short description which explains the changes you made.
+   - Wait for the pull request to be reviewed by a maintainer.
+   - Make changes to the pull request if the reviewing maintainer recommends them.
+   - Celebrate your success after your pull request is merged!
+
