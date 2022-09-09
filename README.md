@@ -53,7 +53,7 @@ The Sir Syed Global Scholar Award (SSGSA) is annually administered by the Sir Sy
    - First fork the repository and setup it if you have not done yet, otherwise make sure that your forked repo is up to date with this repo.
    - Next find an issue that you are interested in addressing or a feature that you would like to add.
    - Open that issue on github if not already open.
-   - Create a branch with the specific name (according to the changes) for your fix
+   - Create a branch with the specific name for your fix (Try to follow the blog [Branch Naming Conventions](https://deepsource.io/blog/git-branch-naming-conventions))
       ```
         git checkout -b <branch name>
       ```
@@ -84,4 +84,8 @@ The Sir Syed Global Scholar Award (SSGSA) is annually administered by the Sir Sy
    - Wait for the pull request to be reviewed by a maintainer.
    - Make changes to the pull request if the reviewing maintainer recommends them.
    - Celebrate your success after your pull request is merged!
+
+   - ### Note
+      - ***Creating a Pull Request is mandatory, even for the smallest possible change***
+      - For modifications that need to be merged quickly, add the label "Urgent"
 
