@@ -285,6 +285,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                     }))
                   }
                   className="w-full rounded-xl p-2 mt-1"
+                  onWheelCapture={(e) => e.currentTarget.blur()}
                 />
               </div>
               <div className="p-2">
@@ -308,6 +309,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                     }))
                   }
                   className="w-full rounded-xl p-2 mt-1"
+                  onWheelCapture={(e) => e.currentTarget.blur()}
                 />
               </div>
               <div className="p-2">
@@ -336,6 +338,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                     }))
                   }
                   className="w-full rounded-xl p-2 mt-1"
+                  onWheelCapture={(e) => e.currentTarget.blur()}
                 />
               </div>
             </div>

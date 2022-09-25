@@ -135,6 +135,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             value={contactNo}
             onChange={(e) => setContactNo(Number(e.target.value))}
             className="w-full rounded-xl p-2 mt-1"
+            onWheelCapture={(e) => e.currentTarget.blur()}
           />
         </div>
         <div className="p-2">

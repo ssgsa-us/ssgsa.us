@@ -85,6 +85,7 @@ export default function ApplicationRow({
               : setA(Number(e.target.value))
           }
           className="w-full rounded-xl p-2"
+          onWheelCapture={(e) => e.currentTarget.blur()}
         />
       </td>
       <td className="border border-blue-850 p-2 text-center">
@@ -101,6 +102,7 @@ export default function ApplicationRow({
               : setB(Number(e.target.value))
           }
           className="w-full rounded-xl p-2"
+          onWheelCapture={(e) => e.currentTarget.blur()}
         />
       </td>
       <td className="border border-blue-850 p-2 text-center">
@@ -117,6 +119,7 @@ export default function ApplicationRow({
               : setC(Number(e.target.value))
           }
           className="w-full rounded-xl p-2"
+          onWheelCapture={(e) => e.currentTarget.blur()}
         />
       </td>
       <td className="border border-blue-850 p-2 text-center">
@@ -133,6 +136,7 @@ export default function ApplicationRow({
               : setD(Number(e.target.value))
           }
           className="w-full rounded-xl p-2"
+          onWheelCapture={(e) => e.currentTarget.blur()}
         />
       </td>
       <td className="border border-blue-850 p-2 text-center">
@@ -149,6 +153,7 @@ export default function ApplicationRow({
               : setE(Number(e.target.value))
           }
           className="w-full rounded-xl p-2"
+          onWheelCapture={(e) => e.currentTarget.blur()}
         />
       </td>
       <td className="border border-blue-850 p-2 text-center">
