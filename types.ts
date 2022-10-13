@@ -26,3 +26,13 @@ export type AnswerType = {
 export type DocumentsType = {
   [documentType: string]: string
 }
+
+export type AwardeesType = {
+  [id: string]: {
+    session: string
+    awardees: Array<{
+      name: string
+      field: string
+    }>
+  }
+}
