@@ -629,6 +629,119 @@ export const scholars = [
         field:
           'M.S. in Visual Computing at Saarland University, Saarbrücken, Germany',
       },
+      {
+        name: 'Firoz Khan',
+        field: 'PhD in Physics at University of Alabama, Birmingham, AL, USA',
+      },
+      {
+        name: 'Ifra Ilyas Anasari',
+        field: 'PhD in Chemistry at Orgeon State University, OR, USA',
+      },
+      {
+        name: 'Mohammad Hanzala',
+        field:
+          'MS in Civil Engineering at Michigan Technological University, MI, USA',
+      },
+      {
+        name: 'Amna Jalali',
+        field: 'MS in Finance at University of New Haven, CT, USA',
+      },
+      {
+        name: 'Rabia Omar',
+        field: 'PhD in Physics at Indiana University, Bloomington, IN, USA',
+      },
+      {
+        name: 'Mohammad Irfan',
+        field: 'PhD in Physics at Florida State University, FL, USA',
+      },
+      {
+        name: 'Wareesha Ali',
+        field:
+          'PhD at Max Planck Insititute of Biophysical Chemistry, Gottingen, Germany',
+      },
+      {
+        name: 'Sheeraz Athar',
+        field:
+          'PhD in Industrial Engineering at Purdue Univeristy, Indiana, USA',
+      },
+      {
+        name: 'Abdul Sabur Kidwai',
+        field:
+          'MA in Comparative Literature at University of London, London, UK',
+      },
+      {
+        name: 'Areesha Ali',
+        field: 'PhD in Physics at Durham University, UK',
+      },
+      {
+        name: 'Aafiya',
+        field: 'PhD in Physics at Kansas University, Lawrence, Kansas, USA',
+      },
+      {
+        name: 'Mohd Talha',
+        field: 'MS in Physics at Univerity of Strasbourg, France',
+      },
+      {
+        name: 'Danish Alam',
+        field: 'MS in Physics at University of Bologna, Italy',
+      },
+      {
+        name: 'Burhani Taher Saifuddin',
+        field: 'PhD in Physics at University of Oklohama, OK, USA',
+      },
+    ],
+  },
+  {
+    session: '2022',
+    scholars: [
+      {
+        name: 'Aijaz Nazir',
+        field: 'PhD in Mathematics at University of Houston, TX, USA',
+      },
+      {
+        name: 'Mohd. Azhar Hasan Ansari',
+        field: 'PhD in Chemistry at Clemson University, SC, USA',
+      },
+      {
+        name: 'Maryam Abbas',
+        field: 'PhD in Psychology at Univeristy of Rhode Island, RI, USA',
+      },
+      {
+        name: 'Samina Irshad Ansari',
+        field:
+          'PhD in Psychology at University of Alabama, Birmingham, AL, USA',
+      },
+      {
+        name: 'Harshul Gupta',
+        field: 'PhD in Physics at University of Illinois at Chicago, IL, USA',
+      },
+      {
+        name: 'Mohammad Anas',
+        field: 'MS in Computer Science at University of Florida, FL, USA',
+      },
+      {
+        name: 'Ahmad Faraz Badar',
+        field:
+          'MS in Engineering Physics at University of Wisconsin-Madison, WI, USA',
+      },
+      {
+        name: 'Tayyibah Khanam',
+        field: 'MS in Data Science at New York University, NY, USA',
+      },
+      {
+        name: 'Madiha Noman',
+        field: 'PhD in English at University of Cambridge, Cambridge, UK',
+      },
+      {
+        name: 'Kunwar Mohd Saaim',
+        field:
+          'MS in Computer Science at University of Alberta, Alberta, Canada',
+      },
+      {
+        name: 'Arsalan Hameed ',
+        field:
+          'MS in Computer Science at University of Victoria, British Columbia, Canada',
+      },
     ],
   },
 ]
