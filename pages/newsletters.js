@@ -53,10 +53,10 @@ export default function Home() {
             Stories of the Month
           </h1>
 
-          <div className="mx-4 sm:mx-12 lg:mx-8">
-            {monthStories.map((monthStory, index) => (
-              <table className="w-full bg-gray-850">
-                <tbody>
+          <div className="sm:mx-8 lg:mx-8">
+            <table className="w-full bg-gray-850 text-sm sm:text-base">
+              <tbody>
+                {monthStories.map((monthStory, index) => (
                   <tr key={index}>
                     <td className="border-2 bg-red-850 text-white font-bold p-2 w-1/5">
                       {monthStory.issue}
@@ -70,9 +70,9 @@ export default function Home() {
                       {monthStory.name}
                     </td>
                   </tr>
-                </tbody>
-              </table>
-            ))}
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
