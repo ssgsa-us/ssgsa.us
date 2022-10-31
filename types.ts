@@ -64,6 +64,20 @@ export type MembersType = {
   }
 }
 
+export type MonthStoriesType = {
+  [id: string]: {
+    link: string
+    title: string
+  }
+}
+
+export type NewslettersType = {
+  [id: string]: {
+    link: string
+    title: string
+  }
+}
+
 export type ResourcesType = {
   [id: string]: {
     category: string

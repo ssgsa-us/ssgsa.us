@@ -4,6 +4,8 @@ import {
   AwardeesType,
   LeadersType,
   MembersType,
+  MonthStoriesType,
+  NewslettersType,
   ResourcesType,
   ScholarsType,
   SuccessfulScholarsType,
@@ -41,6 +43,28 @@ export const getMembers = async () => {
     })
 
   return members
+}
+
+export const getMonthStories = async () => {
+  let monthStories: MonthStoriesType = await firestore
+    .doc(path.join('constants', 'month stories'))
+    .get()
+    .then((snapshot: firebase.firestore.DocumentSnapshot<MonthStoriesType>) => {
+      return snapshot.data()
+    })
+
+  return monthStories
+}
+
+export const getNewsletters = async () => {
+  let newsletters: NewslettersType = await firestore
+    .doc(path.join('constants', 'newsletters'))
+    .get()
+    .then((snapshot: firebase.firestore.DocumentSnapshot<NewslettersType>) => {
+      return snapshot.data()
+    })
+
+  return newsletters
 }
 
 export const getResources = async () => {
