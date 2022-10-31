@@ -31,8 +31,8 @@ export type AwardeesType = {
   [id: string]: {
     session: string
     awardees: Array<{
-      name: string
       field: string
+      name: string
     }>
   }
 }
@@ -64,6 +64,17 @@ export type MembersType = {
   }
 }
 
+export type ResourcesType = {
+  [id: string]: {
+    category: string
+    resources: Array<{
+      link: string
+      text: string
+      title: string
+    }>
+  }
+}
+
 export type ScholarsType = {
   [id: string]: {
     imageUrl: string
@@ -76,8 +87,8 @@ export type SuccessfulScholarsType = {
   [id: string]: {
     session: number
     scholars: Array<{
-      name: string
       field: string
+      name: string
     }>
   }
 }
