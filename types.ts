@@ -63,3 +63,13 @@ export type MembersType = {
     }>
   }
 }
+
+export type SuccessfulScholarsType = {
+  [id: string]: {
+    session: number
+    scholars: Array<{
+      name: string
+      field: string
+    }>
+  }
+}
