@@ -73,3 +73,12 @@ export type SuccessfulScholarsType = {
     }>
   }
 }
+
+export type TestimonialsType = {
+  [id: string]: {
+    imageUrl: string
+    name: string
+    position: string
+    words: string
+  }
+}

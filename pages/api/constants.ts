@@ -5,6 +5,7 @@ import {
   LeadersType,
   MembersType,
   SuccessfulScholarsType,
+  TestimonialsType,
 } from '../../types'
 
 export const getAwardees = async () => {
@@ -53,4 +54,15 @@ export const getSuccessfulScholarsList = async () => {
     )
 
   return scholars
+}
+
+export const getTestimonials = async () => {
+  let testimonials: TestimonialsType = await firestore
+    .doc(path.join('constants', 'testimonials'))
+    .get()
+    .then((snapshot: firebase.firestore.DocumentSnapshot<TestimonialsType>) => {
+      return snapshot.data()
+    })
+
+  return testimonials
 }
