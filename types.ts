@@ -37,6 +37,19 @@ export type AwardeesType = {
   }
 }
 
+export type LeadersType = {
+  [id: string]: {
+    category: string
+    members: Array<{
+      imageUrl: string
+      name: string
+      place: string
+      scholar: string
+      term: string
+    }>
+  }
+}
+
 export type MembersType = {
   [id: string]: {
     category: string
