@@ -1,6 +1,6 @@
 import path from 'path'
 import firebase, { firestore } from '../../firebase'
-import { AwardeesType } from '../../types'
+import { AwardeesType, MembersType } from '../../types'
 
 export const getAwardees = async () => {
   let awardees: AwardeesType = await firestore
@@ -11,4 +11,15 @@ export const getAwardees = async () => {
     })
 
   return awardees
+}
+
+export const getMembers = async () => {
+  let members: MembersType = await firestore
+    .doc(path.join('constants', 'members'))
+    .get()
+    .then((snapshot: firebase.firestore.DocumentSnapshot<MembersType>) => {
+      return snapshot.data()
+    })
+
+  return members
 }

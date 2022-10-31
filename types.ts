@@ -36,3 +36,17 @@ export type AwardeesType = {
     }>
   }
 }
+
+export type MembersType = {
+  [id: string]: {
+    category: string
+    members: Array<{
+      imageUrl: string
+      name: string
+      place: string
+      position: string
+      scholar: string
+      university: string
+    }>
+  }
+}
