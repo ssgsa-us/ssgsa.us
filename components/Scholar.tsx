@@ -1,11 +1,19 @@
 import Image from 'next/image'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Carousel from 'react-elastic-carousel'
-import { Scholars } from '../constants/scholars'
+import { getScholars } from '../pages/api/constants'
+import { ScholarsType } from '../types'
 
 const Scholar = () => {
   const carouselRef = useRef(null)
+  const [scholars, setScholars] = useState<ScholarsType>({})
   let resetTimeout
+
+  useEffect(() => {
+    getScholars()
+      .then((data) => setScholars(data))
+      .catch(() => alert('Not able to get scholars, Try again!'))
+  }, [])
 
   return (
     <div>
@@ -20,14 +28,15 @@ const Scholar = () => {
         showArrows={false}
         onNextEnd={({ index }) => {
           clearTimeout(resetTimeout)
-          if (index === Scholars.length - 1) {
+          if (index === Object.keys(scholars).length - 1) {
             resetTimeout = setTimeout(() => {
               carouselRef.current.goTo(0)
             }, 5000)
           }
         }}
+        isRTL={false}
       >
-        {Scholars.map((scholar, index) => {
+        {Object.keys(scholars).map((id, index) => {
           return (
             <div
               className="flex flex-col sm:flex-row items-center bg-blue-850 rounded-tl-3xl rounded-br-3xl p-1"
@@ -36,8 +45,8 @@ const Scholar = () => {
               <div className="flex flex-col items-center justify-center m-2 p-2 sm:w-2/5">
                 <div className="relative rounded-full border-4 border-white overflow-hidden p-0 w-40 h-40">
                   <Image
-                    src={scholar.imageUrl}
-                    alt={scholar.name}
+                    src={scholars[id].imageUrl}
+                    alt={scholars[id].name}
                     layout="fill"
                     priority={true}
                   />
@@ -46,10 +55,10 @@ const Scholar = () => {
               <div className="flex flex-col h-full text-white sm:w-4/5">
                 <div className="bg-white text-center w-full py-2">
                   <p className="font-bold text-blue-850 text-lg">
-                    {scholar.name}
+                    {scholars[id].name}
                   </p>
                 </div>
-                <p className="text-xs m-2 mb-4 sm:ml-0">{scholar.words}</p>
+                <p className="text-xs m-2 mb-4 sm:ml-0">{scholars[id].words}</p>
               </div>
             </div>
           )

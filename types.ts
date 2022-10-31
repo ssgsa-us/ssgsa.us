@@ -64,6 +64,14 @@ export type MembersType = {
   }
 }
 
+export type ScholarsType = {
+  [id: string]: {
+    imageUrl: string
+    name: string
+    words: string
+  }
+}
+
 export type SuccessfulScholarsType = {
   [id: string]: {
     session: number
