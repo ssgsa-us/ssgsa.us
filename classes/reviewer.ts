@@ -1,31 +1,23 @@
 import firebase from '../firebase'
 
 export class Reviewer {
-  name: string
   email: string
-  set: string
-  personal_email: string
+  name: string
+  sets: Array<string>
 
-  constructor(
-    name: string,
-    email: string,
-    set: string,
-    personal_email: string,
-  ) {
-    this.name = name
+  constructor(email: string, name: string, sets: Array<string>) {
     this.email = email
-    this.set = set
-    this.personal_email = personal_email
+    this.name = name
+    this.sets = sets
   }
 }
 
 export const reviewerController = {
   toFirestore: (reviewer: Reviewer) => {
     return {
-      name: reviewer.name,
       email: reviewer.email,
-      set: reviewer.set,
-      personal_email: reviewer.personal_email,
+      name: reviewer.name,
+      sets: reviewer.sets,
     }
   },
 
@@ -34,12 +26,7 @@ export const reviewerController = {
     options: firebase.firestore.SnapshotOptions,
   ) => {
     let data = snapshot.data(options)
-    let reviewer = new Reviewer(
-      data.name,
-      data.email,
-      data.set,
-      data.personal_email,
-    )
+    let reviewer = new Reviewer(data.email, data.name, data.sets)
 
     return reviewer
   },
