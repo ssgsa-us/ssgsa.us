@@ -30,9 +30,9 @@ export default function ReviewerApplications() {
       else {
         getReviewerDetails(auth.currentUser.email)
           .then((reviewerData: Reviewer) => {
-            setAllSets(reviewerData.sets)
-            setSelectedSet(reviewerData.sets[0])
             if (reviewerData) {
+              setAllSets(reviewerData.sets)
+              setSelectedSet(reviewerData.sets[0])
               getReviewerSetApplications(reviewerData.sets[0])
                 .then((data) => {
                   setApplications(data)
