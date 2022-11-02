@@ -5,16 +5,10 @@ import { Interviewer, interviewerController } from '../../classes/interviewer'
 export const createInterviewer = (
   userId: string,
   email: string,
-  personal_email: string,
   name: string,
-  set: string,
+  sets: Array<string>,
 ) => {
-  const interviewer: Interviewer = new Interviewer(
-    name,
-    email,
-    set,
-    personal_email,
-  )
+  const interviewer: Interviewer = new Interviewer(email, name, sets)
 
   firestore
     .doc(path.join('interviewer', userId))

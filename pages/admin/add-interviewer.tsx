@@ -13,41 +13,37 @@ export default function AddInterviewer() {
     [],
   )
 
-  const createAccount = async (secondaryFirebaseApp, interviewer, password) => {
+  const createAccount = async (
+    secondaryFirebaseApp: firebase.app.App,
+    interviewer: Array<string>,
+    password: string,
+  ) => {
+    const email = interviewer[0]
+    const name = interviewer[1]
+    const sets = interviewer[2].split(',')
+
     await secondaryFirebaseApp
       .auth()
-      .createUserWithEmailAndPassword(interviewer[0], password)
+      .createUserWithEmailAndPassword(email, password)
       .then(async (result: firebase.auth.UserCredential) => {
         try {
           secondaryFirebaseApp.auth().signOut()
         } catch (e) {
-          console.log('Not able to sign out', interviewer[0])
+          console.log('Not able to sign out', email)
         }
 
         // add interviewer data to firestore database
-        createInterviewer(
-          result.user.uid,
-          interviewer[0],
-          interviewer[1],
-          interviewer[2],
-          interviewer[3],
-        )
+        createInterviewer(result.user.uid, email, name, sets)
 
         setAddedInterviewers((prevAddedInterviewers) => [
           ...prevAddedInterviewers,
-          new Interviewer(
-            interviewer[0],
-            interviewer[2],
-            interviewer[3],
-            interviewer[1],
-          ),
+          new Interviewer(email, name, sets),
         ])
 
         let templateParams = {
-          email: interviewer[0],
-          personal_email: interviewer[1],
-          name: interviewer[2],
-          set: interviewer[3],
+          email: email,
+          name: name,
+          sets: sets.join(', '),
           zoom_link: interviewer[4],
           day: interviewer[5],
           date: interviewer[6],
@@ -64,12 +60,7 @@ export default function AddInterviewer() {
       .catch(() => {
         setRemovedInterviewers((prevRemovedInterviewers) => [
           ...prevRemovedInterviewers,
-          new Interviewer(
-            interviewer[0],
-            interviewer[2],
-            interviewer[3],
-            interviewer[1],
-          ),
+          new Interviewer(email, name, sets),
         ])
       })
   }
@@ -104,10 +95,9 @@ export default function AddInterviewer() {
         if (!interviewer[0]) return
 
         // interviewer details
-        // interviewer[0] represents email from which account is created
-        // interviewer[1] represents personal email on which details are to be mailed
-        // interviewer[2] represents name of interviewer
-        // interviewer[3] represents interviewer set
+        // interviewer[0] represents email of interviewer
+        // interviewer[1] represents name of interviewer
+        // interviewer[2] represents interviewer set
 
         // Generate a random password
         let charset =
@@ -170,8 +160,7 @@ export default function AddInterviewer() {
                   <tr>
                     <th className="border p-2">Name</th>
                     <th className="border p-2">Email</th>
-                    <th className="border p-2">Set</th>
-                    <th className="border p-2">Personal Email</th>
+                    <th className="border p-2">Sets</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -180,9 +169,8 @@ export default function AddInterviewer() {
                       <tr key={index}>
                         <td className="border p-2">{interviewer.name}</td>
                         <td className="border p-2">{interviewer.email}</td>
-                        <td className="border p-2">{interviewer.set}</td>
                         <td className="border p-2">
-                          {interviewer.personal_email}
+                          {interviewer.sets.join(', ')}
                         </td>
                       </tr>
                     ),
@@ -204,8 +192,7 @@ export default function AddInterviewer() {
                   <tr>
                     <th className="border p-2">Name</th>
                     <th className="border p-2">Email</th>
-                    <th className="border p-2">Set</th>
-                    <th className="border p-2">Personal Email</th>
+                    <th className="border p-2">Sets</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -214,9 +201,8 @@ export default function AddInterviewer() {
                       <tr key={index}>
                         <td className="border p-2">{interviewer.name}</td>
                         <td className="border p-2">{interviewer.email}</td>
-                        <td className="border p-2">{interviewer.set}</td>
                         <td className="border p-2">
-                          {interviewer.personal_email}
+                          {interviewer.sets.join(', ')}
                         </td>
                       </tr>
                     ),
