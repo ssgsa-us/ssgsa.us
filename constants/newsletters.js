@@ -1,5 +1,11 @@
 export const monthStories = [
   {
+    issue: 'October 2022',
+    title: 'Studying in Germany: coursework, job search and beyond',
+    link: 'https://sh1.sendinblue.com/ad5mmqbtz9pfe.html?t=1667075402',
+    name: 'Hashir Ahmad',
+  },
+  {
     issue: 'September 2022',
     title: 'Becoming a Googler: my software engineering journey',
     link: 'https://7luxg.r.ag.d.sendibm3.com/mk/mr/Merh2roOtHgsqu4MoGK58giBmYfwGZJXokfp8ot_bZpkxFXn0DLBSwNXLfPcDpgpAQsb9s3CynOqFMZesCKx8f4shZAxiJisUYhgO93pnB-fRgF7bbQhIE_9eJb1qKOXDm6i',
