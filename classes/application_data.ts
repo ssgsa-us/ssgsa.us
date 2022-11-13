@@ -3,11 +3,13 @@ import firebase from '../firebase'
 
 export class ApplicationData {
   name: string
+  enrollment: string
   email: string
   contact: number
-  gender: string
-  enrollment: string
-  nationality: string
+  current_position: string
+  target_program: string
+  target_date: string
+  target_country: string
   faculty: string
   academic_record: AcademicRecordType
   documents: DocumentsType
@@ -20,18 +22,22 @@ export class ApplicationData {
 
   step1(
     name: string,
+    enrollment: string,
     email: string,
     contact: number,
-    gender: string,
-    enrollment: string,
-    nationality: string,
+    current_position: string,
+    target_program: string,
+    target_date: string,
+    target_country: string,
   ) {
     this.name = name
+    this.enrollment = enrollment
     this.email = email
     this.contact = contact
-    this.gender = gender
-    this.enrollment = enrollment
-    this.nationality = nationality
+    this.current_position = current_position
+    this.target_program = target_program
+    this.target_date = target_date
+    this.target_country = target_country
   }
 
   step2(academic_record: AcademicRecordType) {
@@ -64,11 +70,13 @@ export const applicationDataConverter = {
     let applicationData = new ApplicationData(data.form_status)
     applicationData.step1(
       data.name,
+      data.enrollment,
       data.email,
       data.contact,
-      data.gender,
-      data.enrollment,
+      data.current_position,
+      data.target_date,
       data.nationality,
+      data.target_country,
     )
     if (data.form_status >= 2) {
       applicationData.step2(data.academic_record)

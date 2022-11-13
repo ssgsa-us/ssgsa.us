@@ -13,25 +13,38 @@ type Props = {
 const Step1 = ({ applicationData, status, setStatus }: Props) => {
   const { authUser } = useAuth()
   const [name, setName] = useState<string>()
+  const [enrollNo, setEnrollNo] = useState<string>()
   const [email, setEmail] = useState<string>()
   const [contactNo, setContactNo] = useState<number>()
-  const [gender, setGender] = useState<string>()
-  const [enrollNo, setEnrollNo] = useState<string>()
-  const [nationality, setNationality] = useState<string>()
+  const [currentPosition, setCurrentPosition] = useState<string>()
+  const [targetProgram, setTargetProgram] = useState<string>()
+  const [targetDate, setTargetDate] = useState<string>()
+  const [targetCountry, setTargetCountry] = useState<string>()
   const [error, setError] = useState<string>('')
 
   useEffect(() => {
     setName(applicationData.name || '')
+    setEnrollNo(applicationData.enrollment || '')
     setEmail(applicationData.email || '')
     setContactNo(applicationData.contact || 0)
-    setGender(applicationData.gender || 'Male')
-    setEnrollNo(applicationData.enrollment || '')
-    setNationality(applicationData.nationality || '')
+    setCurrentPosition(applicationData.current_position || '')
+    setTargetProgram(applicationData.target_program || '')
+    setTargetDate(applicationData.target_date || 'In 0-1 year')
+    setTargetCountry(applicationData.target_country || '')
   }, [applicationData])
 
   const nextStep = () => {
     setError('')
-    if (name && email && contactNo && gender && enrollNo && nationality) {
+    if (
+      name &&
+      enrollNo &&
+      email &&
+      contactNo &&
+      currentPosition &&
+      targetProgram &&
+      targetDate &&
+      targetCountry
+    ) {
       const regex =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (regex.test(String(email).toLowerCase())) {
@@ -39,11 +52,13 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           updateApplicationData(
             authUser.id,
             name,
+            enrollNo,
             email,
             contactNo,
-            gender,
-            enrollNo,
-            nationality,
+            currentPosition,
+            targetProgram,
+            targetDate,
+            targetCountry,
             2,
           )
             .then(() => {
@@ -56,11 +71,13 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           updateApplicationData(
             authUser.id,
             name,
+            enrollNo,
             email,
             contactNo,
-            gender,
-            enrollNo,
-            nationality,
+            currentPosition,
+            targetProgram,
+            targetDate,
+            targetCountry,
             applicationData.form_status,
           )
             .then(() => {
@@ -81,11 +98,13 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
     return updateApplicationData(
       authUser.id,
       name,
+      enrollNo,
       email,
       contactNo,
-      gender,
-      enrollNo,
-      nationality,
+      currentPosition,
+      targetProgram,
+      targetDate,
+      targetCountry,
       applicationData.form_status,
     )
   }
@@ -106,6 +125,19 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className="w-full rounded-xl p-2 mt-1"
+          />
+        </div>
+        <div className="p-2">
+          <p className="md:text-lg">
+            AMU Enrollment Number
+            <span className="text-red-850 font-black">*</span>
+          </p>
+          <input
+            name="EnrollNo"
+            type="text"
+            value={enrollNo}
+            onChange={(e) => setEnrollNo(e.target.value)}
             className="w-full rounded-xl p-2 mt-1"
           />
         </div>
@@ -139,45 +171,70 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
         </div>
         <div className="p-2">
           <p className="md:text-lg">
-            Gender<span className="text-red-850 font-black">*</span>
-          </p>
-          <select
-            name="Gender"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            className="w-full rounded-xl p-3"
-          >
-            <option label="Male" value="Male" />
-            <option label="Female" value="Female" />
-            <option label="Transgender" value="Transgender" />
-            <option
-              label="Prefer Not To Disclose"
-              value="Prefer Not To Disclose"
-            />
-          </select>
-        </div>
-        <div className="p-2">
-          <p className="md:text-lg">
-            AMU Enrollment Number
-            <span className="text-red-850 font-black">*</span>
+            Current Position<span className="text-red-850 font-black">*</span>
+            <span className="text-xs md:text-sm">
+              <br />
+              (e.g., Final year BTech student at AMU, Software Developer in
+              Indian Railways, Taking a year gap, Preparing for entrance exams
+              like GATE etc.)
+            </span>
           </p>
           <input
-            name="EnrollNo"
+            name="Current Position"
             type="text"
-            value={enrollNo}
-            onChange={(e) => setEnrollNo(e.target.value)}
+            value={currentPosition}
+            onChange={(e) => setCurrentPosition(e.target.value)}
             className="w-full rounded-xl p-2 mt-1"
           />
         </div>
         <div className="p-2">
           <p className="md:text-lg">
-            Nationality<span className="text-red-850 font-black">*</span>
+            Which program(s) and in what subject(s) are you interested in
+            studying abroad?<span className="text-red-850 font-black">*</span>
+            <span className="text-xs md:text-sm">
+              <br />
+              (e.g., MS in Machine Learning, MBA, PhD in Asian History, etc.)
+            </span>
           </p>
           <input
-            name="Nationality"
+            name="Target Program"
             type="text"
-            value={nationality}
-            onChange={(e) => setNationality(e.target.value)}
+            value={targetProgram}
+            onChange={(e) => setTargetProgram(e.target.value)}
+            className="w-full rounded-xl p-2 mt-1"
+          />
+        </div>
+        <div className="p-2">
+          <p className="md:text-lg">
+            When do you plan to apply for grad school?
+            <span className="text-red-850 font-black">*</span>
+          </p>
+          <select
+            name="Target Date"
+            value={targetDate}
+            onChange={(e) => setTargetDate(e.target.value)}
+            className="w-full rounded-xl p-3"
+          >
+            <option label="In 0-1 year" value="In 0-1 year" />
+            <option label="In 1-2 years" value="In 1-2 years" />
+            <option label="more than 2 years" value="more than 2 years" />
+            <option label="not decided yet" value="not decided yet" />
+          </select>
+        </div>
+        <div className="p-2">
+          <p className="md:text-lg">
+            Which country(s) will you be applying in?
+            <span className="text-red-850 font-black">*</span>
+            <span className="text-xs md:text-sm">
+              <br />
+              You can list more than one here.
+            </span>
+          </p>
+          <input
+            name="Target Country"
+            type="text"
+            value={targetCountry}
+            onChange={(e) => setTargetCountry(e.target.value)}
             className="w-full rounded-xl p-2 mt-1"
           />
         </div>
