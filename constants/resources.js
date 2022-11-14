@@ -42,6 +42,11 @@ export const resources = [
         text: 'A resource for students applying to universities in France',
         link: '/assets/SSGSA_Gudie_to_France.pdf',
       },
+      {
+        title: 'SSGSA Guide to Canada',
+        text: 'A resource for students applying to universities in Canada',
+        link: '/assets/SSGSA_Guide_to_Canada.pdf',
+      },
     ],
   },
   {
