@@ -48,6 +48,7 @@ export type LeadersType = {
       scholar: string
       term: string
     }>
+    index: number
   }
 }
 

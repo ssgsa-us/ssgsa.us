@@ -17,15 +17,15 @@ const Leadership = () => {
       <h1 className="my-8 bg-blue-850 lg:text-2xl text-xl text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
         Leadership History
       </h1>
-      {Object.keys(leaders)
-        .sort()
-        .map((id, ind) => (
+      {Object.values(leaders)
+        .sort((a, b) => a.index - b.index)
+        .map((doc, ind) => (
           <div className="mx-8 my-8" key={ind}>
             <h3 className="text-red-850 font-extrabold text-center text-xl lg:text-2xl">
-              {leaders[id].category}
+              {doc.category}
             </h3>
             <div className="flex justify-center mt-4 flex-wrap">
-              {leaders[id].members.map((member, index) => (
+              {doc.members.map((member, index) => (
                 <div
                   className="flex flex-col items-center text-center m-2 p-2 transform duration-200 hover:scale-110 cursor-pointer"
                   style={{ maxWidth: 220 }}
