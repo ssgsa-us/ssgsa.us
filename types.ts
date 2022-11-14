@@ -29,18 +29,19 @@ export type DocumentsType = {
 
 export type AwardeesType = {
   [id: string]: {
-    session: string
     awardees: Array<{
       field: string
       name: string
     }>
     index: number
+    session: string
   }
 }
 
 export type LeadersType = {
   [id: string]: {
     category: string
+    index: number
     members: Array<{
       imageUrl: string
       name: string
@@ -48,13 +49,13 @@ export type LeadersType = {
       scholar: string
       term: string
     }>
-    index: number
   }
 }
 
 export type MembersType = {
   [id: string]: {
     category: string
+    index: number
     members: Array<{
       imageUrl: string
       name: string
@@ -63,35 +64,36 @@ export type MembersType = {
       scholar: string
       university: string
     }>
-    index: number
   }
 }
 
 export type MonthStoriesType = {
   [id: string]: {
-    link: string
-    title: string
     index: number
+    issue: string
+    link: string
+    name: string
+    title: string
   }
 }
 
 export type NewslettersType = {
   [id: string]: {
+    index: number
     link: string
     title: string
-    index: number
   }
 }
 
 export type ResourcesType = {
   [id: string]: {
     category: string
+    index: number
     resources: Array<{
       link: string
       text: string
       title: string
     }>
-    index: number
   }
 }
 
@@ -105,12 +107,12 @@ export type ScholarsType = {
 
 export type SuccessfulScholarsType = {
   [id: string]: {
-    session: number
+    index: number
     scholars: Array<{
       field: string
       name: string
     }>
-    index: number
+    session: number
   }
 }
 

@@ -69,27 +69,28 @@ export default function Home() {
             Stories of the Month
           </h1>
 
-          <div className="flex justify-center flex-wrap">
-            {Object.values(monthStories)
-              .sort((a, b) => b.index - a.index)
-              .map((doc, index) => (
-                <Link href={doc.link} key={index}>
-                  <a
-                    className={`flex justify-center items-center text-center bg-gray-400 text-white font-bold w-40 h-24 m-4 ${
-                      index % 3 == 2
-                        ? 'bg-red-850'
-                        : index % 3 == 1
-                        ? 'bg-blue-850'
-                        : index % 6 == 0
-                        ? 'text-red-850'
-                        : 'text-blue-850'
-                    }`}
-                    target="_blank"
-                  >
-                    {doc.title}
-                  </a>
-                </Link>
-              ))}
+          <div className="sm:mx-8 lg:mx-8">
+            <table className="w-full bg-gray-850 text-sm sm:text-base">
+              <tbody>
+                {Object.values(monthStories)
+                  .sort((a, b) => b.index - a.index)
+                  .map((doc, index) => (
+                    <tr key={index}>
+                      <td className="border-2 bg-red-850 text-white font-bold p-2 w-1/5">
+                        {doc.issue}
+                      </td>
+                      <td className="border-2 bg-gray-300 text-blue-850 font-bold p-2 w-3/5">
+                        <Link href={doc.link} key={index}>
+                          {doc.title}
+                        </Link>
+                      </td>
+                      <td className="border-2 bg-gray-300 text-red-850 p-2 w-1/5">
+                        {doc.name}
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
