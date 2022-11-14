@@ -63,6 +63,7 @@ export type MembersType = {
       scholar: string
       university: string
     }>
+    index: number
   }
 }
 
