@@ -34,6 +34,7 @@ export type AwardeesType = {
       field: string
       name: string
     }>
+    index: number
   }
 }
 
