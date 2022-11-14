@@ -23,31 +23,31 @@ const SuccessfulScholars = () => {
         className="flex flex-wrap justify-around my-8 mx-4 sm:mx-12 lg:mx-20 bg-gray-200"
         style={{ fontFamily: 'Lora' }}
       >
-        {Object.keys(scholars)
-          .sort()
-          .map((id, index) => (
+        {Object.values(scholars)
+          .sort((a, b) => a.index - b.index)
+          .map((doc, index) => (
             <h3
               className={`text-red-850 ${
-                currentSession == scholars[id].session ? 'bg-blue-850' : ''
+                currentSession == doc.session ? 'bg-blue-850' : ''
               } font-bold w-32 text-center text-xl px-4 py-2 cursor-pointer`}
-              onClick={() => setCurrentSession(scholars[id].session)}
+              onClick={() => setCurrentSession(doc.session)}
               key={index}
             >
-              {scholars[id].session}
+              {doc.session}
             </h3>
           ))}
       </div>
       <div className=" my-8 mx-4 sm:mx-12 lg:mx-20">
-        {Object.keys(scholars)
-          .sort()
-          .map((id, index) => (
+        {Object.values(scholars)
+          .sort((a, b) => a.index - b.index)
+          .map((doc, index) => (
             <table
               className="w-full"
-              hidden={currentSession != scholars[id].session}
+              hidden={currentSession != doc.session}
               key={index}
             >
               <tbody>
-                {scholars[id].scholars.map((scholar, ind) => (
+                {doc.scholars.map((scholar, ind) => (
                   <tr key={ind}>
                     <td className="bg-gray-200 text-blue-850 font-bold p-2 w-2/5">
                       {scholar.name}

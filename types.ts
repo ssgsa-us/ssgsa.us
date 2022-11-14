@@ -110,6 +110,7 @@ export type SuccessfulScholarsType = {
       field: string
       name: string
     }>
+    index: number
   }
 }
 
