@@ -22,15 +22,15 @@ export default function Home() {
           </h1>
 
           <div>
-            {Object.keys(resources)
-              .sort()
-              .map((id, ind) => (
+            {Object.values(resources)
+              .sort((a, b) => a.index - b.index)
+              .map((doc, ind) => (
                 <div className="mx-8 my-8" key={ind}>
                   <h3 className="text-red-850 font-extrabold text-center text-2xl lg:text-3xl">
-                    {resources[id].category}
+                    {doc.category}
                   </h3>
                   <div className="flex justify-center flex-wrap">
-                    {resources[id].resources.map((resource, index) => (
+                    {doc.resources.map((resource, index) => (
                       <div
                         className="w-52 m-4 text-center"
                         key={ind * 100 + index}

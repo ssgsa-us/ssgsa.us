@@ -91,6 +91,7 @@ export type ResourcesType = {
       text: string
       title: string
     }>
+    index: number
   }
 }
 
