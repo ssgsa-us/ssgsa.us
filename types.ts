@@ -71,6 +71,7 @@ export type MonthStoriesType = {
   [id: string]: {
     link: string
     title: string
+    index: number
   }
 }
 
@@ -78,6 +79,7 @@ export type NewslettersType = {
   [id: string]: {
     link: string
     title: string
+    index: number
   }
 }
 

@@ -41,10 +41,10 @@ export default function Home() {
           </div>
 
           <div className="flex justify-center flex-wrap">
-            {Object.keys(newsletters)
-              .sort()
-              .map((id, index) => (
-                <Link href={newsletters[id].link} key={index}>
+            {Object.values(newsletters)
+              .sort((a, b) => b.index - a.index)
+              .map((doc, index) => (
+                <Link href={doc.link} key={index}>
                   <a
                     className={`flex justify-center items-center text-center bg-gray-400 text-white font-bold w-40 h-24 m-4 ${
                       index % 3 == 2
@@ -57,7 +57,7 @@ export default function Home() {
                     }`}
                     target="_blank"
                   >
-                    {newsletters[id].title}
+                    {doc.title}
                   </a>
                 </Link>
               ))}
@@ -70,10 +70,10 @@ export default function Home() {
           </h1>
 
           <div className="flex justify-center flex-wrap">
-            {Object.keys(monthStories)
-              .sort()
-              .map((id, index) => (
-                <Link href={monthStories[id].link} key={index}>
+            {Object.values(monthStories)
+              .sort((a, b) => b.index - a.index)
+              .map((doc, index) => (
+                <Link href={doc.link} key={index}>
                   <a
                     className={`flex justify-center items-center text-center bg-gray-400 text-white font-bold w-40 h-24 m-4 ${
                       index % 3 == 2
@@ -86,7 +86,7 @@ export default function Home() {
                     }`}
                     target="_blank"
                   >
-                    {monthStories[id].title}
+                    {doc.title}
                   </a>
                 </Link>
               ))}
