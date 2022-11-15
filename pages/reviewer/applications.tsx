@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationRow from '../../components/Reviewer/ApplicationRow'
-import { auth } from '../../firebase'
-import { getReviewerDetails } from '../api/getReviewerDetails'
-import { getReviewerSetApplications } from '../api/getReviewerSetApplications'
-import { Reviewer } from '../../classes/reviewer'
+import { useAuth } from '../../context/AuthUserContext'
 import ReviewerLayout from '../../layouts/reviewer/reviewer-layout'
+import { getReviewerSetApplications } from '../api/getReviewerSetApplications'
 
 type Applications = {
   [key: string]: {
@@ -17,28 +15,27 @@ type Applications = {
 }
 
 export default function ReviewerApplications() {
-  const [applications, setApplications] = useState<Applications>()
+  const { authUser, loading } = useAuth()
+  const [applications, setApplications] = useState<Applications>({})
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/signin')
-      else {
-        getReviewerDetails(auth.currentUser.email)
-          .then((reviewerData: Reviewer) => {
-            if (reviewerData) {
-              getReviewerSetApplications(reviewerData.set).then((data) => {
-                setApplications(data)
-                setPageReady(true)
-              })
-            } else router.push('/404')
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role === 'reviewer') {
+        if (authUser.sets.length)
+          getReviewerSetApplications(authUser.sets[0]).then((data) => {
+            setApplications(data)
+            setPageReady(true)
           })
-          .catch(() => alert('Try again, network error!'))
-      }
-    })
-  }, [])
+        else setPageReady(true)
+      } else router.push('/404')
+    }
+  }, [loading, authUser])
 
   return (
     <ReviewerLayout>

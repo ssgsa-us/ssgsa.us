@@ -1,29 +1,24 @@
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { auth } from '../../firebase'
-import { getReviewerDetails } from '../api/getReviewerDetails'
-import { Reviewer } from '../../classes/reviewer'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../../context/AuthUserContext'
 import ReviewerLayout from '../../layouts/reviewer/reviewer-layout'
 
 export default function ReviewerPortal() {
+  const { authUser, loading } = useAuth()
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/signin')
-      else {
-        getReviewerDetails(auth.currentUser.email)
-          .then((reviewerData: Reviewer) => {
-            if (reviewerData) setPageReady(true)
-            else router.push('/404')
-          })
-          .catch(() => alert('Try again, network error!'))
-      }
-    })
-  }, [])
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role === 'reviewer') setPageReady(true)
+      else router.push('/404')
+    }
+  }, [loading, authUser])
 
   return (
     <ReviewerLayout>
