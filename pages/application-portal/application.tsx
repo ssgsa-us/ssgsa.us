@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationLayout from '../../layouts/application-portal/application'
-import { auth } from '../../firebase'
 import { getApplicationData } from '../api/getApplicationData'
 import Step1 from '../../components/ApplicationSteps/Step1'
 import Step2 from '../../components/ApplicationSteps/Step2'
@@ -11,8 +10,10 @@ import Step3 from '../../components/ApplicationSteps/Step3'
 import Step4 from '../../components/ApplicationSteps/Step4'
 import Step5 from '../../components/ApplicationSteps/Step5'
 import ReviewApplication from '../../components/ApplicationSteps/ReviewApplication'
+import { useAuth } from '../../context/AuthUserContext'
 
 export default function Application() {
+  const { authUser, loading } = useAuth()
   const router = useRouter()
   const [applicationData, setApplicationData] = useState<ApplicationData>(
     new ApplicationData(1),
@@ -23,23 +24,25 @@ export default function Application() {
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/signin')
-      else {
-        getApplicationData(auth.currentUser.uid)
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role === 'applicant')
+        getApplicationData(authUser.id)
           .then((data) => {
             setStatus(data.form_status)
             setApplicationData(data)
             setPageReady(true)
           })
           .catch(() => alert('Try again, network error!'))
-      }
-    })
-  }, [])
+      else router.push('/404')
+    }
+  }, [loading, authUser])
 
   useEffect(() => {
-    if (auth.currentUser)
-      getApplicationData(auth.currentUser.uid).then((data) => {
+    if (!loading && authUser && authUser.email && authUser.role === 'applicant')
+      getApplicationData(authUser.id).then((data) => {
         setApplicationData(data)
       })
   }, [status])
