@@ -1,12 +1,6 @@
 export type AuthUser = {
   id: string
   email: string
-}
-
-export type User = {
-  name: string
-  email: string
-  mobile: Number | null
   role: string
   sets: Array<string>
 }
