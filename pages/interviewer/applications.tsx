@@ -24,7 +24,7 @@ export default function InterviewerApplications() {
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
     auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/interviewer/signin')
+      if (!auth.currentUser) router.push('/signin')
       else {
         getInterviewerDetails(auth.currentUser.email)
           .then((interviewerData: Interviewer) => {
