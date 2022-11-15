@@ -2,24 +2,22 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
-import { Interviewer } from '../../../classes/interviewer'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
-import { auth } from '../../../firebase'
+import { useAuth } from '../../../context/AuthUserContext'
 import InterviewerLayout from '../../../layouts/interviewer/interviewer-layout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
-import { getInterviewerDetails } from '../../api/getInterviewerDetails'
 import { updateInterviewMarks } from '../../api/updateInterviewMarks'
 import { updateInterviewRemark } from '../../api/updateInterviewRemark'
 
 export default function ViewApplication() {
+  const { authUser, loading } = useAuth()
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>(
     new AdminPortalData(),
   )
   const [applicationData, setApplicationData] = useState<ApplicationData>(
     new ApplicationData(),
   )
-  const [interviewer, setInterviewer] = useState<Interviewer>()
   const [A, setA] = useState<number>(0)
   const [B, setB] = useState<number>(0)
   const [C, setC] = useState<number>(0)
@@ -32,12 +30,12 @@ export default function ViewApplication() {
 
   const setInterviewerMarks = (data: AdminPortalData) => {
     let interview_marks = data.interview_marks
-    if (interview_marks && interview_marks[auth.currentUser.uid]) {
-      setA(interview_marks[auth.currentUser.uid].A || 0)
-      setB(interview_marks[auth.currentUser.uid].B || 0)
-      setC(interview_marks[auth.currentUser.uid].C || 0)
-      setD(interview_marks[auth.currentUser.uid].D || 0)
-      setRemark(interview_marks[auth.currentUser.uid].remark || '')
+    if (interview_marks && interview_marks[authUser.id]) {
+      setA(interview_marks[authUser.id].A || 0)
+      setB(interview_marks[authUser.id].B || 0)
+      setC(interview_marks[authUser.id].C || 0)
+      setD(interview_marks[authUser.id].D || 0)
+      setRemark(interview_marks[authUser.id].remark || '')
     }
   }
 
@@ -63,24 +61,24 @@ export default function ViewApplication() {
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/signin')
-      else {
-        getInterviewerDetails(auth.currentUser.email)
-          .then((interviewerData: Interviewer) => {
-            if (interviewerData) {
-              setInterviewer(interviewerData)
-              updateData()
-            } else router.push('/404')
-          })
-          .catch(() => alert('Try again, network error!'))
-      }
-    })
-  }, [])
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role === 'interviewer') updateData()
+      else router.push('/404')
+    }
+  }, [loading, authUser, router.query])
 
   useEffect(() => {
-    if (auth.currentUser && interviewer) updateData()
-  }, [router.query, changeOccured, auth.currentUser])
+    if (
+      !loading &&
+      authUser &&
+      authUser.email &&
+      authUser.role === 'interviewer'
+    )
+      updateData()
+  }, [changeOccured])
 
   return (
     <InterviewerLayout>
@@ -245,7 +243,7 @@ export default function ViewApplication() {
                             ? null
                             : updateInterviewMarks(
                                 applId,
-                                auth.currentUser.uid,
+                                authUser.id,
                                 A,
                                 B,
                                 C,
@@ -289,11 +287,7 @@ export default function ViewApplication() {
                         onClick={() =>
                           adminPortalData.application_status >= 6 || !remark
                             ? null
-                            : updateInterviewRemark(
-                                applId,
-                                auth.currentUser.uid,
-                                remark,
-                              )
+                            : updateInterviewRemark(applId, authUser.id, remark)
                                 .then(() => {
                                   alert('Succesfully Updated!')
                                   setChangeOccured(!changeOccured)

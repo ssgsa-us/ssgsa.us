@@ -2,11 +2,9 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
-import { Interviewer } from '../../classes/interviewer'
 import ApplicationRow from '../../components/Interviewer/ApplicationRow'
-import { auth } from '../../firebase'
+import { useAuth } from '../../context/AuthUserContext'
 import InterviewerLayout from '../../layouts/interviewer/interviewer-layout'
-import { getInterviewerDetails } from '../api/getInterviewerDetails'
 import { getInterviewerSetApplications } from '../api/getInterviewerSetApplications'
 
 type Applications = {
@@ -17,30 +15,27 @@ type Applications = {
 }
 
 export default function InterviewerApplications() {
-  const [applications, setApplications] = useState<Applications>()
+  const { authUser, loading } = useAuth()
+  const [applications, setApplications] = useState<Applications>({})
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/signin')
-      else {
-        getInterviewerDetails(auth.currentUser.email)
-          .then((interviewerData: Interviewer) => {
-            if (interviewerData) {
-              getInterviewerSetApplications(interviewerData.set).then(
-                (data) => {
-                  setApplications(data)
-                  setPageReady(true)
-                },
-              )
-            } else router.push('/404')
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role === 'interviewer') {
+        if (authUser.sets.length)
+          getInterviewerSetApplications(authUser.sets[0]).then((data) => {
+            setApplications(data)
+            setPageReady(true)
           })
-          .catch(() => alert('Try again, network error!'))
-      }
-    })
-  }, [])
+        else setPageReady(true)
+      } else router.push('/404')
+    }
+  }, [loading, authUser])
 
   return (
     <InterviewerLayout>

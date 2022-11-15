@@ -1,28 +1,23 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { Interviewer } from '../../classes/interviewer'
-import { auth } from '../../firebase'
+import { useAuth } from '../../context/AuthUserContext'
 import InterviewerLayout from '../../layouts/interviewer/interviewer-layout'
-import { getInterviewerDetails } from '../api/getInterviewerDetails'
 
 export default function InterviewerPortal() {
+  const { authUser, loading } = useAuth()
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/signin')
-      else {
-        getInterviewerDetails(auth.currentUser.email)
-          .then((interviewerData: Interviewer) => {
-            if (interviewerData) setPageReady(true)
-            else router.push('/404')
-          })
-          .catch(() => alert('Try again, network error!'))
-      }
-    })
-  }, [])
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role === 'interviewer') setPageReady(true)
+      else router.push('/404')
+    }
+  }, [loading, authUser])
 
   return (
     <InterviewerLayout>
