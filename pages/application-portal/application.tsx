@@ -24,7 +24,7 @@ export default function Application() {
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
     auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/application-portal/signin')
+      if (!auth.currentUser) router.push('/signin')
       else {
         getApplicationData(auth.currentUser.uid)
           .then((data) => {
