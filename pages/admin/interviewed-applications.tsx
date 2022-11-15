@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationsTable from '../../components/Admin/ApplicationsTable'
-import { auth } from '../../firebase'
+import { useAuth } from '../../context/AuthUserContext'
 import AdminLayout from '../../layouts/admin/admin-layout'
 import { getApplicationsWithGivenStatus } from '../api/getApplicationsResponse'
 
@@ -15,6 +15,7 @@ type Applications = {
 }
 
 export default function InterviewedApplications() {
+  const { authUser, loading } = useAuth()
   const [applications, setApplications] = useState<Applications>()
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
@@ -22,26 +23,23 @@ export default function InterviewedApplications() {
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/signin')
-      else {
-        if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          getApplicationsWithGivenStatus(5)
-            .then((data) => {
-              setApplications(data)
-              setPageReady(true)
-            })
-            .catch(() => alert('Try again, network error!'))
-        else router.push('/404')
-      }
-    })
-  }, [])
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role === 'admin')
+        getApplicationsWithGivenStatus(5)
+          .then((data) => {
+            setApplications(data)
+            setPageReady(true)
+          })
+          .catch(() => alert('Try again, network error!'))
+      else router.push('/404')
+    }
+  }, [loading, authUser])
 
   useEffect(() => {
-    if (
-      auth.currentUser &&
-      auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
-    )
+    if (!loading && authUser && authUser.email && authUser.role === 'admin')
       getApplicationsWithGivenStatus(5)
         .then((data) => {
           setApplications(data)

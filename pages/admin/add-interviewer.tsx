@@ -1,12 +1,16 @@
 import emailjs from 'emailjs-com'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import * as XLSX from 'xlsx'
 import { Interviewer } from '../../classes/interviewer'
+import { useAuth } from '../../context/AuthUserContext'
 import firebase from '../../firebase'
 import AdminLayout from '../../layouts/admin/admin-layout'
 import { createInterviewer } from '../api/createInterviewer'
 
 export default function AddInterviewer() {
+  const { authUser, loading } = useAuth()
+  const router = useRouter()
   const [file, setFile] = useState<File>()
   const [addedInterviewers, setAddedInterviewers] = useState<Interviewer[]>([])
   const [removedInterviewers, setRemovedInterviewers] = useState<Interviewer[]>(
@@ -134,6 +138,16 @@ export default function AddInterviewer() {
 
     reader.readAsBinaryString(file)
   }
+
+  // Listen for changes on authUser, redirect if needed
+  useEffect(() => {
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role !== 'admin') router.push('/404')
+    }
+  }, [loading, authUser])
 
   return (
     <AdminLayout>

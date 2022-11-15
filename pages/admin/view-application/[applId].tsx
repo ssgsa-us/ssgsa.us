@@ -8,6 +8,7 @@ import SetDropdown from '../../../components/Admin/SetDropdown'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
 import InterviewMarksModal from '../../../components/modals/InterviewerMarksModel'
 import ReviewMarksModal from '../../../components/modals/ReviewMarksModal'
+import { useAuth } from '../../../context/AuthUserContext'
 import { auth } from '../../../firebase'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
@@ -19,6 +20,7 @@ import { updateInterviewSet } from '../../api/updateInterviewSet'
 import { updateReviewSet } from '../../api/updateReviewSet'
 
 export default function ViewApplication() {
+  const { authUser, loading } = useAuth()
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>()
   const [applicationData, setApplicationData] = useState<ApplicationData>()
   const [reviewers, setReviewers] = useState<{ [key: string]: Reviewer }>({})
@@ -75,21 +77,17 @@ export default function ViewApplication() {
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/signin')
-      else {
-        if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          updateData()
-        else router.push('/404')
-      }
-    })
-  }, [])
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role === 'admin') updateData()
+      else router.push('/404')
+    }
+  }, [loading, authUser])
 
   useEffect(() => {
-    if (
-      auth.currentUser &&
-      auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
-    )
+    if (!loading && authUser && authUser.email && authUser.role === 'admin')
       updateData()
   }, [router.query, changeOccured, auth.currentUser])
 

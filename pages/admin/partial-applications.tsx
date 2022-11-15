@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import AdminLayout from '../../layouts/admin/admin-layout'
+import { useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
-import { auth } from '../../firebase'
+import { useAuth } from '../../context/AuthUserContext'
+import AdminLayout from '../../layouts/admin/admin-layout'
 import { getPartialApplications } from '../api/getApplicationsResponse'
 
 type PartialApplications = {
@@ -11,26 +11,27 @@ type PartialApplications = {
 }
 
 export default function PartialApplications() {
+  const { authUser, loading } = useAuth()
   const [applications, setApplications] = useState<PartialApplications>()
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/signin')
-      else {
-        if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          getPartialApplications()
-            .then((data) => {
-              setApplications(data)
-              setPageReady(true)
-            })
-            .catch(() => alert('Try again, network error!'))
-        else router.push('/404')
-      }
-    })
-  }, [])
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role === 'admin')
+        getPartialApplications()
+          .then((data) => {
+            setApplications(data)
+            setPageReady(true)
+          })
+          .catch(() => alert('Try again, network error!'))
+      else router.push('/404')
+    }
+  }, [loading, authUser])
 
   return (
     <AdminLayout>

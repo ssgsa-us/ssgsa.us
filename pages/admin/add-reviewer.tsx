@@ -1,12 +1,16 @@
 import emailjs from 'emailjs-com'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import * as XLSX from 'xlsx'
+import { Reviewer } from '../../classes/reviewer'
+import { useAuth } from '../../context/AuthUserContext'
+import firebase from '../../firebase'
 import AdminLayout from '../../layouts/admin/admin-layout'
 import { createReviewer } from '../api/createReviewer'
-import firebase from '../../firebase'
-import { Reviewer } from '../../classes/reviewer'
 
 export default function AddReviewer() {
+  const { authUser, loading } = useAuth()
+  const router = useRouter()
   const [file, setFile] = useState<File>()
   const [addedReviewers, setAddedReviewers] = useState<Reviewer[]>([])
   const [removedReviewers, setRemovedReviewers] = useState<Reviewer[]>([])
@@ -118,6 +122,16 @@ export default function AddReviewer() {
 
     reader.readAsBinaryString(file)
   }
+
+  // Listen for changes on authUser, redirect if needed
+  useEffect(() => {
+    if (loading) return
+
+    if (!authUser || !authUser.email) router.push('/signin')
+    else {
+      if (authUser.role !== 'admin') router.push('/404')
+    }
+  }, [loading, authUser])
 
   return (
     <AdminLayout>
