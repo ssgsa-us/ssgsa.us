@@ -23,7 +23,7 @@ export default function InterviewedApplications() {
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
     auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/admin/signin')
+      if (!auth.currentUser) router.push('/signin')
       else {
         if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
           getApplicationsWithGivenStatus(5)
