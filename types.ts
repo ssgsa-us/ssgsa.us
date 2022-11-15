@@ -6,7 +6,9 @@ export type AuthUser = {
 export type User = {
   name: string
   email: string
-  mobile: Number
+  mobile: Number | null
+  role: string
+  sets: Array<string>
 }
 
 export type AcademicRecordType = {

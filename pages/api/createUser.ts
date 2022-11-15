@@ -7,11 +7,15 @@ export const createUser = (
   name: string,
   email: string,
   mobile: Number,
+  role: string = 'applicant',
+  sets: Array<string> = [],
 ) => {
   const user: User = {
     name,
     email,
     mobile,
+    role,
+    sets,
   }
 
   firestore.doc(path.join('users', userUID)).set(user)
