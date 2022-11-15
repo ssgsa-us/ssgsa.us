@@ -66,7 +66,7 @@ export default function ViewApplication() {
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
     auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/reviewer/signin')
+      if (!auth.currentUser) router.push('/signin')
       else {
         getReviewerDetails(auth.currentUser.email)
           .then((reviewerData: Reviewer) => {
