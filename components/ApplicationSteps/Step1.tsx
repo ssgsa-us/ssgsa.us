@@ -68,18 +68,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
               setError('Try again, network error!')
             })
         } else {
-          updateApplicationData(
-            authUser.id,
-            name,
-            enrollNo,
-            email,
-            contactNo,
-            currentPosition,
-            targetProgram,
-            targetDate,
-            targetCountry,
-            applicationData.form_status,
-          )
+          saveInformation()
             .then(() => {
               setStatus(2)
             })
