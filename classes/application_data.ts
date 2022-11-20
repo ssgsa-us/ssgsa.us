@@ -74,8 +74,8 @@ export const applicationDataConverter = {
       data.email,
       data.contact,
       data.current_position,
+      data.target_program,
       data.target_date,
-      data.nationality,
       data.target_country,
     )
     if (data.form_status >= 2) {
