@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import { getAwardees } from '../../pages/api/constants'
-import { AwardeesType } from '../../types'
+import { AwardeeType } from '../../types'
 
 const Awardees = () => {
   const [currentSession, setCurrentSession] = useState('2007-08')
-  const [awardees, setAwardees] = useState<AwardeesType>({})
+  const [awardees, setAwardees] = useState<Array<AwardeeType>>([])
   const [error, setError] = useState<string>('')
 
   useEffect(() => {
     getAwardees()
-      .then((data) => setAwardees(data))
+      .then((data) =>
+        setAwardees(Object.values(data).sort((a, b) => a.index - b.index)),
+      )
       .catch(() => setError('Not able to get awardees list, Try again!'))
   }, [])
 
@@ -24,29 +26,23 @@ const Awardees = () => {
             className="flex flex-wrap justify-around my-8 mx-4 sm:mx-12 lg:mx-20 bg-gray-200"
             style={{ fontFamily: 'Lora' }}
           >
-            {Object.values(awardees)
-              .sort((a, b) => a.index - b.index)
-              .map((doc, index) => (
-                <h3
-                  className={`text-red-850 ${
-                    currentSession == doc.session ? 'bg-blue-850' : ''
-                  } font-bold w-32 text-center text-xl px-4 py-2 cursor-pointer`}
-                  onClick={() => setCurrentSession(doc.session)}
-                  key={index}
-                >
-                  {doc.session}
-                </h3>
-              ))}
+            {awardees.map((doc, index) => (
+              <h3
+                className={`text-red-850 ${
+                  currentSession == doc.session ? 'bg-blue-850' : ''
+                } font-bold w-32 text-center text-xl px-4 py-2 cursor-pointer`}
+                onClick={() => setCurrentSession(doc.session)}
+                key={index}
+              >
+                {doc.session}
+              </h3>
+            ))}
           </div>
           <div className=" my-8 mx-4 sm:mx-12 lg:mx-20">
-            {Object.values(awardees)
-              .sort((a, b) => a.index - b.index)
-              .map((doc, index) => (
-                <table
-                  className="w-full"
-                  hidden={currentSession != doc.session}
-                  key={index}
-                >
+            {awardees.map((doc, index) => {
+              if (currentSession != doc.session) return null
+              return (
+                <table className="w-full" key={index}>
                   <tbody>
                     {doc.awardees.map((awardee, ind) => (
                       <tr key={ind}>
@@ -58,7 +54,8 @@ const Awardees = () => {
                     ))}
                   </tbody>
                 </table>
-              ))}
+              )
+            })}
           </div>
         </>
       ) : (

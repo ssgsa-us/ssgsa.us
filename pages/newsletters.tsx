@@ -1,24 +1,28 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import MainLayout from '../layouts/Main'
-import { MonthStoriesType, NewslettersType } from '../types'
+import { MonthStoryType, NewsletterType } from '../types'
 import { getMonthStories, getNewsletters } from './api/constants'
 
 export default function Home() {
-  const [monthStories, setMonthStories] = useState<MonthStoriesType>({})
+  const [monthStories, setMonthStories] = useState<Array<MonthStoryType>>([])
   const [monthStoriesError, setMonthStoriesError] = useState<string>('')
-  const [newsletters, setNewsletters] = useState<NewslettersType>({})
+  const [newsletters, setNewsletters] = useState<Array<NewsletterType>>([])
   const [newslettersError, setNewslettersError] = useState<string>('')
 
   useEffect(() => {
     getMonthStories()
-      .then((data) => setMonthStories(data))
+      .then((data) =>
+        setMonthStories(Object.values(data).sort((a, b) => b.index - a.index)),
+      )
       .catch(() =>
         setMonthStoriesError('Not able to get month stories, Try again!'),
       )
 
     getNewsletters()
-      .then((data) => setNewsletters(data))
+      .then((data) =>
+        setNewsletters(Object.values(data).sort((a, b) => b.index - a.index)),
+      )
       .catch(() =>
         setNewslettersError('Not able to get newsletters, Try again!'),
       )
@@ -48,26 +52,24 @@ export default function Home() {
 
           <div className="flex justify-center flex-wrap">
             {!newslettersError ? (
-              Object.values(newsletters)
-                .sort((a, b) => b.index - a.index)
-                .map((doc, index) => (
-                  <Link href={doc.link} key={index}>
-                    <a
-                      className={`flex justify-center items-center text-center bg-gray-400 text-white font-bold w-40 h-24 m-4 ${
-                        index % 3 == 2
-                          ? 'bg-red-850'
-                          : index % 3 == 1
-                          ? 'bg-blue-850'
-                          : index % 6 == 0
-                          ? 'text-red-850'
-                          : 'text-blue-850'
-                      }`}
-                      target="_blank"
-                    >
-                      {doc.title}
-                    </a>
-                  </Link>
-                ))
+              newsletters.map((newsletter, index) => (
+                <Link href={newsletter.link} key={index}>
+                  <a
+                    className={`flex justify-center items-center text-center bg-gray-400 text-white font-bold w-40 h-24 m-4 ${
+                      index % 3 == 2
+                        ? 'bg-red-850'
+                        : index % 3 == 1
+                        ? 'bg-blue-850'
+                        : index % 6 == 0
+                        ? 'text-red-850'
+                        : 'text-blue-850'
+                    }`}
+                    target="_blank"
+                  >
+                    {newsletter.title}
+                  </a>
+                </Link>
+              ))
             ) : (
               <div className="mt-5">
                 <h3 className="text-red-850 text-center text-lg lg:text-xl">
@@ -87,23 +89,21 @@ export default function Home() {
             {!monthStoriesError ? (
               <table className="w-full bg-gray-850 text-sm sm:text-base">
                 <tbody>
-                  {Object.values(monthStories)
-                    .sort((a, b) => b.index - a.index)
-                    .map((doc, index) => (
-                      <tr key={index}>
-                        <td className="border-2 bg-red-850 text-white font-bold p-2 w-1/5">
-                          {doc.issue}
-                        </td>
-                        <td className="border-2 bg-gray-300 text-blue-850 font-bold p-2 w-3/5">
-                          <Link href={doc.link} key={index}>
-                            {doc.title}
-                          </Link>
-                        </td>
-                        <td className="border-2 bg-gray-300 text-red-850 p-2 w-1/5">
-                          {doc.name}
-                        </td>
-                      </tr>
-                    ))}
+                  {monthStories.map((monthStory, index) => (
+                    <tr key={index}>
+                      <td className="border-2 bg-red-850 text-white font-bold p-2 w-1/5">
+                        {monthStory.issue}
+                      </td>
+                      <td className="border-2 bg-gray-300 text-blue-850 font-bold p-2 w-3/5">
+                        <Link href={monthStory.link} key={index}>
+                          {monthStory.title}
+                        </Link>
+                      </td>
+                      <td className="border-2 bg-gray-300 text-red-850 p-2 w-1/5">
+                        {monthStory.name}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             ) : (

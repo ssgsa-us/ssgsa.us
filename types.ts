@@ -27,100 +27,82 @@ export type DocumentsType = {
   [documentType: string]: string
 }
 
-export type AwardeesType = {
-  [id: string]: {
-    awardees: Array<{
-      field: string
-      name: string
-    }>
-    index: number
-    session: string
-  }
-}
-
-export type LeadersType = {
-  [id: string]: {
-    category: string
-    index: number
-    members: Array<{
-      imageUrl: string
-      name: string
-      place: string
-      scholar: string
-      term: string
-    }>
-  }
-}
-
-export type MembersType = {
-  [id: string]: {
-    category: string
-    index: number
-    members: Array<{
-      imageUrl: string
-      name: string
-      place: string
-      position: string
-      scholar: string
-      university: string
-    }>
-  }
-}
-
-export type MonthStoriesType = {
-  [id: string]: {
-    index: number
-    issue: string
-    link: string
+export type AwardeeType = {
+  awardees: Array<{
+    field: string
     name: string
-    title: string
-  }
+  }>
+  index: number
+  session: string
 }
 
-export type NewslettersType = {
-  [id: string]: {
-    index: number
-    link: string
-    title: string
-  }
-}
-
-export type ResourcesType = {
-  [id: string]: {
-    category: string
-    index: number
-    resources: Array<{
-      link: string
-      text: string
-      title: string
-    }>
-  }
-}
-
-export type ScholarsType = {
-  [id: string]: {
+export type LeaderType = {
+  category: string
+  index: number
+  members: Array<{
     imageUrl: string
     name: string
-    words: string
-  }
+    place: string
+    scholar: string
+    term: string
+  }>
 }
 
-export type SuccessfulScholarsType = {
-  [id: string]: {
-    index: number
-    scholars: Array<{
-      field: string
-      name: string
-    }>
-    session: number
-  }
-}
-
-export type TestimonialsType = {
-  [id: string]: {
+export type MemberType = {
+  category: string
+  index: number
+  members: Array<{
     imageUrl: string
     name: string
+    place: string
     position: string
-    words: string
-  }
+    scholar: string
+    university: string
+  }>
+}
+
+export type MonthStoryType = {
+  index: number
+  issue: string
+  link: string
+  name: string
+  title: string
+}
+
+export type NewsletterType = {
+  index: number
+  link: string
+  title: string
+}
+
+export type ResourceType = {
+  category: string
+  index: number
+  resources: Array<{
+    link: string
+    text: string
+    title: string
+  }>
+}
+
+export type ScholarType = {
+  imageUrl: string
+  name: string
+  words: string
+}
+
+export type SuccessfulScholarType = {
+  index: number
+  scholars: Array<{
+    field: string
+    name: string
+  }>
+  session: number
+}
+
+export type TestimonialType = {
+  imageUrl: string
+  name: string
+  position: string
+  words: string
 }

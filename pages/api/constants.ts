@@ -1,16 +1,26 @@
 import path from 'path'
 import firebase, { firestore } from '../../firebase'
 import {
-  AwardeesType,
-  LeadersType,
-  MembersType,
-  MonthStoriesType,
-  NewslettersType,
-  ResourcesType,
-  ScholarsType,
-  SuccessfulScholarsType,
-  TestimonialsType,
+  AwardeeType,
+  LeaderType,
+  MemberType,
+  MonthStoryType,
+  NewsletterType,
+  ResourceType,
+  ScholarType,
+  SuccessfulScholarType,
+  TestimonialType,
 } from '../../types'
+
+type AwardeesType = { [id: string]: AwardeeType }
+type LeadersType = { [id: string]: LeaderType }
+type MembersType = { [id: string]: MemberType }
+type MonthStoriesType = { [id: string]: MonthStoryType }
+type NewslettersType = { [id: string]: NewsletterType }
+type ResourcesType = { [id: string]: ResourceType }
+type ScholarsType = { [id: string]: ScholarType }
+type SuccessfulScholarsType = { [id: string]: SuccessfulScholarType }
+type TestimonialsType = { [id: string]: TestimonialType }
 
 export const getAwardees = async () => {
   let awardees: AwardeesType = await firestore
