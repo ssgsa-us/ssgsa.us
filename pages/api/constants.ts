@@ -1,6 +1,7 @@
 import path from 'path'
 import firebase, { firestore } from '../../firebase'
 import {
+  ApplicationDatesType,
   AwardeeType,
   LeaderType,
   MemberType,
@@ -123,4 +124,17 @@ export const getTestimonials = async () => {
     })
 
   return testimonials
+}
+
+export const getApplicationDates = async () => {
+  let applicationDates: ApplicationDatesType = await firestore
+    .doc(path.join('constants', 'application dates'))
+    .get()
+    .then(
+      (snapshot: firebase.firestore.DocumentSnapshot<ApplicationDatesType>) => {
+        return snapshot.data()
+      },
+    )
+
+  return applicationDates
 }

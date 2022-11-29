@@ -106,3 +106,14 @@ export type TestimonialType = {
   position: string
   words: string
 }
+
+export type ApplicationDatesType = {
+  session?: string
+  openingDate?: string
+  closingDate?: string
+  shortlistAnnouncement?: string
+  interviewDates?: string
+  awardeesAnnouncement?: string
+  orientationDate?: string
+  mentorAllotmentDate?: string
+}
