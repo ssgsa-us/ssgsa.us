@@ -59,7 +59,7 @@ function ViewApplication() {
         })
         .catch(() => alert('Try again, network error!'))
     }
-  }, [changeOccured])
+  }, [router.query, changeOccured])
 
   return (
     <InterviewerLayout>
