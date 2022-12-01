@@ -8,8 +8,7 @@ import SetDropdown from '../../../components/Admin/SetDropdown'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
 import InterviewMarksModal from '../../../components/modals/InterviewerMarksModel'
 import ReviewMarksModal from '../../../components/modals/ReviewMarksModal'
-import { useAuth } from '../../../context/AuthUserContext'
-import { auth } from '../../../firebase'
+import requireAuth from '../../../components/requireAuth'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
@@ -19,8 +18,7 @@ import { updateApplicationStatus } from '../../api/updateApplicationStatus'
 import { updateInterviewSet } from '../../api/updateInterviewSet'
 import { updateReviewSet } from '../../api/updateReviewSet'
 
-export default function ViewApplication() {
-  const { authUser, loading } = useAuth()
+function ViewApplication() {
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>()
   const [applicationData, setApplicationData] = useState<ApplicationData>()
   const [reviewers, setReviewers] = useState<{ [key: string]: Reviewer }>({})
@@ -56,7 +54,7 @@ export default function ViewApplication() {
     })
   }
 
-  const updateData = () => {
+  useEffect(() => {
     if (applId) {
       getApplicationData(applId)
         .then((data) => {
@@ -73,23 +71,7 @@ export default function ViewApplication() {
         })
         .catch(() => alert('Try again, network error!'))
     }
-  }
-
-  // Listen for changes on authUser, redirect if needed
-  useEffect(() => {
-    if (loading) return
-
-    if (!authUser || !authUser.email) router.push('/signin')
-    else {
-      if (authUser.role === 'admin') updateData()
-      else router.push('/404')
-    }
-  }, [loading, authUser])
-
-  useEffect(() => {
-    if (!loading && authUser && authUser.email && authUser.role === 'admin')
-      updateData()
-  }, [router.query, changeOccured, auth.currentUser])
+  }, [router.query, changeOccured])
 
   return (
     <AdminLayout>
@@ -295,3 +277,5 @@ export default function ViewApplication() {
     </AdminLayout>
   )
 }
+
+export default requireAuth(ViewApplication, 'admin')

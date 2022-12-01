@@ -1,8 +1,7 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
-import { useAuth } from '../../context/AuthUserContext'
+import requireAuth from '../../components/requireAuth'
 import AdminLayout from '../../layouts/admin/admin-layout'
 import { getPartialApplications } from '../api/getApplicationsResponse'
 
@@ -10,28 +9,18 @@ type PartialApplications = {
   [key: string]: ApplicationData
 }
 
-export default function PartialApplications() {
-  const { authUser, loading } = useAuth()
+function PartialApplications() {
   const [applications, setApplications] = useState<PartialApplications>()
   const [pageReady, setPageReady] = useState<boolean>(false)
-  const router = useRouter()
 
-  // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    if (loading) return
-
-    if (!authUser || !authUser.email) router.push('/signin')
-    else {
-      if (authUser.role === 'admin')
-        getPartialApplications()
-          .then((data) => {
-            setApplications(data)
-            setPageReady(true)
-          })
-          .catch(() => alert('Try again, network error!'))
-      else router.push('/404')
-    }
-  }, [loading, authUser])
+    getPartialApplications()
+      .then((data) => {
+        setApplications(data)
+        setPageReady(true)
+      })
+      .catch(() => alert('Try again, network error!'))
+  }, [])
 
   return (
     <AdminLayout>
@@ -92,3 +81,5 @@ export default function PartialApplications() {
     </AdminLayout>
   )
 }
+
+export default requireAuth(PartialApplications, 'admin')
