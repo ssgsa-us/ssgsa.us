@@ -3,6 +3,7 @@ import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import requireAuth from '../../components/requireAuth'
 import ApplicationRow from '../../components/Reviewer/ApplicationRow'
+import Roles from '../../constants/roles'
 import { useAuth } from '../../context/AuthUserContext'
 import ReviewerLayout from '../../layouts/reviewer/reviewer-layout'
 import { getReviewerSetApplications } from '../api/getReviewerSetApplications'
@@ -131,4 +132,4 @@ function ReviewerApplications() {
   )
 }
 
-export default requireAuth(ReviewerApplications, 'reviewer')
+export default requireAuth(ReviewerApplications, Roles.REVIEWER)

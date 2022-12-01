@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
 import ReviewerLayout from '../../layouts/reviewer/reviewer-layout'
 
 function ReviewerPortal() {
@@ -40,4 +41,4 @@ function ReviewerPortal() {
   )
 }
 
-export default requireAuth(ReviewerPortal, 'reviewer')
+export default requireAuth(ReviewerPortal, Roles.REVIEWER)

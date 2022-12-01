@@ -9,6 +9,7 @@ import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplic
 import InterviewMarksModal from '../../../components/modals/InterviewerMarksModel'
 import ReviewMarksModal from '../../../components/modals/ReviewMarksModal'
 import requireAuth from '../../../components/requireAuth'
+import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
@@ -278,4 +279,4 @@ function ViewApplication() {
   )
 }
 
-export default requireAuth(ViewApplication, 'admin')
+export default requireAuth(ViewApplication, Roles.ADMIN)

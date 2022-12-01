@@ -4,6 +4,7 @@ import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
 import requireAuth from '../../../components/requireAuth'
+import Roles from '../../../constants/roles'
 import { useAuth } from '../../../context/AuthUserContext'
 import InterviewerLayout from '../../../layouts/interviewer/interviewer-layout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
@@ -291,4 +292,4 @@ function ViewApplication() {
   )
 }
 
-export default requireAuth(ViewApplication, 'interviewer')
+export default requireAuth(ViewApplication, Roles.INTERVIEWER)

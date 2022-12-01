@@ -3,6 +3,7 @@ import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationRow from '../../components/Interviewer/ApplicationRow'
 import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
 import { useAuth } from '../../context/AuthUserContext'
 import InterviewerLayout from '../../layouts/interviewer/interviewer-layout'
 import { getInterviewerSetApplications } from '../api/getInterviewerSetApplications'
@@ -137,4 +138,4 @@ function InterviewerApplications() {
   )
 }
 
-export default requireAuth(InterviewerApplications, 'interviewer')
+export default requireAuth(InterviewerApplications, Roles.INTERVIEWER)

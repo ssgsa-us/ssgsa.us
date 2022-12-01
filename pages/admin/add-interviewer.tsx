@@ -3,6 +3,7 @@ import { useState } from 'react'
 import * as XLSX from 'xlsx'
 import { Interviewer } from '../../classes/interviewer'
 import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
 import firebase from '../../firebase'
 import AdminLayout from '../../layouts/admin/admin-layout'
 import { createInterviewer } from '../api/createInterviewer'
@@ -232,4 +233,4 @@ function AddInterviewer() {
   )
 }
 
-export default requireAuth(AddInterviewer, 'admin')
+export default requireAuth(AddInterviewer, Roles.ADMIN)

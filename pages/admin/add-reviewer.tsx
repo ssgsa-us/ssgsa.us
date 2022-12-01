@@ -3,6 +3,7 @@ import { useState } from 'react'
 import * as XLSX from 'xlsx'
 import { Reviewer } from '../../classes/reviewer'
 import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
 import firebase from '../../firebase'
 import AdminLayout from '../../layouts/admin/admin-layout'
 import { createReviewer } from '../api/createReviewer'
@@ -208,4 +209,4 @@ function AddReviewer() {
   )
 }
 
-export default requireAuth(AddReviewer, 'admin')
+export default requireAuth(AddReviewer, Roles.ADMIN)

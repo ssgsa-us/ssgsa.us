@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
-import ApplicationLayout from '../../layouts/application-portal/application'
-import { getApplicationData } from '../api/getApplicationData'
+import ReviewApplication from '../../components/ApplicationSteps/ReviewApplication'
 import Step1 from '../../components/ApplicationSteps/Step1'
 import Step2 from '../../components/ApplicationSteps/Step2'
 import Step3 from '../../components/ApplicationSteps/Step3'
 import Step4 from '../../components/ApplicationSteps/Step4'
 import Step5 from '../../components/ApplicationSteps/Step5'
-import ReviewApplication from '../../components/ApplicationSteps/ReviewApplication'
-import { useAuth } from '../../context/AuthUserContext'
 import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
+import { useAuth } from '../../context/AuthUserContext'
+import ApplicationLayout from '../../layouts/application-portal/application'
+import { getApplicationData } from '../api/getApplicationData'
 
 function Application() {
   const { authUser } = useAuth()
@@ -171,4 +172,4 @@ function Application() {
   )
 }
 
-export default requireAuth(Application, 'applicant')
+export default requireAuth(Application, Roles.APPLICANT)

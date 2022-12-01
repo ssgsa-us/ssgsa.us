@@ -1,4 +1,5 @@
 import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
 import InterviewerLayout from '../../layouts/interviewer/interviewer-layout'
 
 function InterviewerPortal() {
@@ -71,4 +72,4 @@ function InterviewerPortal() {
   )
 }
 
-export default requireAuth(InterviewerPortal, 'interviewer')
+export default requireAuth(InterviewerPortal, Roles.INTERVIEWER)

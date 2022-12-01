@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
 import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
 import AdminLayout from '../../layouts/admin/admin-layout'
 import { getPartialApplications } from '../api/getApplicationsResponse'
 
@@ -82,4 +83,4 @@ function PartialApplications() {
   )
 }
 
-export default requireAuth(PartialApplications, 'admin')
+export default requireAuth(PartialApplications, Roles.ADMIN)

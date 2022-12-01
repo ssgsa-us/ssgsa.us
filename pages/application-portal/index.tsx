@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import PortalLayout from '../../layouts/application-portal'
+import { useEffect, useState } from 'react'
+import Roles from '../../constants/roles'
 import { useAuth } from '../../context/AuthUserContext'
+import PortalLayout from '../../layouts/application-portal'
 
 export default function Portal() {
   const { authUser, loading } = useAuth()
@@ -15,7 +16,7 @@ export default function Portal() {
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
     if (!loading && authUser && authUser.email) {
-      if (authUser.role === 'applicant') {
+      if (authUser.role === Roles.APPLICANT) {
         setFirstCheck(true)
         setSecondCheck(true)
         setThirdCheck(true)

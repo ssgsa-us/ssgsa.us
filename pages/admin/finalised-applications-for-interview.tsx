@@ -3,6 +3,7 @@ import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationsTable from '../../components/Admin/ApplicationsTable'
 import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
 import AdminLayout from '../../layouts/admin/admin-layout'
 import { getApplicationsWithGivenStatus } from '../api/getApplicationsResponse'
 
@@ -42,4 +43,4 @@ function FinalisedApplicationsForInterview() {
   )
 }
 
-export default requireAuth(FinalisedApplicationsForInterview, 'admin')
+export default requireAuth(FinalisedApplicationsForInterview, Roles.ADMIN)

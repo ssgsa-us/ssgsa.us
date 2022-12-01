@@ -4,6 +4,7 @@ import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
 import requireAuth from '../../../components/requireAuth'
+import Roles from '../../../constants/roles'
 import { useAuth } from '../../../context/AuthUserContext'
 import ReviewerLayout from '../../../layouts/reviewer/reviewer-layout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
@@ -312,4 +313,4 @@ function ViewApplication() {
   )
 }
 
-export default requireAuth(ViewApplication, 'reviewer')
+export default requireAuth(ViewApplication, Roles.REVIEWER)
