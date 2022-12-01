@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
+import requireAuth from '../../../components/requireAuth'
 import { useAuth } from '../../../context/AuthUserContext'
 import ReviewerLayout from '../../../layouts/reviewer/reviewer-layout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
@@ -10,8 +11,8 @@ import { getApplicationData } from '../../api/getApplicationData'
 import { updateReviewMarks } from '../../api/updateReviewMarks'
 import { updateReviewRemark } from '../../api/updateReviewRemark'
 
-export default function ViewApplication() {
-  const { authUser, loading } = useAuth()
+function ViewApplication() {
+  const { authUser } = useAuth()
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>(
     new AdminPortalData(),
   )
@@ -41,7 +42,7 @@ export default function ViewApplication() {
     }
   }
 
-  const updateData = () => {
+  useEffect(() => {
     if (applId) {
       getApplicationData(applId)
         .then((data) => {
@@ -59,22 +60,6 @@ export default function ViewApplication() {
         })
         .catch(() => alert('Try again, network error!'))
     }
-  }
-
-  // Listen for changes on authUser, redirect if needed
-  useEffect(() => {
-    if (loading) return
-
-    if (!authUser || !authUser.email) router.push('/signin')
-    else {
-      if (authUser.role === 'reviewer') updateData()
-      else router.push('/404')
-    }
-  }, [loading, authUser, router.query])
-
-  useEffect(() => {
-    if (!loading && authUser && authUser.email && authUser.role === 'reviewer')
-      updateData()
   }, [changeOccured])
 
   return (
@@ -326,3 +311,5 @@ export default function ViewApplication() {
     </ReviewerLayout>
   )
 }
+
+export default requireAuth(ViewApplication, 'reviewer')

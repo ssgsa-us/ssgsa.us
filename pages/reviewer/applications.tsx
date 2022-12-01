@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
+import requireAuth from '../../components/requireAuth'
 import ApplicationRow from '../../components/Reviewer/ApplicationRow'
 import { useAuth } from '../../context/AuthUserContext'
 import ReviewerLayout from '../../layouts/reviewer/reviewer-layout'
@@ -14,28 +14,19 @@ type Applications = {
   }
 }
 
-export default function ReviewerApplications() {
-  const { authUser, loading } = useAuth()
+function ReviewerApplications() {
+  const { authUser } = useAuth()
   const [applications, setApplications] = useState<Applications>({})
   const [pageReady, setPageReady] = useState<boolean>(false)
-  const router = useRouter()
 
-  // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    if (loading) return
-
-    if (!authUser || !authUser.email) router.push('/signin')
-    else {
-      if (authUser.role === 'reviewer') {
-        if (authUser.sets.length)
-          getReviewerSetApplications(authUser.sets[0]).then((data) => {
-            setApplications(data)
-            setPageReady(true)
-          })
-        else setPageReady(true)
-      } else router.push('/404')
-    }
-  }, [loading, authUser])
+    if (authUser.sets.length)
+      getReviewerSetApplications(authUser.sets[0]).then((data) => {
+        setApplications(data)
+        setPageReady(true)
+      })
+    else setPageReady(true)
+  }, [])
 
   return (
     <ReviewerLayout>
@@ -139,3 +130,5 @@ export default function ReviewerApplications() {
     </ReviewerLayout>
   )
 }
+
+export default requireAuth(ReviewerApplications, 'reviewer')

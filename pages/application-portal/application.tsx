@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationLayout from '../../layouts/application-portal/application'
 import { getApplicationData } from '../api/getApplicationData'
@@ -11,10 +10,10 @@ import Step4 from '../../components/ApplicationSteps/Step4'
 import Step5 from '../../components/ApplicationSteps/Step5'
 import ReviewApplication from '../../components/ApplicationSteps/ReviewApplication'
 import { useAuth } from '../../context/AuthUserContext'
+import requireAuth from '../../components/requireAuth'
 
-export default function Application() {
-  const { authUser, loading } = useAuth()
-  const router = useRouter()
+function Application() {
+  const { authUser } = useAuth()
   const [applicationData, setApplicationData] = useState<ApplicationData>(
     new ApplicationData(1),
   )
@@ -22,29 +21,14 @@ export default function Application() {
   const [status, setStatus] = useState<number>(1)
   const [printStatus, setPrintStatus] = useState<boolean>(false)
 
-  // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    if (loading) return
-
-    if (!authUser || !authUser.email) router.push('/signin')
-    else {
-      if (authUser.role === 'applicant')
-        getApplicationData(authUser.id)
-          .then((data) => {
-            setStatus(data.form_status)
-            setApplicationData(data)
-            setPageReady(true)
-          })
-          .catch(() => alert('Try again, network error!'))
-      else router.push('/404')
-    }
-  }, [loading, authUser])
-
-  useEffect(() => {
-    if (!loading && authUser && authUser.email && authUser.role === 'applicant')
-      getApplicationData(authUser.id).then((data) => {
+    getApplicationData(authUser.id)
+      .then((data) => {
+        setStatus(data.form_status)
         setApplicationData(data)
+        setPageReady(true)
       })
+      .catch(() => alert('Try again, network error!'))
   }, [status])
 
   const printApplication = () => {
@@ -186,3 +170,5 @@ export default function Application() {
     </ApplicationLayout>
   )
 }
+
+export default requireAuth(Application, 'applicant')

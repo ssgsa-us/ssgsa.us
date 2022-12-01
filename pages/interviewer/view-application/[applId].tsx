@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
+import requireAuth from '../../../components/requireAuth'
 import { useAuth } from '../../../context/AuthUserContext'
 import InterviewerLayout from '../../../layouts/interviewer/interviewer-layout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
@@ -10,8 +11,8 @@ import { getApplicationData } from '../../api/getApplicationData'
 import { updateInterviewMarks } from '../../api/updateInterviewMarks'
 import { updateInterviewRemark } from '../../api/updateInterviewRemark'
 
-export default function ViewApplication() {
-  const { authUser, loading } = useAuth()
+function ViewApplication() {
+  const { authUser } = useAuth()
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>(
     new AdminPortalData(),
   )
@@ -39,7 +40,7 @@ export default function ViewApplication() {
     }
   }
 
-  const updateData = () => {
+  useEffect(() => {
     if (applId) {
       getApplicationData(applId)
         .then((data) => {
@@ -57,27 +58,6 @@ export default function ViewApplication() {
         })
         .catch(() => alert('Try again, network error!'))
     }
-  }
-
-  // Listen for changes on authUser, redirect if needed
-  useEffect(() => {
-    if (loading) return
-
-    if (!authUser || !authUser.email) router.push('/signin')
-    else {
-      if (authUser.role === 'interviewer') updateData()
-      else router.push('/404')
-    }
-  }, [loading, authUser, router.query])
-
-  useEffect(() => {
-    if (
-      !loading &&
-      authUser &&
-      authUser.email &&
-      authUser.role === 'interviewer'
-    )
-      updateData()
   }, [changeOccured])
 
   return (
@@ -310,3 +290,5 @@ export default function ViewApplication() {
     </InterviewerLayout>
   )
 }
+
+export default requireAuth(ViewApplication, 'interviewer')

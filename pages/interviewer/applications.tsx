@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationRow from '../../components/Interviewer/ApplicationRow'
+import requireAuth from '../../components/requireAuth'
 import { useAuth } from '../../context/AuthUserContext'
 import InterviewerLayout from '../../layouts/interviewer/interviewer-layout'
 import { getInterviewerSetApplications } from '../api/getInterviewerSetApplications'
@@ -14,28 +14,19 @@ type Applications = {
   }
 }
 
-export default function InterviewerApplications() {
-  const { authUser, loading } = useAuth()
+function InterviewerApplications() {
+  const { authUser } = useAuth()
   const [applications, setApplications] = useState<Applications>({})
   const [pageReady, setPageReady] = useState<boolean>(false)
-  const router = useRouter()
 
-  // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    if (loading) return
-
-    if (!authUser || !authUser.email) router.push('/signin')
-    else {
-      if (authUser.role === 'interviewer') {
-        if (authUser.sets.length)
-          getInterviewerSetApplications(authUser.sets[0]).then((data) => {
-            setApplications(data)
-            setPageReady(true)
-          })
-        else setPageReady(true)
-      } else router.push('/404')
-    }
-  }, [loading, authUser])
+    if (authUser.sets.length)
+      getInterviewerSetApplications(authUser.sets[0]).then((data) => {
+        setApplications(data)
+        setPageReady(true)
+      })
+    else setPageReady(true)
+  }, [])
 
   return (
     <InterviewerLayout>
@@ -145,3 +136,5 @@ export default function InterviewerApplications() {
     </InterviewerLayout>
   )
 }
+
+export default requireAuth(InterviewerApplications, 'interviewer')
