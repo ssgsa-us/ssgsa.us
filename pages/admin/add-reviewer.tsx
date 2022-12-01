@@ -11,36 +11,37 @@ export default function AddReviewer() {
   const [addedReviewers, setAddedReviewers] = useState<Reviewer[]>([])
   const [removedReviewers, setRemovedReviewers] = useState<Reviewer[]>([])
 
-  const createAccount = async (secondaryFirebaseApp, reviewer, password) => {
+  const createAccount = async (
+    secondaryFirebaseApp: firebase.app.App,
+    reviewer: Array<string>,
+    password: string,
+  ) => {
+    const email = reviewer[0]
+    const name = reviewer[1]
+    const sets = reviewer[2].split(',')
+
     await secondaryFirebaseApp
       .auth()
-      .createUserWithEmailAndPassword(reviewer[0], password)
+      .createUserWithEmailAndPassword(email, password)
       .then(async (result: firebase.auth.UserCredential) => {
         try {
           secondaryFirebaseApp.auth().signOut()
         } catch {
-          console.log('Not able to sign out', reviewer[1])
+          console.log('Not able to sign out', email)
         }
 
         // add reviewer data to firestore database
-        createReviewer(
-          result.user.uid,
-          reviewer[0],
-          reviewer[1],
-          reviewer[2],
-          reviewer[3],
-        )
+        createReviewer(result.user.uid, email, name, sets)
 
         setAddedReviewers((prevAddedReviewers) => [
           ...prevAddedReviewers,
-          new Reviewer(reviewer[0], reviewer[2], reviewer[3], reviewer[1]),
+          new Reviewer(email, name, sets),
         ])
 
         let templateParams = {
-          email: reviewer[0],
-          personal_email: reviewer[1],
-          name: reviewer[2],
-          set: reviewer[3],
+          email: email,
+          name: name,
+          sets: sets.join(', '),
           password: password,
         }
         emailjs.send(
@@ -53,7 +54,7 @@ export default function AddReviewer() {
       .catch(() => {
         setRemovedReviewers((prevRemovedReviewers) => [
           ...prevRemovedReviewers,
-          new Reviewer(reviewer[0], reviewer[2], reviewer[3], reviewer[1]),
+          new Reviewer(email, name, sets),
         ])
       })
   }
@@ -89,9 +90,8 @@ export default function AddReviewer() {
 
         // reviewer details
         // reviewer[0] represents email from which account is created
-        // reviewer[1] represents personal email on which details are to be mailed
-        // reviewer[2] represents name of reviewer
-        // reviewer[3] represents reviewer set
+        // reviewer[1] represents name of reviewer
+        // reviewer[2] represents reviewer sets
 
         // Generate a random password
         let charset =
@@ -154,8 +154,7 @@ export default function AddReviewer() {
                   <tr>
                     <th className="border p-2">Name</th>
                     <th className="border p-2">Email</th>
-                    <th className="border p-2">Set</th>
-                    <th className="border p-2">Personal Email</th>
+                    <th className="border p-2">Sets</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -163,8 +162,7 @@ export default function AddReviewer() {
                     <tr key={index}>
                       <td className="border p-2">{reviewer.name}</td>
                       <td className="border p-2">{reviewer.email}</td>
-                      <td className="border p-2">{reviewer.set}</td>
-                      <td className="border p-2">{reviewer.personal_email}</td>
+                      <td className="border p-2">{reviewer.sets.join(', ')}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -184,8 +182,7 @@ export default function AddReviewer() {
                   <tr>
                     <th className="border p-2">Name</th>
                     <th className="border p-2">Email</th>
-                    <th className="border p-2">Set</th>
-                    <th className="border p-2">Personal Email</th>
+                    <th className="border p-2">Sets</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -193,8 +190,7 @@ export default function AddReviewer() {
                     <tr key={index}>
                       <td className="border p-2">{reviewer.name}</td>
                       <td className="border p-2">{reviewer.email}</td>
-                      <td className="border p-2">{reviewer.set}</td>
-                      <td className="border p-2">{reviewer.personal_email}</td>
+                      <td className="border p-2">{reviewer.sets.join(', ')}</td>
                     </tr>
                   ))}
                 </tbody>

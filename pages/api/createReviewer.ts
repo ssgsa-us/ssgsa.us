@@ -5,11 +5,10 @@ import { Reviewer, reviewerController } from '../../classes/reviewer'
 export const createReviewer = (
   userId: string,
   email: string,
-  personal_email: string,
   name: string,
-  set: string,
+  sets: Array<string>,
 ) => {
-  const reviewer: Reviewer = new Reviewer(name, email, set, personal_email)
+  const reviewer: Reviewer = new Reviewer(email, name, sets)
 
   firestore
     .doc(path.join('reviewer', userId))
