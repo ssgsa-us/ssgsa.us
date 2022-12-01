@@ -5,7 +5,7 @@ import MainLayout from '../layouts/Main'
 import Loading from './Loading'
 
 export default function requireAuth(ChildComponent, authRole) {
-  return (props) => {
+  const Component = (props) => {
     const { authUser, loading } = useAuth()
     const [pageReady, setPageReady] = useState<boolean>(false)
     const router = useRouter()
@@ -28,4 +28,6 @@ export default function requireAuth(ChildComponent, authRole) {
       <ChildComponent {...props} />
     )
   }
+
+  return Component
 }
