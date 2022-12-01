@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
+import Loading from '../../components/Loading'
 import requireAuth from '../../components/requireAuth'
 import ApplicationRow from '../../components/Reviewer/ApplicationRow'
 import Roles from '../../constants/roles'
@@ -29,9 +30,9 @@ function ReviewerApplications() {
       getReviewerSetApplications(selectedSet)
         .then((data) => {
           setApplications(data)
-          setPageReady(true)
         })
         .catch(() => alert('Try again, network error!'))
+        .finally(() => setPageReady(true))
     else setPageReady(true)
   }, [selectedSet])
 
@@ -162,7 +163,7 @@ function ReviewerApplications() {
           </div>
         </div>
       ) : (
-        <div className="mt-96" />
+        <Loading message="Loading your applications!" />
       )}
     </ReviewerLayout>
   )

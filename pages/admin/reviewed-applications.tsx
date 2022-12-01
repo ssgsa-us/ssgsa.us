@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationsTable from '../../components/Admin/ApplicationsTable'
+import Loading from '../../components/Loading'
 import requireAuth from '../../components/requireAuth'
 import Roles from '../../constants/roles'
 import AdminLayout from '../../layouts/admin/admin-layout'
@@ -23,9 +24,9 @@ function ReviewedApplications() {
     getApplicationsWithGivenStatus(3)
       .then((data) => {
         setApplications(data)
-        setPageReady(true)
       })
       .catch(() => alert('Try again, network error!'))
+      .finally(() => setPageReady(true))
   }, [changeOccured])
 
   return (
@@ -37,7 +38,7 @@ function ReviewedApplications() {
           setChangeOccured={setChangeOccured}
         />
       ) : (
-        <div className="mt-96" />
+        <Loading message="Loading your applications!" />
       )}
     </AdminLayout>
   )

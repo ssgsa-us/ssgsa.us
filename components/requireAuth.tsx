@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthUserContext'
 import MainLayout from '../layouts/Main'
+import Loading from './Loading'
 
 export default function requireAuth(ChildComponent, authRole) {
   return (props) => {
@@ -21,9 +22,7 @@ export default function requireAuth(ChildComponent, authRole) {
 
     return !pageReady ? (
       <MainLayout>
-        <div className="my-56 flex justify-center items-center">
-          <p className="text-3xl text-red-850">Loading your page!</p>
-        </div>
+        <Loading message="Loading your page!" />
       </MainLayout>
     ) : (
       <ChildComponent {...props} />

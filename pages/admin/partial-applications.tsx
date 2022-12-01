@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
+import Loading from '../../components/Loading'
 import requireAuth from '../../components/requireAuth'
 import Roles from '../../constants/roles'
 import AdminLayout from '../../layouts/admin/admin-layout'
@@ -18,9 +19,9 @@ function PartialApplications() {
     getPartialApplications()
       .then((data) => {
         setApplications(data)
-        setPageReady(true)
       })
       .catch(() => alert('Try again, network error!'))
+      .finally(() => setPageReady(true))
   }, [])
 
   return (
@@ -77,7 +78,7 @@ function PartialApplications() {
           </table>
         </div>
       ) : (
-        <div className="mt-96" />
+        <Loading message="Loading your applications!" />
       )}
     </AdminLayout>
   )

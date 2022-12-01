@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
+import Loading from '../../../components/Loading'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import { useAuth } from '../../../context/AuthUserContext'
@@ -48,18 +49,17 @@ function ViewApplication() {
       getApplicationData(applId)
         .then((data) => {
           setApplicationData(data)
+          getAdminPortalData(applId)
+            .then((data: AdminPortalData) => {
+              if (data) {
+                setAdminPortalData(data)
+                setReviewerMarks(data)
+              }
+            })
+            .catch(() => alert('Try again, network error!'))
         })
         .catch(() => alert('Try again, network error!'))
-
-      getAdminPortalData(applId)
-        .then((data: AdminPortalData) => {
-          if (data) {
-            setAdminPortalData(data)
-            setReviewerMarks(data)
-          }
-          setPageReady(true)
-        })
-        .catch(() => alert('Try again, network error!'))
+        .finally(() => setPageReady(true))
     }
   }, [router.query, changeOccured])
 
@@ -307,7 +307,7 @@ function ViewApplication() {
           ) : null}
         </div>
       ) : (
-        <div className="mt-96" />
+        <Loading message="Loading your application data!" />
       )}
     </ReviewerLayout>
   )
