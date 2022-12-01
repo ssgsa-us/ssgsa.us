@@ -1,31 +1,23 @@
 import firebase from '../firebase'
 
 export class Interviewer {
-  name: string
   email: string
-  set: string
-  personal_email: string
+  name: string
+  sets: Array<string>
 
-  constructor(
-    name: string,
-    email: string,
-    set: string,
-    personal_email: string,
-  ) {
-    this.name = name
+  constructor(email: string, name: string, sets: Array<string>) {
     this.email = email
-    this.set = set
-    this.personal_email = personal_email
+    this.name = name
+    this.sets = sets
   }
 }
 
 export const interviewerController = {
   toFirestore: (interviewer: Interviewer) => {
     return {
-      name: interviewer.name,
       email: interviewer.email,
-      set: interviewer.set,
-      personal_email: interviewer.personal_email,
+      name: interviewer.name,
+      sets: interviewer.sets,
     }
   },
 
@@ -34,12 +26,7 @@ export const interviewerController = {
     options: firebase.firestore.SnapshotOptions,
   ) => {
     let data = snapshot.data(options)
-    let interviewer = new Interviewer(
-      data.name,
-      data.email,
-      data.set,
-      data.personal_email,
-    )
+    let interviewer = new Interviewer(data.email, data.name, data.sets)
 
     return interviewer
   },
