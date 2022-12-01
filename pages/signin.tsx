@@ -98,7 +98,7 @@ const SignIn = () => {
 
               <div className="flex justify-end">
                 <p className="text-blue-850 text-sm md:text-base">
-                  <Link href="/reset">
+                  <Link href="/reset_password">
                     <a className="py-4 px-2 text-red-850 text-sm">
                       Forgot password?
                     </a>
