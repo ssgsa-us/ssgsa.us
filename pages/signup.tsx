@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../context/AuthUserContext'
+import firebase, { auth } from '../firebase'
+import MainLayout from '../layouts/Main'
 import { createApplicationData } from './api/createApplicationData'
 import { createUser } from './api/createUser'
-import firebase, { auth } from '../firebase'
-import PortalLayout from '../layouts/application-portal'
-import { useAuth } from '../context/AuthUserContext'
 
 const SignUp = () => {
   const { createUserWithEmailAndPassword } = useAuth()
@@ -57,7 +57,7 @@ const SignUp = () => {
   }
 
   return (
-    <PortalLayout>
+    <MainLayout>
       {pageReady ? (
         <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 flex justify-center">
           <div>
@@ -161,7 +161,7 @@ const SignUp = () => {
       ) : (
         <div />
       )}
-    </PortalLayout>
+    </MainLayout>
   )
 }
 

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthUserContext'
-import PortalLayout from '../layouts/application-portal'
+import MainLayout from '../layouts/Main'
 
 const SignIn = () => {
   const { authUser, loading, signInWithEmailAndPassword } = useAuth()
@@ -45,7 +45,7 @@ const SignIn = () => {
   }
 
   return (
-    <PortalLayout>
+    <MainLayout>
       <div className="mx-4 sm:mx-12 lg:mx-20 mt-10 flex justify-center">
         <div>
           <h1 className="mb-4 bg-blue-850 text-xl sm:text-2xl lg:text-3xl text-center text-white font-extrabold py-2 px-6 sm:px-12 rounded-tl-3xl rounded-br-3xl">
@@ -121,7 +121,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-    </PortalLayout>
+    </MainLayout>
   )
 }
 
