@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import Roles from '../constants/roles'
 import { useAuth } from '../context/AuthUserContext'
 import MainLayout from '../layouts/Main'
 
@@ -15,7 +16,12 @@ const SignIn = () => {
   useEffect(() => {
     if (!loading) return
 
-    if (authUser && authUser.email) router.push('/')
+    if (authUser && authUser.email) {
+      if (authUser.role === Roles.ADMIN) router.push('/admin')
+      else if (authUser.role === Roles.INTERVIEWER) router.push('/interviewer')
+      else if (authUser.role === Roles.REVIEWER) router.push('/reviewer')
+      else router.push('/application-portal')
+    }
   }, [loading, authUser])
 
   const onSubmit = (event) => {
@@ -24,21 +30,17 @@ const SignIn = () => {
       const regex =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (regex.test(String(email).toLowerCase())) {
-        signInWithEmailAndPassword(email, password)
-          .then(() => {
-            router.push('/')
-          })
-          .catch((error) => {
-            if (error.code === 'auth/wrong-password') {
-              setError('Wrong password.')
-            } else if (error.code === 'auth/user-not-found') {
-              setError(
-                'There is no user record corresponding to these credentials.',
-              )
-            } else {
-              setError(error.message.replace('Firebase', ''))
-            }
-          })
+        signInWithEmailAndPassword(email, password).catch((error) => {
+          if (error.code === 'auth/wrong-password') {
+            setError('Wrong password.')
+          } else if (error.code === 'auth/user-not-found') {
+            setError(
+              'There is no user record corresponding to these credentials.',
+            )
+          } else {
+            setError(error.message.replace('Firebase', ''))
+          }
+        })
       } else setError('Email is incorrect.')
     } else setError('All fields are required.')
     event.preventDefault()
