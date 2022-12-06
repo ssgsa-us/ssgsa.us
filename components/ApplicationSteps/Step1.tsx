@@ -3,6 +3,7 @@ import { ApplicationData } from '../../classes/application_data'
 import ProceedButtons from './ProceedButtons'
 import { updateApplicationData } from '../../pages/api/step1'
 import { useAuth } from '../../context/AuthUserContext'
+import FileUploadComponent from './FileUpload'
 
 type Props = {
   applicationData: ApplicationData
@@ -14,6 +15,8 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
   const { authUser } = useAuth()
   const [name, setName] = useState<string>()
   const [enrollNo, setEnrollNo] = useState<string>()
+  const [enrollProofDocUploaded, setEnrollProofDocUploaded] =
+    useState<boolean>()
   const [email, setEmail] = useState<string>()
   const [contactNo, setContactNo] = useState<number>()
   const [currentPosition, setCurrentPosition] = useState<string>()
@@ -25,6 +28,9 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
   useEffect(() => {
     setName(applicationData.name || '')
     setEnrollNo(applicationData.enrollment || '')
+    setEnrollProofDocUploaded(
+      !applicationData.enrollment_proof_doc ? false : true,
+    )
     setEmail(applicationData.email || '')
     setContactNo(applicationData.contact || 0)
     setCurrentPosition(applicationData.current_position || '')
@@ -38,6 +44,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
     if (
       name &&
       enrollNo &&
+      enrollProofDocUploaded &&
       email &&
       contactNo &&
       currentPosition &&
@@ -101,6 +108,9 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
   return (
     <div>
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
+        <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
+          Personal Information
+        </h1>
         <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2">
           Note: Remember to save your information at frequent intervals.
         </p>
@@ -128,6 +138,23 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             value={enrollNo}
             onChange={(e) => setEnrollNo(e.target.value)}
             className="w-full rounded-xl p-2 mt-1"
+          />
+        </div>
+        <div className="p-2">
+          <p className="md:text-lg">
+            AMU Enrollment Proof Document
+            <span className="text-red-850 font-black">*</span>
+            <span className="text-xs md:text-sm">
+              <br />
+              Please provide a document as a proof of being AMU Student or
+              Alumna/Alumnus (e.g., ID card, degree, marksheet, etc.)
+            </span>
+          </p>
+          <FileUploadComponent
+            fileName="EnrollmentProofDoc"
+            isFileUploaded={enrollProofDocUploaded}
+            setIsFileUploaded={setEnrollProofDocUploaded}
+            docUrlField="enrollment_proof_doc"
           />
         </div>
         <div className="p-2">

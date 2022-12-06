@@ -4,6 +4,7 @@ import firebase from '../firebase'
 export class ApplicationData {
   name: string
   enrollment: string
+  enrollment_proof_doc: string
   email: string
   contact: number
   current_position: string
@@ -23,6 +24,7 @@ export class ApplicationData {
   step1(
     name: string,
     enrollment: string,
+    enrollment_proof_doc: string,
     email: string,
     contact: number,
     current_position: string,
@@ -32,6 +34,7 @@ export class ApplicationData {
   ) {
     this.name = name
     this.enrollment = enrollment
+    this.enrollment_proof_doc = enrollment_proof_doc
     this.email = email
     this.contact = contact
     this.current_position = current_position
@@ -71,6 +74,7 @@ export const applicationDataConverter = {
     applicationData.step1(
       data.name,
       data.enrollment,
+      data.enrollment_proof_doc,
       data.email,
       data.contact,
       data.current_position,
