@@ -37,7 +37,6 @@ const FileUploadComponent = ({
   useEffect(() => {
     setNewFileSelected(!isFileUploaded)
   }, [isFileUploaded])
-  console.log(isFileUploaded, newFileSelected)
 
   return (
     <>
