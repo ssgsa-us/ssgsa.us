@@ -13,6 +13,7 @@ const SignIn = () => {
   const [error, setError] = useState<string>('')
 
   // Listen for changes on authUser, redirect if needed
+  // Also redirect after signin as authState will update from useFirebaseAuth
   useEffect(() => {
     if (!loading) return
 

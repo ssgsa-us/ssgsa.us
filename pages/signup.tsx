@@ -19,6 +19,7 @@ const SignUp = () => {
   const [error, setError] = useState<string>('')
 
   // Listen for changes on authUser, redirect if needed
+  // Also redirect after signup as authState will update from useFirebaseAuth
   useEffect(() => {
     if (!loading) return
 
@@ -37,12 +38,13 @@ const SignUp = () => {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       if (regex.test(String(email).toLowerCase())) {
         //check if passwords match. If they do, create user in Firebase
-        // and redirect to home page.
         if (passwordOne === passwordTwo) {
           createUserWithEmailAndPassword(email, passwordOne)
             .then(async (result: firebase.auth.UserCredential) => {
               // add user data to firestore database
               createUser(result.user.uid, name, email, mobile)
+
+              // create application data for user
               createApplicationData(result.user.uid)
             })
             .catch((error) => {

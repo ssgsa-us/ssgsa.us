@@ -15,6 +15,9 @@ export default function useFirebaseAuth() {
   const [authUser, setAuthUser] = useState<AuthUser>(null)
   const [loading, setLoading] = useState<boolean>(true)
 
+  // Runs everytime when auth state changes
+  // Runs after signin/signup and at every reload
+  // Fetch user details and update it in authUser
   const authStateChanged = async (authState: firebase.User) => {
     if (!authState) {
       setAuthUser(null)

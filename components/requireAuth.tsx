@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthUserContext'
 import MainLayout from '../layouts/Main'
 import Loading from './Loading'
 
+// Used as HOC at each component which requires authentication and authorization
 export default function requireAuth(ChildComponent, authRole) {
   const Component = (props) => {
     const { authUser, loading } = useAuth()

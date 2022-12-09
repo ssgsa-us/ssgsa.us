@@ -1,8 +1,8 @@
 export type AuthUser = {
   id: string
   email: string
-  role: string
-  sets: Array<string>
+  role: string // Used to authorize user
+  sets: Array<string> // Sets are only used for reviewer and interviewer
 }
 
 export type AcademicRecordType = {

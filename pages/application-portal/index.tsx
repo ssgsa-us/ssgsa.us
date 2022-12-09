@@ -16,6 +16,7 @@ export default function Portal() {
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
     if (!loading && authUser && authUser.email) {
+      // If authUser is applicant, then he/she should have read the rules
       if (authUser.role === Roles.APPLICANT) {
         setFirstCheck(true)
         setSecondCheck(true)
