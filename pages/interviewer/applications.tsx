@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
-import { Interviewer } from '../../classes/interviewer'
 import ApplicationRow from '../../components/Interviewer/ApplicationRow'
-import { auth } from '../../firebase'
+import Loading from '../../components/Loading'
+import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
+import { useAuth } from '../../context/AuthUserContext'
 import InterviewerLayout from '../../layouts/interviewer/interviewer-layout'
-import { getInterviewerDetails } from '../api/getInterviewerDetails'
 import { getInterviewerSetApplications } from '../api/getInterviewerSetApplications'
 
 type Applications = {
@@ -16,45 +16,24 @@ type Applications = {
   }
 }
 
-export default function InterviewerApplications() {
+function InterviewerApplications() {
+  const { authUser } = useAuth()
   const [applications, setApplications] = useState<Applications>()
-  const [allSets, setAllSets] = useState<Array<string>>()
-  const [selectedSet, setSelectedSet] = useState<string>()
+  const [selectedSet, setSelectedSet] = useState<string>(
+    authUser.sets.length ? authUser.sets[0] : '',
+  )
   const [pageReady, setPageReady] = useState<boolean>(false)
-  const router = useRouter()
-
-  // Listen for changes on authUser, redirect if needed
-  useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/interviewer/signin')
-      else {
-        getInterviewerDetails(auth.currentUser.email)
-          .then((interviewerData: Interviewer) => {
-            if (interviewerData) {
-              setAllSets(interviewerData.sets)
-              setSelectedSet(interviewerData.sets[0])
-              getInterviewerSetApplications(interviewerData.sets[0]).then(
-                (data) => {
-                  setApplications(data)
-                  setPageReady(true)
-                },
-              )
-            } else router.push('/404')
-          })
-          .catch(() => alert('Try again, network error!'))
-      }
-    })
-  }, [])
+  const allSets = authUser.sets
 
   useEffect(() => {
-    if (!pageReady) return
-    setPageReady(false)
-    getInterviewerSetApplications(selectedSet)
-      .then((data) => {
-        setApplications(data)
-        setPageReady(true)
-      })
-      .catch((err) => console.log(err))
+    if (selectedSet)
+      getInterviewerSetApplications(selectedSet)
+        .then((data) => {
+          setApplications(data)
+        })
+        .catch(() => alert('Try again, network error!'))
+        .finally(() => setPageReady(true))
+    else setPageReady(true)
   }, [selectedSet])
 
   return (
@@ -175,8 +154,10 @@ export default function InterviewerApplications() {
           </div>
         </div>
       ) : (
-        <div className="mt-96" />
+        <Loading message="Loading your applications!" />
       )}
     </InterviewerLayout>
   )
 }
+
+export default requireAuth(InterviewerApplications, Roles.INTERVIEWER)

@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { auth } from '../../firebase'
+import { useEffect, useState } from 'react'
+import Roles from '../../constants/roles'
+import { useAuth } from '../../context/AuthUserContext'
 import PortalLayout from '../../layouts/application-portal'
 
 export default function Portal() {
+  const { authUser, loading } = useAuth()
   const router = useRouter()
   const [firstCheck, setFirstCheck] = useState<boolean>(false)
   const [secondCheck, setSecondCheck] = useState<boolean>(false)
@@ -13,14 +15,17 @@ export default function Portal() {
 
   // Listen for changes on authUser, redirect if needed
   useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (auth.currentUser) {
+    if (!loading && authUser && authUser.email) {
+      // If authUser is applicant, then he/she should have read the rules
+      if (authUser.role === Roles.APPLICANT) {
         setFirstCheck(true)
         setSecondCheck(true)
         setThirdCheck(true)
+      } else {
+        router.push('/404')
       }
-    })
-  }, [])
+    }
+  }, [loading, authUser])
 
   const proceed = () => {
     setError('')
@@ -42,7 +47,8 @@ export default function Portal() {
           ) : new Date() >
             new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE) ? (
             <div className="bg-red-200 text-2xl text-red-850 text-center font-bold rounded-3xl p-2 pl-6 mb-5">
-              We are no longer accepting applications for the session 2022-23. The deadline was March 15, 2022 at 11:59 PM (IST).
+              We are no longer accepting applications for the session 2022-23.
+              The deadline was March 15, 2022 at 11:59 PM (IST).
             </div>
           ) : null}
         </div>
@@ -94,7 +100,8 @@ export default function Portal() {
                 <br />
                 <span className="flex justify-center">OR</span>I have completed
                 a three year Bachelor&apos;s program and am currently enrolled
-                in a Master&apos;s program or have completed the Master&apos;s program.
+                in a Master&apos;s program or have completed the Master&apos;s
+                program.
               </label>
             </div>
             <br />

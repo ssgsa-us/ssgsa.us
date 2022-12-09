@@ -2,8 +2,8 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import { useState } from 'react'
-import { auth } from '../../firebase'
-import MainLayout from '../../layouts/Main'
+import { auth } from '../firebase'
+import MainLayout from '../layouts/Main'
 
 auth.useDeviceLanguage()
 
@@ -89,7 +89,7 @@ export default function ResetPassword() {
               <br />
               <div className="p-2 flex">
                 <p className="text-blue-850 md:text-base">
-                  <Link href="/application-portal/signin">
+                  <Link href="/signin">
                     <a className="py-4 px-2 text-red-850 text-sm font-bold">
                       <FontAwesomeIcon icon={faArrowLeft} /> Back to signin
                     </a>

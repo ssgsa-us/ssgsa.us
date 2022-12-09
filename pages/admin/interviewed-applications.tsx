@@ -1,9 +1,10 @@
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import ApplicationsTable from '../../components/Admin/ApplicationsTable'
-import { auth } from '../../firebase'
+import Loading from '../../components/Loading'
+import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
 import AdminLayout from '../../layouts/admin/admin-layout'
 import { getApplicationsWithGivenStatus } from '../api/getApplicationsResponse'
 
@@ -14,40 +15,18 @@ type Applications = {
   }
 }
 
-export default function InterviewedApplications() {
+function InterviewedApplications() {
   const [applications, setApplications] = useState<Applications>()
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
-  const router = useRouter()
-
-  // Listen for changes on authUser, redirect if needed
-  useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/admin/signin')
-      else {
-        if (auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL)
-          getApplicationsWithGivenStatus(5)
-            .then((data) => {
-              setApplications(data)
-              setPageReady(true)
-            })
-            .catch(() => alert('Try again, network error!'))
-        else router.push('/404')
-      }
-    })
-  }, [])
 
   useEffect(() => {
-    if (
-      auth.currentUser &&
-      auth.currentUser.email == process.env.NEXT_PUBLIC_ADMIN_EMAIL
-    )
-      getApplicationsWithGivenStatus(5)
-        .then((data) => {
-          setApplications(data)
-          setPageReady(true)
-        })
-        .catch(() => alert('Try again, network error!'))
+    getApplicationsWithGivenStatus(5)
+      .then((data) => {
+        setApplications(data)
+      })
+      .catch(() => alert('Try again, network error!'))
+      .finally(() => setPageReady(true))
   }, [changeOccured])
 
   return (
@@ -59,8 +38,10 @@ export default function InterviewedApplications() {
           setChangeOccured={setChangeOccured}
         />
       ) : (
-        <div className="mt-96" />
+        <Loading message="Loading your applications!" />
       )}
     </AdminLayout>
   )
 }
+
+export default requireAuth(InterviewedApplications, Roles.ADMIN)

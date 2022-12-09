@@ -1,25 +1,26 @@
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
-import { auth } from '../../../firebase'
+import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
+import Loading from '../../../components/Loading'
+import requireAuth from '../../../components/requireAuth'
+import Roles from '../../../constants/roles'
+import { useAuth } from '../../../context/AuthUserContext'
+import ReviewerLayout from '../../../layouts/reviewer/reviewer-layout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
-import { getReviewerDetails } from '../../api/getReviewerDetails'
-import { Reviewer } from '../../../classes/reviewer'
-import ReviewApplication from '../../../components/ApplicationSteps/ReviewApplication'
-import ReviewerLayout from '../../../layouts/reviewer/reviewer-layout'
 import { updateReviewMarks } from '../../api/updateReviewMarks'
 import { updateReviewRemark } from '../../api/updateReviewRemark'
 
-export default function ViewApplication() {
+function ViewApplication() {
+  const { authUser } = useAuth()
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>(
     new AdminPortalData(),
   )
   const [applicationData, setApplicationData] = useState<ApplicationData>(
     new ApplicationData(),
   )
-  const [reviewer, setReviewer] = useState<Reviewer>()
   const [A, setA] = useState<number>(0)
   const [B, setB] = useState<number>(0)
   const [C, setC] = useState<number>(0)
@@ -33,56 +34,34 @@ export default function ViewApplication() {
 
   const setReviewerMarks = (data: AdminPortalData) => {
     let review_marks = data.review_marks
-    if (review_marks && review_marks[auth.currentUser.uid]) {
-      setA(review_marks[auth.currentUser.uid].A || 0)
-      setB(review_marks[auth.currentUser.uid].B || 0)
-      setC(review_marks[auth.currentUser.uid].C || 0)
-      setD(review_marks[auth.currentUser.uid].D || 0)
-      setE(review_marks[auth.currentUser.uid].E || 0)
-      setRemark(review_marks[auth.currentUser.uid].remark || '')
+    if (review_marks && review_marks[authUser.id]) {
+      setA(review_marks[authUser.id].A || 0)
+      setB(review_marks[authUser.id].B || 0)
+      setC(review_marks[authUser.id].C || 0)
+      setD(review_marks[authUser.id].D || 0)
+      setE(review_marks[authUser.id].E || 0)
+      setRemark(review_marks[authUser.id].remark || '')
     }
   }
 
-  const updateData = () => {
+  useEffect(() => {
     if (applId) {
       getApplicationData(applId)
         .then((data) => {
           setApplicationData(data)
+          getAdminPortalData(applId)
+            .then((data: AdminPortalData) => {
+              if (data) {
+                setAdminPortalData(data)
+                setReviewerMarks(data)
+              }
+            })
+            .catch(() => alert('Try again, network error!'))
         })
         .catch(() => alert('Try again, network error!'))
-
-      getAdminPortalData(applId)
-        .then((data: AdminPortalData) => {
-          if (data) {
-            setAdminPortalData(data)
-            setReviewerMarks(data)
-          }
-          setPageReady(true)
-        })
-        .catch(() => alert('Try again, network error!'))
+        .finally(() => setPageReady(true))
     }
-  }
-
-  // Listen for changes on authUser, redirect if needed
-  useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/reviewer/signin')
-      else {
-        getReviewerDetails(auth.currentUser.email)
-          .then((reviewerData: Reviewer) => {
-            if (reviewerData) {
-              setReviewer(reviewerData)
-              updateData()
-            } else router.push('/404')
-          })
-          .catch(() => alert('Try again, network error!'))
-      }
-    })
-  }, [])
-
-  useEffect(() => {
-    if (auth.currentUser && reviewer) updateData()
-  }, [router.query, changeOccured, auth.currentUser])
+  }, [router.query, changeOccured])
 
   return (
     <ReviewerLayout>
@@ -265,7 +244,7 @@ export default function ViewApplication() {
                             ? null
                             : updateReviewMarks(
                                 applId,
-                                auth.currentUser.uid,
+                                authUser.id,
                                 A,
                                 B,
                                 C,
@@ -310,11 +289,7 @@ export default function ViewApplication() {
                         onClick={() =>
                           adminPortalData.application_status >= 5 || !remark
                             ? null
-                            : updateReviewRemark(
-                                applId,
-                                auth.currentUser.uid,
-                                remark,
-                              )
+                            : updateReviewRemark(applId, authUser.id, remark)
                                 .then(() => {
                                   alert('Succesfully Updated!')
                                   setChangeOccured(!changeOccured)
@@ -332,8 +307,10 @@ export default function ViewApplication() {
           ) : null}
         </div>
       ) : (
-        <div className="mt-96" />
+        <Loading message="Loading your application data!" />
       )}
     </ReviewerLayout>
   )
 }
+
+export default requireAuth(ViewApplication, Roles.REVIEWER)

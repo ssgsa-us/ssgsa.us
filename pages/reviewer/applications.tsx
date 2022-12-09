@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
+import Loading from '../../components/Loading'
+import requireAuth from '../../components/requireAuth'
 import ApplicationRow from '../../components/Reviewer/ApplicationRow'
-import { auth } from '../../firebase'
-import { getReviewerDetails } from '../api/getReviewerDetails'
-import { getReviewerSetApplications } from '../api/getReviewerSetApplications'
-import { Reviewer } from '../../classes/reviewer'
+import Roles from '../../constants/roles'
+import { useAuth } from '../../context/AuthUserContext'
 import ReviewerLayout from '../../layouts/reviewer/reviewer-layout'
+import { getReviewerSetApplications } from '../api/getReviewerSetApplications'
 
 type Applications = {
   [key: string]: {
@@ -16,45 +16,24 @@ type Applications = {
   }
 }
 
-export default function ReviewerApplications() {
-  const [applications, setApplications] = useState<Applications>()
-  const [allSets, setAllSets] = useState<Array<string>>()
-  const [selectedSet, setSelectedSet] = useState<string>()
+function ReviewerApplications() {
+  const { authUser } = useAuth()
+  const [applications, setApplications] = useState<Applications>({})
+  const [selectedSet, setSelectedSet] = useState<string>(
+    authUser.sets.length ? authUser.sets[0] : '',
+  )
   const [pageReady, setPageReady] = useState<boolean>(false)
-  const router = useRouter()
-
-  // Listen for changes on authUser, redirect if needed
-  useEffect(() => {
-    auth.onAuthStateChanged(() => {
-      if (!auth.currentUser) router.push('/reviewer/signin')
-      else {
-        getReviewerDetails(auth.currentUser.email)
-          .then((reviewerData: Reviewer) => {
-            if (reviewerData) {
-              setAllSets(reviewerData.sets)
-              setSelectedSet(reviewerData.sets[0])
-              getReviewerSetApplications(reviewerData.sets[0])
-                .then((data) => {
-                  setApplications(data)
-                  setPageReady(true)
-                })
-                .catch((err) => console.log(err))
-            } else router.push('/404')
-          })
-          .catch(() => alert('Try again, network error!'))
-      }
-    })
-  }, [])
+  const allSets = authUser.sets
 
   useEffect(() => {
-    if (!pageReady) return
-    setPageReady(false)
-    getReviewerSetApplications(selectedSet)
-      .then((data) => {
-        setApplications(data)
-        setPageReady(true)
-      })
-      .catch((err) => console.log(err))
+    if (selectedSet)
+      getReviewerSetApplications(selectedSet)
+        .then((data) => {
+          setApplications(data)
+        })
+        .catch(() => alert('Try again, network error!'))
+        .finally(() => setPageReady(true))
+    else setPageReady(true)
   }, [selectedSet])
 
   return (
@@ -184,8 +163,10 @@ export default function ReviewerApplications() {
           </div>
         </div>
       ) : (
-        <div className="mt-96" />
+        <Loading message="Loading your applications!" />
       )}
     </ReviewerLayout>
   )
 }
+
+export default requireAuth(ReviewerApplications, Roles.REVIEWER)
