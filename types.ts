@@ -10,12 +10,19 @@ export type User = {
 }
 
 export type AcademicRecordType = {
-  [category: string]: {
+  [key: number]: {
+    degreeLevel: 'Bachelor' | 'Master' | 'Doctoral' | ''
+    degreeName: string
     branch: string
-    collegeName: string
-    duration: number
+    faculty: string
+    college: string
+    university: string
+    currentlyEnrolled: boolean | null
+    startedYear: number
     completionYear: number
-    percentage: number
+    gradeCriteria: 'CGPA' | 'Percentage' | null
+    grades: number
+    document: string
   }
 }
 
