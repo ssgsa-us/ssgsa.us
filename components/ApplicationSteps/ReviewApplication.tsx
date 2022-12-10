@@ -17,6 +17,12 @@ const ReviewApplication = ({ applicationData }: Props) => {
         </div>
         <div className="flex justify-start mt-4">
           <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
+            AMU Enrollment Number
+          </p>
+          <p className="sm:text-lg w-3/5">{applicationData.enrollment}</p>
+        </div>
+        <div className="flex justify-start mt-4">
+          <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
             E-mail Address
           </p>
           <p className="sm:text-lg w-3/5">{applicationData.email}</p>
@@ -29,21 +35,27 @@ const ReviewApplication = ({ applicationData }: Props) => {
         </div>
         <div className="flex justify-start mt-4">
           <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-            Gender
+            Current Position
           </p>
-          <p className="sm:text-lg w-3/5">{applicationData.gender}</p>
+          <p className="sm:text-lg w-3/5">{applicationData.current_position}</p>
         </div>
         <div className="flex justify-start mt-4">
           <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-            AMU Enrollment Number
+            Target Program
           </p>
-          <p className="sm:text-lg w-3/5">{applicationData.enrollment}</p>
+          <p className="sm:text-lg w-3/5">{applicationData.target_program}</p>
         </div>
         <div className="flex justify-start mt-4">
           <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-            Nationality
+            Target date
           </p>
-          <p className="sm:text-lg w-3/5">{applicationData.nationality}</p>
+          <p className="sm:text-lg w-3/5">{applicationData.target_date}</p>
+        </div>
+        <div className="flex justify-start mt-4">
+          <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
+            Target Country
+          </p>
+          <p className="sm:text-lg w-3/5">{applicationData.target_country}</p>
         </div>
       </div>
       <div className="mb-10">
@@ -280,7 +292,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
           {applicationData.faculty}
         </p>
       </div>
-          
+
       {applicationData.form_status == 6 ? (
         <div className="mt-5">
           <p className="text-black text-xl sm:text-2xl text-red-850 font-extrabold mb-4">
