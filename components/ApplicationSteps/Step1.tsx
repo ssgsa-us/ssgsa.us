@@ -15,8 +15,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
   const { authUser } = useAuth()
   const [name, setName] = useState<string>()
   const [enrollNo, setEnrollNo] = useState<string>()
-  const [enrollProofDocUploaded, setEnrollProofDocUploaded] =
-    useState<boolean>()
+  const [enrollProofDoc, setEnrollProofDoc] = useState<string>()
   const [email, setEmail] = useState<string>()
   const [contactNo, setContactNo] = useState<number>()
   const [currentPosition, setCurrentPosition] = useState<string>()
@@ -28,9 +27,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
   useEffect(() => {
     setName(applicationData.name || '')
     setEnrollNo(applicationData.enrollment || '')
-    setEnrollProofDocUploaded(
-      !applicationData.enrollment_proof_doc ? false : true,
-    )
+    setEnrollProofDoc(applicationData.enrollment_proof_doc)
     setEmail(applicationData.email || '')
     setContactNo(applicationData.contact || 0)
     setCurrentPosition(applicationData.current_position || '')
@@ -44,7 +41,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
     if (
       name &&
       enrollNo &&
-      enrollProofDocUploaded &&
+      enrollProofDoc &&
       email &&
       contactNo &&
       currentPosition &&
@@ -152,9 +149,8 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           </p>
           <FileUploadComponent
             fileName="EnrollmentProofDoc"
-            isFileUploaded={enrollProofDocUploaded}
-            setIsFileUploaded={setEnrollProofDocUploaded}
-            docUrlField="enrollment_proof_doc"
+            fileUrl={enrollProofDoc}
+            setFileUrl={(url: string) => setEnrollProofDoc(url)}
           />
         </div>
         <div className="p-2">

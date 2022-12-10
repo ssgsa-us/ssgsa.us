@@ -4,45 +4,49 @@ import { uploadDocument } from '../../pages/api/uploadDocument'
 
 type Props = {
   fileName: string
-  isFileUploaded: boolean
-  setIsFileUploaded: Dispatch<SetStateAction<boolean>>
-  docUrlField: string
+  fileUrl: string
+  setFileUrl: (url: string) => void
 }
 
-const FileUploadComponent = ({
-  fileName,
-  isFileUploaded,
-  setIsFileUploaded,
-  docUrlField,
-}: Props) => {
+const FileUploadComponent = ({ fileName, fileUrl, setFileUrl }: Props) => {
   const { authUser } = useAuth()
   const [file, setFile] = useState<File>()
   const [newFileSelected, setNewFileSelected] = useState<boolean>(true)
   const [error, setError] = useState<string>('')
 
-  const upload = () => {
+  const upload = async () => {
     setError('')
     if (file)
-      if (file.size <= 1100000)
-        uploadDocument(authUser.id, fileName, file, docUrlField)
-          .then(() => {
-            setIsFileUploaded(true)
-            setNewFileSelected(false)
-            alert('Your file is uploaded.')
-          })
-          .catch(() => alert('Try again, network error!'))
-      else setError('Maximum allowed file size is 1MB.')
+      if (file.size <= 1100000) {
+        try {
+          const downloadURL: string = await uploadDocument(
+            authUser.id,
+            fileName,
+            file,
+          )
+          setFileUrl(downloadURL)
+          setNewFileSelected(false)
+          alert('Your file is uploaded.')
+        } catch {
+          alert('Try again, network error!')
+        }
+      } else setError('Maximum allowed file size is 1MB.')
   }
 
   useEffect(() => {
-    setNewFileSelected(!isFileUploaded)
-  }, [isFileUploaded])
+    setNewFileSelected(!fileUrl)
+  }, [fileUrl])
 
   return (
     <>
       <div>
         <p className="md:text-sm text-red-850">
-          The maximum allowed file size is 1 MB
+          The maximum allowed file size is 1 MB.{' '}
+          {!file ? null : (
+            <span className="text-sm md:text-xs">
+              (Uploading document will not require saving information)
+            </span>
+          )}
         </p>
       </div>
       <div

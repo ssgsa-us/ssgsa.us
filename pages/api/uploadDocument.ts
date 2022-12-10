@@ -8,24 +8,21 @@ import {
 } from 'firebase/storage'
 import { firestore, storage } from '../../firebase'
 
-export const uploadDocument = (
+export const uploadDocument = async (
   userId: string,
   documentName: string,
   document: File,
-  docUrlField: string,
 ) => {
   const storageRef = StorageRef(
     storage,
     path.join('documents', userId, documentName),
   )
-  const uploadTask: UploadTask = uploadBytesResumable(storageRef, document)
 
-  uploadTask.then((snapshot: UploadTaskSnapshot) => {
-    getDownloadURL(snapshot.ref).then((downloadURL: string) => {
-      firestore
-        .doc(path.join('applications_data', userId))
-        .update({ [docUrlField]: downloadURL })
-    })
-  })
-  return uploadTask
+  const snapshot: UploadTaskSnapshot = await uploadBytesResumable(
+    storageRef,
+    document,
+  )
+
+  const downloadURL: string = await getDownloadURL(snapshot.ref)
+  return downloadURL
 }
