@@ -2,11 +2,13 @@ import emailjs from 'emailjs-com'
 import { useState } from 'react'
 import * as XLSX from 'xlsx'
 import { Interviewer } from '../../classes/interviewer'
+import requireAuth from '../../components/requireAuth'
+import Roles from '../../constants/roles'
 import firebase from '../../firebase'
 import AdminLayout from '../../layouts/admin/admin-layout'
 import { createInterviewer } from '../api/createInterviewer'
 
-export default function AddInterviewer() {
+function AddInterviewer() {
   const [file, setFile] = useState<File>()
   const [addedInterviewers, setAddedInterviewers] = useState<Interviewer[]>([])
   const [removedInterviewers, setRemovedInterviewers] = useState<Interviewer[]>(
@@ -216,3 +218,5 @@ export default function AddInterviewer() {
     </AdminLayout>
   )
 }
+
+export default requireAuth(AddInterviewer, Roles.ADMIN)

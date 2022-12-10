@@ -2,7 +2,7 @@ import AdminHeader from '../../components/AdminHeader'
 import Footer from '../../components/Footer'
 import styles from '../../styles/Home.module.css'
 
-export default function ApplicationLayout({ children }) {
+export default function AdminLayout({ children }) {
   return (
     <div className={styles.container}>
       <AdminHeader />

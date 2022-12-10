@@ -3,7 +3,7 @@ import useFirebaseAuth from '../firebase/useFirebaseAuth'
 import firebase, { auth } from '../firebase'
 
 const authUserContext = createContext({
-  authUser: { id: '', email: '' },
+  authUser: { id: '', email: '', role: '', sets: [] },
   loading: true,
   signInWithEmailAndPassword: async (
     email: string,
