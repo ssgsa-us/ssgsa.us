@@ -4,7 +4,10 @@ import { faculties } from '../../constants/faculties'
 import { useAuth } from '../../context/AuthUserContext'
 import { updateApplicationData } from '../../pages/api/step2'
 import { AcademicRecordType } from '../../types'
+import CheckBoxInput from './Checkboxes'
 import ProceedButtons from './ProceedButtons'
+import SelectInput from './SelectInput'
+import TextInput from './TextInput'
 
 type Props = {
   applicationData: ApplicationData
@@ -77,106 +80,6 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
       },
     }))
   }
-
-  const selectInput = (
-    key: number,
-    name: string,
-    variableName: string,
-    options: Array<{ label: string; value: string | number }>,
-  ) => (
-    <div className="p-2">
-      <p className="md:text-lg">
-        {name}
-        <span className="text-red-850 font-black">*</span>
-      </p>
-      <select
-        name={variableName}
-        value={academicData[key][variableName]}
-        onChange={(e) => updateField(key, variableName, e.target.value)}
-        className="w-full rounded-xl p-2 mt-1"
-      >
-        {options.map((option, index) => (
-          <option key={index} label={option.label} value={option.value} />
-        ))}
-      </select>
-    </div>
-  )
-
-  // step used for number type to allow decimal places
-  // minimum and maximum are used for number type
-  const textInput = (
-    key: number,
-    name: string,
-    variableName: string,
-    type: 'text' | 'number',
-    step: string = 'any',
-    minimum: number = null,
-    maximum: number = null,
-  ) => (
-    <div className="p-2">
-      <p className="md:text-lg">
-        {name}
-        <span className="text-red-850 font-black">*</span>
-      </p>
-      <input
-        name={variableName}
-        type={type}
-        step={step}
-        min={minimum}
-        max={maximum}
-        value={academicData[key][variableName]}
-        onChange={(e) =>
-          type === 'text'
-            ? updateField(key, variableName, e.target.value)
-            : Number(e.target.value) > maximum
-            ? null
-            : updateField(key, variableName, Number(e.target.value))
-        }
-        className="w-full rounded-xl p-2 mt-1"
-      />
-    </div>
-  )
-
-  // Only accept 2 options
-  const checkBoxInput = (
-    key: number,
-    name: string,
-    variableName: string,
-    options: Array<{ label: string; value: string | number | boolean }>,
-  ) => (
-    <div className="p-2">
-      <p className="md:text-lg">
-        {name}
-        <span className="text-red-850 font-black">*</span>
-      </p>
-      <div className="flex justify-around items-center">
-        {options.map((option, index) => (
-          <div
-            key={index}
-            className={`flex items-center w-48 border-2 ${
-              academicData[key][variableName] == option.value
-                ? 'border-black'
-                : 'border-green-800'
-            } rounded-xl p-2 mt-1 mr-4`}
-          >
-            <input
-              type="checkbox"
-              checked={academicData[key][variableName] == option.value}
-              onChange={(e) => {
-                updateField(
-                  key,
-                  variableName,
-                  !e.target.checked ? null : option.value,
-                )
-              }}
-              className="w-4 cursor-pointer"
-            />
-            <label className="pl-2">{option.label}</label>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
 
   const checkAllFields = (record: AcademicRecordType[number]) =>
     record.degreeLevel &&
@@ -278,109 +181,184 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
         <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2">
           Note: Remember to save your information at frequent intervals.
         </p>
-        <div>
-          {Object.keys(academicData).map((keyTemp, index) => {
-            const key = Number(keyTemp)
-            return (
-              <div className="my-10" key={key}>
-                <div className="flex justify-between items-center">
-                  <p className="font-bold text-lg md:text-xl">
-                    Academic Record {index + 1}
-                  </p>
-                  <p
-                    className="text-red-850 cursor-pointer"
-                    onClick={() => {
-                      if (Object.keys(academicData).length === 1)
-                        alert('Education Qualifications are required.')
-                      else
-                        setAcademicData(
-                          ({ [key]: value, ...prevRecord }) => prevRecord,
-                        )
-                    }}
-                  >
-                    Remove
-                  </p>
-                </div>
-                {selectInput(key, 'Degree Level', 'degreeLevel', [
+      </div>
+      <div>
+        {Object.keys(academicData).map((keyTemp, index) => {
+          const key = Number(keyTemp)
+          return (
+            <div
+              className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10"
+              key={key}
+            >
+              <div className="flex justify-between items-center">
+                <p className="font-bold text-lg md:text-xl">
+                  Academic Record {index + 1}
+                </p>
+                <p
+                  className="text-red-850 cursor-pointer"
+                  onClick={() => {
+                    if (Object.keys(academicData).length === 1)
+                      alert('Education Qualifications are required.')
+                    else
+                      setAcademicData(
+                        ({ [key]: value, ...prevRecord }) => prevRecord,
+                      )
+                  }}
+                >
+                  Remove
+                </p>
+              </div>
+              <SelectInput
+                name="Degree Level"
+                value={academicData[key]['degreeLevel']}
+                onChange={(e) =>
+                  updateField(key, 'degreeLevel', e.target.value)
+                }
+                required={true}
+                options={[
                   { label: 'Select Category', value: '' },
                   { label: 'Doctoral Degree', value: 'Doctoral' },
                   { label: "Master's Degree", value: 'Master' },
                   { label: "Bachelor's Degree", value: 'Bachelor' },
-                ])}
-                {textInput(key, 'Degree Name', 'degreeName', 'text')}
-                {textInput(key, 'Field of Study', 'branch', 'text')}
-                {selectInput(key, 'Faculty', 'faculty', [
-                  { label: 'Select', value: '' },
-                  ...faculties,
-                ])}
-                {textInput(key, 'Institute/College', 'college', 'text')}
-                {textInput(key, 'University', 'university', 'text')}
-                {checkBoxInput(
-                  key,
-                  'Are you currently enrolled here?',
-                  'currentlyEnrolled',
-                  [
-                    { label: 'Yes', value: true },
-                    { label: 'No', value: false },
-                  ],
-                )}
-                <div className="pl-4">
-                  {academicData[key].currentlyEnrolled === null ? null : (
-                    <div className="p-2">
-                      <p className="md:text-lg">Years Attended</p>
-                      {selectInput(key, 'From', 'startedYear', yearOptions)}
-                      {selectInput(
-                        key,
+                ]}
+              />
+              <TextInput
+                name="Degree Name"
+                value={academicData[key]['degreeName']}
+                type="text"
+                onChange={(e) => updateField(key, 'degreeName', e.target.value)}
+                required={true}
+              />
+              <TextInput
+                name="Field of Study"
+                value={academicData[key]['branch']}
+                type="text"
+                onChange={(e) => updateField(key, 'branch', e.target.value)}
+                required={true}
+              />
+              <SelectInput
+                name="Faculty"
+                value={academicData[key]['faculty']}
+                onChange={(e) => updateField(key, 'faculty', e.target.value)}
+                required={true}
+                options={[{ label: 'Select', value: '' }, ...faculties]}
+              />
+              <TextInput
+                name="Institute/College"
+                value={academicData[key]['college']}
+                type="text"
+                onChange={(e) => updateField(key, 'college', e.target.value)}
+                required={true}
+              />
+              <TextInput
+                name="University"
+                value={academicData[key]['university']}
+                type="text"
+                onChange={(e) => updateField(key, 'university', e.target.value)}
+                required={true}
+              />
+              <CheckBoxInput
+                name="Are you currently enrolled here?"
+                value={academicData[key]['currentlyEnrolled']}
+                onChange={(e, optionValue) => {
+                  updateField(
+                    key,
+                    'currentlyEnrolled',
+                    !e.target.checked ? null : optionValue,
+                  )
+                }}
+                required={true}
+                options={[
+                  { label: 'Yes', value: true },
+                  { label: 'No', value: false },
+                ]}
+              />
+              <div className="pl-4">
+                {academicData[key].currentlyEnrolled === null ? null : (
+                  <div className="p-2">
+                    <p className="md:text-lg">Years Attended</p>
+                    <SelectInput
+                      name="From"
+                      value={academicData[key]['startedYear']}
+                      onChange={(e) =>
+                        updateField(key, 'startedYear', e.target.value)
+                      }
+                      required={true}
+                      options={yearOptions}
+                    />
+                    <SelectInput
+                      name={
                         !academicData[key].currentlyEnrolled
                           ? 'To'
-                          : 'Expected Year of Graduation',
-                        'completionYear',
-                        yearOptions,
-                      )}
-                    </div>
-                  )}
-                </div>
-                {checkBoxInput(
-                  key,
-                  'Does this degree award grade in CGPA or Percentage?',
-                  'gradeCriteria',
-                  [
-                    { label: 'CGPA', value: 'CGPA' },
-                    { label: 'Percentage', value: 'Percentage' },
-                  ],
+                          : 'Expected Year of Graduation'
+                      }
+                      value={academicData[key]['completionYear']}
+                      onChange={(e) =>
+                        updateField(key, 'completionYear', e.target.value)
+                      }
+                      required={true}
+                      options={yearOptions}
+                    />
+                  </div>
                 )}
-                <div className="pl-4">
-                  {academicData[key].gradeCriteria === null
-                    ? null
-                    : textInput(
-                        key,
-                        academicData[key].gradeCriteria === 'CGPA'
-                          ? 'Enter your CGPA'
-                          : 'Enter your Cumulative Percentage',
-                        'grades',
-                        'number',
-                        '0.01',
-                        0,
-                        academicData[key].gradeCriteria === 'CGPA' ? 10 : 100,
-                      )}
-                </div>
               </div>
-            )
-          })}
-        </div>
-        <p
-          className="text-xs sm:text-sm md:text-base font-extrabold w-max pr-2 pl-2 text-blue-850 cursor-pointer"
-          onClick={() => {
-            setAcademicData((prevRecord: AcademicRecordType) => ({
-              ...prevRecord,
-              [newDegreeKey]: defaultRecord,
-            }))
-            setNewDegreeKey((prev) => prev + 1)
-          }}
-        >
-          Add a Degree +
-        </p>
+              <CheckBoxInput
+                name="Does this degree award grade in CGPA or Percentage?"
+                value={academicData[key]['gradeCriteria']}
+                onChange={(e, optionValue) => {
+                  updateField(
+                    key,
+                    'gradeCriteria',
+                    !e.target.checked ? null : optionValue,
+                  )
+                }}
+                required={true}
+                options={[
+                  { label: 'CGPA', value: 'CGPA' },
+                  { label: 'Percentage', value: 'Percentage' },
+                ]}
+              />
+              <div className="pl-4">
+                {academicData[key].gradeCriteria === null ? null : (
+                  <TextInput
+                    name={
+                      academicData[key].gradeCriteria === 'CGPA'
+                        ? 'Enter your CGPA'
+                        : 'Enter your Cumulative Percentage'
+                    }
+                    value={academicData[key]['grades']}
+                    type="number"
+                    onChange={(e) => {
+                      const maximum =
+                        academicData[key].gradeCriteria === 'CGPA' ? 10 : 100
+                      if (Number(e.target.value) > maximum)
+                        updateField(key, 'grades', Number(e.target.value))
+                    }}
+                    required={true}
+                    step="0.01"
+                    minimum={0}
+                    maximum={
+                      academicData[key].gradeCriteria === 'CGPA' ? 10 : 100
+                    }
+                  />
+                )}
+              </div>
+            </div>
+          )
+        })}
       </div>
+      <p
+        className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 pr-2 pl-2 text-blue-850 cursor-pointer"
+        onClick={() => {
+          setAcademicData((prevRecord: AcademicRecordType) => ({
+            ...prevRecord,
+            [newDegreeKey]: defaultRecord,
+          }))
+          setNewDegreeKey((prev) => prev + 1)
+        }}
+      >
+        Add a Degree +
+      </p>
       <ProceedButtons
         status={status}
         formStatus={applicationData.form_status}
