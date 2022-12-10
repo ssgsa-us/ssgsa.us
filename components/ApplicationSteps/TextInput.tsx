@@ -37,6 +37,7 @@ const TextInput = ({
       value={value}
       onChange={onChange}
       className="w-full rounded-xl p-2 mt-1"
+      onWheelCapture={(e) => e.currentTarget.blur()}
     />
   </div>
 )

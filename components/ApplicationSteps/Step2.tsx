@@ -332,7 +332,10 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                     onChange={(e) => {
                       const maximum =
                         academicData[key].gradeCriteria === 'CGPA' ? 10 : 100
-                      if (Number(e.target.value) > maximum)
+                      if (
+                        Number(e.target.value) <= maximum &&
+                        Number(e.target.value) >= 0
+                      )
                         updateField(key, 'grades', Number(e.target.value))
                     }}
                     required={true}
