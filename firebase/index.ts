@@ -20,4 +20,7 @@ export const firestore = firebase.firestore()
 
 export const auth = firebase.auth()
 
-export const storage = getStorage(firebase.app(), 'gs://ssgsa-dev.appspot.com/')
+export const storage = getStorage(
+  firebase.app(),
+  process.env.NEXT_PUBLIC_FIREBASE_STORAGE_URL,
+)
