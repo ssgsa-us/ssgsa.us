@@ -63,6 +63,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             targetProgram,
             targetDate,
             targetCountry,
+            enrollProofDoc,
             2,
           )
             .then(() => {
@@ -98,6 +99,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       targetProgram,
       targetDate,
       targetCountry,
+      enrollProofDoc,
       applicationData.form_status,
     )
   }
