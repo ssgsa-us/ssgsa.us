@@ -33,7 +33,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
     >
       <button
         className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer ${
-          formStatus >= step && formStatus !== totalSteps
+          formStatus >= step && formStatus !== totalSteps + 1
             ? status == step
               ? 'bg-blue-850'
               : 'bg-red-850 hover:bg-blue-850'
