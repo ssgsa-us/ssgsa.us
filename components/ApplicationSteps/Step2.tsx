@@ -291,7 +291,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                       name={
                         !academicData[key].currentlyEnrolled
                           ? 'To'
-                          : 'Expected Year of Graduation'
+                          : 'Expected Year of Completion'
                       }
                       value={academicData[key]['completionYear']}
                       onChange={(e) =>
@@ -354,7 +354,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                   <span className="text-red-850 font-black">*</span>
                 </p>
                 <FileUploadComponent
-                  fileName={`Academic Record ${key}`}
+                  fileName={`AcademicRecord${key}`}
                   fileUrl={academicData[key].document}
                   setFileUrl={(url: string) =>
                     updateField(key, 'document', url)
