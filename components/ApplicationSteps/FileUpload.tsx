@@ -1,6 +1,9 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../../context/AuthUserContext'
 import { uploadDocument } from '../../pages/api/uploadDocument'
+import '@fortawesome/fontawesome-svg-core/styles.css' // import for spin
 
 type Props = {
   fileName: string
@@ -12,9 +15,11 @@ const FileUploadComponent = ({ fileName, fileUrl, setFileUrl }: Props) => {
   const { authUser } = useAuth()
   const [file, setFile] = useState<File>()
   const [newFileSelected, setNewFileSelected] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
 
   const upload = async () => {
+    setLoading(true)
     setError('')
     if (file)
       if (file.size <= 1100000) {
@@ -26,11 +31,11 @@ const FileUploadComponent = ({ fileName, fileUrl, setFileUrl }: Props) => {
           )
           setFileUrl(downloadURL)
           setNewFileSelected(false)
-          alert('Your file is uploaded.')
         } catch {
-          alert('Try again, network error!')
+          setError('Try again, network error!')
         }
       } else setError('Maximum allowed file size is 1MB.')
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -85,10 +90,19 @@ const FileUploadComponent = ({ fileName, fileUrl, setFileUrl }: Props) => {
               : 'bg-red-860 cursor-not-allowed'
           }`}
           onClick={() => {
-            if (newFileSelected) upload()
+            if (newFileSelected && !loading) upload()
           }}
         >
-          Upload
+          {!loading ? (
+            'Upload'
+          ) : (
+            <FontAwesomeIcon
+              icon={faSpinner}
+              width={30}
+              spin={true}
+              className="mx-5"
+            />
+          )}
         </button>
       </div>
       {error ? (
