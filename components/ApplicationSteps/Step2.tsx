@@ -3,6 +3,7 @@ import { ApplicationData } from '../../classes/application_data'
 import { faculties } from '../../constants/faculties'
 import { useAuth } from '../../context/AuthUserContext'
 import { updateApplicationData } from '../../pages/api/step2'
+import { deleteDocuments } from '../../pages/api/uploadDocument'
 import { AcademicRecordType } from '../../types'
 import CheckBoxInput from './Checkboxes'
 import FileUploadComponent from './FileUpload'
@@ -52,6 +53,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
   const [academicData, setAcademicData] = useState<AcademicRecordType>({
     1: defaultRecord,
   })
+  const [deletedDocuments, setDeletedDocuments] = useState<Array<string>>([])
   const [error, setError] = useState<string>('')
 
   useEffect(() => {
@@ -145,6 +147,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
       else if (status === applicationData.form_status)
         updateApplicationData(authUser.id, academicData, 3)
           .then(() => {
+            deleteDocuments(deletedDocuments)
             setStatus(3)
           })
           .catch(() => {
@@ -170,7 +173,10 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
       authUser.id,
       academicData,
       applicationData.form_status,
-    )
+    ).then(() => {
+      deleteDocuments(deletedDocuments)
+      setDeletedDocuments([])
+    })
   }
 
   return (
@@ -200,10 +206,15 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                   onClick={() => {
                     if (Object.keys(academicData).length === 1)
                       alert('Education Qualifications are required.')
-                    else
+                    else {
                       setAcademicData(
                         ({ [key]: value, ...prevRecord }) => prevRecord,
                       )
+                      setDeletedDocuments((prev) => [
+                        ...prev,
+                        academicData[key].document,
+                      ])
+                    }
                   }}
                 >
                   Remove
