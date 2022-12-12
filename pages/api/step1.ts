@@ -11,6 +11,7 @@ export const updateApplicationData = (
   targetProgram: string,
   targetDate: string,
   targetCountry: string,
+  enrollProofDoc: string,
   formStatus: number,
 ) => {
   return firestore.doc(path.join('applications_data', userId)).update({
@@ -22,6 +23,7 @@ export const updateApplicationData = (
     target_program: targetProgram,
     target_date: targetDate,
     target_country: targetCountry,
+    enrollment_proof_doc: enrollProofDoc,
     form_status: formStatus,
   })
 }

@@ -30,6 +30,16 @@ function Application() {
         setPageReady(true)
       })
       .catch(() => alert('Try again, network error!'))
+  }, [])
+
+  useEffect(() => {
+    setPageReady(false)
+    getApplicationData(authUser.id)
+      .then((data) => {
+        setApplicationData(data)
+        setPageReady(true)
+      })
+      .catch(() => alert('Try again, network error!'))
   }, [status])
 
   const printApplication = () => {

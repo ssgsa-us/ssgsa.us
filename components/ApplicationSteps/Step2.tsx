@@ -1,20 +1,15 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { AcademicRecordType } from '../../types'
 import { ApplicationData } from '../../classes/application_data'
-import ProceedButtons from './ProceedButtons'
-import { updateApplicationData } from '../../pages/api/step2'
+import { faculties } from '../../constants/faculties'
 import { useAuth } from '../../context/AuthUserContext'
-
-type RecordDataType = {
-  [key: number]: {
-    category: number
-    branch: string
-    collegeName: string
-    duration: number
-    completionYear: number
-    percentage: number
-  }
-}
+import { updateApplicationData } from '../../pages/api/step2'
+import { deleteDocuments } from '../../pages/api/uploadDocument'
+import { AcademicRecordType } from '../../types'
+import CheckBoxInput from './Checkboxes'
+import FileUploadComponent from './FileUpload'
+import ProceedButtons from './ProceedButtons'
+import SelectInput from './SelectInput'
+import TextInput from './TextInput'
 
 type Props = {
   applicationData: ApplicationData
@@ -22,151 +17,150 @@ type Props = {
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
-const defaultRecord = {
-  category: 0,
+const currentYear = new Date().getFullYear()
+
+// Options for start and completion year from 2000 to 2 years after current year
+const yearOptions = [
+  ...Array.from({ length: currentYear + 3 - 2000 }, (_, i) => i + 2000).map(
+    (value) => {
+      return { label: String(value), value: value }
+    },
+  ),
+  { label: 'Select', value: 0 },
+]
+
+const defaultRecord: AcademicRecordType[number] = {
+  degreeLevel: '',
+  degreeName: '',
   branch: '',
-  collegeName: '',
-  duration: 1,
-  completionYear: 2022,
-  percentage: 0,
+  faculty: '',
+  college: '',
+  university: '',
+  currentlyEnrolled: null,
+  startedYear: 0,
+  completionYear: 0,
+  gradeCriteria: null,
+  grades: 0,
+  document: '',
 }
 
 const Step2 = ({ applicationData, status, setStatus }: Props) => {
   const { authUser } = useAuth()
-  const [totalDegree, setTotalDegree] = useState<number>(1)
-  const [academicData, setAcademicData] = useState<RecordDataType>({
-    0: defaultRecord,
+  // Required to set the new key while adding a degree
+  // While removing a key, other keys remain same
+  // so not able to keep continuous numbers in keys
+  const [newDegreeKey, setNewDegreeKey] = useState<number>(2)
+  const [academicData, setAcademicData] = useState<AcademicRecordType>({
+    1: defaultRecord,
   })
+  const [deletedDocuments, setDeletedDocuments] = useState<Array<string>>([])
   const [error, setError] = useState<string>('')
 
   useEffect(() => {
     if (applicationData.academic_record) {
-      let academic_record: RecordDataType = {}
-      let total: number = 0
-      Object.keys(applicationData.academic_record).map((key, index) => {
-        let category: number = 0
-        if (key == 'Doctoral Degree') category = 6
-        else if (key == "Master's Degree") category = 5
-        else if (key == "Bachelor's Degree") category = 4
-        else if (key == 'Diploma') category = 3
-        else if (key == 'XII Class') category = 2
-        else if (key == 'X Class') category = 1
-
-        academic_record[index] = {
-          category: category,
-          ...applicationData.academic_record[key],
-        }
-        total = total + 1
-      })
-      setTotalDegree(total)
-      setAcademicData(academic_record)
+      setAcademicData(applicationData.academic_record)
+      // Setting number which is larger than the maximum key value
+      setNewDegreeKey(
+        Number(
+          Object.keys(applicationData.academic_record).sort(
+            (a, b) => Number(b) - Number(a),
+          )[0],
+        ) + 1,
+      )
     }
   }, [applicationData])
 
-  // return True if category is bachelor's, diploma, XII or X
-  const requiredCondition = (key: number) =>
-    academicData[key].category == 2 ||
-    academicData[key].category == 3 ||
-    academicData[key].category == 4
-
-  const checkAllFields = (key: number) =>
-    academicData[key].branch &&
-    academicData[key].collegeName &&
-    academicData[key].completionYear &&
-    academicData[key].duration &&
-    academicData[key].percentage
-
-  const getAcademicRecord = () => {
-    let academicRecord: AcademicRecordType = {}
-    Object.keys(academicData).map((key) => {
-      if (academicData[key].category == 0) return
-      let category: string = ''
-      if (academicData[key].category == 6) category = 'Doctoral Degree'
-      else if (academicData[key].category == 5) category = "Master's Degree"
-      else if (academicData[key].category == 4) category = "Bachelor's Degree"
-      else if (academicData[key].category == 3) category = 'Diploma'
-      else if (academicData[key].category == 2) category = 'XII Class'
-      else if (academicData[key].category == 1) category = 'X Class'
-      academicRecord[category] = {
-        branch: academicData[key].branch,
-        collegeName: academicData[key].collegeName,
-        duration: academicData[key].duration,
-        completionYear: academicData[key].completionYear,
-        percentage: academicData[key].percentage,
-      }
-    })
-    return academicRecord
+  const updateField = (
+    key: number,
+    name: string,
+    value: string | number | boolean,
+  ) => {
+    setAcademicData((prevDegree: AcademicRecordType) => ({
+      ...prevDegree,
+      [key]: {
+        ...prevDegree[key],
+        [name]: value,
+      },
+    }))
   }
+
+  const checkAllFields = (record: AcademicRecordType[number]) =>
+    record.degreeLevel &&
+    record.degreeName &&
+    record.branch &&
+    record.faculty &&
+    record.college &&
+    record.university &&
+    record.currentlyEnrolled !== null &&
+    record.startedYear &&
+    record.completionYear &&
+    record.gradeCriteria &&
+    record.grades &&
+    record.document
 
   const nextStep = () => {
     setError('')
-    if (totalDegree >= 2) {
-      // flag checks degrees X, XII/Diploma and Bachelor's are filled or not
-      // flag ranges from 0 to 3 acc to it's boolean format as shown:
-      // <XII/Diploma digit    Bachelor's digit>
-      // <        1                   1          > indicates flag = 3 and all 2 degree's are filled
-      let flag = 0
-      let totalCourseDuration = 0
-      for (let key = 0; key < totalDegree; key++) {
-        if (
-          academicData[key].category == 2 ||
-          academicData[key].category == 3
-        ) {
-          if (checkAllFields(key)) flag += 2
-          else {
-            setError('All fields in XII/Diploma are required')
-            flag = -1
-            break
-          }
-        } else if (academicData[key].category == 4) {
-          if (checkAllFields(key)) {
-            totalCourseDuration += academicData[key].duration
-            flag += 1
-          } else {
-            setError("All fields in Bachelor's are required")
-            flag = -1
-            break
-          }
-        } else if (academicData[key].category == 5) {
-          if (
-            academicData[key].branch &&
-            academicData[key].collegeName &&
-            academicData[key].completionYear &&
-            academicData[key].duration
-          )
-            totalCourseDuration += academicData[key].duration
-        }
-      }
-
-      if (flag == -1) return
-      if (flag == 3) {
-        if (totalCourseDuration >= 4) {
-          let academicRecord: AcademicRecordType = getAcademicRecord()
-          if (applicationData.form_status == 2) {
-            updateApplicationData(authUser.id, academicRecord, 3)
-              .then(() => {
-                setStatus(3)
-              })
-              .catch(() => {
-                setError('Try again, network error!')
-              })
-          } else {
-            updateApplicationData(
-              authUser.id,
-              academicRecord,
-              applicationData.form_status,
+    let bachelor = 0
+    let errorFlag = 0
+    let duration = 0
+    const records = Object.values(academicData)
+    for (let i = 0; i < records.length; i++) {
+      if (checkAllFields(records[i])) {
+        if (records[i].degreeLevel === 'Bachelor') bachelor = 1
+        duration += records[i].completionYear - records[i].startedYear
+      } else {
+        errorFlag = 1
+        if (records[i].degreeLevel)
+          if (records[i].degreeName)
+            setError(
+              'All fields are required for ' +
+                records[i].degreeLevel +
+                ' Degree named ' +
+                records[i].degreeName,
             )
-              .then(() => {
-                setStatus(3)
-              })
-              .catch(() => {
-                setError('Try again, network error!')
-              })
-          }
-        } else
-          setError('Please check eligibility criteria or provide correct data')
-      } else setError("XII/Diploma and Bachelor's degree are required")
-    } else setError("XII/Diploma and Bachelor's degree are required")
+          else
+            setError(
+              'Provide input in all fields for ' +
+                records[i].degreeLevel +
+                ' Degree or Remove the extra degree you have added.',
+            )
+        else if (records[i].degreeName)
+          setError(
+            'Provide input in all fields for Degree named ' +
+              records[i].degreeName +
+              ' or Remove the extra degree you have added.',
+          )
+        else
+          setError(
+            'Degree Level and Name are not provided in some records. Either update it or Remove the extra degree you have added.',
+          )
+        break
+      }
+    }
+
+    if (!errorFlag)
+      if (!bachelor) setError('At least 1 Bachelor degree required')
+      else if (duration < 4)
+        setError(
+          'Check Eligibility Criteria, at least 4 year bachelor program or 3 year bachelor program with master program is required.',
+        )
+      else if (status === applicationData.form_status)
+        updateApplicationData(authUser.id, academicData, 3)
+          .then(() => {
+            deleteDocuments(deletedDocuments)
+            setStatus(3)
+          })
+          .catch(() => {
+            setError('Try again, network error!')
+          })
+      else
+        saveInformation()
+          .then(() => {
+            setStatus(3)
+          })
+          .catch(() => {
+            setError('Try again, network error!')
+          })
   }
 
   const previousStep = () => {
@@ -175,191 +169,225 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
 
   const saveInformation = () => {
     setError('')
-    let academicRecord: AcademicRecordType = getAcademicRecord()
     return updateApplicationData(
       authUser.id,
-      academicRecord,
+      academicData,
       applicationData.form_status,
-    )
+    ).then(() => {
+      deleteDocuments(deletedDocuments)
+      setDeletedDocuments([])
+    })
   }
 
   return (
-    <div>
+    <div className="w-full">
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
+        <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
+          Educational Qualifications
+        </h1>
         <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2">
           Note: Remember to save your information at frequent intervals.
         </p>
-        <div>
-          {Object.keys(academicData).map((key) => (
-            <div className="my-10" key={Number(key)}>
-              <div className="p-2">
-                <p className="font-bold text-lg md:text-xl">Academic Record</p>
-                <select
-                  name="Category"
-                  value={academicData[Number(key)].category}
-                  onChange={(e) =>
-                    setAcademicData((prevDegree: RecordDataType) => ({
-                      ...prevDegree,
-                      [Number(key)]: {
-                        ...prevDegree[Number(key)],
-                        category: Number(e.target.value),
-                      },
-                    }))
-                  }
-                  className="w-full rounded-xl p-3"
+      </div>
+      <div>
+        {Object.keys(academicData).map((keyTemp, index) => {
+          const key = Number(keyTemp)
+          return (
+            <div
+              className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10"
+              key={key}
+            >
+              <div className="flex justify-between items-center">
+                <p className="font-bold text-lg md:text-xl">
+                  Academic Record {index + 1}
+                </p>
+                <p
+                  className="text-red-850 cursor-pointer"
+                  onClick={() => {
+                    if (Object.keys(academicData).length === 1)
+                      alert('Education Qualifications are required.')
+                    else {
+                      setAcademicData(
+                        ({ [key]: value, ...prevRecord }) => prevRecord,
+                      )
+                      setDeletedDocuments((prev) => [
+                        ...prev,
+                        academicData[key].document,
+                      ])
+                    }
+                  }}
                 >
-                  <option label="Select Category" value={0} />
-                  <option label="Doctoral Degree" value={6} />
-                  <option label="Master's Degree" value={5} />
-                  <option label="Bachelor's Degree" value={4} />
-                  <option label="Diploma" value={3} />
-                  <option label="XII Class" value={2} />
-                  <option label="X Class" value={1} />
-                </select>
+                  Remove
+                </p>
+              </div>
+              <SelectInput
+                name="Degree Level"
+                value={academicData[key]['degreeLevel']}
+                onChange={(e) =>
+                  updateField(key, 'degreeLevel', e.target.value)
+                }
+                required={true}
+                options={[
+                  { label: 'Select Category', value: '' },
+                  { label: 'Doctoral Degree', value: 'Doctoral' },
+                  { label: "Master's Degree", value: 'Master' },
+                  { label: "Bachelor's Degree", value: 'Bachelor' },
+                ]}
+              />
+              <TextInput
+                name="Degree Name"
+                value={academicData[key]['degreeName']}
+                type="text"
+                onChange={(e) => updateField(key, 'degreeName', e.target.value)}
+                required={true}
+              />
+              <TextInput
+                name="Field of Study"
+                value={academicData[key]['branch']}
+                type="text"
+                onChange={(e) => updateField(key, 'branch', e.target.value)}
+                required={true}
+              />
+              <SelectInput
+                name="Faculty"
+                value={academicData[key]['faculty']}
+                onChange={(e) => updateField(key, 'faculty', e.target.value)}
+                required={true}
+                options={[{ label: 'Select', value: '' }, ...faculties]}
+              />
+              <TextInput
+                name="Institute/College"
+                value={academicData[key]['college']}
+                type="text"
+                onChange={(e) => updateField(key, 'college', e.target.value)}
+                required={true}
+              />
+              <TextInput
+                name="University"
+                value={academicData[key]['university']}
+                type="text"
+                onChange={(e) => updateField(key, 'university', e.target.value)}
+                required={true}
+              />
+              <CheckBoxInput
+                name="Are you currently enrolled here?"
+                value={academicData[key]['currentlyEnrolled']}
+                onChange={(e, optionValue) => {
+                  updateField(
+                    key,
+                    'currentlyEnrolled',
+                    !e.target.checked ? null : optionValue,
+                  )
+                }}
+                required={true}
+                options={[
+                  { label: 'Yes', value: true },
+                  { label: 'No', value: false },
+                ]}
+              />
+              <div className="pl-4">
+                {academicData[key].currentlyEnrolled === null ? null : (
+                  <div className="p-2">
+                    <p className="md:text-lg">Years Attended</p>
+                    <SelectInput
+                      name="From"
+                      value={academicData[key]['startedYear']}
+                      onChange={(e) =>
+                        updateField(key, 'startedYear', e.target.value)
+                      }
+                      required={true}
+                      options={yearOptions}
+                    />
+                    <SelectInput
+                      name={
+                        !academicData[key].currentlyEnrolled
+                          ? 'To'
+                          : 'Expected Year of Completion'
+                      }
+                      value={academicData[key]['completionYear']}
+                      onChange={(e) =>
+                        updateField(key, 'completionYear', e.target.value)
+                      }
+                      required={true}
+                      options={yearOptions}
+                    />
+                  </div>
+                )}
+              </div>
+              <CheckBoxInput
+                name="Does this degree award grade in CGPA or Percentage?"
+                value={academicData[key]['gradeCriteria']}
+                onChange={(e, optionValue) => {
+                  updateField(
+                    key,
+                    'gradeCriteria',
+                    !e.target.checked ? null : optionValue,
+                  )
+                }}
+                required={true}
+                options={[
+                  { label: 'CGPA', value: 'CGPA' },
+                  { label: 'Percentage', value: 'Percentage' },
+                ]}
+              />
+              <div className="pl-4">
+                {academicData[key].gradeCriteria === null ? null : (
+                  <TextInput
+                    name={
+                      academicData[key].gradeCriteria === 'CGPA'
+                        ? 'Enter your CGPA'
+                        : 'Enter your Cumulative Percentage'
+                    }
+                    value={academicData[key]['grades']}
+                    type="number"
+                    onChange={(e) => {
+                      const maximum =
+                        academicData[key].gradeCriteria === 'CGPA' ? 10 : 100
+                      if (
+                        Number(e.target.value) <= maximum &&
+                        Number(e.target.value) >= 0
+                      )
+                        updateField(key, 'grades', Number(e.target.value))
+                    }}
+                    required={true}
+                    step="0.01"
+                    minimum={0}
+                    maximum={
+                      academicData[key].gradeCriteria === 'CGPA' ? 10 : 100
+                    }
+                  />
+                )}
               </div>
               <div className="p-2">
                 <p className="md:text-lg">
-                  Major/Branch
-                  {requiredCondition(Number(key)) ? (
-                    <span className="text-red-850 font-black">*</span>
-                  ) : null}
+                  Upload your most recent marksheet/transcript showing the
+                  above-mentioned grades
+                  <span className="text-red-850 font-black">*</span>
                 </p>
-                <input
-                  name="Branch"
-                  type="text"
-                  value={academicData[Number(key)].branch}
-                  onChange={(e) =>
-                    setAcademicData((prevDegree: RecordDataType) => ({
-                      ...prevDegree,
-                      [Number(key)]: {
-                        ...prevDegree[Number(key)],
-                        branch: e.target.value,
-                      },
-                    }))
+                <FileUploadComponent
+                  fileName={`AcademicRecord${key}`}
+                  fileUrl={academicData[key].document}
+                  setFileUrl={(url: string) =>
+                    updateField(key, 'document', url)
                   }
-                  className="w-full rounded-xl p-2 mt-1"
-                />
-              </div>
-              <div className="p-2">
-                <p className="md:text-lg leading-none">
-                  Name Of College/University
-                  {requiredCondition(Number(key)) ? (
-                    <span className="text-red-850 font-black">*</span>
-                  ) : null}
-                </p>
-                <input
-                  name="College Name"
-                  type="email"
-                  value={academicData[Number(key)].collegeName}
-                  onChange={(e) =>
-                    setAcademicData((prevDegree: RecordDataType) => ({
-                      ...prevDegree,
-                      [Number(key)]: {
-                        ...prevDegree[Number(key)],
-                        collegeName: e.target.value,
-                      },
-                    }))
-                  }
-                  className="w-full rounded-xl p-2 mt-1"
-                />
-              </div>
-              <div className="p-2">
-                <p className="md:text-lg leading-none">
-                  Course Duration
-                  {requiredCondition(Number(key)) ? (
-                    <span className="text-red-850 font-black">*</span>
-                  ) : null}{' '}
-                  <span className="text-xs md:text-sm">(number of years)</span>
-                </p>
-                <input
-                  name="Duration"
-                  type="number"
-                  value={academicData[Number(key)].duration}
-                  onChange={(e) =>
-                    setAcademicData((prevDegree: RecordDataType) => ({
-                      ...prevDegree,
-                      [Number(key)]: {
-                        ...prevDegree[Number(key)],
-                        duration: Number(e.target.value),
-                      },
-                    }))
-                  }
-                  className="w-full rounded-xl p-2 mt-1"
-                />
-              </div>
-              <div className="p-2">
-                <p className="md:text-lg">
-                  Year/Expected Year of Completion
-                  {requiredCondition(Number(key)) ? (
-                    <span className="text-red-850 font-black">*</span>
-                  ) : null}
-                </p>
-                <input
-                  name="Comletion Year"
-                  type="number"
-                  value={academicData[Number(key)].completionYear}
-                  onChange={(e) =>
-                    setAcademicData((prevDegree: RecordDataType) => ({
-                      ...prevDegree,
-                      [Number(key)]: {
-                        ...prevDegree[Number(key)],
-                        completionYear: Number(e.target.value),
-                      },
-                    }))
-                  }
-                  className="w-full rounded-xl p-2 mt-1"
-                />
-              </div>
-              <div className="p-2">
-                <p className="md:text-lg">
-                  Percentage
-                  {requiredCondition(Number(key)) ? (
-                    <span className="text-red-850 font-black">*</span>
-                  ) : null}{' '}
-                  <span className="text-xs md:text-sm">
-                    (Please convert your CPI/GPA according to the appropriate
-                    formula given on the back of your marksheet and provide
-                    final percentage here.)
-                  </span>
-                </p>
-                <input
-                  name="Percentage"
-                  type="number"
-                  value={academicData[Number(key)].percentage}
-                  onChange={(e) =>
-                    setAcademicData((prevDegree: RecordDataType) => ({
-                      ...prevDegree,
-                      [Number(key)]: {
-                        ...prevDegree[Number(key)],
-                        percentage: Number(e.target.value),
-                      },
-                    }))
-                  }
-                  className="w-full rounded-xl p-2 mt-1"
                 />
               </div>
             </div>
-          ))}
-        </div>
-        <p
-          className={`text-xs sm:text-sm md:text-base font-extrabold w-max pr-2 pl-2 ${
-            totalDegree < 6
-              ? 'text-blue-850 cursor-pointer'
-              : 'text-blue-860 cursor-not-allowed'
-          }`}
-          onClick={() => {
-            if (totalDegree < 6) {
-              setAcademicData((prevRecord: RecordDataType) => ({
-                ...prevRecord,
-                [totalDegree]: defaultRecord,
-              }))
-              setTotalDegree((prevTotal: number) => prevTotal + 1)
-            }
-          }}
-        >
-          Add a Degree +
-        </p>
+          )
+        })}
       </div>
+      <p
+        className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 pr-2 pl-2 text-blue-850 cursor-pointer"
+        onClick={() => {
+          setAcademicData((prevRecord: AcademicRecordType) => ({
+            ...prevRecord,
+            [newDegreeKey]: defaultRecord,
+          }))
+          setNewDegreeKey((prev) => prev + 1)
+        }}
+      >
+        Add a Degree +
+      </p>
       <ProceedButtons
         status={status}
         formStatus={applicationData.form_status}
