@@ -47,7 +47,10 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
   const [error, setError] = useState<string>('')
 
   useEffect(() => {
-    if (applicationData.research_experience) {
+    if (
+      applicationData.research_experience &&
+      Object.keys(applicationData.research_experience).length != 0
+    ) {
       setResearchData(applicationData.research_experience)
       // Setting number which is larger than the maximum key value
       setNewExpKey(
