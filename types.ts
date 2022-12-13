@@ -44,6 +44,18 @@ export type PublicationsType = {
   }
 }
 
+export type WorkExperiencesType = {
+  [key: number]: {
+    organization: string
+    title: string
+    currentlyWorking: boolean | null
+    startDate: string
+    endDate: string
+    description: string
+    document: string
+  }
+}
+
 export type AnswerType = {
   [key: string]: string
 }

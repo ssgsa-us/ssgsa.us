@@ -1,8 +1,14 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
-import ProceedButtons from './ProceedButtons'
 import { useAuth } from '../../context/AuthUserContext'
-import { updateFormStatus, uploadDocument } from '../../pages/api/step4'
+import { updateApplicationData } from '../../pages/api/step4'
+import { deleteDocuments } from '../../pages/api/uploadDocument'
+import { WorkExperiencesType } from '../../types'
+import CheckBoxInput from './Checkboxes'
+import FileUploadComponent from './FileUpload'
+import ProceedButtons from './ProceedButtons'
+import Textarea from './Textarea'
+import TextInput from './TextInput'
 
 type Props = {
   applicationData: ApplicationData
@@ -10,293 +16,284 @@ type Props = {
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
+const defaultExperience: WorkExperiencesType[number] = {
+  organization: '',
+  title: '',
+  currentlyWorking: null,
+  startDate: '',
+  endDate: '',
+  description: '',
+  document: '',
+}
+
 const Step4 = ({ applicationData, status, setStatus }: Props) => {
   const { authUser } = useAuth()
-  const [Xth, setXth] = useState<File>()
-  const [XthUploaded, setXthUploaded] = useState<boolean>(false)
-  const [XIIthOrDiploma, setXIIthOrDiploma] = useState<File>()
-  const [XIIthOrDiplomaUploaded, setXIIthOrDiplomaUploaded] =
-    useState<boolean>(false)
-  const [bachelors, setBachelors] = useState<File>()
-  const [bachelorsUploaded, setBachelorsUploaded] = useState<boolean>(false)
-  const [masters, setMasters] = useState<File>()
-  const [mastersUploaded, setMastersUploaded] = useState<boolean>(false)
-  const [doctoral, setDoctoral] = useState<File>()
-  const [doctoralUploaded, setDoctoralUploaded] = useState<boolean>(false)
-  const [others, setOthers] = useState<File>()
-  const [othersUploaded, setOthersUploaded] = useState<boolean>(false)
-  const [resume, setResume] = useState<File>()
-  const [resumeUploaded, setResumeUploaded] = useState<boolean>(false)
-  const [certificates, setCertificates] = useState<File>()
-  const [certificatesUploaded, setCertificatesUploaded] =
-    useState<boolean>(false)
+  // Required to set the new key while adding a degree
+  // While removing a key, other keys remain same
+  // so not able to keep continuous numbers in keys
+  const [newExpKey, setNewExpKey] = useState<number>(2)
+  const [workExperiences, setWorkExperiences] = useState<WorkExperiencesType>({
+    1: defaultExperience,
+  })
+  const [deletedDocuments, setDeletedDocuments] = useState<Array<string>>([])
   const [error, setError] = useState<string>('')
 
   useEffect(() => {
-    if (applicationData.documents) {
-      if (applicationData.documents['Xth']) setXthUploaded(true)
-      if (applicationData.documents['XIIth-Diploma'])
-        setXIIthOrDiplomaUploaded(true)
-      if (applicationData.documents['Bachelors']) setBachelorsUploaded(true)
-      if (applicationData.documents['Masters']) setMastersUploaded(true)
-      if (applicationData.documents['Others']) setOthersUploaded(true)
-      if (applicationData.documents['Resume']) setResumeUploaded(true)
-      if (applicationData.documents['Certificates'])
-        setCertificatesUploaded(true)
+    if (
+      applicationData.work_experience &&
+      Object.keys(applicationData.work_experience).length != 0
+    ) {
+      setWorkExperiences(applicationData.work_experience)
+      // Setting number which is larger than the maximum key value
+      setNewExpKey(
+        Number(
+          Object.keys(applicationData.work_experience).sort(
+            (a, b) => Number(b) - Number(a),
+          )[0],
+        ) + 1,
+      )
     }
   }, [applicationData])
 
-  const nextStep = () => {
-    setError('')
-    if (XIIthOrDiplomaUploaded) {
-      if (bachelorsUploaded) {
-        if (resumeUploaded) {
-          if (applicationData.form_status == 4) {
-            updateFormStatus(authUser.id, 5)
-              .then(() => {
-                setStatus(5)
-              })
-              .catch(() => {
-                setError('Try again, network error!')
-              })
-          } else {
-            setStatus(5)
-          }
-        } else setError('Resume is required')
-      } else setError('Bachelor Marksheets are required')
-    } else
-      setError(
-        `${
-          applicationData.academic_record['XII Class']
-            ? 'XIIth Class'
-            : 'Diploma'
-        } Marksheet is required`,
-      )
+  const updateField = (
+    key: number,
+    name: string,
+    value: string | number | boolean,
+  ) => {
+    setWorkExperiences((prevExps: WorkExperiencesType) => ({
+      ...prevExps,
+      [key]: {
+        ...prevExps[key],
+        [name]: value,
+      },
+    }))
   }
 
-  const previousStep = () => setStatus(3)
+  const experienceRequired = (experience: WorkExperiencesType[number]) =>
+    !(
+      !experience.organization &&
+      !experience.title &&
+      !experience.description &&
+      !experience.document
+    )
+
+  // Check if user provide some input, then do validation and show error if any
+  // otherwise submit valid experiences and remove invalids
+  const nextStep = () => {
+    setError('')
+    // Save all valid experiences
+    let experiences: WorkExperiencesType = {}
+
+    const keys = Object.keys(workExperiences)
+    for (let i = 0; i < keys.length; i++) {
+      const experience = workExperiences[Number(keys[i])]
+      // Check if user provide some input, then do validation and show error if any
+      // then add valid experience to experiences
+      if (experienceRequired(experience))
+        if (
+          experience.organization &&
+          experience.title &&
+          experience.currentlyWorking !== null &&
+          experience.startDate &&
+          experience.endDate &&
+          experience.description
+        ) {
+          // Add valid experience
+          experiences[Number(keys[i])] = experience
+        } else {
+          setError(
+            'Please fill all field for Experience ' +
+              String(i + 1) +
+              ' or Remove that experience if not needed.',
+          )
+          return
+        }
+    }
+
+    if (status === applicationData.form_status)
+      updateApplicationData(authUser.id, experiences, 5)
+        .then(() => {
+          deleteDocuments(deletedDocuments)
+          setStatus(5)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+        })
+    else
+      updateApplicationData(
+        authUser.id,
+        experiences,
+        applicationData.form_status,
+      )
+        .then(() => {
+          deleteDocuments(deletedDocuments)
+          setStatus(5)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+        })
+  }
+
+  const previousStep = () => {
+    setStatus(4)
+  }
 
   const saveInformation = () => {
     setError('')
-    return new Promise<void>(null)
+    return updateApplicationData(
+      authUser.id,
+      workExperiences,
+      applicationData.form_status,
+    ).then(() => {
+      deleteDocuments(deletedDocuments)
+      setDeletedDocuments([])
+    })
   }
 
-  const fileUploadComponent = (
-    fileName: string,
-    file: File,
-    setFile: Dispatch<SetStateAction<File>>,
-    isFileUploaded: boolean,
-    setIsFileUploaded: Dispatch<SetStateAction<boolean>>,
-  ) => (
-    <div
-      className="flex flex-col items-center sm:flex-row sm:justify-between mt-1"
-      id={fileName}
-    >
-      <div className="w-full flex justify-between mb-4 sm:mb-0">
-        <label>
-          <p className="text-white text-base font-bold md:text-lg bg-blue-850 px-2 sm:px-5 py-2 rounded-lg cursor-pointer w-max">
-            Choose File
-          </p>
-          <input
-            name={fileName}
-            type="file"
-            accept=".pdf"
-            onChange={(e) => setFile(e.target.files[0])}
-            className="hidden"
-          />
-        </label>
-        <input
-          type="text"
-          disabled
-          value={file ? file.name : isFileUploaded ? `${fileName}.pdf` : ''}
-          className="sm:mr-4 w-full bg-white rounded-r-lg md:text-lg py-2 px-2"
-        />
-      </div>
-      <button
-        className={`text-white text-base font-bold md:text-lg mb-4 sm:mb-0 px-5 py-2 rounded-lg w-min ${
-          isFileUploaded
-            ? 'bg-green-850'
-            : file
-            ? 'bg-red-850'
-            : 'bg-red-860 cursor-not-allowed'
-        }`}
-        onClick={() => {
-          setError('')
-          if (file)
-            if (file.size <= 600000)
-              uploadDocument(authUser.id, fileName, file)
-                .then(() => {
-                  setIsFileUploaded(true)
-                  alert('Your file is uploaded.')
-                })
-                .catch(() => alert('Try again, network error!'))
-            else setError('Maximum allowed file size is 500KB.')
-        }}
-      >
-        Upload
-      </button>
-    </div>
-  )
-
   return (
-    <div>
+    <div className="w-full">
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
-        <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2">
+        <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
+          Work Experience
+        </h1>
+        <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
+          If you have any job/work (non-research) experience in any company or
+          industry, industry-based internships, etc., please include them
+          starting with the most recent one.
+        </p>
+        <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2 py-2">
           Note: Remember to save your information at frequent intervals.
         </p>
-        <br />
-        <div className="p-2">
-          <p className="md:text-lg">
-            Please attach a <span className="font-bold">single pdf file </span>
-            containing marksheet of <span className="font-bold">Xth Class</span>
-            <br />
-            The maximum allowed file size is{' '}
-            <span className="font-bold">500 KB</span>
-          </p>
-          {fileUploadComponent('Xth', Xth, setXth, XthUploaded, setXthUploaded)}
-        </div>
-        <div className="p-2">
-          <p className="md:text-lg">
-            Please attach a <span className="font-bold">single pdf file </span>
-            containing marksheet of{' '}
-            <span className="font-bold">
-              {applicationData.academic_record &&
-              applicationData.academic_record['XII Class']
-                ? 'XIIth Class'
-                : 'Diploma'}
-            </span>
-            <span className="text-red-850 font-black">*</span>
-            <br />
-            The maximum allowed file size is{' '}
-            <span className="font-bold">500 KB</span>
-          </p>
-          {fileUploadComponent(
-            'XIIth-Diploma',
-            XIIthOrDiploma,
-            setXIIthOrDiploma,
-            XIIthOrDiplomaUploaded,
-            setXIIthOrDiplomaUploaded,
-          )}
-        </div>
-        <div className="p-2">
-          <p className="md:text-lg">
-            Please attach a <span className="font-bold">single pdf file </span>
-            containing all marksheets of{' '}
-            <span className="font-bold">your Bachelor&apos;s Degree</span>
-            <span className="text-red-850 font-black">*</span>
-            <br />
-            The maximum allowed file size is{' '}
-            <span className="font-bold">500 KB</span>
-          </p>
-          {fileUploadComponent(
-            'Bachelors',
-            bachelors,
-            setBachelors,
-            bachelorsUploaded,
-            setBachelorsUploaded,
-          )}
-        </div>
-        {applicationData.academic_record &&
-          applicationData.academic_record["Master's Degree"] && (
-            <div className="p-2">
-              <p className="md:text-lg">
-                Please attach a{' '}
-                <span className="font-bold">single pdf file </span>
-                containing all marksheets of{' '}
-                <span className="font-bold">your Master&apos;s Degree</span> (if
-                any)
-                <br />
-                The maximum allowed file size is{' '}
-                <span className="font-bold">500 KB</span>
-              </p>
-              {fileUploadComponent(
-                'Masters',
-                masters,
-                setMasters,
-                mastersUploaded,
-                setMastersUploaded,
-              )}
-            </div>
-          )}
-        {applicationData.academic_record &&
-          applicationData.academic_record['Doctoral Degree'] && (
-            <div className="p-2">
-              <p className="md:text-lg">
-                Please attach a{' '}
-                <span className="font-bold">single pdf file </span>
-                containing all marksheets of{' '}
-                <span className="font-bold">your Doctoral Degree</span> (if any)
-                <br />
-                The maximum allowed file size is{' '}
-                <span className="font-bold">500 KB</span>
-              </p>
-              {fileUploadComponent(
-                'Doctoral',
-                doctoral,
-                setDoctoral,
-                doctoralUploaded,
-                setDoctoralUploaded,
-              )}
-            </div>
-          )}
-        <div className="p-2">
-          <p className="md:text-lg">
-            Please attach a <span className="font-bold">single pdf file </span>
-            containing all marksheets of{' '}
-            <span className="font-bold">
-              any other degrees/diploma you hold
-            </span>{' '}
-            (if any)
-            <br />
-            The maximum allowed file size is{' '}
-            <span className="font-bold">500 KB</span>
-          </p>
-          {fileUploadComponent(
-            'Others',
-            others,
-            setOthers,
-            othersUploaded,
-            setOthersUploaded,
-          )}
-        </div>
-        <div className="p-2">
-          <p className="md:text-lg">
-            Please attach a <span className="font-bold">single pdf file </span>
-            containing your <span className="font-bold">Resume</span>
-            <span className="text-red-850 font-black">*</span>
-            <br />
-            The maximum allowed file size is{' '}
-            <span className="font-bold">500 KB</span>
-          </p>
-          {fileUploadComponent(
-            'Resume',
-            resume,
-            setResume,
-            resumeUploaded,
-            setResumeUploaded,
-          )}
-        </div>
-        <div className="p-2">
-          <p className="md:text-lg">
-            Please attach a <span className="font-bold">single pdf file </span>
-            containing all{' '}
-            <span className="font-bold">
-              certificates, proofs of extra-curricular activities, or any
-              documents that may support your SSGSA application
-            </span>
-            <br />
-            The maximum allowed file size is{' '}
-            <span className="font-bold">500 KB</span>
-          </p>
-          {fileUploadComponent(
-            'Certificates',
-            certificates,
-            setCertificates,
-            certificatesUploaded,
-            setCertificatesUploaded,
-          )}
-        </div>
       </div>
+      <div>
+        {Object.keys(workExperiences).map((keyTemp, index) => {
+          const key = Number(keyTemp)
+          return (
+            <div
+              className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10"
+              key={key}
+            >
+              <div className="flex justify-between items-center">
+                <p className="font-bold text-lg md:text-xl">
+                  Experience {index + 1}
+                </p>
+                <p
+                  className="text-red-850 cursor-pointer"
+                  onClick={() => {
+                    setWorkExperiences(
+                      ({ [key]: value, ...prevExps }) => prevExps,
+                    )
+                    if (workExperiences[key].document)
+                      setDeletedDocuments((prev) => [
+                        ...prev,
+                        workExperiences[key].document,
+                      ])
+                  }}
+                >
+                  Remove
+                </p>
+              </div>
+              <TextInput
+                name="Company/Organization Name"
+                value={workExperiences[key].organization}
+                type="text"
+                onChange={(e) =>
+                  updateField(key, 'organization', e.target.value)
+                }
+                required={experienceRequired(workExperiences[key])}
+              />
+              <TextInput
+                name="Position Title"
+                description="(e.g., Lecturer, Software Developer, Manager, Engineer, Accountant, Advocate, Journalist, etc.)"
+                value={workExperiences[key].title}
+                type="text"
+                onChange={(e) => updateField(key, 'title', e.target.value)}
+                required={experienceRequired(workExperiences[key])}
+              />
+              <CheckBoxInput
+                name="Are you currently working here?"
+                value={workExperiences[key].currentlyWorking}
+                onChange={(e, optionValue) => {
+                  updateField(
+                    key,
+                    'currentlyWorking',
+                    !e.target.checked ? null : optionValue,
+                  )
+                }}
+                required={experienceRequired(workExperiences[key])}
+                options={[
+                  { label: 'Yes', value: true },
+                  { label: 'No', value: false },
+                ]}
+              />
+              <div className="pl-4 p-2">
+                {workExperiences[key].currentlyWorking === null ? null : (
+                  <div>
+                    <TextInput
+                      name="Start Date"
+                      value={workExperiences[key].startDate}
+                      type="text"
+                      onChange={(e) =>
+                        updateField(key, 'startDate', e.target.value)
+                      }
+                      required={experienceRequired(workExperiences[key])}
+                    />
+                    <TextInput
+                      name={
+                        !workExperiences[key].currentlyWorking
+                          ? 'End Date'
+                          : 'Expected End Date'
+                      }
+                      value={workExperiences[key].endDate}
+                      type="text"
+                      onChange={(e) =>
+                        updateField(key, 'endDate', e.target.value)
+                      }
+                      required={experienceRequired(workExperiences[key])}
+                    />
+                  </div>
+                )}
+              </div>
+              <Textarea
+                name="Description"
+                description="Please describe your role in this job/work."
+                value={workExperiences[key].description}
+                onChange={(e) =>
+                  updateField(key, 'description', e.target.value)
+                }
+                required={experienceRequired(workExperiences[key])}
+              />
+              <div className="p-2">
+                <p className="md:text-lg">
+                  Add corresponding document (if available)
+                  {!experienceRequired(workExperiences[key]) ? null : (
+                    <span className="text-red-850 font-black">*</span>
+                  )}
+                </p>
+                <FileUploadComponent
+                  fileName={`WorkExperience${key}`}
+                  fileUrl={workExperiences[key].document}
+                  setFileUrl={(url: string) =>
+                    updateField(key, 'document', url)
+                  }
+                />
+              </div>
+            </div>
+          )
+        })}
+      </div>
+      <p
+        className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 pr-2 pl-2 text-blue-850 cursor-pointer"
+        onClick={() => {
+          setWorkExperiences((prevExps: WorkExperiencesType) => ({
+            ...prevExps,
+            [newExpKey]: defaultExperience,
+          }))
+          setNewExpKey((prev) => prev + 1)
+        }}
+      >
+        Add an Experience +
+      </p>
       <ProceedButtons
         status={status}
         formStatus={applicationData.form_status}
