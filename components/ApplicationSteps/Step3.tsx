@@ -98,6 +98,23 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
     }))
   }
 
+  const publicationRequired = (
+    publication: ResearchExperiencesType[number]['publications'][number],
+  ) =>
+    !(
+      !publication.titleAndDate &&
+      !publication.conferenceName &&
+      !publication.link
+    )
+
+  const experienceRequired = (experience: ResearchExperiencesType[number]) =>
+    !(
+      !experience.university &&
+      !experience.title &&
+      !experience.mentor &&
+      !experience.description
+    )
+
   // Check if user provide some input, then do validation and show error if any
   // otherwise submit valid experiences and remove invalids
   const nextStep = () => {
@@ -110,12 +127,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
       const experience = researchData[Number(keys[i])]
       // Check if user provide some input, then do validation and show error if any
       // then add valid experience to experiences
-      if (
-        experience.university ||
-        experience.title ||
-        experience.mentor ||
-        experience.description
-      )
+      if (experienceRequired(experience))
         if (
           experience.university &&
           experience.title &&
@@ -133,11 +145,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
             // then add valid publication to publications
             const publication = experience.publications[Number(pubKeys[j])]
 
-            if (
-              publication.titleAndDate ||
-              publication.conferenceName ||
-              publication.link
-            ) {
+            if (publicationRequired(publication)) {
               if (
                 publication.titleAndDate &&
                 publication.conferenceName &&
@@ -252,7 +260,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                 value={researchData[key].university}
                 type="text"
                 onChange={(e) => updateField(key, 'university', e.target.value)}
-                required={false}
+                required={experienceRequired(researchData[key])}
               />
               <TextInput
                 name="Position Title"
@@ -260,7 +268,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                 value={researchData[key].title}
                 type="text"
                 onChange={(e) => updateField(key, 'title', e.target.value)}
-                required={false}
+                required={experienceRequired(researchData[key])}
               />
               <TextInput
                 name="Advisor/Supervisor/Mentor"
@@ -268,7 +276,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                 value={researchData[key].mentor}
                 type="text"
                 onChange={(e) => updateField(key, 'mentor', e.target.value)}
-                required={false}
+                required={experienceRequired(researchData[key])}
               />
               <CheckBoxInput
                 name="Are you currently working here?"
@@ -280,7 +288,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                     !e.target.checked ? null : optionValue,
                   )
                 }}
-                required={false}
+                required={experienceRequired(researchData[key])}
                 options={[
                   { label: 'Yes', value: true },
                   { label: 'No', value: false },
@@ -296,7 +304,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                       onChange={(e) =>
                         updateField(key, 'startDate', e.target.value)
                       }
-                      required={false}
+                      required={experienceRequired(researchData[key])}
                     />
                     <TextInput
                       name={
@@ -309,7 +317,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                       onChange={(e) =>
                         updateField(key, 'endDate', e.target.value)
                       }
-                      required={false}
+                      required={experienceRequired(researchData[key])}
                     />
                   </div>
                 )}
@@ -321,7 +329,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                 onChange={(e) =>
                   updateField(key, 'description', e.target.value)
                 }
-                required={false}
+                required={experienceRequired(researchData[key])}
               />
               <div className="p-2">
                 <p className="text-xs sm:text-sm md:text-base pl-2">
@@ -383,7 +391,9 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                               e.target.value,
                             )
                           }
-                          required={false}
+                          required={publicationRequired(
+                            researchData[key].publications[pubKey],
+                          )}
                         />
                         <TextInput
                           name="Journal/Conference Name"
@@ -400,7 +410,9 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                               e.target.value,
                             )
                           }
-                          required={false}
+                          required={publicationRequired(
+                            researchData[key].publications[pubKey],
+                          )}
                         />
                         <TextInput
                           name="Link"
@@ -416,7 +428,9 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                               e.target.value,
                             )
                           }
-                          required={false}
+                          required={publicationRequired(
+                            researchData[key].publications[pubKey],
+                          )}
                         />
                       </div>
                     ),
