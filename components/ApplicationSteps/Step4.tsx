@@ -266,9 +266,6 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
               <div className="p-2">
                 <p className="md:text-lg">
                   Add corresponding document (if available)
-                  {!experienceRequired(workExperiences[key]) ? null : (
-                    <span className="text-red-850 font-black">*</span>
-                  )}
                 </p>
                 <FileUploadComponent
                   fileName={`WorkExperience${key}`}
