@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react'
 
 type Props = {
   name: string
+  description?: string
   value: string | number | boolean
   onChange: (
     e: ChangeEvent<HTMLInputElement>,
@@ -12,11 +13,24 @@ type Props = {
 }
 
 // Only accept 2 options
-const CheckBoxes = ({ name, value, onChange, required, options }: Props) => (
+const CheckBoxes = ({
+  name,
+  description = '',
+  value,
+  onChange,
+  required,
+  options,
+}: Props) => (
   <div className="p-2">
     <p className="md:text-lg">
       {name}
       {!required ? null : <span className="text-red-850 font-black">*</span>}
+      {!description ? null : (
+        <span className="text-xs md:text-sm">
+          <br />
+          {description}
+        </span>
+      )}
     </p>
     <div className="flex justify-around items-center">
       {options.map((option, index) => (

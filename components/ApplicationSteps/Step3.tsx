@@ -253,6 +253,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
               />
               <TextInput
                 name="Position Title"
+                description="(e.g., Master thesis, summer internship, research assistant, project assistant, research associate, etc.)"
                 value={researchData[key].title}
                 type="text"
                 onChange={(e) => updateField(key, 'title', e.target.value)}
@@ -260,6 +261,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
               />
               <TextInput
                 name="Advisor/Supervisor/Mentor"
+                description="(with his/her designation)"
                 value={researchData[key].mentor}
                 type="text"
                 onChange={(e) => updateField(key, 'mentor', e.target.value)}
@@ -311,6 +313,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
               </div>
               <Textarea
                 name="Description"
+                description="Please describe the research you have contributed to while working in this position."
                 value={researchData[key].description}
                 onChange={(e) =>
                   updateField(key, 'description', e.target.value)

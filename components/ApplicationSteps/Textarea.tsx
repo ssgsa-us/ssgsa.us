@@ -2,6 +2,7 @@ import { ChangeEventHandler } from 'react'
 
 type Props = {
   name: string
+  description?: string
   value: string
   onChange: ChangeEventHandler<HTMLTextAreaElement>
   required: boolean
@@ -11,6 +12,7 @@ type Props = {
 
 const Textarea = ({
   name,
+  description = '',
   value,
   onChange,
   required,
@@ -21,6 +23,12 @@ const Textarea = ({
     <p className="md:text-lg">
       {name}
       {!required ? null : <span className="text-red-850 font-black">*</span>}
+      {!description ? null : (
+        <span className="text-xs md:text-sm">
+          <br />
+          {description}
+        </span>
+      )}
     </p>
     <textarea
       name={name}
