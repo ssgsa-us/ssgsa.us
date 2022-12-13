@@ -2,17 +2,31 @@ import { ChangeEventHandler } from 'react'
 
 type Props = {
   name: string
+  description?: string
   value: string | number
   onChange: ChangeEventHandler<HTMLSelectElement>
   required: boolean
   options: Array<{ label: string; value: string | number }>
 }
 
-const SelectInput = ({ name, value, onChange, required, options }: Props) => (
+const SelectInput = ({
+  name,
+  description = '',
+  value,
+  onChange,
+  required,
+  options,
+}: Props) => (
   <div className="p-2">
     <p className="md:text-lg">
       {name}
       {!required ? null : <span className="text-red-850 font-black">*</span>}
+      {!description ? null : (
+        <span className="text-xs md:text-sm">
+          <br />
+          {description}
+        </span>
+      )}
     </p>
     <select
       name={name}

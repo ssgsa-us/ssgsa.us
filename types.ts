@@ -22,6 +22,28 @@ export type AcademicRecordType = {
   }
 }
 
+export type ResearchExperiencesType = {
+  [key: number]: {
+    university: string
+    title: string
+    mentor: string
+    currentlyWorking: boolean | null
+    startDate: string
+    endDate: string
+    description: string
+    publications: PublicationsType
+    newPublicationKey: number
+  }
+}
+
+export type PublicationsType = {
+  [key: number]: {
+    titleAndDate: string
+    conferenceName: string
+    link: string
+  }
+}
+
 export type AnswerType = {
   [key: string]: string
 }
