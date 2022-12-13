@@ -203,7 +203,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
   }
 
   const previousStep = () => {
-    setStatus(1)
+    setStatus(2)
   }
 
   const saveInformation = () => {
