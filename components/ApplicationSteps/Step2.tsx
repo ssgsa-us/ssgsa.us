@@ -210,10 +210,11 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                       setAcademicData(
                         ({ [key]: value, ...prevRecord }) => prevRecord,
                       )
-                      setDeletedDocuments((prev) => [
-                        ...prev,
-                        academicData[key].document,
-                      ])
+                      if (academicData[key].document)
+                        setDeletedDocuments((prev) => [
+                          ...prev,
+                          academicData[key].document,
+                        ])
                     }
                   }}
                 >

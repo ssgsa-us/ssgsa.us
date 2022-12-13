@@ -4,6 +4,7 @@ import {
   AnswerType,
   DocumentsType,
   ResearchExperiencesType,
+  WorkExperiencesType,
 } from '../types'
 
 export class ApplicationData {
@@ -19,6 +20,7 @@ export class ApplicationData {
   faculty: string
   academic_record: AcademicRecordType
   research_experience: ResearchExperiencesType
+  work_experience: WorkExperiencesType
   documents: DocumentsType
   sop_answers: AnswerType
   form_status: number
@@ -57,8 +59,8 @@ export class ApplicationData {
     this.research_experience = research_experience
   }
 
-  step4(documents: DocumentsType) {
-    this.documents = documents
+  step4(work_experience: WorkExperiencesType) {
+    this.work_experience = work_experience
   }
 
   step5(faculty: string) {
@@ -95,7 +97,7 @@ export const applicationDataConverter = {
       applicationData.step3(data.research_experience)
     }
     if (data.form_status >= 4) {
-      applicationData.step4(data.documents)
+      applicationData.step4(data.work_experience)
     }
     if (data.form_status >= 5) {
       applicationData.step5(data.faculty)
