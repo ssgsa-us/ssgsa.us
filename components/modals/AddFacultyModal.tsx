@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { faculties } from '../../constants/faculties'
-import { updateApplicationData } from '../../pages/api/step5'
 import { useAuth } from '../../context/AuthUserContext'
+import { updateApplicationFaculty } from '../../pages/api/updateApplicationFaculty'
 
 type Props = {
   showModal: Boolean
@@ -22,7 +22,7 @@ export default function ApplyFacultyModal({
   const submitApplication = () => {
     if (!selectedFaculty) setError('Please select one faculty!')
     else
-      updateApplicationData(authUser.id, selectedFaculty, 6)
+      updateApplicationFaculty(authUser.id, selectedFaculty, 6)
         .then(() => {
           setShowModal(false)
           setStatus(6)
