@@ -1,9 +1,14 @@
-import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
-import ReviewApplication from './ReviewApplication'
-import ApplyFacultyModal from '../../components/modals/AddFacultyModal'
+import { useAuth } from '../../context/AuthUserContext'
+import { updateApplicationData } from '../../pages/api/step5'
+import { deleteDocuments } from '../../pages/api/uploadDocument'
+import { PosterOrWorkshopsType } from '../../types'
+import FileUploadComponent from './FileUpload'
+import ProceedButtons from './ProceedButtons'
+import SelectInput from './SelectInput'
+import Textarea from './Textarea'
+import TextInput from './TextInput'
 
 type Props = {
   applicationData: ApplicationData
@@ -11,121 +16,249 @@ type Props = {
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
-const Step5 = ({ applicationData, status, setStatus }: Props) => {
-  const [stepStatus, setStepStatus] = useState<string>('review')
-  const [name, setName] = useState<string>('')
-  const [error, setError] = useState<string>('')
-  const [showModal, setShowModal] = useState(false)
+const defaultWorkshop: PosterOrWorkshopsType[number] = {
+  category: '',
+  title: '',
+  duration: '',
+  description: '',
+  document: '',
+}
 
-  const reviewApplication = () => {
-    setError('')
-    if (name === applicationData.name) {
-      setStepStatus('submit')
-    } else
-      setError(
-        'Name given should be similar to the name provided in application.',
+const Step5 = ({ applicationData, status, setStatus }: Props) => {
+  const { authUser } = useAuth()
+  // Required to set the new key while adding a degree
+  // While removing a key, other keys remain same
+  // so not able to keep continuous numbers in keys
+  const [newKey, setNewKey] = useState<number>(2)
+  const [workshops, setWorkshops] = useState<PosterOrWorkshopsType>({
+    1: defaultWorkshop,
+  })
+  const [deletedDocuments, setDeletedDocuments] = useState<Array<string>>([])
+  const [error, setError] = useState<string>('')
+
+  useEffect(() => {
+    if (
+      applicationData.poster_or_workshops &&
+      Object.keys(applicationData.poster_or_workshops).length != 0
+    ) {
+      setWorkshops(applicationData.poster_or_workshops)
+      // Setting number which is larger than the maximum key value
+      setNewKey(
+        Number(
+          Object.keys(applicationData.poster_or_workshops).sort(
+            (a, b) => Number(b) - Number(a),
+          )[0],
+        ) + 1,
       )
+    }
+  }, [applicationData])
+
+  const updateField = (
+    key: number,
+    name: string,
+    value: string | number | boolean,
+  ) => {
+    setWorkshops((prevWorkshops: PosterOrWorkshopsType) => ({
+      ...prevWorkshops,
+      [key]: {
+        ...prevWorkshops[key],
+        [name]: value,
+      },
+    }))
   }
 
-  const previousStep = () => setStatus(4)
+  const workshopRequired = (workshop: PosterOrWorkshopsType[number]) =>
+    !(!workshop.title && !workshop.description && !workshop.document)
+
+  // Check if user provide some input, then do validation and show error if any
+  // otherwise submit valid workshops and remove invalids
+  const nextStep = () => {
+    setError('')
+    // Save all valid workshops
+    let workshopsTemp: PosterOrWorkshopsType = {}
+
+    const keys = Object.keys(workshops)
+    for (let i = 0; i < keys.length; i++) {
+      const workshop = workshops[Number(keys[i])]
+      // Check if user provide some input, then do validation and show error if any
+      // then add valid workshop to workshops
+      if (workshopRequired(workshop))
+        if (
+          workshop.category != '' &&
+          workshop.title &&
+          workshop.duration &&
+          workshop.description
+        ) {
+          // Add valid workshop
+          workshopsTemp[Number(keys[i])] = workshop
+        } else {
+          setError(
+            'Please fill all field for Poster/Workshop ' +
+              String(i + 1) +
+              ' or Remove that poster/workshop if not needed.',
+          )
+          return
+        }
+    }
+
+    if (status === applicationData.form_status)
+      updateApplicationData(authUser.id, workshopsTemp, 6)
+        .then(() => {
+          deleteDocuments(deletedDocuments)
+          setStatus(6)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+        })
+    else
+      updateApplicationData(
+        authUser.id,
+        workshopsTemp,
+        applicationData.form_status,
+      )
+        .then(() => {
+          deleteDocuments(deletedDocuments)
+          setStatus(6)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+        })
+  }
+
+  const previousStep = () => {
+    setStatus(4)
+  }
+
+  const saveInformation = () => {
+    setError('')
+    return updateApplicationData(
+      authUser.id,
+      workshops,
+      applicationData.form_status,
+    ).then(() => {
+      deleteDocuments(deletedDocuments)
+      setDeletedDocuments([])
+    })
+  }
 
   return (
-    <div>
-      {stepStatus == 'review' ? (
-        <div>
-          <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
-            <p className="md:text-lg">
-              I declare that all the information provided by me in this
-              application is true to the best of my knowledge, and all the
-              answers written by me are my original responses. I understand that
-              if any part of my application is found to be false or plagiarized,
-              I will be disqualified and barred from applying to the Sir Syed
-              Global Scholar Award in the future.
-            </p>
-            <br />
-            <p className="md:text-lg">
-              Please write your full name in lieu of your signature as
-              confirmation of the above.
-            </p>
-            <input
-              name="Name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-xl p-2 mt-1"
-            />
-          </div>
-          <div className="mt-10">
-            {error ? (
-              <div className="bg-red-200 rounded-3xl p-2 pl-6 mb-5">
-                <p>
-                  <span className="font-bold">Error:</span> {error}
+    <div className="w-full">
+      <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
+        <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
+          POSTER PRESENTATION/ WORKSHOPS/SUMMER SCHOOL
+        </h1>
+        <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
+          List all of them starting with the most recent. If you have mentioned
+          anything in preceding sections, please do not repeat that here. For
+          example, if you have already included summer internship in the
+          Research experience section, please do not mention it in this section
+          again.
+        </p>
+        <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2 py-2">
+          Note: Remember to save your information at frequent intervals.
+        </p>
+      </div>
+      <div>
+        {Object.keys(workshops).map((keyTemp, index) => {
+          const key = Number(keyTemp)
+          return (
+            <div
+              className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10"
+              key={key}
+            >
+              <div className="flex justify-between items-center">
+                <p className="font-bold text-lg md:text-xl">
+                  Poster/Workshop {index + 1}
                 </p>
-              </div>
-            ) : null}
-            <div className="flex justify-between mt-10">
-              <button
-                className="text-white text-base md:text-lg bg-blue-850 mr-2 p-2 rounded-lg flex flex-row items-center"
-                onClick={previousStep}
-              >
-                <FontAwesomeIcon
-                  icon={faArrowAltCircleLeft}
-                  size="lg"
-                  className="text-white"
-                />
-                <p className="ml-2">Previous Step</p>
-              </button>
-              <button
-                className="text-white text-lg md:text-xl bg-red-850 font-bold py-2 px-5 rounded-lg flex flex-row items-center"
-                onClick={reviewApplication}
-              >
-                Review Application
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <ReviewApplication applicationData={applicationData} />
-          <div className="mt-10">
-            <div className="flex flex-col items-center sm:items-start sm:flex-row sm:justify-between mt-10">
-              <button
-                className="text-white text-lg md:text-xl bg-blue-850 font-bold mb-4 sm:mb-0 py-2 px-5 mr-2 rounded-lg flex flex-row items-center"
-                onClick={() => setStatus(1)}
-              >
-                Edit Information
-              </button>
-              <button className="text-white text-lg md:text-xl bg-blue-850 font-bold mb-4 sm:mb-0 py-2 px-5 mr-2 rounded-lg flex flex-row items-center">
-                Save for later
-              </button>
-              <div className="flex flex-col items-center w-60 sm:w-64 md:w-80">
-                <button
-                  className="text-white text-lg md:text-xl bg-red-850 font-bold py-2 px-5 mb-2 rounded-lg flex flex-row items-center"
+                <p
+                  className="text-red-850 cursor-pointer"
                   onClick={() => {
-                    setError('')
-                    setShowModal(true)
+                    setWorkshops(
+                      ({ [key]: value, ...prevWorkshops }) => prevWorkshops,
+                    )
+                    if (workshops[key].document)
+                      setDeletedDocuments((prev) => [
+                        ...prev,
+                        workshops[key].document,
+                      ])
                   }}
                 >
-                  Submit Application
-                </button>
-                <p className="text-center">
-                  Note: Please click on &apos;Submit Application&apos; button
-                  only if you are confident your application is complete in all
-                  respects. Upon clicking the &apos;Submit Application&apos;
-                  button, you will not be able to make any changes to your
-                  application.
+                  Remove
                 </p>
               </div>
+              <SelectInput
+                name="Category"
+                value={workshops[key].category}
+                onChange={(e) => updateField(key, 'category', e.target.value)}
+                options={[
+                  { label: 'Select Category', value: '' },
+                  { label: 'Poster Presentation', value: 'Poster' },
+                  { label: 'Workshop', value: 'Workshop' },
+                  { label: 'Summer School', value: 'Summer School' },
+                  { label: 'Other', value: 'Other' },
+                ]}
+                required={workshopRequired(workshops[key])}
+              />
+              <TextInput
+                name="Title"
+                value={workshops[key].title}
+                type="text"
+                onChange={(e) => updateField(key, 'title', e.target.value)}
+                required={workshopRequired(workshops[key])}
+              />
+              <TextInput
+                name="Years Attended and Duration"
+                value={workshops[key].duration}
+                type="text"
+                onChange={(e) => updateField(key, 'duration', e.target.value)}
+                required={workshopRequired(workshops[key])}
+              />
+              <Textarea
+                name="Description"
+                description="Please mention a few lines about your participation in this activity."
+                value={workshops[key].description}
+                onChange={(e) =>
+                  updateField(key, 'description', e.target.value)
+                }
+                required={workshopRequired(workshops[key])}
+              />
+              <div className="p-2">
+                <p className="md:text-lg">
+                  Add corresponding document (if available)
+                </p>
+                <FileUploadComponent
+                  fileName={`PosterOrWorkshop${key}`}
+                  fileUrl={workshops[key].document}
+                  setFileUrl={(url: string) =>
+                    updateField(key, 'document', url)
+                  }
+                />
+              </div>
             </div>
-          </div>
-          <ApplyFacultyModal
-            showModal={showModal}
-            setShowModal={setShowModal}
-            setStatus={setStatus}
-            setError={setError}
-          />
-        </div>
-      )}
+          )
+        })}
+      </div>
+      <p
+        className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 pr-2 pl-2 text-blue-850 cursor-pointer"
+        onClick={() => {
+          setWorkshops((prevWorkshops: PosterOrWorkshopsType) => ({
+            ...prevWorkshops,
+            [newKey]: defaultWorkshop,
+          }))
+          setNewKey((prev) => prev + 1)
+        }}
+      >
+        Add an Experience +
+      </p>
+      <ProceedButtons
+        status={status}
+        formStatus={applicationData.form_status}
+        previousStep={previousStep}
+        nextStep={nextStep}
+        saveInformation={saveInformation}
+        error={error}
+        setError={setError}
+      />
     </div>
   )
 }

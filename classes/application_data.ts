@@ -3,6 +3,7 @@ import {
   AcademicRecordType,
   AnswerType,
   DocumentsType,
+  PosterOrWorkshopsType,
   ResearchExperiencesType,
   WorkExperiencesType,
 } from '../types'
@@ -21,6 +22,7 @@ export class ApplicationData {
   academic_record: AcademicRecordType
   research_experience: ResearchExperiencesType
   work_experience: WorkExperiencesType
+  poster_or_workshops: PosterOrWorkshopsType
   documents: DocumentsType
   sop_answers: AnswerType
   form_status: number
@@ -63,8 +65,8 @@ export class ApplicationData {
     this.work_experience = work_experience
   }
 
-  step5(faculty: string) {
-    this.faculty = faculty
+  step5(poster_or_workshops: PosterOrWorkshopsType) {
+    this.poster_or_workshops = poster_or_workshops
   }
 }
 
@@ -100,7 +102,7 @@ export const applicationDataConverter = {
       applicationData.step4(data.work_experience)
     }
     if (data.form_status >= 5) {
-      applicationData.step5(data.faculty)
+      applicationData.step5(data.poster_or_workshops)
     }
     return applicationData
   },

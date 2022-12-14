@@ -56,6 +56,16 @@ export type WorkExperiencesType = {
   }
 }
 
+export type PosterOrWorkshopsType = {
+  [key: number]: {
+    category: 'Poster' | 'Workshop' | 'Summer School' | 'Other' | ''
+    title: string
+    duration: string
+    description: string
+    document: string
+  }
+}
+
 export type AnswerType = {
   [key: string]: string
 }
