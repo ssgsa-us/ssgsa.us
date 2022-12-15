@@ -27,6 +27,7 @@ export class ApplicationData {
   curricular_activities: CurricularActivitiesType
   extra_curriculars: ExtraCurricularsType
   sop_answers: AnswerType
+  resume: string
   other_information: string
   faculty: string
   documents: DocumentsType
@@ -82,8 +83,9 @@ export class ApplicationData {
     this.extra_curriculars = extra_curriculars
   }
 
-  step8(sop_answers: ExtraCurricularsType) {
+  step8(sop_answers: ExtraCurricularsType, resume: string) {
     this.sop_answers = sop_answers
+    this.resume = resume
   }
 
   step9(other_information: string) {
@@ -136,7 +138,7 @@ export const applicationDataConverter = {
       applicationData.step7(data.extra_curriculars)
     }
     if (data.form_status >= 8) {
-      applicationData.step8(data.sop_answers)
+      applicationData.step8(data.sop_answers, data.resume)
     }
     if (data.form_status >= 9) {
       applicationData.step9(data.other_information)

@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthUserContext'
 import { AnswerType } from '../../types'
 import { updateApplicationData } from '../../pages/api/step8'
 import { ApplicationData } from '../../classes/application_data'
+import FileUploadComponent from './FileUpload'
 
 type Props = {
   applicationData: ApplicationData
@@ -14,6 +15,7 @@ type Props = {
 const Step8 = ({ applicationData, status, setStatus }: Props) => {
   const { authUser } = useAuth()
   const [answers, setAnswers] = useState<AnswerType>({})
+  const [resume, setResume] = useState<string>('')
   const [error, setError] = useState<string>('')
 
   const questionComponent = (index, question) => (
@@ -48,6 +50,7 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
 
   useEffect(() => {
     setAnswers(applicationData.sop_answers || {})
+    setResume(applicationData.resume || '')
   }, [applicationData])
 
   const nextStep = () => {
@@ -77,42 +80,46 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
               answers['SOP5'].split(' ').length >= 1 &&
               answers['SOP5'].split(' ').length <= 200
             ) {
-              if (applicationData.form_status == 8) {
-                updateApplicationData(authUser.id, answers, 9)
-                  .then(() => {
-                    setStatus(9)
-                  })
-                  .catch(() => {
-                    setError('Try again, network error!')
-                  })
+              if (resume) {
+                if (applicationData.form_status == 8) {
+                  updateApplicationData(authUser.id, answers, resume, 9)
+                    .then(() => {
+                      setStatus(9)
+                    })
+                    .catch(() => {
+                      setError('Try again, network error!')
+                    })
+                } else {
+                  saveInformation()
+                    .then(() => {
+                      setStatus(9)
+                    })
+                    .catch(() => {
+                      setError('Try again, network error!')
+                    })
+                }
               } else {
-                saveInformation()
-                  .then(() => {
-                    setStatus(9)
-                  })
-                  .catch(() => {
-                    setError('Try again, network error!')
-                  })
+                setError('Resume is required.')
               }
             } else
               setError(
-                `For Question e, your response must be between 1 word and 200 words`,
+                'For Question e, your response must be between 1 word and 200 words',
               )
           } else
             setError(
-              `For Question d, your response must be between 1 word and 200 words`,
+              'For Question d, your response must be between 1 word and 200 words',
             )
         } else
           setError(
-            `For Question c, your response must be between 1 word and 200 words`,
+            'For Question c, your response must be between 1 word and 200 words',
           )
       } else
         setError(
-          `For Question b, your response must be between 1 word and 200 words`,
+          'For Question b, your response must be between 1 word and 200 words',
         )
     } else
       setError(
-        `For Question a, your response must be between 1 word and 200 words`,
+        'For Question a, your response must be between 1 word and 200 words',
       )
   }
 
@@ -123,6 +130,7 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
     return updateApplicationData(
       authUser.id,
       answers,
+      resume,
       applicationData.form_status,
     )
   }
@@ -151,6 +159,15 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
         {questionComponent(3, process.env.NEXT_PUBLIC_QUESTION_3)}
         {questionComponent(4, process.env.NEXT_PUBLIC_QUESTION_4)}
         {questionComponent(5, process.env.NEXT_PUBLIC_QUESTION_5)}
+        <div className="p-2">
+          <p className="md:text-lg">Attach your CV/Resume</p>
+          <span className="text-red-850 font-black">*</span>
+          <FileUploadComponent
+            fileName="Resume"
+            fileUrl={resume}
+            setFileUrl={(url: string) => setResume(url)}
+          />
+        </div>
       </div>
       <ProceedButtons
         status={status}
