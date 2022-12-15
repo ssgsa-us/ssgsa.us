@@ -135,7 +135,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
   }
 
   const previousStep = () => {
-    setStatus(4)
+    setStatus(3)
   }
 
   const saveInformation = () => {
