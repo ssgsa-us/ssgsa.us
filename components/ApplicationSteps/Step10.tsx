@@ -31,7 +31,7 @@ const Step10 = ({ applicationData, status, setStatus }: Props) => {
   const previousStep = () => setStatus(9)
 
   return (
-    <div>
+    <div className="w-full">
       {stepStatus == 'review' ? (
         <div>
           <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
