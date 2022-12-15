@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
 import ReviewApplication from '../../components/ApplicationSteps/ReviewApplication'
 import Step1 from '../../components/ApplicationSteps/Step1'
+import Step10 from '../../components/ApplicationSteps/Step10'
 import Step2 from '../../components/ApplicationSteps/Step2'
 import Step3 from '../../components/ApplicationSteps/Step3'
 import Step4 from '../../components/ApplicationSteps/Step4'
@@ -160,6 +161,14 @@ function Application() {
         ) : status == 9 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <Step9
+              applicationData={applicationData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status == 10 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <Step10
               applicationData={applicationData}
               status={status}
               setStatus={setStatus}
