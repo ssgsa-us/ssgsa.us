@@ -82,10 +82,6 @@ export type AnswerType = {
   [key: string]: string
 }
 
-export type DocumentsType = {
-  [documentType: string]: string
-}
-
 export type AwardeeType = {
   awardees: Array<{
     field: string

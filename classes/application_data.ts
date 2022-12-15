@@ -3,7 +3,6 @@ import {
   AcademicRecordType,
   AnswerType,
   CurricularActivitiesType,
-  DocumentsType,
   ExtraCurricularsType,
   PosterOrWorkshopsType,
   ResearchExperiencesType,
@@ -30,7 +29,6 @@ export class ApplicationData {
   resume: string
   other_information: string
   faculty: string
-  documents: DocumentsType
   form_status: number
 
   constructor(form_status: number = 1) {
