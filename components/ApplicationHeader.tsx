@@ -108,7 +108,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
           } md:flex md:justify-between`}
         >
           <div className="flex flex-col w-full md:flex-row md:justify-center lg:ml-28">
-            <div className="hidden md:flex justify-center w-4 mr-2">
+            <div className="hidden md:flex items-center w-4 mr-2">
               <FontAwesomeIcon
                 className={
                   visibleStepStart === 1
@@ -117,6 +117,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
                 }
                 color={visibleStepStart === 1 ? '#dadada' : 'white'}
                 icon={faAngleLeft}
+                size="2x"
                 onClick={() => {
                   if (visibleStepStart !== 1)
                     setVisibleStepStart(visibleStepStart - 1)
@@ -127,13 +128,13 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
             {stepComponent(2, 'Qualifications')}
             {stepComponent(3, 'Research Experience')}
             {stepComponent(4, 'Work Experience')}
-            {stepComponent(5, 'Presentations / Workshops')}
-            {stepComponent(6, 'Achievements / Awards')}
+            {stepComponent(5, 'Posters / Workshops')}
+            {stepComponent(6, 'Curricular Activities')}
             {stepComponent(7, 'Extra Curricular Activities')}
-            {stepComponent(8, 'Written Responses')}
+            {stepComponent(8, 'Essays')}
             {stepComponent(9, 'Other Information')}
             {stepComponent(10, 'Review and Submit')}
-            <div className="hidden md:flex justify-center w-4 ml-2">
+            <div className="hidden md:flex items-center w-4 ml-2">
               <FontAwesomeIcon
                 className={
                   visibleStepStart === totalSteps - 4
@@ -144,6 +145,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
                   visibleStepStart === totalSteps - 4 ? '#dadada' : 'white'
                 }
                 icon={faAngleRight}
+                size="2x"
                 onClick={() => {
                   // (totalSteps-4) used to make sure 5 steps are visible every time
                   if (visibleStepStart !== totalSteps - 4)
