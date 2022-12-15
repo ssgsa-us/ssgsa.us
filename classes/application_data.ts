@@ -27,8 +27,8 @@ export class ApplicationData {
   poster_or_workshops: PosterOrWorkshopsType
   curricular_activities: CurricularActivitiesType
   extra_curriculars: ExtraCurricularsType
-  documents: DocumentsType
   sop_answers: AnswerType
+  documents: DocumentsType
   form_status: number
 
   constructor(form_status: number = 1) {
@@ -80,6 +80,10 @@ export class ApplicationData {
   step7(extra_curriculars: ExtraCurricularsType) {
     this.extra_curriculars = extra_curriculars
   }
+
+  step8(sop_answers: ExtraCurricularsType) {
+    this.sop_answers = sop_answers
+  }
 }
 
 export const applicationDataConverter = {
@@ -121,6 +125,9 @@ export const applicationDataConverter = {
     }
     if (data.form_status >= 7) {
       applicationData.step7(data.extra_curriculars)
+    }
+    if (data.form_status >= 8) {
+      applicationData.step8(data.sop_answers)
     }
     return applicationData
   },
