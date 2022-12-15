@@ -20,7 +20,6 @@ export class ApplicationData {
   target_program: string
   target_date: string
   target_country: string
-  faculty: string
   academic_record: AcademicRecordType
   research_experience: ResearchExperiencesType
   work_experience: WorkExperiencesType
@@ -28,6 +27,8 @@ export class ApplicationData {
   curricular_activities: CurricularActivitiesType
   extra_curriculars: ExtraCurricularsType
   sop_answers: AnswerType
+  other_information: string
+  faculty: string
   documents: DocumentsType
   form_status: number
 
@@ -84,6 +85,14 @@ export class ApplicationData {
   step8(sop_answers: ExtraCurricularsType) {
     this.sop_answers = sop_answers
   }
+
+  step9(other_information: string) {
+    this.other_information = other_information
+  }
+
+  step10(faculty: string) {
+    this.faculty = faculty
+  }
 }
 
 export const applicationDataConverter = {
@@ -128,6 +137,12 @@ export const applicationDataConverter = {
     }
     if (data.form_status >= 8) {
       applicationData.step8(data.sop_answers)
+    }
+    if (data.form_status >= 9) {
+      applicationData.step9(data.other_information)
+    }
+    if (data.form_status >= 10) {
+      applicationData.step10(data.faculty)
     }
     return applicationData
   },

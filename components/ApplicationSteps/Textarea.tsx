@@ -8,6 +8,7 @@ type Props = {
   required: boolean
   rows?: number
   cols?: number
+  wordLimit?: number
 }
 
 const Textarea = ({
@@ -18,6 +19,7 @@ const Textarea = ({
   required,
   rows = 4,
   cols = 10,
+  wordLimit = 0,
 }: Props) => (
   <div className="p-2">
     <p className="md:text-lg">
@@ -27,6 +29,12 @@ const Textarea = ({
         <span className="text-xs md:text-sm">
           <br />
           {description}
+        </span>
+      )}
+      {!wordLimit ? null : (
+        <span className="text-red-850 font-black">
+          {'  '}
+          {!value ? 0 : value.split(' ').length}/200
         </span>
       )}
     </p>
