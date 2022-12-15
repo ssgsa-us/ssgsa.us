@@ -2,6 +2,7 @@ import firebase from '../firebase'
 import {
   AcademicRecordType,
   AnswerType,
+  CurricularActivitiesType,
   DocumentsType,
   PosterOrWorkshopsType,
   ResearchExperiencesType,
@@ -23,6 +24,7 @@ export class ApplicationData {
   research_experience: ResearchExperiencesType
   work_experience: WorkExperiencesType
   poster_or_workshops: PosterOrWorkshopsType
+  curricular_activities: CurricularActivitiesType
   documents: DocumentsType
   sop_answers: AnswerType
   form_status: number
@@ -68,6 +70,10 @@ export class ApplicationData {
   step5(poster_or_workshops: PosterOrWorkshopsType) {
     this.poster_or_workshops = poster_or_workshops
   }
+
+  step6(curricular_activities: CurricularActivitiesType) {
+    this.curricular_activities = curricular_activities
+  }
 }
 
 export const applicationDataConverter = {
@@ -103,6 +109,9 @@ export const applicationDataConverter = {
     }
     if (data.form_status >= 5) {
       applicationData.step5(data.poster_or_workshops)
+    }
+    if (data.form_status >= 6) {
+      applicationData.step6(data.curricular_activities)
     }
     return applicationData
   },

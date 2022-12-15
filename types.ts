@@ -66,6 +66,13 @@ export type PosterOrWorkshopsType = {
   }
 }
 
+export type CurricularActivitiesType = {
+  description: string
+  document: string
+  others: string
+  others_document: string
+}
+
 export type AnswerType = {
   [key: string]: string
 }
