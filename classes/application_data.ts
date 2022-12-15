@@ -4,6 +4,7 @@ import {
   AnswerType,
   CurricularActivitiesType,
   DocumentsType,
+  ExtraCurricularsType,
   PosterOrWorkshopsType,
   ResearchExperiencesType,
   WorkExperiencesType,
@@ -25,6 +26,7 @@ export class ApplicationData {
   work_experience: WorkExperiencesType
   poster_or_workshops: PosterOrWorkshopsType
   curricular_activities: CurricularActivitiesType
+  extra_curriculars: ExtraCurricularsType
   documents: DocumentsType
   sop_answers: AnswerType
   form_status: number
@@ -74,6 +76,10 @@ export class ApplicationData {
   step6(curricular_activities: CurricularActivitiesType) {
     this.curricular_activities = curricular_activities
   }
+
+  step7(extra_curriculars: ExtraCurricularsType) {
+    this.extra_curriculars = extra_curriculars
+  }
 }
 
 export const applicationDataConverter = {
@@ -112,6 +118,9 @@ export const applicationDataConverter = {
     }
     if (data.form_status >= 6) {
       applicationData.step6(data.curricular_activities)
+    }
+    if (data.form_status >= 7) {
+      applicationData.step7(data.extra_curriculars)
     }
     return applicationData
   },
