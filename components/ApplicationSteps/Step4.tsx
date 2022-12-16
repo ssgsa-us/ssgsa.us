@@ -302,7 +302,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           setNewExpKey((prev) => prev + 1)
         }}
       >
-        Add an Experience +
+        Add another Experience +
       </p>
       <ProceedButtons
         status={status}

@@ -243,16 +243,10 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
               />
               <TextInput
                 name="Degree Name"
+                description="(e.g., BTech in Computer Science, MSc in Agricultural Science, BA in History, etc.)"
                 value={academicData[key]['degreeName']}
                 type="text"
                 onChange={(e) => updateField(key, 'degreeName', e.target.value)}
-                required={true}
-              />
-              <TextInput
-                name="Field of Study"
-                value={academicData[key]['branch']}
-                type="text"
-                onChange={(e) => updateField(key, 'branch', e.target.value)}
                 required={true}
               />
               <SelectInput

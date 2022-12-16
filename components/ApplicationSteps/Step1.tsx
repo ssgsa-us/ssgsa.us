@@ -187,10 +187,10 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           value={targetDate}
           options={[
             { label: 'Select', value: '' },
-            { label: 'In 0-1 year', value: 'In 0-1 year' },
-            { label: 'In 1-2 years', value: 'In 1-2 years' },
-            { label: 'more than 2 years', value: 'more than 2 years' },
-            { label: 'not decided yet', value: 'not decided yet' },
+            { label: 'Within 0-1 year', value: 'Within 0-1 year' },
+            { label: 'Within 1-2 years', value: 'Within 1-2 years' },
+            { label: 'After 2 years', value: 'After 2 years' },
+            { label: 'Not decided', value: 'Not decided' },
           ]}
           onChange={(e) => setTargetDate(e.target.value)}
           required={true}

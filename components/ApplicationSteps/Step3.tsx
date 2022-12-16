@@ -467,7 +467,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                       }))
                     }}
                   >
-                    Add new Publication +
+                    Add another Publication +
                   </p>
                 </div>
               </div>
@@ -486,7 +486,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
           setNewExpKey((prev) => prev + 1)
         }}
       >
-        Add an Experience +
+        Add another Experience +
       </p>
       <ProceedButtons
         status={status}

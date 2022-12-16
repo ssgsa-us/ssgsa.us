@@ -139,7 +139,7 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
     <div>
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
-          Extra - Curricular Activites
+          Essays
         </h1>
         <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
           Please answer the following questions. Each has a limit of 200 words.
