@@ -18,6 +18,7 @@ type Props = {
 
 const defaultWorkshop: PosterOrWorkshopsType[number] = {
   category: '',
+  otherCategory: '',
   title: '',
   duration: '',
   description: '',
@@ -85,6 +86,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
       if (workshopRequired(workshop))
         if (
           workshop.category != '' &&
+          (workshop.category === 'Other' ? !!workshop.otherCategory : true) &&
           workshop.title &&
           workshop.duration &&
           workshop.description
@@ -208,6 +210,17 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
                 ]}
                 required={workshopRequired(workshops[key])}
               />
+              {workshops[key].category === 'Other' ? (
+                <TextInput
+                  name="Other Category Name"
+                  value={workshops[key].otherCategory}
+                  type="text"
+                  onChange={(e) =>
+                    updateField(key, 'otherCategory', e.target.value)
+                  }
+                  required={workshopRequired(workshops[key])}
+                />
+              ) : null}
               <TextInput
                 name="Title"
                 value={workshops[key].title}

@@ -59,6 +59,7 @@ export type WorkExperiencesType = {
 export type PosterOrWorkshopsType = {
   [key: number]: {
     category: 'Poster' | 'Workshop' | 'Summer School' | 'Other' | ''
+    otherCategory: string
     title: string
     duration: string
     description: string
