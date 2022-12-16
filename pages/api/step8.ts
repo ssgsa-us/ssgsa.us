@@ -5,12 +5,10 @@ import { firestore } from '../../firebase'
 export const updateApplicationData = (
   userId: string,
   SOPAnswers: AnswerType,
-  resume: string,
   formStatus: number,
 ) => {
   return firestore.doc(path.join('applications_data', userId)).update({
     sop_answers: SOPAnswers,
-    resume: resume,
     form_status: formStatus,
   })
 }
