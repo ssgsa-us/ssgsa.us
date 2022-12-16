@@ -338,9 +338,10 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                 description="Please describe the research you have contributed 
                   to while working in this position. Maximum Word Limit: 200"
                 value={researchData[key].description}
-                onChange={(e) =>
-                  updateField(key, 'description', e.target.value)
-                }
+                onChange={(e) => {
+                  if (e.target.value.split(' ').length <= 200)
+                    updateField(key, 'description', e.target.value)
+                }}
                 required={experienceRequired(researchData[key])}
                 wordLimit={200}
               />

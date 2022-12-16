@@ -19,29 +19,32 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
 
   const questionComponent = (index, question) => (
     <div className="p-2">
-      <p className="font-bold md:text-lg">
-        {String.fromCharCode(index + 96)}) {question}
+      <div className="flex justify-between items-center">
+        <p className="font-bold md:text-lg">
+          {String.fromCharCode(index + 96)}) {question}
+          <span className="text-red-850 font-black">*</span>
+        </p>
         <span className="text-red-850 font-black">
-          *{' '}
           {answers[`SOP${index}`]
             ? answers[`SOP${index}`].split(' ').length
             : 0}
           /200
         </span>
-      </p>
+      </div>
       <textarea
         name={`SOP${index}`}
         rows={4}
         cols={10}
         value={answers[`SOP${index}`]}
-        onChange={(e) =>
-          setAnswers((prevAnswers: AnswerType) => {
-            return {
-              ...prevAnswers,
-              [`SOP${index}`]: e.target.value,
-            }
-          })
-        }
+        onChange={(e) => {
+          if (e.target.value.split(' ').length <= 200)
+            setAnswers((prevAnswers: AnswerType) => {
+              return {
+                ...prevAnswers,
+                [`SOP${index}`]: e.target.value,
+              }
+            })
+        }}
         className="w-full rounded-xl p-2 mt-1"
       />
     </div>

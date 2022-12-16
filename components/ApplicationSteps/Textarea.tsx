@@ -22,22 +22,19 @@ const Textarea = ({
   wordLimit = 0,
 }: Props) => (
   <div className="p-2">
-    <p className="md:text-lg">
-      {name}
-      {!required ? null : <span className="text-red-850 font-black">*</span>}
-      {!description ? null : (
-        <span className="text-xs md:text-sm">
-          <br />
-          {description}
-        </span>
-      )}
+    <div className="flex justify-between items-center">
+      <p className="md:text-lg">
+        {name}
+        {!required ? null : <span className="text-red-850 font-black">*</span>}
+      </p>
       {!wordLimit ? null : (
-        <span className="text-red-850 font-black">
-          {'  '}
+        <p className="text-red-850 font-black">
           {!value ? 0 : value.split(' ').length}/200
-        </span>
+        </p>
       )}
-    </p>
+    </div>
+
+    {!description ? null : <p className="text-xs md:text-sm">{description}</p>}
     <textarea
       name={name}
       value={value}

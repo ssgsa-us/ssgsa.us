@@ -240,9 +240,10 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
                 description="Please mention a few lines about your 
                   participation in this activity. Maximum Word Limit: 50"
                 value={workshops[key].description}
-                onChange={(e) =>
-                  updateField(key, 'description', e.target.value)
-                }
+                onChange={(e) => {
+                  if (e.target.value.split(' ').length <= 50)
+                    updateField(key, 'description', e.target.value)
+                }}
                 required={workshopRequired(workshops[key])}
                 wordLimit={50}
               />
