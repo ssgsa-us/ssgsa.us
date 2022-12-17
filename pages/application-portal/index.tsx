@@ -75,10 +75,10 @@ export default function Portal() {
               />
               <label className="pl-5 text-blue-850">
                 I am currently enrolled at Aligarh Muslim University or an
-                alumnus{' '}
+                Alumna/Alumnus{' '}
                 <span className="text-xs">
-                  (Students who have completed Senior Secondary School
-                  Certificate OR Diploma from AMU are eligible)
+                  (Students who have completed Senior Secondary School,
+                  Certificate OR Diploma from AMU are also eligible)
                 </span>
               </label>
             </div>
@@ -141,43 +141,66 @@ export default function Portal() {
           <h1 className="text-2xl text-center text-blue-850 font-black">
             Instructions
           </h1>
-          <p className="my-5 text-lg">
-            The application form is divided into 5 parts.
-            <br />
-            <br />
-            You can view a step only after you have successfully completed all
-            the preceding steps. However, you can go back to any of the{' '}
-            <span className="underline">completed</span> steps to make any
-            changes before final submission.
-            <br />
-            <br />
-            Questions marked <span className="text-red-850 font-black">
-              *
-            </span>{' '}
-            are mandatory.
-            <br />
-            <br />
-            You will be able to save your information at each step. However, if
-            you press the back button{' '}
-            <span className="underline">without saving your information</span>,
-            your entered data will be lost.
-            <br />
-            <br />
-            You will be able to review the information entered by you before
-            submission of the form.
-            <br />
-            <br />
-            <span className="text-sm">
-              Note: The SSGSA portal functions best with Google Chrome and
-              Firefox browsers. Please watch our{' '}
-              <Link href="/faq">
-                {/* Add link for faq portal */}
-                <a className="text-blue-800 underline font-black">
-                  SSGSA application video tutorial
-                </a>
-              </Link>{' '}
-              in case of any doubt.
-            </span>
+          <ul style={{ listStyleType: 'disc' }} className="pl-5 text-lg">
+            <li className="mt-5">
+              The application form is divided into 10 parts.
+            </li>
+            <li>
+              You can view a step only after you have successfully completed all
+              the preceding steps. However, you can go back to any of the{' '}
+              <span className="underline">completed</span> steps to make any
+              changes before final submission.
+            </li>
+            <li>
+              Questions marked{' '}
+              <span className="text-red-850 font-black">*</span> are mandatory.
+            </li>
+            <li>
+              You will be able to save your information at each step. However,
+              if you press the back button{' '}
+              <span className="underline">without saving your information</span>
+              , your entered data will be lost.
+            </li>
+            <li>
+              You will be able to review the information entered by you before
+              submission of the form.
+            </li>
+          </ul>
+          <p className="mt-5 pl-5 text-lg">
+            Your application will be reviewed on the following basis:
+          </p>
+          <ol style={{ listStyleType: 'number' }} className="pl-10 font-bold">
+            <li className="pl-5">Academic Grades</li>
+            <li className="pl-5">
+              Curricular Activities
+              <br />
+              <span className="text-sm font-normal">
+                Projects, work experience, publications, internships, academic
+                awards & recognition, etc.
+              </span>
+            </li>
+            <li className="pl-5">
+              Extra-Curricular Activities
+              <br />
+              <span className="text-sm font-normal">
+                Leadership experience, literary and cultural involvement,
+                sports, volunteering, social work etc.
+              </span>
+            </li>
+            <li className="pl-5">
+              Motivation to stay abroad as gauged from Essay-Type Questions.
+            </li>
+          </ol>
+          <p className="pl-5 pt-5 text-sm">
+            Note: The SSGSA portal functions best with Google Chrome and Firefox
+            browsers. Please watch our{' '}
+            <Link href="/faq">
+              {/* Add link for faq portal */}
+              <a className="text-blue-800 underline font-black">
+                SSGSA application video tutorial
+              </a>
+            </Link>{' '}
+            in case of any doubt.
           </p>
         </div>
 

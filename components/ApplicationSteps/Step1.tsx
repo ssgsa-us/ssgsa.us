@@ -136,8 +136,8 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             <span className="text-red-850 font-black">*</span>
             <span className="text-xs md:text-sm">
               <br />
-              Please provide a document as a proof of being AMU Student or
-              Alumna/Alumnus (e.g., ID card, degree, marksheet, etc.)
+              Please provide a document as a proof of being a current AMU
+              Student or Alumna/Alumnus (e.g., ID card, degree, marksheet, etc.)
             </span>
           </p>
           <FileUploadComponent
