@@ -317,6 +317,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                 name="Does this degree award grade in CGPA or Percentage?"
                 value={academicData[key]['gradeCriteria']}
                 onChange={(e, optionValue) => {
+                  updateField(key, 'grades', 0)
                   updateField(
                     key,
                     'gradeCriteria',
