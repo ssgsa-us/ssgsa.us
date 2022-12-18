@@ -133,6 +133,9 @@ export const applicationDataConverter = {
     if (data.form_status >= 7) {
       applicationData.step7(data.extra_curriculars)
     }
+    if (data.form_status >= 8) {
+      applicationData.step8(data.sop_answers)
+    }
     if (data.form_status >= 9) {
       applicationData.step9(data.other_information)
     }

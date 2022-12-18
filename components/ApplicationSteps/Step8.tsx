@@ -4,7 +4,6 @@ import { useAuth } from '../../context/AuthUserContext'
 import { AnswerType } from '../../types'
 import { updateApplicationData } from '../../pages/api/step8'
 import { ApplicationData } from '../../classes/application_data'
-import FileUploadComponent from './FileUpload'
 
 type Props = {
   applicationData: ApplicationData
