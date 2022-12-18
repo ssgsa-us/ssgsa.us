@@ -130,7 +130,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
             {stepComponent(4, 'Work Experience')}
             {stepComponent(5, 'Posters / Workshops')}
             {stepComponent(6, 'Curricular Activities')}
-            {stepComponent(7, 'Extra Curricular Activities')}
+            {stepComponent(7, 'Extracurricular Activities')}
             {stepComponent(8, 'Essays')}
             {stepComponent(9, 'Other Information')}
             {stepComponent(10, 'Review and Submit')}
