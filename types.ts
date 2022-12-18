@@ -9,7 +9,6 @@ export type AcademicRecordType = {
   [key: number]: {
     degreeLevel: 'Bachelor' | 'Master' | 'Doctoral' | ''
     degreeName: string
-    branch: string
     faculty: string
     college: string
     university: string

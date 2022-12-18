@@ -88,14 +88,6 @@ const ReviewApplication = ({ applicationData }: Props) => {
               </div>
               <div className="flex justify-start mt-4">
                 <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                  Field Of Study
-                </p>
-                <p className="sm:text-lg w-3/5">
-                  {applicationData.academic_record[Number(key)].branch}
-                </p>
-              </div>
-              <div className="flex justify-start mt-4">
-                <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
                   Faculty
                 </p>
                 <p className="sm:text-lg w-3/5">

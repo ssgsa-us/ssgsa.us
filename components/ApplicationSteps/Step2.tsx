@@ -32,7 +32,6 @@ const yearOptions = [
 const defaultRecord: AcademicRecordType[number] = {
   degreeLevel: '',
   degreeName: '',
-  branch: '',
   faculty: '',
   college: '',
   university: '',
@@ -87,7 +86,6 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
   const checkAllFields = (record: AcademicRecordType[number]) =>
     record.degreeLevel &&
     record.degreeName &&
-    record.branch &&
     record.faculty &&
     record.college &&
     record.university &&
