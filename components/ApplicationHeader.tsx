@@ -60,12 +60,12 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
   return (
     <nav className="sticky top-0 z-50 bg-red-850">
       <div className="w-full flex flex-row bg-white items-center flex">
-        <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 lg:ml-24 flex items-center font-black text-red-850 ">
+        <div className="flex-1 text-lg sm:text-xl md:text-2xl justify-center px-4 my-4 lg:ml-32 flex items-center font-black text-red-850 ">
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
-        <div className="mr-3 flex-2">
+        <div className="mr-3 md:mr-10 flex-2">
           <Link href="/">
-            <Image width={110} height={110} src={logo} alt="SSGSA Logo" />
+            <Image width={60} height={60} src={logo} alt="SSGSA Logo" />
           </Link>
         </div>
       </div>
