@@ -41,6 +41,14 @@ const SignUp = () => {
         if (passwordOne === passwordTwo) {
           createUserWithEmailAndPassword(email, passwordOne)
             .then(async (result: firebase.auth.UserCredential) => {
+              result.user
+                .sendEmailVerification()
+                .then(() =>
+                  alert(
+                    'An email verification mail is sent to you. Please follow the instructions to verify your email.',
+                  ),
+                )
+
               // add user data to firestore database
               createUser(result.user.uid, name, email, mobile)
 
