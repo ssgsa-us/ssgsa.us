@@ -15,6 +15,8 @@ const authUserContext = createContext({
     password: string,
   ): Promise<firebase.auth.UserCredential> =>
     auth.createUserWithEmailAndPassword(email, password),
+  sendPasswordResetEmail: async (email: string): Promise<void> =>
+    auth.sendPasswordResetEmail(email),
   signOut: async () => auth.signOut().then(() => {}),
 })
 

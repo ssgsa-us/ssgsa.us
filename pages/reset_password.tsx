@@ -1,43 +1,61 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import { useState } from 'react'
+import router from 'next/router'
+import { useEffect, useState } from 'react'
+import Roles from '../constants/roles'
+import { useAuth } from '../context/AuthUserContext'
 import { auth } from '../firebase'
 import MainLayout from '../layouts/Main'
 
 auth.useDeviceLanguage()
 
 export default function ResetPassword() {
+  const { authUser, loading, sendPasswordResetEmail } = useAuth()
   const [email, setEmail] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [emailSent, setEmailSent] = useState(false)
 
-  const startPasswordReset = async () => {
+  // Listen for changes on authUser, redirect if needed
+  // Also redirect after signin as authState will update from useFirebaseAuth
+  useEffect(() => {
+    if (!loading) return
+
+    if (authUser && authUser.email) {
+      if (authUser.role === Roles.ADMIN) router.push('/admin')
+      else if (authUser.role === Roles.INTERVIEWER) router.push('/interviewer')
+      else if (authUser.role === Roles.REVIEWER) router.push('/reviewer')
+      else router.push('/application-portal')
+    }
+  }, [loading, authUser])
+
+  const startPasswordReset = () => {
     setErrorMessage('')
     setEmailSent(false)
     if (!email) return
 
-    try {
-      await auth.sendPasswordResetEmail(email)
-      setEmailSent(true)
-      setEmail('')
-    } catch (error) {
-      switch (error.code) {
-        case 'auth/user-not-found':
-          setErrorMessage(
-            'No such email - please use the email you signed up with.',
-          )
-          break
-        case 'auth/invalid-email':
-          setErrorMessage("Email address isn't valid.")
-          break
-        default:
-          setErrorMessage(
-            'Something went wrong, please try again in a few hours.',
-          )
-          break
-      }
-    }
+    sendPasswordResetEmail(email)
+      .then(() => {
+        setEmailSent(true)
+        setEmail('')
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case 'auth/user-not-found':
+            setErrorMessage(
+              'No such email - please use the email you signed up with.',
+            )
+            break
+          case 'auth/invalid-email':
+            setErrorMessage("Email address isn't valid.")
+            break
+          default:
+            setErrorMessage(
+              'Something went wrong, please try again in a few hours.',
+            )
+            break
+        }
+      })
   }
 
   return (
