@@ -12,6 +12,7 @@ export default function requireAuth(ChildComponent, authRole) {
     const { authUser, loading, signOut } = useAuth()
     const [pageReady, setPageReady] = useState<boolean>(false)
     const [error, setError] = useState<string>('')
+    const [emailSent, setEmailSent] = useState<boolean>(false)
     const router = useRouter()
 
     useEffect(() => {
@@ -23,12 +24,10 @@ export default function requireAuth(ChildComponent, authRole) {
         else {
           if (authRole === Roles.APPLICANT) {
             if (auth.currentUser.emailVerified) setPageReady(true)
-            else {
-              auth.currentUser.sendEmailVerification()
+            else
               setError(
-                'Please verify your email first, if verified try to reload/signing out. A new email verification is sent.',
+                'Please verify your email first, if verified try to reload/signing out.',
               )
-            }
           } else setPageReady(true)
         }
       }
@@ -36,13 +35,38 @@ export default function requireAuth(ChildComponent, authRole) {
 
     return !pageReady ? (
       <MainLayout>
-        {!error ? (
+        {!error && !emailSent ? (
           <Loading message="Loading your page!" />
         ) : (
-          <div className="flex flex-col justify-center items-center my-36">
-            <div className="flex justify-center items-center">
-              <p className="text-3xl text-red-850 font-black">Error: </p>
-              <p className="text-3xl text-red-850 ml-5">{error}</p>
+          <div className="flex flex-col justify-center items-center my-24">
+            {!error ? null : (
+              <div className="flex justify-center items-center">
+                <p className="text-3xl text-red-850 font-black">Error: </p>
+                <p className="text-3xl text-red-850 ml-5">{error}</p>
+              </div>
+            )}
+            {!emailSent ? null : (
+              <div className="flex justify-center items-center">
+                <p className="text-3xl text-blue-850 text-center">
+                  A new verification email is sent. If not recieved, try again
+                  later!
+                  <br /> If verified, try reloaing!
+                </p>
+              </div>
+            )}
+            <div className="flex justify-center items-center mt-10">
+              <button
+                className="text-white text-base md:text-lg bg-blue-850 py-2 px-4 rounded-3xl"
+                onClick={() => {
+                  if (!emailSent) {
+                    auth.currentUser.sendEmailVerification()
+                    setError('')
+                    setEmailSent(true)
+                  }
+                }}
+              >
+                Send New Verification Email
+              </button>
             </div>
             <div className="flex justify-center items-center mt-10">
               <button
