@@ -12,7 +12,7 @@ export default function Home() {
       <div className="bg-gray-350 text-red-850 font-black w-screen -ml-2 sm:-ml-5 md:-ml-10 lg:-ml-20 xl:-ml-40 mt-8 lg:mr-2 lg:p-3 p-2">
         <marquee className="flex items-center">
           <Link href="/assets/PressRelease_SSGSA_2022_23.pdf">
-            <a>SSGSA results (2022-2023) announced</a>
+            <a>SSGSA Application 2023-24 will be opening soon</a>
           </Link>
         </marquee>
       </div>
