@@ -48,7 +48,11 @@ export default function Portal() {
             new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE) ? (
             <div className="bg-red-200 text-2xl text-red-850 text-center font-bold rounded-3xl p-2 pl-6 mb-5">
               We are no longer accepting applications for the session 2022-23.
-              The deadline was March 15, 2022 at 11:59 PM (IST).
+              The deadline was{' '}
+              {new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE)
+                .toString()
+                .slice(0, 25)}{' '}
+              (IST).
             </div>
           ) : null}
         </div>
