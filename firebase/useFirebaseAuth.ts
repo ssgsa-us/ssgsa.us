@@ -9,6 +9,7 @@ const formatAuthUser = (id: string, user: User) => ({
   email: user.email,
   role: user.role,
   sets: user.sets,
+  verificationEmailEpoch: user.verificationEmailEpoch,
 })
 
 export default function useFirebaseAuth() {

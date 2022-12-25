@@ -48,12 +48,19 @@ const SignUp = () => {
                     'An email verification mail is sent to you. Please follow the instructions to verify your email.',
                   ),
                 )
+                .finally(() => {
+                  // add user data to firestore database
+                  createUser(
+                    result.user.uid,
+                    name,
+                    email,
+                    mobile,
+                    new Date().getTime(),
+                  )
 
-              // add user data to firestore database
-              createUser(result.user.uid, name, email, mobile)
-
-              // create application data for user
-              createApplicationData(result.user.uid)
+                  // create application data for user
+                  createApplicationData(result.user.uid)
+                })
             })
             .catch((error) => {
               if (error.code === 'auth/weak-password') {
