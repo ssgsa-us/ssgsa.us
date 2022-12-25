@@ -41,11 +41,26 @@ const SignUp = () => {
         if (passwordOne === passwordTwo) {
           createUserWithEmailAndPassword(email, passwordOne)
             .then(async (result: firebase.auth.UserCredential) => {
-              // add user data to firestore database
-              createUser(result.user.uid, name, email, mobile)
+              result.user
+                .sendEmailVerification()
+                .then(() =>
+                  alert(
+                    'An email verification mail is sent to you. Please follow the instructions to verify your email.',
+                  ),
+                )
+                .finally(() => {
+                  // add user data to firestore database
+                  createUser(
+                    result.user.uid,
+                    name,
+                    email,
+                    mobile,
+                    new Date().getTime(),
+                  )
 
-              // create application data for user
-              createApplicationData(result.user.uid)
+                  // create application data for user
+                  createApplicationData(result.user.uid)
+                })
             })
             .catch((error) => {
               if (error.code === 'auth/weak-password') {

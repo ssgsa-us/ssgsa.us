@@ -9,6 +9,7 @@ const formatAuthUser = (id: string, user: User) => ({
   email: user.email,
   role: user.role,
   sets: user.sets,
+  verificationEmailEpoch: user.verificationEmailEpoch,
 })
 
 export default function useFirebaseAuth() {
@@ -43,6 +44,9 @@ export default function useFirebaseAuth() {
   const createUserWithEmailAndPassword = (email: string, password: string) =>
     auth.createUserWithEmailAndPassword(email, password)
 
+  const sendPasswordResetEmail = (email: string) =>
+    auth.sendPasswordResetEmail(email)
+
   const signOut = () =>
     auth.signOut().then(() => {
       setAuthUser(null)
@@ -60,6 +64,7 @@ export default function useFirebaseAuth() {
     loading,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
     signOut,
   }
 }
