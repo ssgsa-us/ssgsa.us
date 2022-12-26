@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ApplicationData } from '../../classes/application_data'
 import Step1 from '../ReviewApplicationSteps/Step1'
+import Step2 from '../ReviewApplicationSteps/Step2'
 
 type Props = {
   applicationData: ApplicationData
@@ -13,113 +14,8 @@ const ReviewApplication = ({ applicationData }: Props) => {
         Review Application
       </h1>
       <Step1 applicationData={applicationData} />
+      <Step2 academicRecord={applicationData.academic_record} />
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
-        <div className="mb-10">
-          <p className="text-black text-xl sm:text-2xl font-extrabold mb-4">
-            Education Qualifications
-          </p>
-          {!applicationData.academic_record ? (
-            <p className="mt-4">No Academic Record Added</p>
-          ) : (
-            Object.keys(applicationData.academic_record).map((key, index) => (
-              <div className="mb-10" key={key}>
-                <p className="text-black text-lg sm:text-xl font-extrabold">
-                  Academic Record {index}
-                </p>
-                <div className="flex justify-start mt-4">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                    Degree Level
-                  </p>
-                  <p className="sm:text-lg w-3/5">
-                    {applicationData.academic_record[Number(key)].degreeLevel}
-                  </p>
-                </div>
-                <div className="flex justify-start mt-4">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                    Degree Name
-                  </p>
-                  <p className="sm:text-lg w-3/5">
-                    {applicationData.academic_record[Number(key)].degreeName}
-                  </p>
-                </div>
-                <div className="flex justify-start mt-4">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                    Field Of Study
-                  </p>
-                  <p className="sm:text-lg w-3/5">
-                    {applicationData.academic_record[Number(key)].branch}
-                  </p>
-                </div>
-                <div className="flex justify-start mt-4">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                    Faculty
-                  </p>
-                  <p className="sm:text-lg w-3/5">
-                    {applicationData.academic_record[Number(key)].faculty}
-                  </p>
-                </div>
-                <div className="flex justify-start mt-4">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                    Institute/College
-                  </p>
-                  <p className="sm:text-lg w-3/5">
-                    {applicationData.academic_record[Number(key)].college}
-                  </p>
-                </div>
-                <div className="flex justify-start mt-4">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                    University
-                  </p>
-                  <p className="sm:text-lg w-3/5">
-                    {applicationData.academic_record[Number(key)].university}
-                  </p>
-                </div>
-                <div className="flex justify-start mt-4">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                    Started Year
-                  </p>
-                  <p className="sm:text-lg w-3/5">
-                    {applicationData.academic_record[Number(key)].startedYear}
-                  </p>
-                </div>
-                <div className="flex justify-start mt-4">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                    {!applicationData.academic_record[Number(key)]
-                      .currentlyEnrolled
-                      ? 'To'
-                      : 'Expected Year Of Completion'}
-                  </p>
-                  <p className="sm:text-lg w-3/5">
-                    {applicationData.academic_record[key].completionYear}
-                  </p>
-                </div>
-                <div className="flex justify-start mt-4">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                    {applicationData.academic_record[Number(key)]
-                      .gradeCriteria === 'CGPA'
-                      ? 'CGPA'
-                      : 'Percentage'}
-                  </p>
-                  <p className="sm:text-lg w-3/5">
-                    {applicationData.academic_record[Number(key)].grades}
-                  </p>
-                </div>
-                <div className="flex justify-start mt-4">
-                  <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                    Most Recent Marksheet/Transcript
-                  </p>
-                  <Link
-                    href={applicationData.academic_record[Number(key)].document}
-                  >
-                    <a className="sm:text-lg text-blue-500" target="_blank">
-                      AcademicRecord{key}.pdf
-                    </a>
-                  </Link>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
         <div className="mb-10">
           <p className="text-black text-xl sm:text-2xl font-extrabold mb-4">
             Written Responses
