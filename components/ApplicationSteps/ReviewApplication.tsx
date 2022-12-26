@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { ApplicationData } from '../../classes/application_data'
 import Step1 from '../ReviewApplicationSteps/Step1'
 import Step2 from '../ReviewApplicationSteps/Step2'
@@ -30,29 +29,27 @@ const ReviewApplication = ({ applicationData }: Props) => {
       <Step8 sopAnswers={applicationData.sop_answers} />
       <Step9 otherInfo={applicationData.other_information} />
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
-        {applicationData.form_status == 6 ? (
-          <div className="mt-5">
-            <p className="text-black text-xl sm:text-2xl text-red-850 font-extrabold mb-4">
-              Declaration
+        <div className="mt-5">
+          <p className="text-black text-xl sm:text-2xl text-red-850 font-extrabold mb-4">
+            Declaration
+          </p>
+          <p className="text-black text-lg sm:text-xl font-extrabold mb-4">
+            All the information provided by me in this application are true to
+            the best of my knowledge, and all the answers written by me are my
+            original responses. I understand that if any part of my application
+            is found to be false or plagiarized, I will be disqualified and
+            barred from applying to the Sir Syed Global Scholar Award in the
+            future.
+          </p>
+          <div className="flex justify-start mt-4">
+            <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
+              Signature
             </p>
-            <p className="text-black text-lg sm:text-xl font-extrabold mb-4">
-              All the information provided by me in this application are true to
-              the best of my knowledge, and all the answers written by me are my
-              original responses. I understand that if any part of my
-              application is found to be false or plagiarized, I will be
-              disqualified and barred from applying to the Sir Syed Global
-              Scholar Award in the future.
+            <p className="sm:text-lg text-black font-extrabold">
+              {applicationData.name}
             </p>
-            <div className="flex justify-start mt-4">
-              <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5 mr-5">
-                Signature
-              </p>
-              <p className="sm:text-lg text-black font-extrabold">
-                {applicationData.name}
-              </p>
-            </div>
           </div>
-        ) : null}
+        </div>
       </div>
     </div>
   )
