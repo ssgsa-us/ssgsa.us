@@ -68,7 +68,7 @@ const Step2 = ({ academicRecord }: Props) => (
           />
           <FileField
             fieldName="Most Recent Marksheet/Transcript"
-            fileName={`AcademicRecord${index + 1}.pdf`}
+            fileName={`AcademicRecord${key}.pdf`}
             url={academicRecord[Number(key)].document}
           />
         </div>

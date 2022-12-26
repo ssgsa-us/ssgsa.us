@@ -11,14 +11,20 @@ const FileField = ({ fieldName, fileName, url }: Props) => (
     <p className="text-red-850 sm:text-lg md:text-xl font-extrabold w-2/5 mr-5">
       {fieldName}
     </p>
-    <Link href={url}>
-      <a
-        className="text-sm sm:text-lg text-blue-500 break-all w-3/5"
-        target="_blank"
-      >
-        {fileName}
-      </a>
-    </Link>
+    {!url ? (
+      <p className="text-sm sm:text-lg text-red-850 break-all w-3/5">
+        Not Provided
+      </p>
+    ) : (
+      <Link href={url}>
+        <a
+          className="text-sm sm:text-lg text-blue-500 break-all w-3/5"
+          target="_blank"
+        >
+          {fileName}
+        </a>
+      </Link>
+    )}
   </div>
 )
 
