@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ApplicationData } from '../../classes/application_data'
 import Step1 from '../ReviewApplicationSteps/Step1'
 import Step2 from '../ReviewApplicationSteps/Step2'
+import Step3 from '../ReviewApplicationSteps/Step3'
 
 type Props = {
   applicationData: ApplicationData
@@ -15,6 +16,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
       </h1>
       <Step1 applicationData={applicationData} />
       <Step2 academicRecord={applicationData.academic_record} />
+      <Step3 researchData={applicationData.research_experience} />
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
         <div className="mb-10">
           <p className="text-black text-xl sm:text-2xl font-extrabold mb-4">
