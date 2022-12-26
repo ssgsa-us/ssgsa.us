@@ -6,6 +6,7 @@ import Step3 from '../ReviewApplicationSteps/Step3'
 import Step4 from '../ReviewApplicationSteps/Step4'
 import Step5 from '../ReviewApplicationSteps/Step5'
 import Step6 from '../ReviewApplicationSteps/Step6'
+import Step7 from '../ReviewApplicationSteps/Step7'
 
 type Props = {
   applicationData: ApplicationData
@@ -23,6 +24,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
       <Step4 workExperiences={applicationData.work_experience} />
       <Step5 workshops={applicationData.poster_or_workshops} />
       <Step6 curricularActivities={applicationData.curricular_activities} />
+      <Step7 extraCurrActivities={applicationData.extra_curriculars} />
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
         <div className="mb-10">
           <p className="text-black text-xl sm:text-2xl font-extrabold mb-4">
