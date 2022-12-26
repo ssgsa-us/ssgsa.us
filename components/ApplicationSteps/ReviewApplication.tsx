@@ -8,6 +8,7 @@ import Step5 from '../ReviewApplicationSteps/Step5'
 import Step6 from '../ReviewApplicationSteps/Step6'
 import Step7 from '../ReviewApplicationSteps/Step7'
 import Step8 from '../ReviewApplicationSteps/Step8'
+import Step9 from '../ReviewApplicationSteps/Step9'
 
 type Props = {
   applicationData: ApplicationData
@@ -27,6 +28,7 @@ const ReviewApplication = ({ applicationData }: Props) => {
       <Step6 curricularActivities={applicationData.curricular_activities} />
       <Step7 extraCurrActivities={applicationData.extra_curriculars} />
       <Step8 sopAnswers={applicationData.sop_answers} />
+      <Step9 otherInfo={applicationData.other_information} />
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
         {applicationData.form_status == 6 ? (
           <div className="mt-5">
