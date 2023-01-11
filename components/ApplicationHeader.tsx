@@ -131,7 +131,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
             {stepComponent(5, 'Posters / Workshops')}
             {stepComponent(6, 'Curricular Activities')}
             {stepComponent(7, 'Extracurricular Activities')}
-            {stepComponent(8, 'Essays')}
+            {stepComponent(8, 'Essay-Type Questions')}
             {stepComponent(9, 'Other Information')}
             {stepComponent(10, 'Review and Submit')}
             <div className="hidden md:flex items-center w-4 ml-2">
