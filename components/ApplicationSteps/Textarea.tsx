@@ -29,7 +29,7 @@ const Textarea = ({
       </p>
       {!wordLimit ? null : (
         <p className="text-red-850 font-black">
-          {!value ? 0 : value.split(' ').length}/200
+          {!value ? 0 : value.split(' ').length}/{wordLimit}
         </p>
       )}
     </div>
