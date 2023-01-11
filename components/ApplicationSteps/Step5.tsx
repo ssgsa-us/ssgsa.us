@@ -96,17 +96,17 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
             workshopsTemp[Number(keys[i])] = workshop
           } else {
             setError(
-              'Description limit is 50 words for Poster/Workshop ' +
+              'Description limit is 50 words for Poster/Workshop/Summer School ' +
                 String(i + 1) +
-                ' or Remove that poster/workshop if not needed.',
+                ' or Remove that Poster/Workshop/Summer School if not needed.',
             )
             return
           }
         } else {
           setError(
-            'Please fill all field for Poster/Workshop ' +
+            'Please fill all field for Poster/Workshop/Summer School ' +
               String(i + 1) +
-              ' or Remove that poster/workshop if not needed.',
+              ' or Remove that Poster/Workshop/Summer School if not needed.',
           )
           return
         }
@@ -156,7 +156,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
     <div className="w-full">
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
-          POSTER PRESENTATION/ WORKSHOPS/SUMMER SCHOOL
+          Poster Presentation/ Workshops/Summer School
         </h1>
         <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
           List all of them starting with the most recent. If you have mentioned
@@ -179,7 +179,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
             >
               <div className="flex justify-between items-center">
                 <p className="font-bold text-lg md:text-xl">
-                  Poster/Workshop {index + 1}
+                  Poster/Workshop/Summer School {index + 1}
                 </p>
                 <p
                   className="text-red-850 cursor-pointer"
@@ -229,7 +229,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
                 required={workshopRequired(workshops[key])}
               />
               <TextInput
-                name="Years Attended and Duration"
+                name="Year(s) Attended and Duration"
                 value={workshops[key].duration}
                 type="text"
                 onChange={(e) => updateField(key, 'duration', e.target.value)}
