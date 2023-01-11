@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
-import ProceedButtons from './ProceedButtons'
-import { updateApplicationData } from '../../pages/api/step1'
+import { faculties } from '../../constants/faculties'
 import { useAuth } from '../../context/AuthUserContext'
+import { updateApplicationData } from '../../pages/api/step1'
 import FileUploadComponent from './FileUpload'
-import TextInput from './TextInput'
+import ProceedButtons from './ProceedButtons'
 import SelectInput from './SelectInput'
+import TextInput from './TextInput'
 
 type Props = {
   applicationData: ApplicationData
@@ -22,6 +23,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
   const [contactNo, setContactNo] = useState<number>()
   const [currentPosition, setCurrentPosition] = useState<string>()
   const [targetProgram, setTargetProgram] = useState<string>()
+  const [faculty, setFaculty] = useState<string>()
   const [targetDate, setTargetDate] = useState<string>()
   const [targetCountry, setTargetCountry] = useState<string>()
   const [error, setError] = useState<string>('')
@@ -34,6 +36,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
     setContactNo(applicationData.contact || 0)
     setCurrentPosition(applicationData.current_position || '')
     setTargetProgram(applicationData.target_program || '')
+    setFaculty(applicationData.faculty || '')
     setTargetDate(applicationData.target_date || '')
     setTargetCountry(applicationData.target_country || '')
   }, [applicationData])
@@ -48,6 +51,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       contactNo &&
       currentPosition &&
       targetProgram &&
+      faculty &&
       targetDate &&
       targetCountry
     ) {
@@ -63,6 +67,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
             contactNo,
             currentPosition,
             targetProgram,
+            faculty,
             targetDate,
             targetCountry,
             enrollProofDoc,
@@ -99,6 +104,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       contactNo,
       currentPosition,
       targetProgram,
+      faculty,
       targetDate,
       targetCountry,
       enrollProofDoc,
@@ -180,6 +186,13 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           value={targetProgram}
           type="text"
           onChange={(e) => setTargetProgram(e.target.value)}
+          required={true}
+        />
+        <SelectInput
+          name="In which of the following faculty does your program of intent abroad fall?"
+          value={faculty}
+          options={[{ label: 'Select', value: '' }, ...faculties]}
+          onChange={(e) => setFaculty(e.target.value)}
           required={true}
         />
         <SelectInput

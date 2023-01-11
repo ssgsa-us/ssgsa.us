@@ -17,6 +17,7 @@ export class ApplicationData {
   contact: number
   current_position: string
   target_program: string
+  faculty: string
   target_date: string
   target_country: string
   academic_record: AcademicRecordType
@@ -27,7 +28,6 @@ export class ApplicationData {
   extra_curriculars: ExtraCurricularsType
   sop_answers: AnswerType
   other_information: string
-  faculty: string
   form_status: number
 
   constructor(form_status: number = 1) {
@@ -42,6 +42,7 @@ export class ApplicationData {
     contact: number,
     current_position: string,
     target_program: string,
+    faculty: string,
     target_date: string,
     target_country: string,
   ) {
@@ -52,6 +53,7 @@ export class ApplicationData {
     this.contact = contact
     this.current_position = current_position
     this.target_program = target_program
+    this.faculty = faculty
     this.target_date = target_date
     this.target_country = target_country
   }
@@ -87,10 +89,6 @@ export class ApplicationData {
   step9(other_information: string) {
     this.other_information = other_information
   }
-
-  step10(faculty: string) {
-    this.faculty = faculty
-  }
 }
 
 export const applicationDataConverter = {
@@ -112,6 +110,7 @@ export const applicationDataConverter = {
       data.contact,
       data.current_position,
       data.target_program,
+      data.faculty,
       data.target_date,
       data.target_country,
     )
@@ -138,9 +137,6 @@ export const applicationDataConverter = {
     }
     if (data.form_status >= 9) {
       applicationData.step9(data.other_information)
-    }
-    if (data.form_status >= 10) {
-      applicationData.step10(data.faculty)
     }
     return applicationData
   },
