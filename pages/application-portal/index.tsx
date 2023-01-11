@@ -146,31 +146,33 @@ export default function Portal() {
             Instructions
           </h1>
           <ul style={{ listStyleType: 'disc' }} className="pl-5 text-lg">
-            <li className="mt-5">
+            <li className="mt-8">
               The application form is divided into 10 parts.
             </li>
-            <li>
+            <li className="mt-2">
               You can view a step only after you have successfully completed all
               the preceding steps. However, you can go back to any of the{' '}
-              <span className="underline">completed</span> steps to make any
-              changes before final submission.
+              <span className="font-bold text-red-850">completed</span> steps to
+              make any changes before final submission.
             </li>
-            <li>
+            <li className="text-xl mt-2">
               Questions marked{' '}
               <span className="text-red-850 font-black">*</span> are mandatory.
             </li>
-            <li>
+            <li className="mt-2">
               You will be able to save your information at each step. However,
               if you press the back button{' '}
-              <span className="underline">without saving your information</span>
+              <span className="font-bold text-red-850">
+                without saving your information
+              </span>
               , your entered data will be lost.
             </li>
-            <li>
+            <li className="mt-2">
               You will be able to review the information entered by you before
               submission of the form.
             </li>
           </ul>
-          <p className="mt-5 pl-5 text-lg">
+          <p className="mt-10 pl-5 text-lg">
             Your application will be reviewed on the following basis:
           </p>
           <ol style={{ listStyleType: 'number' }} className="pl-10 font-bold">
@@ -217,7 +219,7 @@ export default function Portal() {
             </div>
           ) : null}
           <button
-            className={`text-white text-base md:text-lg py-2 px-4 rounded-3xl ${
+            className={`text-white text-base md:text-lg py-2 px-4 mt-5 rounded-3xl ${
               new Date() <
                 new Date(process.env.NEXT_PUBLIC_APPLICATION_START_DATE) ||
               new Date() >
@@ -240,14 +242,10 @@ export default function Portal() {
       </div>
       <p className="text-sm text-center mx-5 sm:mx-10 lg:mx-20">
         If you encounter any error during application process, please contact us
-        at{' '}
-        <a className="text-blue-800 underline font-black">contact@ssgsa.us</a>{' '}
-        or{' '}
-        <a className="text-blue-800 underline font-black">
-          developers@ssgsa.us
-        </a>
-        , describing your problem{' '}
-        <span className="underline">with a screenshot of the error</span>
+        at <a className="text-blue-800 font-black">contact@ssgsa.us</a> or{' '}
+        <a className="text-blue-800 font-black">developers@ssgsa.us</a>,
+        describing your problem{' '}
+        <span className="text-red-850">with a screenshot of the error</span>
       </p>
     </PortalLayout>
   )
