@@ -240,7 +240,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
                 {workExperiences[key].currentlyWorking === null ? null : (
                   <div>
                     <TextInput
-                      name="Start Date"
+                      name="Start Date (mm/yyyy)"
                       value={workExperiences[key].startDate}
                       type="text"
                       onChange={(e) =>
@@ -251,8 +251,8 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
                     <TextInput
                       name={
                         !workExperiences[key].currentlyWorking
-                          ? 'End Date'
-                          : 'Expected End Date'
+                          ? 'End Date (mm/yyyy)'
+                          : 'Expected End Date (mm/yyyy)'
                       }
                       value={workExperiences[key].endDate}
                       type="text"
