@@ -48,7 +48,11 @@ export default function Portal() {
             new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE) ? (
             <div className="bg-red-200 text-2xl text-red-850 text-center font-bold rounded-3xl p-2 pl-6 mb-5">
               We are no longer accepting applications for the session 2022-23.
-              The deadline was March 15, 2022 at 11:59 PM (IST).
+              The deadline was{' '}
+              {new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE)
+                .toString()
+                .slice(0, 25)}{' '}
+              (IST).
             </div>
           ) : null}
         </div>
@@ -75,10 +79,10 @@ export default function Portal() {
               />
               <label className="pl-5 text-blue-850">
                 I am currently enrolled at Aligarh Muslim University or an
-                alumnus{' '}
+                Alumna/Alumnus{' '}
                 <span className="text-xs">
-                  (Students who have completed Senior Secondary School
-                  Certificate OR Diploma from AMU are eligible)
+                  (Students who have completed Senior Secondary School,
+                  Certificate OR Diploma from AMU are also eligible)
                 </span>
               </label>
             </div>
@@ -141,43 +145,68 @@ export default function Portal() {
           <h1 className="text-2xl text-center text-blue-850 font-black">
             Instructions
           </h1>
-          <p className="my-5 text-lg">
-            The application form is divided into 5 parts.
-            <br />
-            <br />
-            You can view a step only after you have successfully completed all
-            the preceding steps. However, you can go back to any of the{' '}
-            <span className="underline">completed</span> steps to make any
-            changes before final submission.
-            <br />
-            <br />
-            Questions marked <span className="text-red-850 font-black">
-              *
-            </span>{' '}
-            are mandatory.
-            <br />
-            <br />
-            You will be able to save your information at each step. However, if
-            you press the back button{' '}
-            <span className="underline">without saving your information</span>,
-            your entered data will be lost.
-            <br />
-            <br />
-            You will be able to review the information entered by you before
-            submission of the form.
-            <br />
-            <br />
-            <span className="text-sm">
-              Note: The SSGSA portal functions best with Google Chrome and
-              Firefox browsers. Please watch our{' '}
-              <Link href="/faq">
-                {/* Add link for faq portal */}
-                <a className="text-blue-800 underline font-black">
-                  SSGSA application video tutorial
-                </a>
-              </Link>{' '}
-              in case of any doubt.
-            </span>
+          <ul style={{ listStyleType: 'disc' }} className="pl-5 text-lg">
+            <li className="mt-8">
+              The application form is divided into 10 parts.
+            </li>
+            <li className="mt-2">
+              You can view a step only after you have successfully completed all
+              the preceding steps. However, you can go back to any of the{' '}
+              <span className="font-bold text-red-850">completed</span> steps to
+              make any changes before final submission.
+            </li>
+            <li className="text-xl mt-2">
+              Questions marked{' '}
+              <span className="text-red-850 font-black">*</span> are mandatory.
+            </li>
+            <li className="mt-2">
+              You will be able to save your information at each step. However,
+              if you press the back button{' '}
+              <span className="font-bold text-red-850">
+                without saving your information
+              </span>
+              , your entered data will be lost.
+            </li>
+            <li className="mt-2">
+              You will be able to review the information entered by you before
+              submission of the form.
+            </li>
+          </ul>
+          <p className="mt-10 pl-5 text-lg">
+            Your application will be reviewed on the following basis:
+          </p>
+          <ol style={{ listStyleType: 'number' }} className="pl-10 font-bold">
+            <li className="pl-5">Academic Grades</li>
+            <li className="pl-5">
+              Curricular Activities
+              <br />
+              <span className="text-sm font-normal">
+                Projects, work experience, publications, internships, academic
+                awards & recognition, etc.
+              </span>
+            </li>
+            <li className="pl-5">
+              Extra-Curricular Activities
+              <br />
+              <span className="text-sm font-normal">
+                Leadership experience, literary and cultural involvement,
+                sports, volunteering, social work etc.
+              </span>
+            </li>
+            <li className="pl-5">
+              Motivation to stay abroad as gauged from Essay-Type Questions.
+            </li>
+          </ol>
+          <p className="pl-5 pt-5 text-sm">
+            Note: The SSGSA portal functions best with Google Chrome and Firefox
+            browsers.
+            {/* Please watch our{' '}
+            <Link href="/faq">
+              <a className="text-blue-800 underline font-black">
+                SSGSA application video tutorial
+              </a>
+            </Link>{' '}
+            in case of any doubt. */}
           </p>
         </div>
 
@@ -190,7 +219,7 @@ export default function Portal() {
             </div>
           ) : null}
           <button
-            className={`text-white text-base md:text-lg py-2 px-4 rounded-3xl ${
+            className={`text-white text-base md:text-lg py-2 px-4 mt-5 rounded-3xl ${
               new Date() <
                 new Date(process.env.NEXT_PUBLIC_APPLICATION_START_DATE) ||
               new Date() >
@@ -213,14 +242,10 @@ export default function Portal() {
       </div>
       <p className="text-sm text-center mx-5 sm:mx-10 lg:mx-20">
         If you encounter any error during application process, please contact us
-        at{' '}
-        <a className="text-blue-800 underline font-black">contact@ssgsa.us</a>{' '}
-        or{' '}
-        <a className="text-blue-800 underline font-black">
-          developers@ssgsa.us
-        </a>
-        , describing your problem{' '}
-        <span className="underline">with a screenshot of the error</span>
+        at <a className="text-blue-800 font-black">contact@ssgsa.us</a> or{' '}
+        <a className="text-blue-800 font-black">developers@ssgsa.us</a>,
+        describing your problem{' '}
+        <span className="text-red-850">with a screenshot of the error</span>
       </p>
     </PortalLayout>
   )

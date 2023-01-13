@@ -10,8 +10,8 @@ export type AcademicRecordType = {
   [key: number]: {
     degreeLevel: 'Bachelor' | 'Master' | 'Doctoral' | ''
     degreeName: string
-    branch: string
     faculty: string
+    otherFaculty: string
     college: string
     university: string
     currentlyEnrolled: boolean | null
@@ -60,6 +60,7 @@ export type WorkExperiencesType = {
 export type PosterOrWorkshopsType = {
   [key: number]: {
     category: 'Poster' | 'Workshop' | 'Summer School' | 'Other' | ''
+    otherCategory: string
     title: string
     duration: string
     description: string
@@ -81,10 +82,6 @@ export type ExtraCurricularsType = {
 
 export type AnswerType = {
   [key: string]: string
-}
-
-export type DocumentsType = {
-  [documentType: string]: string
 }
 
 export type AwardeeType = {

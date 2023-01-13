@@ -60,12 +60,12 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
   return (
     <nav className="sticky top-0 z-50 bg-red-850">
       <div className="w-full flex flex-row bg-white items-center flex">
-        <div className="flex-1 text-xl sm:text-2xl md:text-3xl justify-center px-4 my-6 lg:ml-24 flex items-center font-black text-red-850 ">
+        <div className="flex-1 text-lg sm:text-xl md:text-2xl justify-center px-4 my-4 lg:ml-32 flex items-center font-black text-red-850 ">
           SIR SYED GLOBAL SCHOLAR AWARD
         </div>
-        <div className="mr-3 flex-2">
+        <div className="mr-3 md:mr-10 flex-2">
           <Link href="/">
-            <Image width={110} height={110} src={logo} alt="SSGSA Logo" />
+            <Image width={60} height={60} src={logo} alt="SSGSA Logo" />
           </Link>
         </div>
       </div>
@@ -108,7 +108,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
           } md:flex md:justify-between`}
         >
           <div className="flex flex-col w-full md:flex-row md:justify-center lg:ml-28">
-            <div className="hidden md:flex justify-center w-4 mr-2">
+            <div className="hidden md:flex items-center w-4 mr-2">
               <FontAwesomeIcon
                 className={
                   visibleStepStart === 1
@@ -117,6 +117,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
                 }
                 color={visibleStepStart === 1 ? '#dadada' : 'white'}
                 icon={faAngleLeft}
+                size="2x"
                 onClick={() => {
                   if (visibleStepStart !== 1)
                     setVisibleStepStart(visibleStepStart - 1)
@@ -127,13 +128,13 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
             {stepComponent(2, 'Qualifications')}
             {stepComponent(3, 'Research Experience')}
             {stepComponent(4, 'Work Experience')}
-            {stepComponent(5, 'Presentations / Workshops')}
-            {stepComponent(6, 'Achievements / Awards')}
-            {stepComponent(7, 'Extra Curricular Activities')}
-            {stepComponent(8, 'Written Responses')}
+            {stepComponent(5, 'Posters / Workshops')}
+            {stepComponent(6, 'Curricular Activities')}
+            {stepComponent(7, 'Extracurricular Activities')}
+            {stepComponent(8, 'Essay-Type Questions')}
             {stepComponent(9, 'Other Information')}
             {stepComponent(10, 'Review and Submit')}
-            <div className="hidden md:flex justify-center w-4 ml-2">
+            <div className="hidden md:flex items-center w-4 ml-2">
               <FontAwesomeIcon
                 className={
                   visibleStepStart === totalSteps - 4
@@ -144,6 +145,7 @@ export default function ApplicationHeader({ status, formStatus, setStatus }) {
                   visibleStepStart === totalSteps - 4 ? '#dadada' : 'white'
                 }
                 icon={faAngleRight}
+                size="2x"
                 onClick={() => {
                   // (totalSteps-4) used to make sure 5 steps are visible every time
                   if (visibleStepStart !== totalSteps - 4)

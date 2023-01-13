@@ -18,9 +18,7 @@ function ViewApplication() {
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>(
     new AdminPortalData(),
   )
-  const [applicationData, setApplicationData] = useState<ApplicationData>(
-    new ApplicationData(),
-  )
+  const [applicationData, setApplicationData] = useState<ApplicationData>()
   const [A, setA] = useState<number>(0)
   const [B, setB] = useState<number>(0)
   const [C, setC] = useState<number>(0)

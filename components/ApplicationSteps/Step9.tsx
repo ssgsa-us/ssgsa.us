@@ -65,7 +65,10 @@ const Step9 = ({ applicationData, status, setStatus }: Props) => {
             name=""
             description="(Word Limit: Maximum 200 words)"
             value={otherInfo}
-            onChange={(e) => setOtherInfo(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.split(' ').length <= 200)
+                setOtherInfo(e.target.value)
+            }}
             required={false}
             wordLimit={200}
           />

@@ -98,8 +98,17 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           experience.endDate &&
           experience.description
         ) {
-          // Add valid experience
-          experiences[Number(keys[i])] = experience
+          if (experience.description.split(' ').length <= 200) {
+            // Add valid experience
+            experiences[Number(keys[i])] = experience
+          } else {
+            setError(
+              'Description limit is 200 words for Experience ' +
+                String(i + 1) +
+                ' or Remove that experience if not needed.',
+            )
+            return
+          }
         } else {
           setError(
             'Please fill all field for Experience ' +
@@ -135,7 +144,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
   }
 
   const previousStep = () => {
-    setStatus(4)
+    setStatus(3)
   }
 
   const saveInformation = () => {
@@ -204,7 +213,8 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
               />
               <TextInput
                 name="Position Title"
-                description="(e.g., Lecturer, Software Developer, Manager, Engineer, Accountant, Advocate, Journalist, etc.)"
+                description="(e.g., Lecturer, Software Developer, Manager, 
+                  Engineer, Accountant, Advocate, Journalist, etc.)"
                 value={workExperiences[key].title}
                 type="text"
                 onChange={(e) => updateField(key, 'title', e.target.value)}
@@ -230,7 +240,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
                 {workExperiences[key].currentlyWorking === null ? null : (
                   <div>
                     <TextInput
-                      name="Start Date"
+                      name="Start Date (mm/yyyy)"
                       value={workExperiences[key].startDate}
                       type="text"
                       onChange={(e) =>
@@ -241,8 +251,8 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
                     <TextInput
                       name={
                         !workExperiences[key].currentlyWorking
-                          ? 'End Date'
-                          : 'Expected End Date'
+                          ? 'End Date (mm/yyyy)'
+                          : 'Expected End Date (mm/yyyy)'
                       }
                       value={workExperiences[key].endDate}
                       type="text"
@@ -256,12 +266,15 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
               </div>
               <Textarea
                 name="Description"
-                description="Please describe your role in this job/work."
+                description="Please describe your role in this job/work. 
+                  Maximum Word Limit: 200"
                 value={workExperiences[key].description}
-                onChange={(e) =>
-                  updateField(key, 'description', e.target.value)
-                }
+                onChange={(e) => {
+                  if (e.target.value.split(' ').length <= 200)
+                    updateField(key, 'description', e.target.value)
+                }}
                 required={experienceRequired(workExperiences[key])}
+                wordLimit={200}
               />
               <div className="p-2">
                 <p className="md:text-lg">
@@ -280,7 +293,8 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
         })}
       </div>
       <p
-        className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 pr-2 pl-2 text-blue-850 cursor-pointer"
+        className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 
+          pr-2 pl-2 text-blue-850 cursor-pointer"
         onClick={() => {
           setWorkExperiences((prevExps: WorkExperiencesType) => ({
             ...prevExps,
@@ -289,7 +303,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           setNewExpKey((prev) => prev + 1)
         }}
       >
-        Add an Experience +
+        Add another Experience +
       </p>
       <ProceedButtons
         status={status}

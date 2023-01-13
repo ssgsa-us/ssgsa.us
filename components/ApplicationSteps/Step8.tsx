@@ -18,29 +18,32 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
 
   const questionComponent = (index, question) => (
     <div className="p-2">
-      <p className="font-bold md:text-lg">
-        {String.fromCharCode(index + 96)}) {question}
+      <div className="flex justify-between items-center">
+        <p className="font-bold md:text-lg">
+          {String.fromCharCode(index + 96)}) {question}
+          <span className="text-red-850 font-black">*</span>
+        </p>
         <span className="text-red-850 font-black">
-          *{' '}
           {answers[`SOP${index}`]
             ? answers[`SOP${index}`].split(' ').length
             : 0}
           /200
         </span>
-      </p>
+      </div>
       <textarea
         name={`SOP${index}`}
         rows={4}
         cols={10}
         value={answers[`SOP${index}`]}
-        onChange={(e) =>
-          setAnswers((prevAnswers: AnswerType) => {
-            return {
-              ...prevAnswers,
-              [`SOP${index}`]: e.target.value,
-            }
-          })
-        }
+        onChange={(e) => {
+          if (e.target.value.split(' ').length <= 200)
+            setAnswers((prevAnswers: AnswerType) => {
+              return {
+                ...prevAnswers,
+                [`SOP${index}`]: e.target.value,
+              }
+            })
+        }}
         className="w-full rounded-xl p-2 mt-1"
       />
     </div>
@@ -96,23 +99,23 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
               }
             } else
               setError(
-                `For Question e, your response must be between 1 word and 200 words`,
+                'For Question e, your response must be between 1 word and 200 words',
               )
           } else
             setError(
-              `For Question d, your response must be between 1 word and 200 words`,
+              'For Question d, your response must be between 1 word and 200 words',
             )
         } else
           setError(
-            `For Question c, your response must be between 1 word and 200 words`,
+            'For Question c, your response must be between 1 word and 200 words',
           )
       } else
         setError(
-          `For Question b, your response must be between 1 word and 200 words`,
+          'For Question b, your response must be between 1 word and 200 words',
         )
     } else
       setError(
-        `For Question a, your response must be between 1 word and 200 words`,
+        'For Question a, your response must be between 1 word and 200 words',
       )
   }
 
@@ -131,7 +134,7 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
     <div>
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
-          Extra - Curricular Activites
+          Essay-Type Questions
         </h1>
         <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
           Please answer the following questions. Each has a limit of 200 words.

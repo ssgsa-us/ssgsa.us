@@ -137,38 +137,48 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
           experience.endDate &&
           experience.description
         ) {
-          // Save all valid publications
-          let publications: ResearchExperiencesType[number]['publications'] = {}
-          const pubKeys = Object.keys(experience.publications)
-          for (let j = 0; j < pubKeys.length; j++) {
-            // Check if user provide some input, then do validation and show error if any
-            // then add valid publication to publications
-            const publication = experience.publications[Number(pubKeys[j])]
+          if (experience.description.split(' ').length <= 200) {
+            // Save all valid publications
+            let publications: ResearchExperiencesType[number]['publications'] =
+              {}
+            const pubKeys = Object.keys(experience.publications)
+            for (let j = 0; j < pubKeys.length; j++) {
+              // Check if user provide some input, then do validation and show error if any
+              // then add valid publication to publications
+              const publication = experience.publications[Number(pubKeys[j])]
 
-            if (publicationRequired(publication)) {
-              if (
-                publication.titleAndDate &&
-                publication.conferenceName &&
-                publication.link
-              ) {
-                publications[Number(pubKeys[j])] = publication
-              } else {
-                setError(
-                  'Please fill all fields of Publication ' +
-                    String(j + 1) +
-                    ' in Experience ' +
-                    String(i + 1) +
-                    ' or Remove that publication if not needed.',
-                )
-                return
+              if (publicationRequired(publication)) {
+                if (
+                  publication.titleAndDate &&
+                  publication.conferenceName &&
+                  publication.link
+                ) {
+                  publications[Number(pubKeys[j])] = publication
+                } else {
+                  setError(
+                    'Please fill all fields of Publication ' +
+                      String(j + 1) +
+                      ' in Experience ' +
+                      String(i + 1) +
+                      ' or Remove that publication if not needed.',
+                  )
+                  return
+                }
               }
             }
-          }
 
-          // Add valid experience with valid publications
-          experiences[Number(keys[i])] = {
-            ...experience,
-            publications,
+            // Add valid experience with valid publications
+            experiences[Number(keys[i])] = {
+              ...experience,
+              publications,
+            }
+          } else {
+            setError(
+              'Description limit is 200 words for Experience ' +
+                String(i + 1) +
+                ' or Remove that experience if not needed.',
+            )
+            return
           }
         } else {
           setError(
@@ -264,7 +274,8 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
               />
               <TextInput
                 name="Position Title"
-                description="(e.g., Master thesis, summer internship, research assistant, project assistant, research associate, etc.)"
+                description="(e.g., Master thesis, summer internship, research 
+                  assistant, project assistant, research associate, etc.)"
                 value={researchData[key].title}
                 type="text"
                 onChange={(e) => updateField(key, 'title', e.target.value)}
@@ -298,7 +309,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                 {researchData[key].currentlyWorking === null ? null : (
                   <div>
                     <TextInput
-                      name="Start Date"
+                      name="Start Date (mm/yyyy)"
                       value={researchData[key].startDate}
                       type="text"
                       onChange={(e) =>
@@ -309,8 +320,8 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                     <TextInput
                       name={
                         !researchData[key].currentlyWorking
-                          ? 'End Date'
-                          : 'Expected End Date'
+                          ? 'End Date (mm/yyyy)'
+                          : 'Expected End Date (mm/yyyy)'
                       }
                       value={researchData[key].endDate}
                       type="text"
@@ -324,12 +335,15 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
               </div>
               <Textarea
                 name="Description"
-                description="Please describe the research you have contributed to while working in this position."
+                description="Please describe the research you have contributed 
+                  to while working in this position. Maximum Word Limit: 200"
                 value={researchData[key].description}
-                onChange={(e) =>
-                  updateField(key, 'description', e.target.value)
-                }
+                onChange={(e) => {
+                  if (e.target.value.split(' ').length <= 200)
+                    updateField(key, 'description', e.target.value)
+                }}
                 required={experienceRequired(researchData[key])}
+                wordLimit={200}
               />
               <div className="p-2">
                 <p className="text-xs sm:text-sm md:text-base pl-2">
@@ -436,7 +450,8 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                     ),
                   )}
                   <p
-                    className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 pr-2 pl-2 text-blue-850 cursor-pointer"
+                    className="text-base sm:text-lg md:text-xl font-extrabold 
+                      w-max mt-5 pr-2 pl-2 text-blue-850 cursor-pointer"
                     onClick={() => {
                       setResearchData((prevExps: ResearchExperiencesType) => ({
                         ...prevExps,
@@ -453,7 +468,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                       }))
                     }}
                   >
-                    Add new Publication +
+                    Add another Publication +
                   </p>
                 </div>
               </div>
@@ -462,7 +477,8 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
         })}
       </div>
       <p
-        className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 pr-2 pl-2 text-blue-850 cursor-pointer"
+        className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 
+          pr-2 pl-2 text-blue-850 cursor-pointer"
         onClick={() => {
           setResearchData((prevExps: ResearchExperiencesType) => ({
             ...prevExps,
@@ -471,7 +487,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
           setNewExpKey((prev) => prev + 1)
         }}
       >
-        Add an Experience +
+        Add another Experience +
       </p>
       <ProceedButtons
         status={status}

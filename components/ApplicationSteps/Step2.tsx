@@ -32,8 +32,8 @@ const yearOptions = [
 const defaultRecord: AcademicRecordType[number] = {
   degreeLevel: '',
   degreeName: '',
-  branch: '',
   faculty: '',
+  otherFaculty: '',
   college: '',
   university: '',
   currentlyEnrolled: null,
@@ -87,8 +87,8 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
   const checkAllFields = (record: AcademicRecordType[number]) =>
     record.degreeLevel &&
     record.degreeName &&
-    record.branch &&
     record.faculty &&
+    (record.faculty === 'Other' ? !!record.otherFaculty : true) &&
     record.college &&
     record.university &&
     record.currentlyEnrolled !== null &&
@@ -100,16 +100,18 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
 
   const nextStep = () => {
     setError('')
-    let bachelor = 0
-    let errorFlag = 0
+    // Bachelor variable to check if there ia bachelor degree or not
+    let bachelor = false
+    // Duration variable to check the eligibility of user
     let duration = 0
     const records = Object.values(academicData)
+    // check all fields and show error if any field is not present or if extra
+    // degree is added ask to remove that.
     for (let i = 0; i < records.length; i++) {
       if (checkAllFields(records[i])) {
-        if (records[i].degreeLevel === 'Bachelor') bachelor = 1
+        if (records[i].degreeLevel === 'Bachelor') bachelor = true
         duration += records[i].completionYear - records[i].startedYear
       } else {
-        errorFlag = 1
         if (records[i].degreeLevel)
           if (records[i].degreeName)
             setError(
@@ -134,33 +136,32 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
           setError(
             'Degree Level and Name are not provided in some records. Either update it or Remove the extra degree you have added.',
           )
-        break
+        return
       }
     }
 
-    if (!errorFlag)
-      if (!bachelor) setError('At least 1 Bachelor degree required')
-      else if (duration < 4)
-        setError(
-          'Check Eligibility Criteria, at least 4 year bachelor program or 3 year bachelor program with master program is required.',
-        )
-      else if (status === applicationData.form_status)
-        updateApplicationData(authUser.id, academicData, 3)
-          .then(() => {
-            deleteDocuments(deletedDocuments)
-            setStatus(3)
-          })
-          .catch(() => {
-            setError('Try again, network error!')
-          })
-      else
-        saveInformation()
-          .then(() => {
-            setStatus(3)
-          })
-          .catch(() => {
-            setError('Try again, network error!')
-          })
+    if (!bachelor) setError('At least 1 Bachelor degree required')
+    else if (duration < 4)
+      setError(
+        'Check Eligibility Criteria, at least 4 year bachelor program or 3 year bachelor program with master program is required.',
+      )
+    else if (status === applicationData.form_status)
+      updateApplicationData(authUser.id, academicData, 3)
+        .then(() => {
+          deleteDocuments(deletedDocuments)
+          setStatus(3)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+        })
+    else
+      saveInformation()
+        .then(() => {
+          setStatus(3)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+        })
   }
 
   const previousStep = () => {
@@ -185,7 +186,12 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Educational Qualifications
         </h1>
-        <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2">
+        <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
+          Fill in the details of your educational history of the bachelor&apos;s
+          and the master&apos;s degrees (if available) starting with the most
+          recent.
+        </p>
+        <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2 py-2">
           Note: Remember to save your information at frequent intervals.
         </p>
       </div>
@@ -237,27 +243,36 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
               />
               <TextInput
                 name="Degree Name"
+                description="(e.g., BTech in Computer Science, MSc in Agricultural Science, BA in History, etc.)"
                 value={academicData[key]['degreeName']}
                 type="text"
                 onChange={(e) => updateField(key, 'degreeName', e.target.value)}
                 required={true}
               />
-              <TextInput
-                name="Field of Study"
-                value={academicData[key]['branch']}
-                type="text"
-                onChange={(e) => updateField(key, 'branch', e.target.value)}
-                required={true}
-              />
               <SelectInput
-                name="Faculty"
+                name="Faculty (Most Relevant)"
                 value={academicData[key]['faculty']}
                 onChange={(e) => updateField(key, 'faculty', e.target.value)}
                 required={true}
-                options={[{ label: 'Select', value: '' }, ...faculties]}
+                options={[
+                  { label: 'Select', value: '' },
+                  ...faculties,
+                  { label: 'Other', value: 'Other' },
+                ]}
               />
+              {academicData[key]['faculty'] === 'Other' ? (
+                <TextInput
+                  name="Other Faculty"
+                  value={academicData[key]['otherFaculty']}
+                  type="text"
+                  onChange={(e) =>
+                    updateField(key, 'otherFaculty', e.target.value)
+                  }
+                  required={true}
+                />
+              ) : null}
               <TextInput
-                name="Institute/College"
+                name="Institute/College/Department"
                 value={academicData[key]['college']}
                 type="text"
                 onChange={(e) => updateField(key, 'college', e.target.value)}
@@ -319,6 +334,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                 name="Does this degree award grade in CGPA or Percentage?"
                 value={academicData[key]['gradeCriteria']}
                 onChange={(e, optionValue) => {
+                  updateField(key, 'grades', 0)
                   updateField(
                     key,
                     'gradeCriteria',

@@ -18,6 +18,7 @@ type Props = {
 
 const defaultWorkshop: PosterOrWorkshopsType[number] = {
   category: '',
+  otherCategory: '',
   title: '',
   duration: '',
   description: '',
@@ -85,17 +86,27 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
       if (workshopRequired(workshop))
         if (
           workshop.category != '' &&
+          (workshop.category === 'Other' ? !!workshop.otherCategory : true) &&
           workshop.title &&
           workshop.duration &&
           workshop.description
         ) {
-          // Add valid workshop
-          workshopsTemp[Number(keys[i])] = workshop
+          if (workshop.description.split(' ').length <= 50) {
+            // Add valid workshop
+            workshopsTemp[Number(keys[i])] = workshop
+          } else {
+            setError(
+              'Description limit is 50 words for Poster/Workshop/Summer School ' +
+                String(i + 1) +
+                ' or Remove that Poster/Workshop/Summer School if not needed.',
+            )
+            return
+          }
         } else {
           setError(
-            'Please fill all field for Poster/Workshop ' +
+            'Please fill all field for Poster/Workshop/Summer School ' +
               String(i + 1) +
-              ' or Remove that poster/workshop if not needed.',
+              ' or Remove that Poster/Workshop/Summer School if not needed.',
           )
           return
         }
@@ -145,14 +156,14 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
     <div className="w-full">
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
-          POSTER PRESENTATION/ WORKSHOPS/SUMMER SCHOOL
+          Poster Presentation/ Workshops/ Summer School
         </h1>
         <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
-          List all of them starting with the most recent. If you have mentioned
-          anything in preceding sections, please do not repeat that here. For
-          example, if you have already included summer internship in the
-          Research experience section, please do not mention it in this section
-          again.
+          List all your most recent Poster Presentations, Workshops, or Summer
+          Schools. If you have mentioned anything in preceding sections, please
+          do not repeat that here. For example, if you have already included
+          summer internship in the Research experience section, please do not
+          mention it in this section again.
         </p>
         <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2 py-2">
           Note: Remember to save your information at frequent intervals.
@@ -168,7 +179,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
             >
               <div className="flex justify-between items-center">
                 <p className="font-bold text-lg md:text-xl">
-                  Poster/Workshop {index + 1}
+                  Poster/Workshop/Summer School {index + 1}
                 </p>
                 <p
                   className="text-red-850 cursor-pointer"
@@ -199,6 +210,17 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
                 ]}
                 required={workshopRequired(workshops[key])}
               />
+              {workshops[key].category === 'Other' ? (
+                <TextInput
+                  name="Other Category Name"
+                  value={workshops[key].otherCategory}
+                  type="text"
+                  onChange={(e) =>
+                    updateField(key, 'otherCategory', e.target.value)
+                  }
+                  required={workshopRequired(workshops[key])}
+                />
+              ) : null}
               <TextInput
                 name="Title"
                 value={workshops[key].title}
@@ -207,7 +229,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
                 required={workshopRequired(workshops[key])}
               />
               <TextInput
-                name="Years Attended and Duration"
+                name="Year(s) Attended and Duration"
                 value={workshops[key].duration}
                 type="text"
                 onChange={(e) => updateField(key, 'duration', e.target.value)}
@@ -215,12 +237,15 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
               />
               <Textarea
                 name="Description"
-                description="Please mention a few lines about your participation in this activity."
+                description="Please mention a few lines about your 
+                  participation in this activity. Maximum Word Limit: 50"
                 value={workshops[key].description}
-                onChange={(e) =>
-                  updateField(key, 'description', e.target.value)
-                }
+                onChange={(e) => {
+                  if (e.target.value.split(' ').length <= 50)
+                    updateField(key, 'description', e.target.value)
+                }}
                 required={workshopRequired(workshops[key])}
+                wordLimit={50}
               />
               <div className="p-2">
                 <p className="md:text-lg">
@@ -239,7 +264,8 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
         })}
       </div>
       <p
-        className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 pr-2 pl-2 text-blue-850 cursor-pointer"
+        className="text-base sm:text-lg md:text-xl font-extrabold w-max mt-5 
+          pr-2 pl-2 text-blue-850 cursor-pointer"
         onClick={() => {
           setWorkshops((prevWorkshops: PosterOrWorkshopsType) => ({
             ...prevWorkshops,
