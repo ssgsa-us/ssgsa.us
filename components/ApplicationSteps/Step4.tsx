@@ -171,8 +171,8 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           starting with the most recent one.
         </p>
         <p className="text-xs sm:text-sm md:text-base pl-2 py-1">
-          Please click on the REMOVE button if you don't have any entry to put
-          here.
+          Please click on the REMOVE button if you don&apos;t have any entry to
+          put here.
         </p>
         <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2 py-2">
           Note: Remember to save your information at frequent intervals.
