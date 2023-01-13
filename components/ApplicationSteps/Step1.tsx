@@ -159,7 +159,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           required={true}
         />
         <SelectInput
-          name="In which of the following faculty does your program of intent abroad fall?"
+          name="In which of the following faculty (most relevant) does your program of intent abroad fall?"
           value={faculty}
           options={[{ label: 'Select', value: '' }, ...faculties]}
           onChange={(e) => setFaculty(e.target.value)}

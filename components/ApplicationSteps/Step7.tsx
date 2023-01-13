@@ -88,7 +88,7 @@ const Step7 = ({ applicationData, status, setStatus }: Props) => {
             Add corresponding documents (if available) in one file.
           </p>
           <FileUploadComponent
-            fileName={`CurricularActivities`}
+            fileName={`ExtraCurricularActivities`}
             fileUrl={extraCurr.document}
             setFileUrl={(url: string) =>
               setExtraCurr((prev) => ({ ...prev, document: url }))

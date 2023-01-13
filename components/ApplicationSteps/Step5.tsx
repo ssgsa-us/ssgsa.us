@@ -156,14 +156,14 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
     <div className="w-full">
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
-          Poster Presentation/ Workshops/Summer School
+          Poster Presentation/ Workshops/ Summer School
         </h1>
         <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
-          List all of them starting with the most recent. If you have mentioned
-          anything in preceding sections, please do not repeat that here. For
-          example, if you have already included summer internship in the
-          Research experience section, please do not mention it in this section
-          again.
+          List all your most recent Poster Presentations, Workshops, or Summer
+          Schools. If you have mentioned anything in preceding sections, please
+          do not repeat that here. For example, if you have already included
+          summer internship in the Research experience section, please do not
+          mention it in this section again.
         </p>
         <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2 py-2">
           Note: Remember to save your information at frequent intervals.

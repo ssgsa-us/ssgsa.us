@@ -248,14 +248,14 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                 required={true}
               />
               <SelectInput
-                name="Faculty"
+                name="Faculty (Most Relevant)"
                 value={academicData[key]['faculty']}
                 onChange={(e) => updateField(key, 'faculty', e.target.value)}
                 required={true}
                 options={[{ label: 'Select', value: '' }, ...faculties]}
               />
               <TextInput
-                name="Institute/College"
+                name="Institute/College/Department"
                 value={academicData[key]['college']}
                 type="text"
                 onChange={(e) => updateField(key, 'college', e.target.value)}
