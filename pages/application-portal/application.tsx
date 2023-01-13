@@ -21,7 +21,7 @@ import { getApplicationData } from '../api/getApplicationData'
 function Application() {
   const { authUser } = useAuth()
   const [applicationData, setApplicationData] = useState<ApplicationData>(
-    new ApplicationData(1),
+    new ApplicationData(1, authUser.email, 0),
   )
   const [pageReady, setPageReady] = useState<boolean>(false)
   const [status, setStatus] = useState<number>(1)
