@@ -33,6 +33,7 @@ const defaultRecord: AcademicRecordType[number] = {
   degreeLevel: '',
   degreeName: '',
   faculty: '',
+  otherFaculty: '',
   college: '',
   university: '',
   currentlyEnrolled: null,
@@ -87,6 +88,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
     record.degreeLevel &&
     record.degreeName &&
     record.faculty &&
+    (record.faculty === 'Other' ? !!record.otherFaculty : true) &&
     record.college &&
     record.university &&
     record.currentlyEnrolled !== null &&
@@ -252,8 +254,23 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                 value={academicData[key]['faculty']}
                 onChange={(e) => updateField(key, 'faculty', e.target.value)}
                 required={true}
-                options={[{ label: 'Select', value: '' }, ...faculties]}
+                options={[
+                  { label: 'Select', value: '' },
+                  ...faculties,
+                  { label: 'Other', value: 'Other' },
+                ]}
               />
+              {academicData[key]['faculty'] === 'Other' ? (
+                <TextInput
+                  name="Other Faculty"
+                  value={academicData[key]['otherFaculty']}
+                  type="text"
+                  onChange={(e) =>
+                    updateField(key, 'otherFaculty', e.target.value)
+                  }
+                  required={true}
+                />
+              ) : null}
               <TextInput
                 name="Institute/College/Department"
                 value={academicData[key]['college']}

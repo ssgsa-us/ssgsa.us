@@ -10,6 +10,7 @@ export type AcademicRecordType = {
     degreeLevel: 'Bachelor' | 'Master' | 'Doctoral' | ''
     degreeName: string
     faculty: string
+    otherFaculty: string
     college: string
     university: string
     currentlyEnrolled: boolean | null
