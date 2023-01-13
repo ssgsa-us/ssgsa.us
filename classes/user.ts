@@ -6,6 +6,7 @@ export class User {
   mobile: Number | null
   role: string
   sets: Array<string>
+  verificationEmailEpoch: number
 
   constructor(
     name: string,
@@ -13,12 +14,14 @@ export class User {
     mobile: Number | null,
     role: string,
     sets: Array<string>,
+    verificationEmailEpoch: number,
   ) {
     this.name = name
     this.email = email
     this.mobile = mobile
     this.role = role
     this.sets = sets
+    this.verificationEmailEpoch = verificationEmailEpoch
   }
 }
 
@@ -44,6 +47,7 @@ export const userController = {
       data.mobile,
       data.role,
       data.sets,
+      data.verificationEmailEpoch,
     )
 
     return user

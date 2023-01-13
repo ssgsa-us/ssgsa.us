@@ -8,10 +8,18 @@ export const createUser = (
   name: string,
   email: string,
   mobile: Number,
+  verificationEmailEpoch: number,
   role: string = Roles.APPLICANT,
   sets: Array<string> = [],
 ) => {
-  const user: User = new User(name, email, mobile, role, sets)
+  const user: User = new User(
+    name,
+    email,
+    mobile,
+    role,
+    sets,
+    verificationEmailEpoch,
+  )
 
   firestore
     .doc(path.join('users', userUID))
