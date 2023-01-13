@@ -12,7 +12,7 @@ export type AcademicRecordType = {
     degreeName: string
     faculty: string
     otherFaculty: string
-    college: string
+    department: string
     university: string
     currentlyEnrolled: boolean | null
     startedYear: number

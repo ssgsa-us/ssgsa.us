@@ -34,7 +34,7 @@ const defaultRecord: AcademicRecordType[number] = {
   degreeName: '',
   faculty: '',
   otherFaculty: '',
-  college: '',
+  department: '',
   university: '',
   currentlyEnrolled: null,
   startedYear: 0,
@@ -89,7 +89,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
     record.degreeName &&
     record.faculty &&
     (record.faculty === 'Other' ? !!record.otherFaculty : true) &&
-    record.college &&
+    record.department &&
     record.university &&
     record.currentlyEnrolled !== null &&
     record.startedYear &&
@@ -272,10 +272,10 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                 />
               ) : null}
               <TextInput
-                name="Institute/College/Department"
-                value={academicData[key]['college']}
+                name="Department"
+                value={academicData[key]['department']}
                 type="text"
-                onChange={(e) => updateField(key, 'college', e.target.value)}
+                onChange={(e) => updateField(key, 'department', e.target.value)}
                 required={true}
               />
               <TextInput
