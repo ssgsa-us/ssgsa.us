@@ -45,7 +45,7 @@ const SignUp = () => {
               createUser(result.user.uid, name, email, mobile)
 
               // create application data for user
-              createApplicationData(result.user.uid)
+              createApplicationData(result.user.uid, email, mobile)
             })
             .catch((error) => {
               if (error.code === 'auth/weak-password') {

@@ -19,8 +19,6 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
   const [name, setName] = useState<string>()
   const [enrollNo, setEnrollNo] = useState<string>()
   const [enrollProofDoc, setEnrollProofDoc] = useState<string>()
-  const [email, setEmail] = useState<string>()
-  const [contactNo, setContactNo] = useState<number>()
   const [currentPosition, setCurrentPosition] = useState<string>()
   const [targetProgram, setTargetProgram] = useState<string>()
   const [faculty, setFaculty] = useState<string>()
@@ -32,8 +30,6 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
     setName(applicationData.name || '')
     setEnrollNo(applicationData.enrollment || '')
     setEnrollProofDoc(applicationData.enrollment_proof_doc)
-    setEmail(applicationData.email || '')
-    setContactNo(applicationData.contact || 0)
     setCurrentPosition(applicationData.current_position || '')
     setTargetProgram(applicationData.target_program || '')
     setFaculty(applicationData.faculty || '')
@@ -47,48 +43,40 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       name &&
       enrollNo &&
       enrollProofDoc &&
-      email &&
-      contactNo &&
       currentPosition &&
       targetProgram &&
       faculty &&
       targetDate &&
       targetCountry
     ) {
-      const regex =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      if (regex.test(String(email).toLowerCase())) {
-        if (applicationData.form_status == 1) {
-          updateApplicationData(
-            authUser.id,
-            name,
-            enrollNo,
-            email,
-            contactNo,
-            currentPosition,
-            targetProgram,
-            faculty,
-            targetDate,
-            targetCountry,
-            enrollProofDoc,
-            2,
-          )
-            .then(() => {
-              setStatus(2)
-            })
-            .catch(() => {
-              setError('Try again, network error!')
-            })
-        } else {
-          saveInformation()
-            .then(() => {
-              setStatus(2)
-            })
-            .catch(() => {
-              setError('Try again, network error!')
-            })
-        }
-      } else setError('Email is incorrect.')
+      if (applicationData.form_status == 1) {
+        updateApplicationData(
+          authUser.id,
+          name,
+          enrollNo,
+          currentPosition,
+          targetProgram,
+          faculty,
+          targetDate,
+          targetCountry,
+          enrollProofDoc,
+          2,
+        )
+          .then(() => {
+            setStatus(2)
+          })
+          .catch(() => {
+            setError('Try again, network error!')
+          })
+      } else {
+        saveInformation()
+          .then(() => {
+            setStatus(2)
+          })
+          .catch(() => {
+            setError('Try again, network error!')
+          })
+      }
     } else setError('All fields are required.')
   }
 
@@ -100,8 +88,6 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       authUser.id,
       name,
       enrollNo,
-      email,
-      contactNo,
       currentPosition,
       targetProgram,
       faculty,
@@ -153,22 +139,6 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           />
         </div>
         <TextInput
-          name="E-mail address"
-          description="(this email ID will stay in the SSGSA records and be 
-            used for future correspondence)"
-          value={email}
-          type="text"
-          onChange={(e) => setEmail(e.target.value)}
-          required={true}
-        />
-        <TextInput
-          name="Contact Number"
-          value={contactNo}
-          type="number"
-          onChange={(e) => setContactNo(Number(e.target.value))}
-          required={true}
-        />
-        <TextInput
           name="Current Position"
           description="(e.g., Final year BTech student at AMU, Software 
             Developer in Indian Railways, Taking a year gap, Preparing for 
@@ -209,7 +179,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           required={true}
         />
         <TextInput
-          name="Which country(s) will you be applying in?"
+          name="Which country(ies) will you be applying in?"
           description="You can list more than one here."
           value={targetCountry}
           type="text"

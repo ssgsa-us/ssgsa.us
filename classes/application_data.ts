@@ -30,16 +30,16 @@ export class ApplicationData {
   other_information: string
   form_status: number
 
-  constructor(form_status: number = 1) {
+  constructor(form_status: number = 1, email: string, contact: number) {
     this.form_status = form_status
+    this.email = email
+    this.contact = contact
   }
 
   step1(
     name: string,
     enrollment: string,
     enrollment_proof_doc: string,
-    email: string,
-    contact: number,
     current_position: string,
     target_program: string,
     faculty: string,
@@ -49,8 +49,6 @@ export class ApplicationData {
     this.name = name
     this.enrollment = enrollment
     this.enrollment_proof_doc = enrollment_proof_doc
-    this.email = email
-    this.contact = contact
     this.current_position = current_position
     this.target_program = target_program
     this.faculty = faculty
@@ -101,13 +99,15 @@ export const applicationDataConverter = {
     options: firebase.firestore.SnapshotOptions,
   ) => {
     let data = snapshot.data(options)
-    let applicationData = new ApplicationData(data.form_status)
+    let applicationData = new ApplicationData(
+      data.form_status,
+      data.email,
+      data.contact,
+    )
     applicationData.step1(
       data.name,
       data.enrollment,
       data.enrollment_proof_doc,
-      data.email,
-      data.contact,
       data.current_position,
       data.target_program,
       data.faculty,
