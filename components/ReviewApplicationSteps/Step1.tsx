@@ -25,7 +25,7 @@ const Step1 = ({ applicationData }: Props) => (
       value={applicationData.target_program}
     />
     <Field
-      name="In which of the following faculty (most relevant) does your program of intent abroad fall?"
+      name="In which of the following faculty (most relevant) does your target program fall?"
       value={applicationData.faculty}
     />
     <Field

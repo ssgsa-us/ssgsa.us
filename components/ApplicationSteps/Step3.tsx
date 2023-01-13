@@ -231,7 +231,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Research Experience
         </h1>
-        <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
+        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
           If you have done any research projects, research internships, or other
           research related work please include them here starting with the most
           recent one.

@@ -54,7 +54,7 @@ const Step9 = ({ applicationData, status, setStatus }: Props) => {
           <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
             Other Information
           </h1>
-          <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
+          <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
             Is there any other information you would like to share with us that
             can help you stand out from other applicants?
           </p>

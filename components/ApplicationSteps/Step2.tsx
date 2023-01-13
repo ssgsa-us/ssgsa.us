@@ -186,7 +186,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Educational Qualifications
         </h1>
-        <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
+        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
           Fill in the details of your educational history of the bachelor&apos;s
           and the master&apos;s degrees (if available) starting with the most
           recent.

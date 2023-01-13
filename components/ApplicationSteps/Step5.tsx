@@ -158,7 +158,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Poster Presentation/ Workshops/ Summer School
         </h1>
-        <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
+        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
           List all your most recent Poster Presentations, Workshops, or Summer
           Schools. If you have mentioned anything in preceding sections, please
           do not repeat that here. For example, if you have already included
