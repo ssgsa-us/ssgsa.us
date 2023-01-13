@@ -20,24 +20,17 @@ export default function Home() {
               </p>
               <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
                 <li className="my-2">
-                  You have completed your Senior Secondary School Certificate
-                  (XIth and XIIth Classes) OR Diploma OR Bachelor&apos;s degree
-                  OR Master&apos;s degree from Aligarh Muslim University.
-                  Students from all streams and faculties are welcome to apply.
+                  You have completed or enrolled in at least one of the degrees
+                  (High School/Senior Secondary/Diploma/Bachelor/Master) from
+                  Aligarh Muslim University.
                 </li>
                 <li className="my-2">
                   You are currently registered for the final or penultimate year
-                  of a four (or more) years&apos; Bachelors program.
+                  of a four (or more) years&apos; bachelor&apos;s program.
                   <br />
-                  <span className="text-xs text-red-850">
-                    Note: Students holding a three-years&apos; Bachelor&apos;s
-                    degree are encouraged to apply after enrolling in the first
-                    year of a Master&apos;s program. This is a requirement for
-                    North American Universities.
-                  </span>
-                </li>
-                <li className="my-2">
-                  You have an outstanding academic record
+                  <span className="flex justify-center">OR</span>
+                  You have finished a three-year Bachelor&apos;s degree and
+                  enrolled in the first year of a Master&apos;s program.
                 </li>
                 <li className="my-2">
                   You wish to apply for a Master&apos;s or PhD degree at a
@@ -46,9 +39,9 @@ export default function Home() {
                 </li>
               </ul>
               <p>
-                The Sir Syed Global Scholar Award is an equal opportunity
+                The Sir Syed Global Scholar Award is an equal-opportunity
                 scholarship. We strongly encourage women, people with
-                disabilities and those from economically and socially excluded
+                disabilities, and those from economically and socially excluded
                 communities to apply.
               </p>
             </div>
