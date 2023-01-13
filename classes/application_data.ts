@@ -3,7 +3,6 @@ import {
   AcademicRecordType,
   AnswerType,
   CurricularActivitiesType,
-  DocumentsType,
   ExtraCurricularsType,
   PosterOrWorkshopsType,
   ResearchExperiencesType,
@@ -18,6 +17,8 @@ export class ApplicationData {
   contact: number
   current_position: string
   target_program: string
+  faculty: string
+  other_faculty: string
   target_date: string
   target_country: string
   academic_record: AcademicRecordType
@@ -28,32 +29,32 @@ export class ApplicationData {
   extra_curriculars: ExtraCurricularsType
   sop_answers: AnswerType
   other_information: string
-  faculty: string
-  documents: DocumentsType
   form_status: number
 
-  constructor(form_status: number = 1) {
+  constructor(form_status: number = 1, email: string, contact: number) {
     this.form_status = form_status
+    this.email = email
+    this.contact = contact
   }
 
   step1(
     name: string,
     enrollment: string,
     enrollment_proof_doc: string,
-    email: string,
-    contact: number,
     current_position: string,
     target_program: string,
+    faculty: string,
+    other_faculty: string,
     target_date: string,
     target_country: string,
   ) {
     this.name = name
     this.enrollment = enrollment
     this.enrollment_proof_doc = enrollment_proof_doc
-    this.email = email
-    this.contact = contact
     this.current_position = current_position
     this.target_program = target_program
+    this.faculty = faculty
+    this.other_faculty = other_faculty
     this.target_date = target_date
     this.target_country = target_country
   }
@@ -89,10 +90,6 @@ export class ApplicationData {
   step9(other_information: string) {
     this.other_information = other_information
   }
-
-  step10(faculty: string) {
-    this.faculty = faculty
-  }
 }
 
 export const applicationDataConverter = {
@@ -105,15 +102,19 @@ export const applicationDataConverter = {
     options: firebase.firestore.SnapshotOptions,
   ) => {
     let data = snapshot.data(options)
-    let applicationData = new ApplicationData(data.form_status)
+    let applicationData = new ApplicationData(
+      data.form_status,
+      data.email,
+      data.contact,
+    )
     applicationData.step1(
       data.name,
       data.enrollment,
       data.enrollment_proof_doc,
-      data.email,
-      data.contact,
       data.current_position,
       data.target_program,
+      data.faculty,
+      data.other_faculty,
       data.target_date,
       data.target_country,
     )
@@ -140,9 +141,6 @@ export const applicationDataConverter = {
     }
     if (data.form_status >= 9) {
       applicationData.step9(data.other_information)
-    }
-    if (data.form_status >= 10) {
-      applicationData.step10(data.faculty)
     }
     return applicationData
   },

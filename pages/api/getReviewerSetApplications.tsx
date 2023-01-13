@@ -42,7 +42,7 @@ export const getReviewerSetApplications = async (reviewerSet: string) => {
                   document: firebase.firestore.QueryDocumentSnapshot<AdminPortalData>,
                 ) => {
                   applications[document.id] = {
-                    applicationData: new ApplicationData(),
+                    applicationData: new ApplicationData(0, '', 0),
                     adminPortalData: document.data(),
                   }
                 },

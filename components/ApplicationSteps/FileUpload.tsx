@@ -66,10 +66,16 @@ const FileUploadComponent = ({ fileName, fileUrl, setFileUrl }: Props) => {
             <input
               name={fileName}
               type="file"
-              accept=".pdf"
+              accept="application/pdf"
               onChange={(e) => {
-                setFile(e.target.files[0])
-                setNewFileSelected(true)
+                if (e.target.files[0]) {
+                  if (e.target.files[0].name.split('.')[1] === 'pdf') {
+                    setFile(e.target.files[0])
+                    setNewFileSelected(true)
+                  } else {
+                    setError('Invalid File Type')
+                  }
+                }
               }}
               className="hidden"
             />
