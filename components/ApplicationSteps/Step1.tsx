@@ -22,6 +22,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
   const [currentPosition, setCurrentPosition] = useState<string>()
   const [targetProgram, setTargetProgram] = useState<string>()
   const [faculty, setFaculty] = useState<string>()
+  const [otherFaculty, setOtherFaculty] = useState<string>()
   const [targetDate, setTargetDate] = useState<string>()
   const [targetCountry, setTargetCountry] = useState<string>()
   const [error, setError] = useState<string>('')
@@ -33,6 +34,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
     setCurrentPosition(applicationData.current_position || '')
     setTargetProgram(applicationData.target_program || '')
     setFaculty(applicationData.faculty || '')
+    setOtherFaculty(applicationData.other_faculty || '')
     setTargetDate(applicationData.target_date || '')
     setTargetCountry(applicationData.target_country || '')
   }, [applicationData])
@@ -46,6 +48,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       currentPosition &&
       targetProgram &&
       faculty &&
+      (faculty === 'Other' ? !!otherFaculty : true) &&
       targetDate &&
       targetCountry
     ) {
@@ -57,6 +60,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           currentPosition,
           targetProgram,
           faculty,
+          otherFaculty,
           targetDate,
           targetCountry,
           enrollProofDoc,
@@ -91,6 +95,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       currentPosition,
       targetProgram,
       faculty,
+      otherFaculty,
       targetDate,
       targetCountry,
       enrollProofDoc,
@@ -161,10 +166,23 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
         <SelectInput
           name="In which of the following faculty (most relevant) does your program of intent abroad fall?"
           value={faculty}
-          options={[{ label: 'Select', value: '' }, ...faculties]}
+          options={[
+            { label: 'Select', value: '' },
+            ...faculties,
+            { label: 'Other', value: 'Other' },
+          ]}
           onChange={(e) => setFaculty(e.target.value)}
           required={true}
         />
+        {faculty === 'Other' ? (
+          <TextInput
+            name="Other Faculty"
+            value={otherFaculty}
+            type="text"
+            onChange={(e) => setOtherFaculty(e.target.value)}
+            required={true}
+          />
+        ) : null}
         <SelectInput
           name="When do you plan to apply for grad school?"
           value={targetDate}

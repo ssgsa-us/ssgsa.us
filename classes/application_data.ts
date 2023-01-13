@@ -18,6 +18,7 @@ export class ApplicationData {
   current_position: string
   target_program: string
   faculty: string
+  other_faculty: string
   target_date: string
   target_country: string
   academic_record: AcademicRecordType
@@ -43,6 +44,7 @@ export class ApplicationData {
     current_position: string,
     target_program: string,
     faculty: string,
+    other_faculty: string,
     target_date: string,
     target_country: string,
   ) {
@@ -52,6 +54,7 @@ export class ApplicationData {
     this.current_position = current_position
     this.target_program = target_program
     this.faculty = faculty
+    this.other_faculty = other_faculty
     this.target_date = target_date
     this.target_country = target_country
   }
@@ -111,6 +114,7 @@ export const applicationDataConverter = {
       data.current_position,
       data.target_program,
       data.faculty,
+      data.other_faculty,
       data.target_date,
       data.target_country,
     )
