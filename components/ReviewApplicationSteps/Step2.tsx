@@ -27,13 +27,20 @@ const Step2 = ({ academicRecord }: Props) => (
             name="Degree Name"
             value={academicRecord[Number(key)].degreeName}
           />
-          <Field name="Faculty" value={academicRecord[Number(key)].faculty} />
+          <Field
+            name="Faculty"
+            value={
+              academicRecord[Number(key)].faculty == 'Other'
+                ? academicRecord[Number(key)].otherFaculty
+                : academicRecord[Number(key)].faculty
+            }
+          />
           <Field
             name="Degree Name"
             value={academicRecord[Number(key)].degreeName}
           />
           <Field
-            name="Institute/College"
+            name="Institute/College/Department"
             value={academicRecord[Number(key)].college}
           />
           <Field

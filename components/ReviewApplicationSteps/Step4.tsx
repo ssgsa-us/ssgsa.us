@@ -35,14 +35,14 @@ const Step4 = ({ workExperiences }: Props) => (
           />
           <div className="pl-4">
             <Field
-              name="Start Date"
+              name="Start Date (mm/yyyy)"
               value={workExperiences[Number(key)].startDate}
             />
             <Field
               name={
                 !workExperiences[Number(key)].currentlyWorking
-                  ? 'End Date'
-                  : 'Expected End Date'
+                  ? 'End Date (mm/yyyy)'
+                  : 'Expected End Date (mm/yyyy)'
               }
               value={workExperiences[Number(key)].endDate}
             />

@@ -36,14 +36,14 @@ const Step3 = ({ researchData }: Props) => (
           />
           <div className="pl-4">
             <Field
-              name="Start Date"
+              name="Start Date (mm/yyyy)"
               value={researchData[Number(key)].startDate}
             />
             <Field
               name={
                 !researchData[Number(key)].currentlyWorking
-                  ? 'End Date'
-                  : 'Expected End Date'
+                  ? 'End Date (mm/yyyy)'
+                  : 'Expected End Date (mm/yyyy)'
               }
               value={researchData[Number(key)].endDate}
             />

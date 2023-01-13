@@ -19,11 +19,23 @@ const Step1 = ({ applicationData }: Props) => (
       url={applicationData.enrollment_proof_doc}
     />
     <Field name="E-mail Address" value={applicationData.email} />
-    <Field name="Contact Number" value={applicationData.contact} />
     <Field name="Current Position" value={applicationData.current_position} />
-    <Field name="Target Program" value={applicationData.target_program} />
-    <Field name="Target date" value={applicationData.target_date} />
-    <Field name="Target Country" value={applicationData.target_country} />
+    <Field
+      name="Which program(s) and in what subject(s) are you interested in studying abroad?"
+      value={applicationData.target_program}
+    />
+    <Field
+      name="In which of the following faculty (most relevant) does your program of intent abroad fall?"
+      value={applicationData.faculty}
+    />
+    <Field
+      name="When do you plan to apply for grad school?"
+      value={applicationData.target_date}
+    />
+    <Field
+      name="Which country(s) will you be applying in?"
+      value={applicationData.target_country}
+    />
   </div>
 )
 
