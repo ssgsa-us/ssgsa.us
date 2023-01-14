@@ -153,42 +153,17 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
     return true
   }
 
-  const nextStep = () => {
-    if (!validation) return
-
-    if (status === applicationData.form_status)
-      updateApplicationData(authUser.id, academicData, 3)
-        .then(() => {
-          deleteDocuments(deletedDocuments)
-          setStatus(3)
-        })
-        .catch(() => {
-          setError('Try again, network error!')
-        })
-    else
-      saveInformation()
-        .then(() => {
-          setStatus(3)
-        })
-        .catch(() => {
-          setError('Try again, network error!')
-        })
-  }
-
-  const previousStep = () => {
-    setStatus(1)
-  }
-
-  const saveInformation = () => {
-    setError('')
-    return updateApplicationData(
-      authUser.id,
-      academicData,
-      applicationData.form_status,
-    ).then(() => {
-      deleteDocuments(deletedDocuments)
-      setDeletedDocuments([])
-    })
+  // Used in next step and save information
+  // Call updateApplicationData with required fields and a dynamic status (newStatus)
+  // newStatus will be provided depends upon the formStatus and the current status
+  // if both are equal newStatus will be status+1 otherwise formStatus
+  const updateData = (newStatus: number) => {
+    return updateApplicationData(authUser.id, academicData, newStatus).then(
+      () => {
+        deleteDocuments(deletedDocuments)
+        setDeletedDocuments([])
+      },
+    )
   }
 
   return (
@@ -417,12 +392,11 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
         Add a Degree +
       </p>
       <ProceedButtons
-        status={status}
         formStatus={applicationData.form_status}
-        previousStep={previousStep}
-        nextStep={nextStep}
-        saveInformation={saveInformation}
-        saveConditionCheck={validation}
+        status={status}
+        setStatus={setStatus}
+        validation={validation}
+        updateApplicationData={updateData}
         error={error}
         setError={setError}
       />

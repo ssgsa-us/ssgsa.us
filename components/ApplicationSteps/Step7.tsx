@@ -27,38 +27,12 @@ const Step7 = ({ applicationData, status, setStatus }: Props) => {
     }
   }, [applicationData])
 
-  const nextStep = () => {
-    setError('')
-
-    if (status === applicationData.form_status)
-      updateApplicationData(authUser.id, extraCurr, 8)
-        .then(() => {
-          setStatus(8)
-        })
-        .catch(() => {
-          setError('Try again, network error!')
-        })
-    else
-      updateApplicationData(authUser.id, extraCurr, applicationData.form_status)
-        .then(() => {
-          setStatus(8)
-        })
-        .catch(() => {
-          setError('Try again, network error!')
-        })
-  }
-
-  const previousStep = () => {
-    setStatus(6)
-  }
-
-  const saveInformation = () => {
-    setError('')
-    return updateApplicationData(
-      authUser.id,
-      extraCurr,
-      applicationData.form_status,
-    )
+  // Used in next step and save information
+  // Call updateApplicationData with required fields and a dynamic status (newStatus)
+  // newStatus will be provided depends upon the formStatus and the current status
+  // if both are equal newStatus will be status+1 otherwise formStatus
+  const updateData = (newStatus: number) => {
+    return updateApplicationData(authUser.id, extraCurr, newStatus)
   }
 
   return (
@@ -97,12 +71,11 @@ const Step7 = ({ applicationData, status, setStatus }: Props) => {
         </div>
       </div>
       <ProceedButtons
-        status={status}
         formStatus={applicationData.form_status}
-        previousStep={previousStep}
-        nextStep={nextStep}
-        saveInformation={saveInformation}
-        saveConditionCheck={() => true}
+        status={status}
+        setStatus={setStatus}
+        validation={() => true}
+        updateApplicationData={updateData}
         error={error}
         setError={setError}
       />
