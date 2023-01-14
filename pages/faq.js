@@ -24,17 +24,21 @@ export default function Home() {
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
                 onClick={() => (index == 1 ? setIndex(0) : setIndex(1))}
               >
-                <p className="font-bold text-sm sm:text-base">What is SSGSA?</p>
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  What is the eligibility criteria to apply for the SSGSA award?
+                </p>
                 {index == 1 ? (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleUp}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleDown}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 )}
@@ -44,13 +48,31 @@ export default function Home() {
                 className="bg-red-850 pl-3 py-3 pr-12"
                 hidden={index != 1}
               >
-                <p className="text-sm sm:text-base text-white">
-                  SSGSA (Sir Syed Global Scholar Award, run by AMU alumni based
-                  in USA) is an award given to successful applicants towards
-                  their expenses for GRE, TOEFL and five university applications
-                  fees along with the mentorship throughout the application
-                  process.
-                </p>
+                <ul
+                  style={{ listStyle: 'disc' }}
+                  className="text-sm sm:text-base text-white ml-5"
+                >
+                  <li className="my-2">
+                    You have completed or enrolled in at least one of the
+                    degrees (High School/Senior
+                    Secondary/Diploma/Bachelor/Master) from Aligarh Muslim
+                    University.
+                  </li>
+                  <li className="my-2">
+                    You are currently registered for the final or penultimate
+                    year of a four (or more) years&apos; bachelor&apos;s
+                    program.
+                    <br />
+                    <span className="flex justify-center">OR</span>
+                    You have finished a three-year Bachelor&apos;s degree and
+                    enrolled in the first year of a Master&apos;s program.
+                  </li>
+                  <li className="my-2">
+                    You wish to apply for a Master's or PhD degree at a
+                    university of international repute outside India within the
+                    next 2 academic years.
+                  </li>
+                </ul>
               </div>
             </div>
             <div>
@@ -58,20 +80,22 @@ export default function Home() {
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
                 onClick={() => (index == 2 ? setIndex(0) : setIndex(2))}
               >
-                <p className="font-bold text-sm sm:text-base">
-                  When are the applications due and how long does it take to get
-                  the applications reviewed?
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  I am a final year student of a 3-year undergraduate degree
+                  program, can I apply this year? If not, why?
                 </p>
                 {index == 2 ? (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleUp}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleDown}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 )}
@@ -82,12 +106,14 @@ export default function Home() {
                 hidden={index != 2}
               >
                 <p className="text-sm sm:text-base text-white">
-                  SSGSA application portal opens every Academic Year in the
-                  month of February.
-                  <br />
-                  Generally, the application deadline is somewhere around
-                  mid-March (but could vary every year) and the review process
-                  gets finished by May.
+                  No, you cannot apply this year because most universities in
+                  the United States require a minimum of 4 years of
+                  university-level education for their graduate programs. You
+                  can satisfy this requirement by continuing your education
+                  after the final year of your 3-year undergraduate program by
+                  enrolling in a master&apos;s program. We encourage you to
+                  apply for SSGSA next year when you are enrolled in the first
+                  year of your master&apos;s degree.
                 </p>
               </div>
             </div>
@@ -96,19 +122,21 @@ export default function Home() {
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
                 onClick={() => (index == 3 ? setIndex(0) : setIndex(3))}
               >
-                <p className="font-bold text-sm sm:text-base">
-                  What is the eligibility criteria to apply for SSGSA award?
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  What are the documents I need to attach to the application?
                 </p>
                 {index == 3 ? (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleUp}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleDown}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 )}
@@ -123,30 +151,10 @@ export default function Home() {
                   className="text-sm sm:text-base text-white ml-5"
                 >
                   <li className="my-2">
-                    You have completed your Senior Secondary School Certificate
-                    (XIth and XIIth Classes) OR Diploma OR Bachelor&apos;s
-                    degree OR Master&apos;s degree from Aligarh Muslim
-                    University. Students from all streams and faculties are
-                    welcome to apply.
+                    Marksheets of all your Bachelor&apos;s and Master&apos;s
                   </li>
                   <li className="my-2">
-                    You are currently registered for the final or penultimate
-                    year of a four (or more) years&apos; Bachelors program.
-                    <br />
-                    <span className="text-xs">
-                      Note: Students holding a three-years&apos; Bachelor&apos;s
-                      degree are encouraged to apply after enrolling in the
-                      first year of a Master&apos;s program. This is a
-                      requirement for North American Universities.
-                    </span>
-                  </li>
-                  <li className="my-2">
-                    You have an outstanding academic record
-                  </li>
-                  <li className="my-2">
-                    You wish to apply for a Master&apos;s or PhD degree at a
-                    university of international repute outside India within the
-                    next 2 academic years.
+                    Certificates of any of your achievement
                   </li>
                 </ul>
               </div>
@@ -156,21 +164,21 @@ export default function Home() {
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
                 onClick={() => (index == 4 ? setIndex(0) : setIndex(4))}
               >
-                <p className="font-bold text-sm sm:text-base">
-                  I already graduated from AMU and am currently a working
-                  professional. I already have a GRE and TOEFL score. Can I get
-                  my SOP reviewed by the SSGSA team?
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  Is there a minimum CGPA requirement to apply for SSGSA?
                 </p>
                 {index == 4 ? (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleUp}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleDown}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 )}
@@ -181,12 +189,7 @@ export default function Home() {
                 hidden={index != 4}
               >
                 <p className="text-sm sm:text-base text-white">
-                  Sure. You can forward your request to
-                  <span className="text-blue-400 cursor-pointer">
-                    &nbsp; contact@ssgsa.us
-                  </span>
-                  , or you can send a personalized message through SSGSA&apos;s
-                  contact page.
+                  No, there is no minimum CGPA or percentage to apply.
                 </p>
               </div>
             </div>
@@ -195,20 +198,22 @@ export default function Home() {
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
                 onClick={() => (index == 5 ? setIndex(0) : setIndex(5))}
               >
-                <p className="font-bold text-sm sm:text-base">
-                  I am a final year student of a 3-year undergraduate degree
-                  program, can I apply this year? If not, why?
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  Is it necessary to have an internship or research experience
+                  to apply for SSGSA?
                 </p>
                 {index == 5 ? (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleUp}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleDown}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 )}
@@ -219,16 +224,8 @@ export default function Home() {
                 hidden={index != 5}
               >
                 <p className="text-sm sm:text-base text-white">
-                  No, you cannot apply this year because most of the
-                  universities in the United States require a minimum of 4 years
-                  of university level education for their graduate programs.
-                  Given that you are three years away from the admission,
-                  availing this award in the final year of your 3-year
-                  undergraduate program would not benefit you immediately for
-                  you would still have to wait to get your masters degree in
-                  order to be eligible for admissions abroad. We encourage you
-                  to apply for SSGSA next year when you are enrolled in the
-                  first year of your masters degree.
+                  No, it is not necessary to have any prior experience but it is
+                  encouraged to have one.
                 </p>
               </div>
             </div>
@@ -237,19 +234,21 @@ export default function Home() {
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
                 onClick={() => (index == 6 ? setIndex(0) : setIndex(6))}
               >
-                <p className="font-bold text-sm sm:text-base">
-                  What are the documents I need to attach with the application?
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  What achievements can be considered curricular achievements?
                 </p>
                 {index == 6 ? (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleUp}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleDown}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 )}
@@ -259,23 +258,11 @@ export default function Home() {
                 className="bg-red-850 pl-3 py-3 pr-12"
                 hidden={index != 6}
               >
-                <ul
-                  style={{ listStyle: 'disc' }}
-                  className="text-sm sm:text-base text-white ml-5"
-                >
-                  <li>Your curriculum vitae.</li>
-                  <li>
-                    Attested copies of your marksheets from 10th standard
-                    onwards. It should include Grade 12, Bachelor&apos;s and
-                    Master&apos;s (NET, GATE scores if already taken)
-                  </li>
-                  <li>
-                    Attested copies of certificates of any of your achievements
-                  </li>
-                  <li>
-                    Some essay based questions asked in the application form.
-                  </li>
-                </ul>
+                <p className="text-sm sm:text-base text-white">
+                  All academic achievements like internships, summer school,
+                  poster presentations, scholarships, academic awards, etc are
+                  curricular in nature.
+                </p>
               </div>
             </div>
             <div>
@@ -283,20 +270,22 @@ export default function Home() {
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
                 onClick={() => (index == 7 ? setIndex(0) : setIndex(7))}
               >
-                <p className="font-bold text-sm sm:text-base">
-                  I want to apply for the Summer Internship (ISRA). What are the
-                  requirements for this program?
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  What achievements can be considered extra-curricular
+                  achievements?
                 </p>
                 {index == 7 ? (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleUp}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleDown}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 )}
@@ -307,17 +296,9 @@ export default function Home() {
                 hidden={index != 7}
               >
                 <p className="text-sm sm:text-base text-white">
-                  ISRA (International Summer Research Award) is completely a
-                  different program than SSGSA.
-                  <br />
-                  Through ISRA, motivated and eligible candidates enrolled at
-                  AMU are placed in Summer Research Internship Programs
-                  globally. Though we are not currently taking applications for
-                  ISRA, you can write to us at
-                  <span className="text-blue-400 cursor-pointer">
-                    &nbsp; contact@ssgsa.us &nbsp;
-                  </span>
-                  for more information and current status of the program.
+                  All non-academic achievements such as student organizations
+                  and competitions, projects, volunteering work, leadership
+                  roles, sports, etc are supposed to be co-curricular.
                 </p>
               </div>
             </div>
@@ -326,20 +307,21 @@ export default function Home() {
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
                 onClick={() => (index == 8 ? setIndex(0) : setIndex(8))}
               >
-                <p className="font-bold text-sm sm:text-base">
-                  After I become a successful SSGSA awardee, how long will the
-                  award remain valid?
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  How long does it take to get the applications reviewed?
                 </p>
                 {index == 8 ? (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleUp}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleDown}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 )}
@@ -350,12 +332,8 @@ export default function Home() {
                 hidden={index != 8}
               >
                 <p className="text-sm sm:text-base text-white">
-                  Generally the award remains valid for Two years after you have
-                  become an awardee.
-                  <br />
-                  For example, if you are a 2021 batch of SSGSA awardees, your
-                  award will terminate in 2023, 2 years from the date of the
-                  award.
+                  It will usually take a month depending on the number of
+                  applications we receive.
                 </p>
               </div>
             </div>
@@ -364,19 +342,21 @@ export default function Home() {
                 className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
                 onClick={() => (index == 9 ? setIndex(0) : setIndex(9))}
               >
-                <p className="font-bold text-sm sm:text-base">
-                  Who can I consider a referee?
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  How does an application is reviewed by SSGSA?
                 </p>
                 {index == 9 ? (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleUp}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleDown}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 )}
@@ -387,40 +367,33 @@ export default function Home() {
                 hidden={index != 9}
               >
                 <p className="text-sm sm:text-base text-white">
-                  Anyone who has been involved in a professional relationship
-                  with the scholar.
-                  <br />
-                  Examples are your manager (past or current) if you&apos;re
-                  working, your teachers at the university level (professors or
-                  lecturers), or any others including coaches and mentors etc.
-                  Please refrain from using connections as your referees whom
-                  you do not know (or have worked with) in any professional
-                  capacity.
-                  <br />
-                  Personal connections like friends and relatives do not qualify
-                  as valid referees.
+                  A group of panelists thoroughly review each application and
+                  then around 5-10 % of the applicants get shortlisted for an
+                  interview.
                 </p>
               </div>
             </div>
             <div>
               <div
-                className="flex justify-between px-3 py-3 border-2 border-red-850 cursor-pointer"
+                className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
                 onClick={() => (index == 10 ? setIndex(0) : setIndex(10))}
               >
-                <p className="font-bold text-sm sm:text-base">
-                  Is there any limitations on how many times I can apply for
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  Are there any limitations on how many times I can apply for
                   SSGSA?
                 </p>
                 {index == 10 ? (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleUp}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faArrowAltCircleDown}
                     size="lg"
+                    width={25}
                     className="ml-2 text-red-850"
                   />
                 )}
@@ -433,6 +406,114 @@ export default function Home() {
                 <p className="text-sm sm:text-base text-white">
                   No, currently there are no limitations on how many times you
                   can apply.
+                </p>
+              </div>
+            </div>
+            <div>
+              <div
+                className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
+                onClick={() => (index == 11 ? setIndex(0) : setIndex(11))}
+              >
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  What criteria are used to select candidates in the interview
+                  stage?
+                </p>
+                {index == 11 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    width={25}
+                    className="ml-2 text-red-850"
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    width={25}
+                    className="ml-2 text-red-850"
+                  />
+                )}
+              </div>
+              <div
+                id="answer"
+                className="bg-red-850 pl-3 py-3 pr-12"
+                hidden={index != 11}
+              >
+                <p className="text-sm sm:text-base text-white">
+                  The interviewers look for three basic aspects: technical
+                  knowledge, motivation to study abroad, and overall
+                  personality.
+                </p>
+              </div>
+            </div>
+            <div>
+              <div
+                className="flex justify-between px-3 py-3 border-2 border-b-0 border-red-850 cursor-pointer"
+                onClick={() => (index == 12 ? setIndex(0) : setIndex(12))}
+              >
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  Who will be on the interview panel?
+                </p>
+                {index == 12 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    width={25}
+                    className="ml-2 text-red-850"
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    width={25}
+                    className="ml-2 text-red-850"
+                  />
+                )}
+              </div>
+              <div
+                id="answer"
+                className="bg-red-850 pl-3 py-3 pr-12"
+                hidden={index != 12}
+              >
+                <p className="text-sm sm:text-base text-white">
+                  Each panel usually includes Professors from different US
+                  Universities, working individuals in US, and our past senior
+                  scholars.
+                </p>
+              </div>
+            </div>
+            <div>
+              <div
+                className="flex justify-between px-3 py-3 border-2 border-red-850 cursor-pointer"
+                onClick={() => (index == 13 ? setIndex(0) : setIndex(13))}
+              >
+                <p className="font-bold text-sm sm:text-base w-11/12">
+                  How many total students have been selected every year?
+                </p>
+                {index == 13 ? (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleUp}
+                    size="lg"
+                    width={25}
+                    className="ml-2 text-red-850"
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faArrowAltCircleDown}
+                    size="lg"
+                    width={25}
+                    className="ml-2 text-red-850"
+                  />
+                )}
+              </div>
+              <div
+                id="answer"
+                className="bg-red-850 pl-3 py-3 pr-12"
+                hidden={index != 13}
+              >
+                <p className="text-sm sm:text-base text-white">
+                  We usually select 25-30 students every year depending on the
+                  available funds.
                 </p>
               </div>
             </div>
