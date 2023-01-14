@@ -71,13 +71,11 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
   const workshopRequired = (workshop: PosterOrWorkshopsType[number]) =>
     !(!workshop.title && !workshop.description && !workshop.document)
 
-  // Check if user provide some input, then do validation and show error if any
-  // otherwise submit valid workshops and remove invalids
-  const nextStep = () => {
+  const validation = () => {
     setError('')
+
     // Save all valid workshops
     let workshopsTemp: PosterOrWorkshopsType = {}
-
     const keys = Object.keys(workshops)
     for (let i = 0; i < keys.length; i++) {
       const workshop = workshops[Number(keys[i])]
@@ -100,7 +98,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
                 String(i + 1) +
                 ' or Remove that Poster/Workshop/Summer School if not needed.',
             )
-            return
+            return false
           }
         } else {
           setError(
@@ -108,12 +106,20 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
               String(i + 1) +
               ' or Remove that Poster/Workshop/Summer School if not needed.',
           )
-          return
+          return false
         }
     }
+    setWorkshops(workshopsTemp)
+    return true
+  }
+
+  // Check if user provide some input, then do validation and show error if any
+  // otherwise submit valid workshops and remove invalids
+  const nextStep = () => {
+    if (!validation) return
 
     if (status === applicationData.form_status)
-      updateApplicationData(authUser.id, workshopsTemp, 6)
+      updateApplicationData(authUser.id, workshops, 6)
         .then(() => {
           deleteDocuments(deletedDocuments)
           setStatus(6)
@@ -122,11 +128,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
           setError('Try again, network error!')
         })
     else
-      updateApplicationData(
-        authUser.id,
-        workshopsTemp,
-        applicationData.form_status,
-      )
+      updateApplicationData(authUser.id, workshops, applicationData.form_status)
         .then(() => {
           deleteDocuments(deletedDocuments)
           setStatus(6)
@@ -286,6 +288,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
         previousStep={previousStep}
         nextStep={nextStep}
         saveInformation={saveInformation}
+        saveConditionCheck={validation}
         error={error}
         setError={setError}
       />

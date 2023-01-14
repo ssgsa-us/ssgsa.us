@@ -98,15 +98,16 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
     record.grades &&
     record.document
 
-  const nextStep = () => {
+  const validation = () => {
     setError('')
     // Bachelor variable to check if there ia bachelor degree or not
     let bachelor = false
     // Duration variable to check the eligibility of user
     let duration = 0
-    const records = Object.values(academicData)
+
     // check all fields and show error if any field is not present or if extra
     // degree is added ask to remove that.
+    const records = Object.values(academicData)
     for (let i = 0; i < records.length; i++) {
       if (checkAllFields(records[i])) {
         if (records[i].degreeLevel === 'Bachelor') bachelor = true
@@ -136,16 +137,26 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
           setError(
             'Degree Level and Name are not provided in some records. Either update it or Remove the extra degree you have added.',
           )
-        return
+        return false
       }
     }
 
-    if (!bachelor) setError('At least 1 Bachelor degree required')
-    else if (duration < 4)
+    if (!bachelor) {
+      setError('At least 1 Bachelor degree required')
+      return false
+    } else if (duration < 4) {
       setError(
         'Check Eligibility Criteria, at least 4 year bachelor program or 3 year bachelor program with master program is required.',
       )
-    else if (status === applicationData.form_status)
+      return false
+    }
+    return true
+  }
+
+  const nextStep = () => {
+    if (!validation) return
+
+    if (status === applicationData.form_status)
       updateApplicationData(authUser.id, academicData, 3)
         .then(() => {
           deleteDocuments(deletedDocuments)
@@ -411,6 +422,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
         previousStep={previousStep}
         nextStep={nextStep}
         saveInformation={saveInformation}
+        saveConditionCheck={validation}
         error={error}
         setError={setError}
       />

@@ -53,7 +53,7 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
     setAnswers(applicationData.sop_answers || {})
   }, [applicationData])
 
-  const nextStep = () => {
+  const validation = () => {
     setError('')
     if (
       answers['SOP1'] &&
@@ -80,43 +80,54 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
               answers['SOP5'].split(' ').length >= 1 &&
               answers['SOP5'].split(' ').length <= 200
             ) {
-              if (applicationData.form_status == 8) {
-                updateApplicationData(authUser.id, answers, 9)
-                  .then(() => {
-                    setStatus(9)
-                  })
-                  .catch(() => {
-                    setError('Try again, network error!')
-                  })
-              } else {
-                saveInformation()
-                  .then(() => {
-                    setStatus(9)
-                  })
-                  .catch(() => {
-                    setError('Try again, network error!')
-                  })
-              }
-            } else
-              setError(
-                'For Question e, your response must be between 1 word and 200 words',
-              )
-          } else
+              return true
+            }
             setError(
-              'For Question d, your response must be between 1 word and 200 words',
+              'For Question e, your response must be between 1 word and 200 words',
             )
-        } else
+            return false
+          }
           setError(
-            'For Question c, your response must be between 1 word and 200 words',
+            'For Question d, your response must be between 1 word and 200 words',
           )
-      } else
+          return false
+        }
         setError(
-          'For Question b, your response must be between 1 word and 200 words',
+          'For Question c, your response must be between 1 word and 200 words',
         )
-    } else
+        return false
+      }
       setError(
-        'For Question a, your response must be between 1 word and 200 words',
+        'For Question b, your response must be between 1 word and 200 words',
       )
+      return false
+    }
+    setError(
+      'For Question a, your response must be between 1 word and 200 words',
+    )
+    return false
+  }
+
+  const nextStep = () => {
+    if (!validation) return
+
+    if (applicationData.form_status == 8) {
+      updateApplicationData(authUser.id, answers, 9)
+        .then(() => {
+          setStatus(9)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+        })
+    } else {
+      saveInformation()
+        .then(() => {
+          setStatus(9)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+        })
+    }
   }
 
   const previousStep = () => setStatus(7)
@@ -161,6 +172,7 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
         previousStep={previousStep}
         nextStep={nextStep}
         saveInformation={saveInformation}
+        saveConditionCheck={validation}
         error={error}
         setError={setError}
       />

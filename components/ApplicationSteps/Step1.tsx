@@ -39,7 +39,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
     setTargetCountry(applicationData.target_country || '')
   }, [applicationData])
 
-  const nextStep = () => {
+  const validation = () => {
     setError('')
     if (
       name &&
@@ -52,36 +52,43 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       targetDate &&
       targetCountry
     ) {
-      if (applicationData.form_status == 1) {
-        updateApplicationData(
-          authUser.id,
-          name,
-          enrollNo,
-          currentPosition,
-          targetProgram,
-          faculty,
-          otherFaculty,
-          targetDate,
-          targetCountry,
-          enrollProofDoc,
-          2,
-        )
-          .then(() => {
-            setStatus(2)
-          })
-          .catch(() => {
-            setError('Try again, network error!')
-          })
-      } else {
-        saveInformation()
-          .then(() => {
-            setStatus(2)
-          })
-          .catch(() => {
-            setError('Try again, network error!')
-          })
-      }
-    } else setError('All fields are required.')
+      return true
+    }
+    setError('All fields are required.')
+    return false
+  }
+
+  const nextStep = () => {
+    if (!validation) return
+
+    if (applicationData.form_status == 1)
+      updateApplicationData(
+        authUser.id,
+        name,
+        enrollNo,
+        currentPosition,
+        targetProgram,
+        faculty,
+        otherFaculty,
+        targetDate,
+        targetCountry,
+        enrollProofDoc,
+        2,
+      )
+        .then(() => {
+          setStatus(2)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+        })
+    else
+      saveInformation()
+        .then(() => {
+          setStatus(2)
+        })
+        .catch(() => {
+          setError('Try again, network error!')
+        })
   }
 
   const previousStep = () => setStatus(1)
@@ -210,6 +217,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
         formStatus={applicationData.form_status}
         previousStep={previousStep}
         nextStep={nextStep}
+        saveConditionCheck={validation}
         saveInformation={saveInformation}
         error={error}
         setError={setError}

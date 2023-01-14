@@ -144,6 +144,7 @@ const Step6 = ({ applicationData, status, setStatus }: Props) => {
         previousStep={previousStep}
         nextStep={nextStep}
         saveInformation={saveInformation}
+        saveConditionCheck={() => true}
         error={error}
         setError={setError}
       />

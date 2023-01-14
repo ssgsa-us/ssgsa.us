@@ -10,6 +10,7 @@ type Props = {
   formStatus: number
   previousStep: () => void
   nextStep: () => void
+  saveConditionCheck: () => boolean
   saveInformation: () => Promise<void>
   error: string
   setError: Dispatch<SetStateAction<string>>
@@ -20,6 +21,7 @@ const ProceedButtons = ({
   formStatus,
   previousStep,
   nextStep,
+  saveConditionCheck,
   saveInformation,
   error,
   setError,
@@ -61,11 +63,11 @@ const ProceedButtons = ({
           </button>
         </div>
         <button
-          className={`text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg order-1 sm:order-2 ${
-            status == formStatus ? null : 'bg-red-860 cursor-not-allowed'
-          }`}
+          className={
+            'text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg order-1 sm:order-2'
+          }
           onClick={() => {
-            if (status == formStatus)
+            if (status == formStatus || saveConditionCheck())
               saveInformation()
                 .then(() => alert('Your data is saved!'))
                 .catch(() => setError('Try again, network error!'))

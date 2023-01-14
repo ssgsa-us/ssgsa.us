@@ -77,13 +77,11 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
       !experience.document
     )
 
-  // Check if user provide some input, then do validation and show error if any
-  // otherwise submit valid experiences and remove invalids
-  const nextStep = () => {
+  const validation = () => {
     setError('')
+
     // Save all valid experiences
     let experiences: WorkExperiencesType = {}
-
     const keys = Object.keys(workExperiences)
     for (let i = 0; i < keys.length; i++) {
       const experience = workExperiences[Number(keys[i])]
@@ -107,7 +105,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
                 String(i + 1) +
                 ' or Remove that experience if not needed.',
             )
-            return
+            return false
           }
         } else {
           setError(
@@ -115,12 +113,20 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
               String(i + 1) +
               ' or Remove that experience if not needed.',
           )
-          return
+          return false
         }
     }
+    setWorkExperiences(experiences)
+    return true
+  }
+
+  // Check if user provide some input, then do validation and show error if any
+  // otherwise submit valid experiences and remove invalids
+  const nextStep = () => {
+    if (!validation) return
 
     if (status === applicationData.form_status)
-      updateApplicationData(authUser.id, experiences, 5)
+      updateApplicationData(authUser.id, workExperiences, 5)
         .then(() => {
           deleteDocuments(deletedDocuments)
           setStatus(5)
@@ -131,7 +137,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
     else
       updateApplicationData(
         authUser.id,
-        experiences,
+        workExperiences,
         applicationData.form_status,
       )
         .then(() => {
@@ -315,6 +321,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
         previousStep={previousStep}
         nextStep={nextStep}
         saveInformation={saveInformation}
+        saveConditionCheck={validation}
         error={error}
         setError={setError}
       />

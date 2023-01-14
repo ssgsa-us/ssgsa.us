@@ -20,20 +20,26 @@ const Step9 = ({ applicationData, status, setStatus }: Props) => {
     setOtherInfo(applicationData.other_information || '')
   }, [applicationData])
 
-  const nextStep = () => {
+  const validation = () => {
     setError('')
-    if (otherInfo.split(' ').length >= 200)
+    if (otherInfo.split(' ').length >= 200) {
       setError('Please provide response in 200 words')
-    else {
-      if (applicationData.form_status === 9)
-        updateApplicationData(authUser.id, otherInfo, 10)
-          .then(() => setStatus(10))
-          .catch(() => setError('Try again, network error!'))
-      else
-        saveInformation()
-          .then(() => setStatus(10))
-          .catch(() => setError('Try again, network error!'))
+      return false
     }
+    return true
+  }
+
+  const nextStep = () => {
+    if (!validation) return
+
+    if (applicationData.form_status === 9)
+      updateApplicationData(authUser.id, otherInfo, 10)
+        .then(() => setStatus(10))
+        .catch(() => setError('Try again, network error!'))
+    else
+      saveInformation()
+        .then(() => setStatus(10))
+        .catch(() => setError('Try again, network error!'))
   }
 
   const previousStep = () => setStatus(8)
@@ -79,6 +85,7 @@ const Step9 = ({ applicationData, status, setStatus }: Props) => {
           previousStep={previousStep}
           nextStep={nextStep}
           saveInformation={saveInformation}
+          saveConditionCheck={validation}
           error={error}
           setError={setError}
         />
