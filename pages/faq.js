@@ -68,7 +68,7 @@ export default function Home() {
                     enrolled in the first year of a Master&apos;s program.
                   </li>
                   <li className="my-2">
-                    You wish to apply for a Master's or PhD degree at a
+                    You wish to apply for a Master&apos;s or PhD degree at a
                     university of international repute outside India within the
                     next 2 academic years.
                   </li>
