@@ -199,14 +199,13 @@ export default function Portal() {
           </ol>
           <p className="pl-5 pt-5 text-sm">
             Note: The SSGSA portal functions best with Google Chrome and Firefox
-            browsers.
-            {/* Please watch our{' '}
-            <Link href="/faq">
-              <a className="text-blue-800 underline font-black">
+            browsers. Please watch our{' '}
+            <Link href="https://www.youtube.com/watch?v=aNTXrDwlMZE">
+              <a className="text-blue-800 underline font-black" target="_blank">
                 SSGSA application video tutorial
               </a>
             </Link>{' '}
-            in case of any doubt. */}
+            in case of any doubt.
           </p>
         </div>
 
