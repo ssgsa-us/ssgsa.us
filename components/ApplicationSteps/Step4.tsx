@@ -165,10 +165,14 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Work Experience
         </h1>
-        <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
+        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
           If you have any job/work (non-research) experience in any company or
           industry, industry-based internships, etc., please include them
           starting with the most recent one.
+        </p>
+        <p className="text-xs sm:text-sm md:text-base pl-2 py-1">
+          Please click on the REMOVE button if you don&apos;t have any entry to
+          put here.
         </p>
         <p className="text-xs sm:text-sm md:text-base text-red-850 pl-2 py-2">
           Note: Remember to save your information at frequent intervals.

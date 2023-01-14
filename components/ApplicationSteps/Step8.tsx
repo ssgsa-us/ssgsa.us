@@ -136,7 +136,7 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Essay-Type Questions
         </h1>
-        <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
+        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
           Please answer the following questions. Each has a limit of 200 words.
           The answers should be your original. Obtaining them from others,
           whether from current or past SSGSA applicants, or from the internet

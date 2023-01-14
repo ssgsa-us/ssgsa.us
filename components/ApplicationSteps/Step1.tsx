@@ -164,7 +164,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
           required={true}
         />
         <SelectInput
-          name="In which of the following faculty (most relevant) does your program of intent abroad fall?"
+          name="In which of the following faculty (most relevant) does your target program fall?"
           value={faculty}
           options={[
             { label: 'Select', value: '' },

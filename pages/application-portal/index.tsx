@@ -194,7 +194,7 @@ export default function Portal() {
               </span>
             </li>
             <li className="pl-5">
-              Motivation to stay abroad as gauged from Essay-Type Questions.
+              Motivation to study abroad, gauged from Essay-Type Questions.
             </li>
           </ol>
           <p className="pl-5 pt-5 text-sm">

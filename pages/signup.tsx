@@ -57,7 +57,7 @@ const SignUp = () => {
                     mobile,
                     new Date().getTime(),
                   )
-                  
+
                   // create application data for user
                   createApplicationData(result.user.uid, email, mobile)
                 })

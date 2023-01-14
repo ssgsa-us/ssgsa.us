@@ -88,7 +88,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
           workshop.category != '' &&
           (workshop.category === 'Other' ? !!workshop.otherCategory : true) &&
           workshop.title &&
-          workshop.duration &&
+          (workshop.category === 'Poster' || workshop.duration) &&
           workshop.description
         ) {
           if (workshop.description.split(' ').length <= 50) {
@@ -158,7 +158,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Poster Presentation/ Workshops/ Summer School
         </h1>
-        <p className="text-xs sm:text-sm md:text-base pl-2 pt-2">
+        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
           List all your most recent Poster Presentations, Workshops, or Summer
           Schools. If you have mentioned anything in preceding sections, please
           do not repeat that here. For example, if you have already included
@@ -230,10 +230,14 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
               />
               <TextInput
                 name="Year(s) Attended and Duration"
+                description="(Note: You don't have to mention the duration for Poster Presentation)"
                 value={workshops[key].duration}
                 type="text"
                 onChange={(e) => updateField(key, 'duration', e.target.value)}
-                required={workshopRequired(workshops[key])}
+                required={
+                  workshopRequired(workshops[key]) &&
+                  workshops[key].category !== 'Poster'
+                }
               />
               <Textarea
                 name="Description"
