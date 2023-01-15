@@ -98,15 +98,16 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
     record.grades &&
     record.document
 
-  const nextStep = () => {
+  const validation = () => {
     setError('')
     // Bachelor variable to check if there ia bachelor degree or not
     let bachelor = false
     // Duration variable to check the eligibility of user
     let duration = 0
-    const records = Object.values(academicData)
+
     // check all fields and show error if any field is not present or if extra
     // degree is added ask to remove that.
+    const records = Object.values(academicData)
     for (let i = 0; i < records.length; i++) {
       if (checkAllFields(records[i])) {
         if (records[i].degreeLevel === 'Bachelor') bachelor = true
@@ -136,48 +137,33 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
           setError(
             'Degree Level and Name are not provided in some records. Either update it or Remove the extra degree you have added.',
           )
-        return
+        return false
       }
     }
 
-    if (!bachelor) setError('At least 1 Bachelor degree required')
-    else if (duration < 4)
+    if (!bachelor) {
+      setError('At least 1 Bachelor degree required')
+      return false
+    } else if (duration < 4) {
       setError(
         'Check Eligibility Criteria, at least 4 year bachelor program or 3 year bachelor program with master program is required.',
       )
-    else if (status === applicationData.form_status)
-      updateApplicationData(authUser.id, academicData, 3)
-        .then(() => {
-          deleteDocuments(deletedDocuments)
-          setStatus(3)
-        })
-        .catch(() => {
-          setError('Try again, network error!')
-        })
-    else
-      saveInformation()
-        .then(() => {
-          setStatus(3)
-        })
-        .catch(() => {
-          setError('Try again, network error!')
-        })
+      return false
+    }
+    return true
   }
 
-  const previousStep = () => {
-    setStatus(1)
-  }
-
-  const saveInformation = () => {
-    setError('')
-    return updateApplicationData(
-      authUser.id,
-      academicData,
-      applicationData.form_status,
-    ).then(() => {
-      deleteDocuments(deletedDocuments)
-      setDeletedDocuments([])
-    })
+  // Used in next step and save information
+  // Call updateApplicationData with required fields and a dynamic status (newStatus)
+  // newStatus will be provided depends upon the formStatus and the current status
+  // if both are equal newStatus will be status+1 otherwise formStatus
+  const updateData = (newStatus: number) => {
+    return updateApplicationData(authUser.id, academicData, newStatus).then(
+      () => {
+        deleteDocuments(deletedDocuments)
+        setDeletedDocuments([])
+      },
+    )
   }
 
   return (
@@ -406,11 +392,11 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
         Add a Degree +
       </p>
       <ProceedButtons
-        status={status}
         formStatus={applicationData.form_status}
-        previousStep={previousStep}
-        nextStep={nextStep}
-        saveInformation={saveInformation}
+        status={status}
+        setStatus={setStatus}
+        validation={validation}
+        updateApplicationData={updateData}
         error={error}
         setError={setError}
       />

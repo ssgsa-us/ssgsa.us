@@ -39,7 +39,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
     setTargetCountry(applicationData.target_country || '')
   }, [applicationData])
 
-  const nextStep = () => {
+  const validation = () => {
     setError('')
     if (
       name &&
@@ -52,42 +52,17 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       targetDate &&
       targetCountry
     ) {
-      if (applicationData.form_status == 1) {
-        updateApplicationData(
-          authUser.id,
-          name,
-          enrollNo,
-          currentPosition,
-          targetProgram,
-          faculty,
-          otherFaculty,
-          targetDate,
-          targetCountry,
-          enrollProofDoc,
-          2,
-        )
-          .then(() => {
-            setStatus(2)
-          })
-          .catch(() => {
-            setError('Try again, network error!')
-          })
-      } else {
-        saveInformation()
-          .then(() => {
-            setStatus(2)
-          })
-          .catch(() => {
-            setError('Try again, network error!')
-          })
-      }
-    } else setError('All fields are required.')
+      return true
+    }
+    setError('All fields are required.')
+    return false
   }
 
-  const previousStep = () => setStatus(1)
-
-  const saveInformation = () => {
-    setError('')
+  // Used in next step and save information
+  // Call updateApplicationData with required fields and a dynamic status (newStatus)
+  // newStatus will be provided depends upon the formStatus and the current status
+  // if both are equal newStatus will be status+1 otherwise formStatus
+  const updateData = (newStatus: number) => {
     return updateApplicationData(
       authUser.id,
       name,
@@ -99,7 +74,7 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
       targetDate,
       targetCountry,
       enrollProofDoc,
-      applicationData.form_status,
+      newStatus,
     )
   }
 
@@ -206,11 +181,11 @@ const Step1 = ({ applicationData, status, setStatus }: Props) => {
         />
       </div>
       <ProceedButtons
-        status={status}
         formStatus={applicationData.form_status}
-        previousStep={previousStep}
-        nextStep={nextStep}
-        saveInformation={saveInformation}
+        status={status}
+        setStatus={setStatus}
+        validation={validation}
+        updateApplicationData={updateData}
         error={error}
         setError={setError}
       />

@@ -31,16 +31,16 @@ const Step10 = ({ applicationData, status, setStatus }: Props) => {
 
   const submitApplication = () => {
     setError('')
-    updateApplicationData(authUser.id, 11)
+    updateApplicationData(authUser.id, status + 1)
       .then(() => {
-        setStatus(11)
+        setStatus(status + 1)
       })
       .catch(() => {
         setError('Try again, network error!')
       })
   }
 
-  const previousStep = () => setStatus(9)
+  const previousStep = () => setStatus(status - 1)
 
   return (
     <div className="w-full">

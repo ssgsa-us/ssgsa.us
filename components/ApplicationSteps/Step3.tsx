@@ -115,13 +115,11 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
       !experience.description
     )
 
-  // Check if user provide some input, then do validation and show error if any
-  // otherwise submit valid experiences and remove invalids
-  const nextStep = () => {
+  const validation = () => {
     setError('')
+
     // Save all valid experiences
     let experiences: ResearchExperiencesType = {}
-
     const keys = Object.keys(researchData)
     for (let i = 0; i < keys.length; i++) {
       const experience = researchData[Number(keys[i])]
@@ -162,7 +160,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                       String(i + 1) +
                       ' or Remove that publication if not needed.',
                   )
-                  return
+                  return false
                 }
               }
             }
@@ -178,7 +176,7 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                 String(i + 1) +
                 ' or Remove that experience if not needed.',
             )
-            return
+            return false
           }
         } else {
           setError(
@@ -186,43 +184,19 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
               String(i + 1) +
               ' or Remove that experience if not needed.',
           )
-          return
+          return false
         }
     }
-
-    if (status === applicationData.form_status)
-      updateApplicationData(authUser.id, experiences, 4)
-        .then(() => {
-          setStatus(4)
-        })
-        .catch(() => {
-          setError('Try again, network error!')
-        })
-    else
-      updateApplicationData(
-        authUser.id,
-        experiences,
-        applicationData.form_status,
-      )
-        .then(() => {
-          setStatus(4)
-        })
-        .catch(() => {
-          setError('Try again, network error!')
-        })
+    setResearchData(experiences)
+    return true
   }
 
-  const previousStep = () => {
-    setStatus(2)
-  }
-
-  const saveInformation = () => {
-    setError('')
-    return updateApplicationData(
-      authUser.id,
-      researchData,
-      applicationData.form_status,
-    )
+  // Used in next step and save information
+  // Call updateApplicationData with required fields and a dynamic status (newStatus)
+  // newStatus will be provided depends upon the formStatus and the current status
+  // if both are equal newStatus will be status+1 otherwise formStatus
+  const updateData = (newStatus: number) => {
+    return updateApplicationData(authUser.id, researchData, newStatus)
   }
 
   return (
@@ -490,11 +464,11 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
         Add another Experience +
       </p>
       <ProceedButtons
-        status={status}
         formStatus={applicationData.form_status}
-        previousStep={previousStep}
-        nextStep={nextStep}
-        saveInformation={saveInformation}
+        status={status}
+        setStatus={setStatus}
+        validation={validation}
+        updateApplicationData={updateData}
         error={error}
         setError={setError}
       />

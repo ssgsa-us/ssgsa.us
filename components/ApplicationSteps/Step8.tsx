@@ -53,7 +53,7 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
     setAnswers(applicationData.sop_answers || {})
   }, [applicationData])
 
-  const nextStep = () => {
+  const validation = () => {
     setError('')
     if (
       answers['SOP1'] &&
@@ -80,54 +80,40 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
               answers['SOP5'].split(' ').length >= 1 &&
               answers['SOP5'].split(' ').length <= 200
             ) {
-              if (applicationData.form_status == 8) {
-                updateApplicationData(authUser.id, answers, 9)
-                  .then(() => {
-                    setStatus(9)
-                  })
-                  .catch(() => {
-                    setError('Try again, network error!')
-                  })
-              } else {
-                saveInformation()
-                  .then(() => {
-                    setStatus(9)
-                  })
-                  .catch(() => {
-                    setError('Try again, network error!')
-                  })
-              }
-            } else
-              setError(
-                'For Question e, your response must be between 1 word and 200 words',
-              )
-          } else
+              return true
+            }
             setError(
-              'For Question d, your response must be between 1 word and 200 words',
+              'For Question e, your response must be between 1 word and 200 words',
             )
-        } else
+            return false
+          }
           setError(
-            'For Question c, your response must be between 1 word and 200 words',
+            'For Question d, your response must be between 1 word and 200 words',
           )
-      } else
+          return false
+        }
         setError(
-          'For Question b, your response must be between 1 word and 200 words',
+          'For Question c, your response must be between 1 word and 200 words',
         )
-    } else
+        return false
+      }
       setError(
-        'For Question a, your response must be between 1 word and 200 words',
+        'For Question b, your response must be between 1 word and 200 words',
       )
+      return false
+    }
+    setError(
+      'For Question a, your response must be between 1 word and 200 words',
+    )
+    return false
   }
 
-  const previousStep = () => setStatus(7)
-
-  const saveInformation = () => {
-    setError('')
-    return updateApplicationData(
-      authUser.id,
-      answers,
-      applicationData.form_status,
-    )
+  // Used in next step and save information
+  // Call updateApplicationData with required fields and a dynamic status (newStatus)
+  // newStatus will be provided depends upon the formStatus and the current status
+  // if both are equal newStatus will be status+1 otherwise formStatus
+  const updateData = (newStatus: number) => {
+    return updateApplicationData(authUser.id, answers, newStatus)
   }
 
   return (
@@ -156,11 +142,11 @@ const Step8 = ({ applicationData, status, setStatus }: Props) => {
         {questionComponent(5, process.env.NEXT_PUBLIC_QUESTION_5)}
       </div>
       <ProceedButtons
-        status={status}
         formStatus={applicationData.form_status}
-        previousStep={previousStep}
-        nextStep={nextStep}
-        saveInformation={saveInformation}
+        status={status}
+        setStatus={setStatus}
+        validation={validation}
+        updateApplicationData={updateData}
         error={error}
         setError={setError}
       />

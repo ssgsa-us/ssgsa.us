@@ -5,22 +5,26 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dispatch, SetStateAction } from 'react'
 
+// updateApplicationData function: Used in next step and save information
+// Call updateApplicationData with required fields and a dynamic status (newStatus)
+// newStatus will be provided depends upon the formStatus and the current status
+// if both are equal newStatus will be status+1 otherwise formStatus
 type Props = {
-  status: number
   formStatus: number
-  previousStep: () => void
-  nextStep: () => void
-  saveInformation: () => Promise<void>
+  status: number
+  setStatus: Dispatch<SetStateAction<number>>
+  validation: () => boolean
+  updateApplicationData: (newStatus: number) => Promise<void>
   error: string
   setError: Dispatch<SetStateAction<string>>
 }
 
 const ProceedButtons = ({
-  status,
   formStatus,
-  previousStep,
-  nextStep,
-  saveInformation,
+  status,
+  setStatus,
+  validation,
+  updateApplicationData,
   error,
   setError,
 }: Props) => {
@@ -39,7 +43,7 @@ const ProceedButtons = ({
             className={`text-white text-base md:text-lg ${
               status == 1 ? 'bg-blue-860 cursor-not-allowed' : 'bg-blue-850'
             } mr-2 py-2 px-2 rounded-lg flex flex-row items-center`}
-            onClick={status !== 1 ? previousStep : null}
+            onClick={() => (status !== 1 ? setStatus(status - 1) : null)}
           >
             <FontAwesomeIcon
               icon={faArrowAltCircleLeft}
@@ -50,7 +54,18 @@ const ProceedButtons = ({
           </button>
           <button
             className="text-white text-base md:text-lg bg-blue-850 ml-2 py-2 px-2 rounded-lg flex flex-row items-center"
-            onClick={nextStep}
+            onClick={() => {
+              if (!validation()) return
+
+              if (formStatus === status)
+                updateApplicationData(status + 1)
+                  .then(() => setStatus(status + 1))
+                  .catch(() => setError('Try again, network error!'))
+              else
+                updateApplicationData(formStatus)
+                  .then(() => setStatus(status + 1))
+                  .catch(() => setError('Try again, network error!'))
+            }}
           >
             <p className="mr-2">Save And Proceed</p>
             <FontAwesomeIcon
@@ -61,12 +76,13 @@ const ProceedButtons = ({
           </button>
         </div>
         <button
-          className={`text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg order-1 sm:order-2 ${
-            status == formStatus ? null : 'bg-red-860 cursor-not-allowed'
-          }`}
+          className={
+            'text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg order-1 sm:order-2'
+          }
           onClick={() => {
-            if (status == formStatus)
-              saveInformation()
+            setError('')
+            if (status == formStatus || validation())
+              updateApplicationData(formStatus)
                 .then(() => alert('Your data is saved!'))
                 .catch(() => setError('Try again, network error!'))
           }}

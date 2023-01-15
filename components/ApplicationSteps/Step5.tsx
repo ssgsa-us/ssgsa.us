@@ -71,13 +71,11 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
   const workshopRequired = (workshop: PosterOrWorkshopsType[number]) =>
     !(!workshop.title && !workshop.description && !workshop.document)
 
-  // Check if user provide some input, then do validation and show error if any
-  // otherwise submit valid workshops and remove invalids
-  const nextStep = () => {
+  const validation = () => {
     setError('')
+
     // Save all valid workshops
     let workshopsTemp: PosterOrWorkshopsType = {}
-
     const keys = Object.keys(workshops)
     for (let i = 0; i < keys.length; i++) {
       const workshop = workshops[Number(keys[i])]
@@ -100,7 +98,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
                 String(i + 1) +
                 ' or Remove that Poster/Workshop/Summer School if not needed.',
             )
-            return
+            return false
           }
         } else {
           setError(
@@ -108,45 +106,19 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
               String(i + 1) +
               ' or Remove that Poster/Workshop/Summer School if not needed.',
           )
-          return
+          return false
         }
     }
-
-    if (status === applicationData.form_status)
-      updateApplicationData(authUser.id, workshopsTemp, 6)
-        .then(() => {
-          deleteDocuments(deletedDocuments)
-          setStatus(6)
-        })
-        .catch(() => {
-          setError('Try again, network error!')
-        })
-    else
-      updateApplicationData(
-        authUser.id,
-        workshopsTemp,
-        applicationData.form_status,
-      )
-        .then(() => {
-          deleteDocuments(deletedDocuments)
-          setStatus(6)
-        })
-        .catch(() => {
-          setError('Try again, network error!')
-        })
+    setWorkshops(workshopsTemp)
+    return true
   }
 
-  const previousStep = () => {
-    setStatus(4)
-  }
-
-  const saveInformation = () => {
-    setError('')
-    return updateApplicationData(
-      authUser.id,
-      workshops,
-      applicationData.form_status,
-    ).then(() => {
+  // Used in next step and save information
+  // Call updateApplicationData with required fields and a dynamic status (newStatus)
+  // newStatus will be provided depends upon the formStatus and the current status
+  // if both are equal newStatus will be status+1 otherwise formStatus
+  const updateData = (newStatus: number) => {
+    return updateApplicationData(authUser.id, workshops, newStatus).then(() => {
       deleteDocuments(deletedDocuments)
       setDeletedDocuments([])
     })
@@ -281,11 +253,11 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
         Add an Experience +
       </p>
       <ProceedButtons
-        status={status}
         formStatus={applicationData.form_status}
-        previousStep={previousStep}
-        nextStep={nextStep}
-        saveInformation={saveInformation}
+        status={status}
+        setStatus={setStatus}
+        validation={validation}
+        updateApplicationData={updateData}
         error={error}
         setError={setError}
       />
