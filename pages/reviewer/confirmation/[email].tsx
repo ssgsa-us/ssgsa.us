@@ -29,7 +29,8 @@ function ReviewerConfirmation() {
           setError(
             "Sorry, we don't have your data. Please contact at contact@ssgsa.us",
           )
-        else if (invite.response) setError('You have already responded.')
+        else if (invite.response === 'YES')
+          setError("You have already responded to 'YES'.")
         else setReviewerInvite(invite)
       })
       .catch(() => setError('Network issue, Try Again!'))
