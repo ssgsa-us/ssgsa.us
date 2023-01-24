@@ -101,13 +101,12 @@ function ReviewerConfirmation() {
         </h1>
         <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10">
           <p className="my-5 text-sm sm:text-lg text-blue-850">
-            Please provide your confirmation by clicking &apos;YES&apos; or
-            &apos;NO&apos; button below.
+            If you agree to review SSGSA Applications this year, please first
+            create a PASSWORD for creating your account and then click on the
+            YES button otherwise click on the NO button directly.
           </p>
           <p className="my-5 text-sm sm:text-lg text-blue-850">
-            Please provide PASSWORD for creating your account before clicking on
-            &apos;YES&apos; button. You will be able to change your password
-            anytime.
+            Note: You will be able to reset your password anytime.
           </p>
           {error ? (
             <p className="text-red-850 text-center pt-1">
