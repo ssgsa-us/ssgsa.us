@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import { auth } from '../../firebase'
-import { updateReviewMarks } from '../../pages/api/updateReviewMarks'
 
 type Application = {
   applicationData: ApplicationData
@@ -51,18 +50,6 @@ export default function ApplicationRow({
       </td>
       <td className="border border-blue-850 p-2">
         {application.applicationData.contact}
-      </td>
-      <td className="border border-blue-850 p-2">
-        {
-          application.applicationData.academic_record["Bachelor's Degree"]
-            .branch
-        }
-      </td>
-      <td className="border border-blue-850 p-2">
-        {application.applicationData.academic_record["Master's Degree"]
-          ? application.applicationData.academic_record["Master's Degree"]
-              .branch
-          : '-'}
       </td>
       <td className="border border-blue-850 p-2 text-center">
         <Link href={`/reviewer/view-application/${applicationId}`}>
@@ -153,35 +140,6 @@ export default function ApplicationRow({
       </td>
       <td className="border border-blue-850 p-2 text-center">
         {A + B + C + D + E}
-      </td>
-      <td className="border border-blue-850 p-2 text-center">
-        <button
-          className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
-            application.adminPortalData.application_status >= 5 ||
-            (!A && !B && !C && !D && !E)
-              ? 'bg-red-860 cursor-not-allowed'
-              : 'bg-red-850'
-          }`}
-          onClick={() =>
-            application.adminPortalData.application_status >= 5 ||
-            (!A && !B && !C && !D && !E)
-              ? null
-              : updateReviewMarks(
-                  applicationId,
-                  auth.currentUser.uid,
-                  A,
-                  B,
-                  C,
-                  D,
-                  E,
-                  3,
-                )
-                  .then(() => alert('Succesfully Updated'))
-                  .catch(() => alert('Try again, network error!'))
-          }
-        >
-          Update
-        </button>
       </td>
     </tr>
   )

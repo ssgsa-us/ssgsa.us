@@ -77,19 +77,10 @@ function ReviewerApplications() {
                       Phone Number
                     </th>
                     <th className="border border-blue-850 p-2" rowSpan={2}>
-                      Bachelor&apos;s Major/Branch
-                    </th>
-                    <th className="border border-blue-850 p-2" rowSpan={2}>
-                      Master&apos;s Major/Branch
-                    </th>
-                    <th className="border border-blue-850 p-2" rowSpan={2}>
                       View Completed Applications
                     </th>
                     <th className="border border-blue-850 p-2" colSpan={6}>
                       Review Marks
-                    </th>
-                    <th className="border border-blue-850 p-2" rowSpan={2}>
-                      Update Marks
                     </th>
                   </tr>
                   <tr>
