@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import * as XLSX from 'xlsx'
+import requireAuth from '../../../components/requireAuth'
+import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import { addReviewerInvite } from '../../api/reviewerInvite'
 
-export default function InviteReviewers() {
+function InviteReviewers() {
   const [file, setFile] = useState<File>()
 
   const proceed = () => {
@@ -27,7 +29,7 @@ export default function InviteReviewers() {
         // reviewer details
         // reviewer[0] represents reviewer email
         // reviewer[1] represents name of reviewer
-        const email = reviewer[0]
+        const email = String(reviewer[0]).trim()
         const name = reviewer[1]
 
         addReviewerInvite(email, name)
@@ -69,3 +71,5 @@ export default function InviteReviewers() {
     </AdminLayout>
   )
 }
+
+export default requireAuth(InviteReviewers, Roles.ADMIN)
