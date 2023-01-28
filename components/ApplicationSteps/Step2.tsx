@@ -366,7 +366,15 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                   Upload your most recent marksheet/transcript showing the
                   above-mentioned grades
                   <span className="text-red-850 font-black">*</span>
+                  {academicData[key].degreeLevel === 'Master' ? (
+                    <span className="text-xs md:text-sm">
+                      <br />
+                      If you haven't yet received any marksheet from your
+                      master's program, please upload your admission card
+                    </span>
+                  ) : null}
                 </p>
+
                 <FileUploadComponent
                   fileName={`AcademicRecord${key}`}
                   fileUrl={academicData[key].document}
