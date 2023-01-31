@@ -369,8 +369,8 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                   {academicData[key].degreeLevel === 'Master' ? (
                     <span className="text-xs md:text-sm">
                       <br />
-                      If you haven't yet received any marksheet from your
-                      master's program, please upload your admission card
+                      If you haven&apos;t yet received any marksheet from your
+                      master&apos;s program, please upload your admission card
                     </span>
                   ) : null}
                 </p>
