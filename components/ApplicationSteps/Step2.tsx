@@ -29,6 +29,11 @@ const yearOptions = [
   { label: 'Select', value: 0 },
 ]
 
+// Adding a note for master's and doctoral degree
+// If they haven't recieved marksheet, then they can write 1 in grades
+// It needs to be changed to a question marksheet recieved or not
+// If recieved then ask for grades otherwise not
+
 const defaultRecord: AcademicRecordType[number] = {
   degreeLevel: '',
   degreeName: '',
@@ -342,6 +347,12 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                         : 'Enter your Cumulative Percentage'
                     }
                     value={academicData[key]['grades']}
+                    description={
+                      academicData[key].degreeLevel === 'Master' ||
+                      academicData[key].degreeLevel === 'Doctoral'
+                        ? "If you haven't yet received any marksheet from your master's or doctoral program, please write 1 below"
+                        : ''
+                    }
                     type="number"
                     onChange={(e) => {
                       const maximum =
@@ -366,11 +377,13 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                   Upload your most recent marksheet/transcript showing the
                   above-mentioned grades
                   <span className="text-red-850 font-black">*</span>
-                  {academicData[key].degreeLevel === 'Master' ? (
+                  {academicData[key].degreeLevel === 'Master' ||
+                  academicData[key].degreeLevel === 'Doctoral' ? (
                     <span className="text-xs md:text-sm">
                       <br />
-                      If you haven't yet received any marksheet from your
-                      master's program, please upload your admission card
+                      If you haven&apos;t yet received any marksheet from your
+                      master&apos;s or doctoral program, please upload your
+                      admission card
                     </span>
                   ) : null}
                 </p>
