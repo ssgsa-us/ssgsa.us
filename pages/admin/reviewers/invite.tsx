@@ -61,11 +61,13 @@ function InviteReviewers() {
         const email = String(reviewer[0]).trim()
         const name = reviewer[1]
 
-        addReviewerInvite(email, name)
+        setTimeout(() => {
+          addReviewerInvite(email, name)
 
-        if (index == reviewers.length - 1) {
-          alert('Sent invites to all reviewers!')
-        }
+          if (index === reviewers.length - 1) {
+            setTimeout(() => alert('Sent invites to all reviewers!'), 1000)
+          }
+        }, 1000 * index)
       })
     }
 
@@ -74,10 +76,16 @@ function InviteReviewers() {
 
   const sendReminders = () => {
     unresposiveReviewers.forEach((reviewer, index) => {
-      setTimeout(
-        () => sendRevReminder(reviewer.email, reviewer.reminder + 1 || 1),
-        1000 * index,
-      )
+      setTimeout(() => {
+        sendRevReminder(reviewer.email, reviewer.reminder + 1 || 1)
+
+        if (index === unresposiveReviewers.length - 1) {
+          setTimeout(
+            () => alert('Sent reminder to unresponsive reviewers!'),
+            1000,
+          )
+        }
+      }, 1000 * index)
     })
   }
 
