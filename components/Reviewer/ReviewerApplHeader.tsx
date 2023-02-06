@@ -140,9 +140,13 @@ export default function ReviewerApplHeader({
                 </div>
               </button>
             </div>
-            <div className="pt-5 text-white pl-2">
-              <p>Instructions</p>
-              <p>Applications</p>
+            <div className="pt-5 text-white pl-2 flex flex-col ">
+              <Link href="/reviewer">
+                <a> Instructions </a>
+              </Link>
+              <Link href="/reviewer/applications">
+                <a> All Applications </a>
+              </Link>
             </div>
           </div>
 
