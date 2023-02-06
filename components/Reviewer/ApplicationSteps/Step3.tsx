@@ -7,6 +7,7 @@ import Step3 from '../../ReviewApplicationSteps/Step3'
 import Step4 from '../../ReviewApplicationSteps/Step4'
 import Step5 from '../../ReviewApplicationSteps/Step5'
 import Step6 from '../../ReviewApplicationSteps/Step6'
+import TextInput from '../../ApplicationSteps/TextInput'
 
 type Props = {
   applicationData: ApplicationData
@@ -44,6 +45,31 @@ const ReviewerStep3 = ({
       <Step4 workExperiences={applicationData.work_experience} />
       <Step5 workshops={applicationData.poster_or_workshops} />
       <Step6 curricularActivities={applicationData.curricular_activities} />
+
+      <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
+        <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
+          Academic/Curricular Activities Marks
+        </h1>
+        <div className="md:w-1/2">
+          <TextInput
+            name="Enter Total Marks"
+            value={5}
+            type="number"
+            onChange={(e) => {
+              const maximum = 100
+              if (
+                Number(e.target.value) <= maximum &&
+                Number(e.target.value) >= 0
+              )
+                true
+            }}
+            required={true}
+            step="0.01"
+            minimum={0}
+            maximum={100}
+          />
+        </div>
+      </div>
 
       <ProceedButtons
         formStatus={applicationData.form_status}
