@@ -11,6 +11,12 @@ import { getApplicationData } from '../../api/getApplicationData'
 import { updateReviewMarks } from '../../api/updateReviewMarks'
 import { updateReviewRemark } from '../../api/updateReviewRemark'
 import ApplicationLayout from '../../../layouts/reviewer/ApplicationLayout'
+import ReviewerStep1 from '../../../components/Reviewer/ApplicationSteps/Step1'
+import ReviewerStep2 from '../../../components/Reviewer/ApplicationSteps/Step2'
+import ReviewerStep3 from '../../../components/Reviewer/ApplicationSteps/Step3'
+import ReviewerStep4 from '../../../components/Reviewer/ApplicationSteps/Step4'
+import ReviewerStep5 from '../../../components/Reviewer/ApplicationSteps/Step5'
+import ReviewerStep6 from '../../../components/Reviewer/ApplicationSteps/Step6'
 
 function ViewApplication() {
   const { authUser } = useAuth()
@@ -64,7 +70,63 @@ function ViewApplication() {
   return (
     <ApplicationLayout status={status} formStatus={3} setStatus={setStatus}>
       {pageReady ? (
-        <div></div>
+        status == 1 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <ReviewerStep1
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status == 2 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <ReviewerStep2
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status == 3 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <ReviewerStep3
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status == 4 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <ReviewerStep4
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status == 5 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <ReviewerStep5
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status == 6 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <ReviewerStep6
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : (
+          <div></div>
+        )
       ) : (
         <Loading message="Loading your application data!" />
       )}
