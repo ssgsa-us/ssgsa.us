@@ -29,7 +29,7 @@ function ReviewerPortal() {
             </span>
           </p>
           <div className="flex justify-center">
-            <Link href={process.env.NEXT_PUBLIC_REVIEWER_RUBRIC_URL}>
+            <Link href={process.env.NEXT_PUBLIC_REVIEWER_RUBRIC_URL || ''}>
               <a className="text-white text-lg py-2 px-4 my-10 rounded-3xl bg-red-850">
                 Download the Rubric here
               </a>

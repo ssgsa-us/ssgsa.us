@@ -58,34 +58,36 @@ const Step3 = ({ researchData }: Props) => (
             !Object.keys(researchData[Number(key)].publications).length ? (
               <p className="mb-4">No Publications</p>
             ) : (
-              Object.keys(researchData).map((pubKey, ind) => (
-                <div className="mb-5" key={pubKey}>
-                  <p className="text-black sm:text-lg font-bold">
-                    Publication {ind + 1}
-                  </p>
-                  <Field
-                    name="Title and Date of the Publication"
-                    value={
-                      researchData[Number(key)].publications[Number(pubKey)]
-                        .titleAndDate
-                    }
-                  />
-                  <Field
-                    name="Journal/Conference Name"
-                    value={
-                      researchData[Number(key)].publications[Number(pubKey)]
-                        .conferenceName
-                    }
-                  />
-                  <Field
-                    name="Link"
-                    value={
-                      researchData[Number(key)].publications[Number(pubKey)]
-                        .link
-                    }
-                  />
-                </div>
-              ))
+              Object.keys(researchData[Number(key)].publications).map(
+                (pubKey, ind) => (
+                  <div className="mb-5" key={pubKey}>
+                    <p className="text-black sm:text-lg font-bold">
+                      Publication {ind + 1}
+                    </p>
+                    <Field
+                      name="Title and Date of the Publication"
+                      value={
+                        researchData[Number(key)].publications[Number(pubKey)]
+                          .titleAndDate
+                      }
+                    />
+                    <Field
+                      name="Journal/Conference Name"
+                      value={
+                        researchData[Number(key)].publications[Number(pubKey)]
+                          .conferenceName
+                      }
+                    />
+                    <Field
+                      name="Link"
+                      value={
+                        researchData[Number(key)].publications[Number(pubKey)]
+                          .link
+                      }
+                    />
+                  </div>
+                ),
+              )
             )}
           </div>
         </div>
