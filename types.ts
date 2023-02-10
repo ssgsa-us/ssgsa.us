@@ -174,3 +174,25 @@ export type ApplicationDatesType = {
   orientationDate?: string
   mentorAllotmentDate?: string
 }
+
+export type ReviewMarksType = {
+  // key will be reviewer Id
+  [key: string]: {
+    formStatus: number // Form Status for specific reviewer
+    academicGrades: {
+      // key will be academic record id
+      [key: number]: {
+        isGradeCorrect: boolean | null
+        correctGrades: number
+      }
+    }
+    totalAcademicMarks: number
+    curricularMarks: number
+    extracurricularMarks: number
+    sopMarks: {
+      // key will be SOP id
+      [key: string]: number
+    }
+    totalSOPMarks: number
+  }
+}
