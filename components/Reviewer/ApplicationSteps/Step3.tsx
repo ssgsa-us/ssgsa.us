@@ -35,7 +35,7 @@ const ReviewerStep3 = ({
     if (
       adminPortalData.review_marks &&
       adminPortalData.review_marks[authUser.id] &&
-      adminPortalData.review_marks[authUser.id].curricularMarks
+      adminPortalData.review_marks[authUser.id].curricularMarks !== null
     )
       setCurricularMarks(
         adminPortalData.review_marks[authUser.id].curricularMarks,

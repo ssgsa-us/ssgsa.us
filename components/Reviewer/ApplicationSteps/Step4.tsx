@@ -32,7 +32,7 @@ const ReviewerStep4 = ({
     if (
       adminPortalData.review_marks &&
       adminPortalData.review_marks[authUser.id] &&
-      adminPortalData.review_marks[authUser.id].extracurricularMarks
+      adminPortalData.review_marks[authUser.id].extracurricularMarks !== null
     )
       setExtracurricularMarks(
         adminPortalData.review_marks[authUser.id].extracurricularMarks,
