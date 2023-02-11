@@ -1,27 +1,36 @@
+import { Dispatch, SetStateAction, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
-import { Dispatch, SetStateAction, useState } from 'react'
-import ProceedButtons from './ProceedButtons'
-import AcademicRecord from '../../ReviewApplicationSteps/AcademicRecord'
+import { useAuth } from '../../../context/AuthUserContext'
+import { step2 } from '../../../pages/api/updateReviewMarks'
 import CheckBoxInput from '../../ApplicationSteps/Checkboxes'
 import TextInput from '../../ApplicationSteps/TextInput'
+import AcademicRecord from '../../ReviewApplicationSteps/AcademicRecord'
 import Field from '../../ReviewApplicationSteps/Field'
+import ProceedButtons from './ProceedButtons'
 
 type Props = {
+  applId: string
   applicationData: ApplicationData
   adminPortalData: AdminPortalData
+  formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
 const ReviewerStep2 = ({
+  applId,
   applicationData,
   adminPortalData,
+  formStatus,
   status,
   setStatus,
 }: Props) => {
+  const { authUser } = useAuth()
   const [error, setError] = useState<string>('')
   const academicRecord = applicationData.academic_record
+
+  const validation = () => true
 
   return (
     <div className="w-full">
@@ -104,9 +113,13 @@ const ReviewerStep2 = ({
       </div>
 
       <ProceedButtons
-        formStatus={applicationData.form_status}
+        formStatus={formStatus}
         status={status}
         setStatus={setStatus}
+        validation={validation}
+        updateReviewMarks={(newStatus: number) =>
+          step2(applId, authUser.id, {}, 0, newStatus)
+        }
         error={error}
         setError={setError}
       />

@@ -13,6 +13,8 @@ type Props = {
   formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<number>>
+  validation: () => boolean
+  updateReviewMarks: (newStatus: number) => Promise<void>
   error: string
   setError: Dispatch<SetStateAction<string>>
 }
@@ -21,6 +23,8 @@ const ProceedButtons = ({
   formStatus,
   status,
   setStatus,
+  validation,
+  updateReviewMarks,
   error,
   setError,
 }: Props) => {
@@ -50,7 +54,12 @@ const ProceedButtons = ({
         </button>
         <button
           className="text-white text-base md:text-xl bg-blue-850 mt-2 sm:mt-0 ml-2 py-2 px-5 rounded-lg flex flex-row items-center"
-          onClick={() => setStatus(status + 1)}
+          onClick={() => {
+            if (validation())
+              updateReviewMarks(status === formStatus ? status + 1 : formStatus)
+                .then(() => setStatus(status + 1))
+                .catch(() => setError('Try again, network error!'))
+          }}
         >
           <p className="mr-2">Save And Proceed</p>
           <FontAwesomeIcon

@@ -60,6 +60,12 @@ function ViewApplication() {
         .then((data: AdminPortalData) => {
           if (data) {
             setAdminPortalData(data)
+            if (
+              data.review_marks &&
+              data.review_marks[authUser.id] &&
+              data.review_marks[authUser.id].formStatus
+            )
+              setFormStatus(data.review_marks[authUser.id].formStatus)
           }
         })
         .catch(() => alert('Try again, network error!'))
@@ -76,8 +82,10 @@ function ViewApplication() {
         status == 1 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <ReviewerStep1
+              applId={applId}
               applicationData={applicationData}
               adminPortalData={adminPortalData}
+              formStatus={formStatus}
               status={status}
               setStatus={setStatus}
             />
@@ -85,8 +93,10 @@ function ViewApplication() {
         ) : status == 2 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <ReviewerStep2
+              applId={applId}
               applicationData={applicationData}
               adminPortalData={adminPortalData}
+              formStatus={formStatus}
               status={status}
               setStatus={setStatus}
             />
@@ -94,8 +104,10 @@ function ViewApplication() {
         ) : status == 3 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <ReviewerStep3
+              applId={applId}
               applicationData={applicationData}
               adminPortalData={adminPortalData}
+              formStatus={formStatus}
               status={status}
               setStatus={setStatus}
             />
@@ -103,8 +115,10 @@ function ViewApplication() {
         ) : status == 4 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <ReviewerStep4
+              applId={applId}
               applicationData={applicationData}
               adminPortalData={adminPortalData}
+              formStatus={formStatus}
               status={status}
               setStatus={setStatus}
             />
@@ -112,8 +126,10 @@ function ViewApplication() {
         ) : status == 5 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <ReviewerStep5
+              applId={applId}
               applicationData={applicationData}
               adminPortalData={adminPortalData}
+              formStatus={formStatus}
               status={status}
               setStatus={setStatus}
             />
@@ -121,8 +137,10 @@ function ViewApplication() {
         ) : status == 6 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <ReviewerStep6
+              applId={applId}
               applicationData={applicationData}
               adminPortalData={adminPortalData}
+              formStatus={formStatus}
               status={status}
               setStatus={setStatus}
             />

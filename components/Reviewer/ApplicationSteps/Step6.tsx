@@ -1,23 +1,29 @@
+import { Dispatch, SetStateAction, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
-import { Dispatch, SetStateAction, useState } from 'react'
-import ProceedButtons from './ProceedButtons'
-import Step8 from '../../ReviewApplicationSteps/Step8'
+import { useAuth } from '../../../context/AuthUserContext'
+import { step6 } from '../../../pages/api/updateReviewMarks'
 import Step9 from '../../ReviewApplicationSteps/Step9'
+import ProceedButtons from './ProceedButtons'
 
 type Props = {
+  applId: string
   applicationData: ApplicationData
   adminPortalData: AdminPortalData
+  formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
 const ReviewerStep6 = ({
+  applId,
   applicationData,
   adminPortalData,
+  formStatus,
   status,
   setStatus,
 }: Props) => {
+  const { authUser } = useAuth()
   const [error, setError] = useState<string>('')
 
   return (
@@ -34,9 +40,13 @@ const ReviewerStep6 = ({
       <Step9 otherInfo={applicationData.other_information} />
 
       <ProceedButtons
-        formStatus={applicationData.form_status}
+        formStatus={formStatus}
         status={status}
         setStatus={setStatus}
+        validation={() => true}
+        updateReviewMarks={(newStatus: number) =>
+          step6(applId, authUser.id, '', newStatus)
+        }
         error={error}
         setError={setError}
       />

@@ -1,26 +1,34 @@
+import { Dispatch, SetStateAction, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
-import { Dispatch, SetStateAction, useState } from 'react'
-import ProceedButtons from './ProceedButtons'
-import Step8 from '../../ReviewApplicationSteps/Step8'
-import Field from '../../ReviewApplicationSteps/Field'
+import { useAuth } from '../../../context/AuthUserContext'
+import { step5 } from '../../../pages/api/updateReviewMarks'
 import TextInput from '../../ApplicationSteps/TextInput'
+import Field from '../../ReviewApplicationSteps/Field'
+import ProceedButtons from './ProceedButtons'
 
 type Props = {
+  applId: string
   applicationData: ApplicationData
   adminPortalData: AdminPortalData
+  formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
 }
 
 const ReviewerStep5 = ({
+  applId,
   applicationData,
   adminPortalData,
+  formStatus,
   status,
   setStatus,
 }: Props) => {
+  const { authUser } = useAuth()
   const [error, setError] = useState<string>('')
   const sopAnswers = applicationData.sop_answers
+
+  const validation = () => true
 
   return (
     <div className="w-full">
@@ -179,9 +187,13 @@ const ReviewerStep5 = ({
       </div>
 
       <ProceedButtons
-        formStatus={applicationData.form_status}
+        formStatus={formStatus}
         status={status}
         setStatus={setStatus}
+        validation={validation}
+        updateReviewMarks={(newStatus: number) =>
+          step5(applId, authUser.id, {}, 0, newStatus)
+        }
         error={error}
         setError={setError}
       />
