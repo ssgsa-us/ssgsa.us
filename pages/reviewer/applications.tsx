@@ -79,62 +79,32 @@ function ReviewerApplications() {
                     <th className="border border-blue-850 p-2" rowSpan={2}>
                       View Completed Applications
                     </th>
-                    <th className="border border-blue-850 p-2" colSpan={6}>
+                    <th className="border border-blue-850 p-2" colSpan={5}>
                       Review Marks
                     </th>
                   </tr>
                   <tr>
                     <th className="border border-blue-850 py-2 px-10">
-                      {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_A}
+                      Educational Qualifications
                       <br />
-                      (Out of {process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS}
-                      )
+                      (Out of )
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
-                      {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_B}
+                      Academic / Curricular Activities
                       <br />
-                      (Out of {process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS}
-                      )
+                      (Out of )
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
-                      {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_C}
+                      Extracurricular Activities
                       <br />
-                      (Out of {process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS}
-                      )
+                      (Out of )
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
-                      {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_D}
+                      Essay-Type Questions
                       <br />
-                      (Out of {process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS}
-                      )
+                      (Out of )
                     </th>
-                    <th className="border border-blue-850 py-2 px-10">
-                      {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_E}
-                      <br />
-                      (Out of {process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS}
-                      )
-                    </th>
-                    <th className="border border-blue-850 p-2">
-                      Total
-                      <br />
-                      (Out of{' '}
-                      {Number(
-                        process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS,
-                      ) +
-                        Number(
-                          process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS,
-                        ) +
-                        Number(
-                          process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS,
-                        ) +
-                        Number(
-                          process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS,
-                        ) +
-                        Number(
-                          process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS,
-                        )}
-                      )
-                    </th>
+                    <th className="border border-blue-850 p-2">Total</th>
                   </tr>
                 </thead>
                 <tbody>
