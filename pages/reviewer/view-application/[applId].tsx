@@ -10,6 +10,7 @@ import ReviewerStep3 from '../../../components/Reviewer/ApplicationSteps/Step3'
 import ReviewerStep4 from '../../../components/Reviewer/ApplicationSteps/Step4'
 import ReviewerStep5 from '../../../components/Reviewer/ApplicationSteps/Step5'
 import ReviewerStep6 from '../../../components/Reviewer/ApplicationSteps/Step6'
+import ReviewerStep7 from '../../../components/Reviewer/ApplicationSteps/Step7'
 import Roles from '../../../constants/roles'
 import { useAuth } from '../../../context/AuthUserContext'
 import ApplicationLayout from '../../../layouts/reviewer/ApplicationLayout'
@@ -146,7 +147,16 @@ function ViewApplication() {
             />
           </div>
         ) : (
-          <div></div>
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <ReviewerStep7
+              applId={applId}
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              formStatus={formStatus}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
         )
       ) : (
         <Loading message="Loading your application data!" />

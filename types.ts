@@ -194,5 +194,6 @@ export type ReviewMarksType = {
       [key: string]: number
     }
     totalSOPMarks: number
+    remark: string
   }
 }

@@ -38,7 +38,6 @@ const ProceedButtons = ({
         </div>
       ) : null}
       <div className="flex flex-col sm:flex-row sm:justify-between mt-10 items-center sm:items-stretch">
-        {/* <div className="flex justify-between sm:justify-start w-full sm:w-max order-2 sm:order-1"> */}
         <button
           className={`text-white text-base md:text-xl ${
             status == 1 ? 'bg-blue-860 cursor-not-allowed' : 'bg-blue-850'
@@ -56,19 +55,27 @@ const ProceedButtons = ({
           className="text-white text-base md:text-xl bg-blue-850 mt-2 sm:mt-0 ml-2 py-2 px-5 rounded-lg flex flex-row items-center"
           onClick={() => {
             if (validation())
-              updateReviewMarks(status === formStatus ? status + 1 : formStatus)
-                .then(() => setStatus(status + 1))
-                .catch(() => setError('Try again, network error!'))
+              if (status === 7)
+                updateReviewMarks(7)
+                  .then(() => alert('Thanks for reviewing application!'))
+                  .catch(() => setError('Try again, network error!'))
+              else
+                updateReviewMarks(
+                  status === formStatus ? status + 1 : formStatus,
+                )
+                  .then(() => setStatus(status + 1))
+                  .catch(() => setError('Try again, network error!'))
           }}
         >
-          <p className="mr-2">Save And Proceed</p>
+          <p className="mr-2">
+            {status === 7 ? 'Complete' : 'Save And Proceed'}
+          </p>
           <FontAwesomeIcon
             icon={faArrowAltCircleRight}
             width={40}
             className="text-white"
           />
         </button>
-        {/* </div> */}
       </div>
     </div>
   )
