@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
@@ -28,7 +28,27 @@ const ReviewerStep3 = ({
   setStatus,
 }: Props) => {
   const { authUser } = useAuth()
+  const [curricularMarks, setCurricularMarks] = useState<number>(null)
   const [error, setError] = useState<string>('')
+
+  useEffect(() => {
+    if (
+      adminPortalData.review_marks &&
+      adminPortalData.review_marks[authUser.id] &&
+      adminPortalData.review_marks[authUser.id].curricularMarks
+    )
+      setCurricularMarks(
+        adminPortalData.review_marks[authUser.id].curricularMarks,
+      )
+  }, [adminPortalData])
+
+  const validation = () => {
+    if (curricularMarks === null) {
+      setError('Please provide curricular marks.')
+      return false
+    }
+    return true
+  }
 
   return (
     <div className="w-full">
@@ -59,7 +79,7 @@ const ReviewerStep3 = ({
         <div className="md:w-1/2">
           <TextInput
             name="Enter Total Marks"
-            value={5}
+            value={curricularMarks}
             type="number"
             onChange={(e) => {
               const maximum = 100
@@ -67,7 +87,7 @@ const ReviewerStep3 = ({
                 Number(e.target.value) <= maximum &&
                 Number(e.target.value) >= 0
               )
-                true
+                setCurricularMarks(Number(e.target.value))
             }}
             required={true}
             step="0.01"
@@ -81,9 +101,9 @@ const ReviewerStep3 = ({
         formStatus={formStatus}
         status={status}
         setStatus={setStatus}
-        validation={() => true}
+        validation={validation}
         updateReviewMarks={(newStatus: number) =>
-          step3(applId, authUser.id, 0, newStatus)
+          step3(applId, authUser.id, curricularMarks, newStatus)
         }
         error={error}
         setError={setError}

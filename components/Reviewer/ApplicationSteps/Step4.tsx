@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
@@ -25,7 +25,27 @@ const ReviewerStep4 = ({
   setStatus,
 }: Props) => {
   const { authUser } = useAuth()
+  const [extracurricularMarks, setExtracurricularMarks] = useState<number>(null)
   const [error, setError] = useState<string>('')
+
+  useEffect(() => {
+    if (
+      adminPortalData.review_marks &&
+      adminPortalData.review_marks[authUser.id] &&
+      adminPortalData.review_marks[authUser.id].extracurricularMarks
+    )
+      setExtracurricularMarks(
+        adminPortalData.review_marks[authUser.id].extracurricularMarks,
+      )
+  }, [adminPortalData])
+
+  const validation = () => {
+    if (extracurricularMarks === null) {
+      setError('Please provide extra curricular marks.')
+      return false
+    }
+    return true
+  }
 
   return (
     <div className="w-full">
@@ -53,7 +73,7 @@ const ReviewerStep4 = ({
         <div className="md:w-1/2">
           <TextInput
             name="Enter Total Marks"
-            value={5}
+            value={extracurricularMarks}
             type="number"
             onChange={(e) => {
               const maximum = 100
@@ -61,7 +81,7 @@ const ReviewerStep4 = ({
                 Number(e.target.value) <= maximum &&
                 Number(e.target.value) >= 0
               )
-                true
+                setExtracurricularMarks(Number(e.target.value))
             }}
             required={true}
             step="0.01"
@@ -75,9 +95,9 @@ const ReviewerStep4 = ({
         formStatus={formStatus}
         status={status}
         setStatus={setStatus}
-        validation={() => true}
+        validation={validation}
         updateReviewMarks={(newStatus: number) =>
-          step4(applId, authUser.id, 0, newStatus)
+          step4(applId, authUser.id, extracurricularMarks, newStatus)
         }
         error={error}
         setError={setError}

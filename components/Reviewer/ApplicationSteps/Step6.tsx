@@ -45,7 +45,7 @@ const ReviewerStep6 = ({
         setStatus={setStatus}
         validation={() => true}
         updateReviewMarks={(newStatus: number) =>
-          step6(applId, authUser.id, '', newStatus)
+          step6(applId, authUser.id, newStatus)
         }
         error={error}
         setError={setError}

@@ -1,8 +1,9 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
 import { step2 } from '../../../pages/api/updateReviewMarks'
+import { AcademicRecordType, ReviewMarksType } from '../../../types'
 import CheckBoxInput from '../../ApplicationSteps/Checkboxes'
 import TextInput from '../../ApplicationSteps/TextInput'
 import AcademicRecord from '../../ReviewApplicationSteps/AcademicRecord'
@@ -27,10 +28,94 @@ const ReviewerStep2 = ({
   setStatus,
 }: Props) => {
   const { authUser } = useAuth()
+  const [academicGrades, setAcademicGrades] = useState<
+    ReviewMarksType[string]['academicGrades']
+  >({})
+  const [totalGrades, setTotalGrades] = useState<number>(0)
   const [error, setError] = useState<string>('')
-  const academicRecord = applicationData.academic_record
+  const academicRecord: AcademicRecordType = applicationData.academic_record
 
-  const validation = () => true
+  useEffect(() => {
+    if (
+      adminPortalData.review_marks &&
+      adminPortalData.review_marks[authUser.id]
+    ) {
+      if (adminPortalData.review_marks[authUser.id].academicGrades)
+        setAcademicGrades(
+          adminPortalData.review_marks[authUser.id].academicGrades,
+        )
+
+      if (adminPortalData.review_marks[authUser.id].totalAcademicMarks)
+        setTotalGrades(
+          adminPortalData.review_marks[authUser.id].totalAcademicMarks,
+        )
+      else updateTotalGrades()
+    }
+  }, [adminPortalData])
+
+  const updateTotalGrades = () => {
+    let bachelorGrades = 0
+    let masterGrades = 0
+
+    Object.keys(academicRecord).map((key) => {
+      // Convert CGPA to percentage
+      let percentage =
+        academicRecord[Number(key)].gradeCriteria === 'CGPA'
+          ? academicRecord[Number(key)].grades * 10
+          : academicRecord[Number(key)].grades
+      if (
+        academicGrades[Number(key)] &&
+        academicGrades[Number(key)].isGradeCorrect === false
+      )
+        percentage =
+          academicRecord[Number(key)].gradeCriteria === 'CGPA'
+            ? academicGrades[Number(key)].correctGrades * 10
+            : academicGrades[Number(key)].correctGrades
+
+      if (academicRecord[Number(key)].degreeLevel === 'Bachelor')
+        bachelorGrades = Math.max(bachelorGrades, percentage)
+      else if (
+        academicRecord[Number(key)].degreeLevel === 'Master' &&
+        academicRecord[Number(key)].grades !== 1
+      )
+        masterGrades = Math.max(masterGrades, percentage)
+    })
+
+    let total
+    if (masterGrades)
+      total = Math.round(masterGrades * 100 + bachelorGrades * 100) / 100
+    else total = Math.round(bachelorGrades * 100) / 100
+
+    setTotalGrades(total)
+    return total
+  }
+
+  const validation = () => {
+    let validate: boolean = true
+
+    Object.keys(academicRecord).map((key, index) => {
+      if (
+        !academicGrades[Number(key)] ||
+        academicGrades[Number(key)].isGradeCorrect === null
+      ) {
+        validate = false
+        setError(
+          'Please check if grade is correct or not in Academic Record ' +
+            String(index),
+        )
+      } else if (
+        !academicGrades[Number(key)].isGradeCorrect &&
+        !academicGrades[Number(key)].correctGrades
+      ) {
+        validate = false
+        setError(
+          'Please provide correct grades in Academic Record ' + String(index),
+        )
+      }
+    })
+
+    return validate
+  }
 
   return (
     <div className="w-full">
@@ -60,45 +145,78 @@ const ReviewerStep2 = ({
                   id={Number(key)}
                   key={key}
                 />
-                <div className="mb-10">
+                <div className="mb-10 text-blue-850 font-black">
                   <CheckBoxInput
                     name="Does the applicant’s reported CGPA/percentage match with their marksheet (rounded off to two decimal places)?"
-                    value={true}
-                    onChange={(e, optionValue) => {}}
+                    value={
+                      academicGrades[Number(key)]
+                        ? academicGrades[Number(key)].isGradeCorrect
+                        : null
+                    }
+                    onChange={(e, optionValue: boolean) => {
+                      setAcademicGrades((prev) => ({
+                        ...prev,
+                        [Number(key)]: {
+                          isGradeCorrect: !e.target.checked
+                            ? null
+                            : optionValue,
+                          correctGrades:
+                            e.target.checked && !optionValue
+                              ? academicRecord[Number(key)].grades
+                              : 0,
+                        },
+                      }))
+                    }}
                     required={true}
                     options={[
                       { label: 'Yes', value: true },
                       { label: 'No', value: false },
                     ]}
                   />
-                  <div className="md:w-1/2">
-                    <TextInput
-                      name={
-                        academicRecord[Number(key)].gradeCriteria === 'CGPA'
-                          ? 'Enter Correct CGPA'
-                          : 'Enter Correct Cumulative Percentage'
-                      }
-                      value={5}
-                      type="number"
-                      onChange={(e) => {
-                        const maximum =
+                  {academicGrades[Number(key)] &&
+                  academicGrades[Number(key)].isGradeCorrect === false ? (
+                    <div className="md:w-1/2">
+                      <TextInput
+                        name={
+                          academicRecord[Number(key)].gradeCriteria === 'CGPA'
+                            ? 'Enter Correct CGPA'
+                            : 'Enter Correct Cumulative Percentage'
+                        }
+                        value={
+                          academicGrades[Number(key)]
+                            ? academicGrades[Number(key)].correctGrades
+                            : null
+                        }
+                        type="number"
+                        onChange={(e) => {
+                          const maximum =
+                            academicRecord[key].gradeCriteria === 'CGPA'
+                              ? 10
+                              : 100
+                          if (
+                            Number(e.target.value) <= maximum &&
+                            Number(e.target.value) >= 0
+                          ) {
+                            setAcademicGrades((prev) => ({
+                              ...prev,
+                              [Number(key)]: {
+                                isGradeCorrect: false,
+                                correctGrades: Number(e.target.value),
+                              },
+                            }))
+                          }
+                        }}
+                        required={true}
+                        step="0.01"
+                        minimum={0}
+                        maximum={
                           academicRecord[key].gradeCriteria === 'CGPA'
                             ? 10
                             : 100
-                        if (
-                          Number(e.target.value) <= maximum &&
-                          Number(e.target.value) >= 0
-                        )
-                          true
-                      }}
-                      required={true}
-                      step="0.01"
-                      minimum={0}
-                      maximum={
-                        academicRecord[key].gradeCriteria === 'CGPA' ? 10 : 100
-                      }
-                    />
-                  </div>
+                        }
+                      />
+                    </div>
+                  ) : null}
                 </div>
               </>
             ))
@@ -109,7 +227,18 @@ const ReviewerStep2 = ({
         <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
           Education Qualifications Marks
         </h1>
-        <Field name="Total Marks (out of academicRecordPoints)" value={1} />
+        <Field
+          name="Total Marks (out of academicRecordPoints)"
+          value={totalGrades}
+        />
+        <div className="flex justify-center mt-10">
+          <button
+            onClick={updateTotalGrades}
+            className="text-white text-base md:text-lg bg-blue-850 py-2 px-5 rounded-lg cursor-pointer"
+          >
+            Calculate Total Grades
+          </button>
+        </div>
       </div>
 
       <ProceedButtons
@@ -117,9 +246,10 @@ const ReviewerStep2 = ({
         status={status}
         setStatus={setStatus}
         validation={validation}
-        updateReviewMarks={(newStatus: number) =>
-          step2(applId, authUser.id, {}, 0, newStatus)
-        }
+        updateReviewMarks={(newStatus: number) => {
+          let total = updateTotalGrades()
+          return step2(applId, authUser.id, academicGrades, total, newStatus)
+        }}
         error={error}
         setError={setError}
       />

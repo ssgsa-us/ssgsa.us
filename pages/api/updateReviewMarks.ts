@@ -53,7 +53,7 @@ export const step4 = (
 export const step5 = (
   userId: string,
   reviewerId: string,
-  sopMarks: ReviewMarksType[string]['academicGrades'],
+  sopMarks: ReviewMarksType[string]['sopMarks'],
   totalSOPMarks: number,
   formStatus: number,
 ) => {
@@ -67,11 +67,9 @@ export const step5 = (
 export const step6 = (
   userId: string,
   reviewerId: string,
-  remark: string,
   formStatus: number,
 ) => {
   return firestore.doc(path.join('admin_portal_data', userId)).update({
-    [`review_marks.${reviewerId}.remark`]: remark,
     [`review_marks.${reviewerId}.formStatus`]: formStatus,
   })
 }
