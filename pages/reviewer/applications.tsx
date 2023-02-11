@@ -87,24 +87,30 @@ function ReviewerApplications() {
                     <th className="border border-blue-850 py-2 px-10">
                       Educational Qualifications
                       <br />
-                      (Out of )
+                      (Out of{' '}
+                      {process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
                       Academic / Curricular Activities
                       <br />
-                      (Out of )
+                      (Out of{' '}
+                      {process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
                       Extracurricular Activities
                       <br />
-                      (Out of )
+                      (Out of{' '}
+                      {process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS}
+                      )
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
                       Essay-Type Questions
                       <br />
-                      (Out of )
+                      (Out of {process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})
                     </th>
-                    <th className="border border-blue-850 p-2">Total</th>
+                    <th className="border border-blue-850 p-2">
+                      Total (out of 100)
+                    </th>
                   </tr>
                 </thead>
                 <tbody>

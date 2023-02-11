@@ -54,13 +54,13 @@ const ReviewerStep4 = ({
           Extracurricular Activities
         </h1>
         <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          Step 4 - Instruction 1
+          {process.env.NEXT_PUBLIC_REVIEW_STEP4_INSTRUCTION1}
         </p>
         <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          Step 4 - Instruction 2
+          {process.env.NEXT_PUBLIC_REVIEW_STEP4_INSTRUCTION2}
         </p>
         <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          Step 4 - Instruction 3
+          {process.env.NEXT_PUBLIC_REVIEW_STEP4_INSTRUCTION3}
         </p>
       </div>
 
@@ -70,15 +70,17 @@ const ReviewerStep4 = ({
         <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
           Extracurricular Activities Marks
         </h1>
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name="Enter Total Marks"
+            name={`Enter Total Marks (out of ${process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS})`}
             value={extracurricularMarks}
             type="number"
             onChange={(e) => {
-              const maximum = 100
               if (
-                Number(e.target.value) <= maximum &&
+                Number(e.target.value) <=
+                  Number(
+                    process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS,
+                  ) &&
                 Number(e.target.value) >= 0
               )
                 setExtracurricularMarks(Number(e.target.value))
@@ -86,7 +88,9 @@ const ReviewerStep4 = ({
             required={true}
             step="0.01"
             minimum={0}
-            maximum={100}
+            maximum={Number(
+              process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS,
+            )}
           />
         </div>
       </div>

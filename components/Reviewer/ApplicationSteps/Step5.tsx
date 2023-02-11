@@ -66,7 +66,10 @@ const ReviewerStep5 = ({
   }, [adminPortalData])
 
   const updateSOPMarks = (key, value) => {
-    if (value <= 100 && value >= 0) {
+    if (
+      value <= Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS) &&
+      value >= 0
+    ) {
       if (!sopMarks[key]) setTotalMarks((prev) => prev + value)
       else setTotalMarks((prev) => prev - sopMarks[key] + value)
       setSOPMarks((prev) => ({
@@ -108,13 +111,13 @@ const ReviewerStep5 = ({
           Essay-Type Questions
         </h1>
         <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          Step 5 - Instruction 1
+          {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION1}
         </p>
         <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          Step 5 - Instruction 2
+          {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION2}
         </p>
         <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          Step 5 - Instruction 3
+          {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION3}
         </p>
       </div>
 
@@ -127,16 +130,16 @@ const ReviewerStep5 = ({
             name={`a) ${process.env.NEXT_PUBLIC_QUESTION_1}`}
             value={sopAnswers['SOP1']}
           />
-          <div className="md:w-1/2">
+          <div className="md:w-1/2 text-blue-850 font-black">
             <TextInput
-              name="Points for Essay (a)"
+              name={`Points for Essay (a) (out of ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})`}
               value={sopMarks['SOP1']}
               type="number"
               onChange={(e) => updateSOPMarks('SOP1', Number(e.target.value))}
               required={true}
               step="0.01"
               minimum={0}
-              maximum={100}
+              maximum={Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS)}
             />
           </div>
         </div>
@@ -145,16 +148,16 @@ const ReviewerStep5 = ({
             name={`b) ${process.env.NEXT_PUBLIC_QUESTION_2}`}
             value={sopAnswers['SOP2']}
           />
-          <div className="md:w-1/2">
+          <div className="md:w-1/2 text-blue-850 font-black">
             <TextInput
-              name="Points for Essay (b)"
+              name={`Points for Essay (b) (out of ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})`}
               value={sopMarks['SOP2']}
               type="number"
               onChange={(e) => updateSOPMarks('SOP2', Number(e.target.value))}
               required={true}
               step="0.01"
               minimum={0}
-              maximum={100}
+              maximum={Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS)}
             />
           </div>
         </div>
@@ -163,16 +166,16 @@ const ReviewerStep5 = ({
             name={`c) ${process.env.NEXT_PUBLIC_QUESTION_3}`}
             value={sopAnswers['SOP3']}
           />
-          <div className="md:w-1/2">
+          <div className="md:w-1/2 text-blue-850 font-black">
             <TextInput
-              name="Points for Essay (c)"
+              name={`Points for Essay (c) (out of ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})`}
               value={sopMarks['SOP3']}
               type="number"
               onChange={(e) => updateSOPMarks('SOP3', Number(e.target.value))}
               required={true}
               step="0.01"
               minimum={0}
-              maximum={100}
+              maximum={Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS)}
             />
           </div>
         </div>
@@ -181,16 +184,16 @@ const ReviewerStep5 = ({
             name={`d) ${process.env.NEXT_PUBLIC_QUESTION_4}`}
             value={sopAnswers['SOP4']}
           />
-          <div className="md:w-1/2">
+          <div className="md:w-1/2 text-blue-850 font-black">
             <TextInput
-              name="Points for Essay (d)"
+              name={`Points for Essay (d) (out of ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})`}
               value={sopMarks['SOP4']}
               type="number"
               onChange={(e) => updateSOPMarks('SOP4', Number(e.target.value))}
               required={true}
               step="0.01"
               minimum={0}
-              maximum={100}
+              maximum={Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS)}
             />
           </div>
         </div>
@@ -200,16 +203,16 @@ const ReviewerStep5 = ({
             name={`e) ${process.env.NEXT_PUBLIC_QUESTION_5}`}
             value={sopAnswers['SOP5']}
           />
-          <div className="md:w-1/2">
+          <div className="md:w-1/2 text-blue-850 font-black">
             <TextInput
-              name="Points for Essay (e)"
+              name={`Points for Essay (e) (out of ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})`}
               value={sopMarks['SOP5']}
               type="number"
               onChange={(e) => updateSOPMarks('SOP5', Number(e.target.value))}
               required={true}
               step="0.01"
               minimum={0}
-              maximum={100}
+              maximum={Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS)}
             />
           </div>
         </div>
@@ -219,7 +222,12 @@ const ReviewerStep5 = ({
         <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
           Essay-Type Question Marks
         </h1>
-        <Field name="Total Marks" value={totalMarks} />
+        <Field
+          name={`Total Marks (out of ${
+            Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS) * 5
+          })`}
+          value={totalMarks}
+        />
       </div>
 
       <ProceedButtons

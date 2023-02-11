@@ -83,8 +83,19 @@ const ReviewerStep2 = ({
 
     let total
     if (masterGrades)
-      total = Math.round(masterGrades * 100 + bachelorGrades * 100) / 100
-    else total = Math.round(bachelorGrades * 100) / 100
+      total =
+        Math.round(
+          masterGrades *
+            (Number(process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS) / 2) +
+            bachelorGrades *
+              (Number(process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS) / 2),
+        ) / 100
+    else
+      total =
+        Math.round(
+          bachelorGrades *
+            Number(process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS),
+        ) / 100
 
     setTotalGrades(total)
     return total
@@ -124,7 +135,7 @@ const ReviewerStep2 = ({
           Educational Qualifications
         </h1>
         <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          Step 2 - Instruction 1
+          {process.env.NEXT_PUBLIC_REVIEW_STEP2_INSTRUCTION1}
         </p>
       </div>
 
@@ -228,7 +239,7 @@ const ReviewerStep2 = ({
           Education Qualifications Marks
         </h1>
         <Field
-          name="Total Marks (out of academicRecordPoints)"
+          name={`Total Marks (out of ${process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS})`}
           value={totalGrades}
         />
         <div className="flex justify-center mt-10">

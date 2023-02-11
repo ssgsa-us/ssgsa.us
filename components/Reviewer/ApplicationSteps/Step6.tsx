@@ -33,7 +33,7 @@ const ReviewerStep6 = ({
           Other Information
         </h1>
         <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          Step 6 - Instruction 1
+          {process.env.NEXT_PUBLIC_REVIEW_STEP6_INSTRUCTION1}
         </p>
       </div>
 

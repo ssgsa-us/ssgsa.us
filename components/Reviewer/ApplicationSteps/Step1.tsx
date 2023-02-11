@@ -33,7 +33,7 @@ const ReviewerStep1 = ({
           Applicant&apos;s Tentative Plan And Personal Data
         </h1>
         <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          Step 1 - Instruction 1
+          {process.env.NEXT_PUBLIC_REVIEW_STEP1_INSTRUCTION1}
         </p>
       </div>
 
