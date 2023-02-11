@@ -26,15 +26,26 @@ const ReviewerStep7 = ({
 }: Props) => {
   const { authUser } = useAuth()
   const [remark, setRemark] = useState<string>('')
+  const [totalMarks, setTotalMarks] = useState<number>(0)
   const [error, setError] = useState<string>('')
 
   useEffect(() => {
     if (
       adminPortalData.review_marks &&
-      adminPortalData.review_marks[authUser.id] &&
-      adminPortalData.review_marks[authUser.id].remark
+      adminPortalData.review_marks[authUser.id]
     ) {
-      setRemark(adminPortalData.review_marks[authUser.id].remark)
+      if (adminPortalData.review_marks[authUser.id].remark)
+        setRemark(adminPortalData.review_marks[authUser.id].remark)
+
+      if (adminPortalData.review_marks[authUser.id].totalMarks)
+        setTotalMarks(adminPortalData.review_marks[authUser.id].totalMarks)
+      else
+        setTotalMarks(
+          adminPortalData.review_marks[authUser.id].totalAcademicMarks +
+            adminPortalData.review_marks[authUser.id].curricularMarks +
+            adminPortalData.review_marks[authUser.id].extracurricularMarks +
+            adminPortalData.review_marks[authUser.id].totalSOPMarks,
+        )
     }
   }, [])
 
@@ -60,6 +71,7 @@ const ReviewerStep7 = ({
           name="Essay-Type Questions"
           value={adminPortalData.review_marks[authUser.id].totalSOPMarks}
         />
+        <Field name="Total Marks" value={totalMarks} />
         <div className="md:w-1/2">
           <TextInput
             name="Remark"
@@ -77,7 +89,7 @@ const ReviewerStep7 = ({
         setStatus={setStatus}
         validation={() => true}
         updateReviewMarks={(newStatus: number) =>
-          step7(applId, authUser.id, remark, newStatus)
+          step7(applId, authUser.id, remark, totalMarks, newStatus)
         }
         error={error}
         setError={setError}

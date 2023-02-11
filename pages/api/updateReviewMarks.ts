@@ -78,10 +78,12 @@ export const step7 = (
   userId: string,
   reviewerId: string,
   remark: string,
+  totalMarks: number,
   formStatus: number,
 ) => {
   return firestore.doc(path.join('admin_portal_data', userId)).update({
     [`review_marks.${reviewerId}.remark`]: remark,
+    [`review_marks.${reviewerId}.totalMarks`]: totalMarks,
     [`review_marks.${reviewerId}.formStatus`]: formStatus,
   })
 }

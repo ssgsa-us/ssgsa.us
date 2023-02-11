@@ -195,5 +195,6 @@ export type ReviewMarksType = {
     }
     totalSOPMarks: number
     remark: string
+    totalMarks: number
   }
 }
