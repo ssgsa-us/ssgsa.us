@@ -47,10 +47,10 @@ export default function ApplicationsTable({
                 Faculty
               </th>
               <th className="border border-blue-850 p-2" rowSpan={3}>
-                Bachelor&apos;s Major/Branch
+                Bachelor&apos;s Faculties
               </th>
               <th className="border border-blue-850 p-2" rowSpan={3}>
-                Master&apos;s Major/Branch
+                Master&apos;s Faculties
               </th>
               <th className="border border-blue-850 p-2" rowSpan={3}>
                 View Completed Applications
