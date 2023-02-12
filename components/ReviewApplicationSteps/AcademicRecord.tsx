@@ -24,12 +24,11 @@ export default function AcademicRecord({ academicRecord, index, id }: Props) {
             : academicRecord[id].faculty
         }
       />
-      <Field name="Degree Name" value={academicRecord[id].degreeName} />
       <Field name="Department" value={academicRecord[id].department} />
-      <Field name="University" value={academicRecord[id].degreeName} />
+      <Field name="University" value={academicRecord[id].university} />
       <Field
         name="Degree Completed"
-        value={!academicRecord[id].currentlyEnrolled ? 'No' : 'Yes'}
+        value={!academicRecord[id].currentlyEnrolled ? 'Yes' : 'No'}
       />
       <div className="pl-4">
         <Field name="From" value={academicRecord[id].startedYear} />
