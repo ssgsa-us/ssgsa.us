@@ -1,6 +1,5 @@
 import { AcademicRecordType } from '../../types'
-import FileField from './FIleField'
-import Field from './Field'
+import AcademicRecord from './AcademicRecord'
 
 type Props = {
   academicRecord: AcademicRecordType
@@ -14,72 +13,16 @@ const Step2 = ({ academicRecord }: Props) => (
     {!academicRecord || !Object.keys(academicRecord).length ? (
       <p className="font-bold mb-4">No Academic Record Added</p>
     ) : (
-      Object.keys(academicRecord).map((key, index) => (
-        <div className="mb-10" key={key}>
-          <p className="text-black text-lg sm:text-xl font-extrabold">
-            Academic Record {index + 1}
-          </p>
-          <Field
-            name="Degree Level"
-            value={academicRecord[Number(key)].degreeLevel}
+      Object.keys(academicRecord)
+        .sort()
+        .map((key, index) => (
+          <AcademicRecord
+            academicRecord={academicRecord}
+            index={index}
+            id={Number(key)}
+            key={key}
           />
-          <Field
-            name="Degree Name"
-            value={academicRecord[Number(key)].degreeName}
-          />
-          <Field
-            name="Faculty"
-            value={
-              academicRecord[Number(key)].faculty == 'Other'
-                ? academicRecord[Number(key)].otherFaculty
-                : academicRecord[Number(key)].faculty
-            }
-          />
-          <Field
-            name="Degree Name"
-            value={academicRecord[Number(key)].degreeName}
-          />
-          <Field
-            name="Department"
-            value={academicRecord[Number(key)].department}
-          />
-          <Field
-            name="University"
-            value={academicRecord[Number(key)].degreeName}
-          />
-          <Field
-            name="Degree Completed"
-            value={
-              !academicRecord[Number(key)].currentlyEnrolled ? 'No' : 'Yes'
-            }
-          />
-          <div className="pl-4">
-            <Field
-              name="From"
-              value={academicRecord[Number(key)].startedYear}
-            />
-            <Field
-              name={
-                !academicRecord[Number(key)].currentlyEnrolled
-                  ? 'To'
-                  : 'Expected Year of Completion'
-              }
-              value={academicRecord[Number(key)].completionYear}
-            />
-          </div>
-          <Field
-            name="Grades"
-            value={`${academicRecord[Number(key)].grades} ${
-              academicRecord[Number(key)].gradeCriteria
-            }`}
-          />
-          <FileField
-            fieldName="Most Recent Marksheet/Transcript"
-            fileName={`AcademicRecord${key}.pdf`}
-            url={academicRecord[Number(key)].document}
-          />
-        </div>
-      ))
+        ))
     )}
   </div>
 )

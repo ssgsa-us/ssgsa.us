@@ -22,7 +22,7 @@ type PartialApplications = {
 export const getPartialApplications = async () => {
   let partialApplications: PartialApplications = await firestore
     .collection('applications_data')
-    .where('form_status', '!=', 6)
+    .where('form_status', '!=', 11)
     .withConverter(applicationDataConverter)
     .get()
     .then(
@@ -48,7 +48,7 @@ export const getPartialApplications = async () => {
 export const getCompletedApplications = async () => {
   let completedApplications: Applications = await firestore
     .collection('applications_data')
-    .where('form_status', '==', 6)
+    .where('form_status', '==', 11)
     .orderBy('faculty')
     .withConverter(applicationDataConverter)
     .get()
@@ -100,7 +100,7 @@ export const getApplicationsWithGivenStatus = async (
 ) => {
   let applicationsWithGivenStatus: Applications = await firestore
     .collection('applications_data')
-    .where('form_status', '==', 6)
+    .where('form_status', '==', 11)
     .orderBy('faculty')
     .withConverter(applicationDataConverter)
     .get()
@@ -119,7 +119,7 @@ export const getApplicationsWithGivenStatus = async (
             ) => {
               let applications: Applications = {}
               let adminPortalData: { [key: string]: AdminPortalData } = {}
-               // collect complete data
+              // collect complete data
               admin_portal_data.forEach(
                 (
                   document: firebase.firestore.QueryDocumentSnapshot<AdminPortalData>,

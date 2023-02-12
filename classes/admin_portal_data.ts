@@ -1,16 +1,5 @@
 import firebase from '../firebase'
-
-// key will be reviewer Id
-type ReviewMarks = {
-  [key: string]: {
-    A: number
-    B: number
-    C: number
-    D: number
-    E: number
-    remark: string
-  }
-}
+import { ReviewMarksType } from '../types'
 
 type InterviewMarks = {
   [key: string]: {
@@ -32,14 +21,14 @@ type InterviewMarks = {
 
 export class AdminPortalData {
   application_status: number
-  review_marks: ReviewMarks
+  review_marks: ReviewMarksType
   review_set: string
   interview_marks: InterviewMarks
   interview_set: string
 
   updateDetails(
     application_status: number,
-    review_marks: ReviewMarks,
+    review_marks: ReviewMarksType,
     review_set: string,
     interview_marks: InterviewMarks,
     interview_set: string,

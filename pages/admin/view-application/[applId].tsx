@@ -122,17 +122,17 @@ function ViewApplication() {
                             </p>
                             <div className="sm:text-lg font-bold navgroup relative cursor-pointer">
                               <p className="navbar-text px-2 rounded-lg">
-                                {adminPortalData.review_marks[reviewerId].A +
+                                {/* {adminPortalData.review_marks[reviewerId].A +
                                   adminPortalData.review_marks[reviewerId].B +
                                   adminPortalData.review_marks[reviewerId].C +
                                   adminPortalData.review_marks[reviewerId].D +
-                                  adminPortalData.review_marks[reviewerId].E}
+                                  adminPortalData.review_marks[reviewerId].E} */}
                               </p>
-                              <ReviewMarksModal
+                              {/* <ReviewMarksModal
                                 reviewMarks={
                                   adminPortalData.review_marks[reviewerId]
                                 }
-                              />
+                              /> */}
                             </div>
                           </div>
                         ))}

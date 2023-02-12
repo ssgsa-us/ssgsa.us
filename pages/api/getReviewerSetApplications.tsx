@@ -18,7 +18,7 @@ type Applications = {
 export const getReviewerSetApplications = async (reviewerSet: string) => {
   let applications: Applications = await firestore
     .collection('applications_data')
-    .where('form_status', '==', 6)
+    .where('form_status', '==', 11)
     .withConverter(applicationDataConverter)
     .get()
     .then(
