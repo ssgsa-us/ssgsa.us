@@ -37,6 +37,27 @@ function ReviewerPortal() {
           </div>
         </div>
       </div>
+      <div className="bg-gray-200 rounded-xl py-5 px-3 sm:py-5 sm:px-10 lg:px-32 my-8">
+        <p className="mx-auto font-black text-sm text-red-850 text-center mt-1">
+          Sponsor a student
+        </p>
+        <a
+          href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="px-10 py-1 block mx-auto bg-red-850 font-black text-lg text-white text-center">
+            Donate Now
+          </button>
+        </a>
+        <p className="text-sm mt-3 text-center">
+          By supporting students, you are becoming an active participant in
+          building their careers. All donations and contributions directly
+          sponsor the attempts of talented students to secure admission in an
+          MS/PhD program at a university of international repute. You can easily
+          cancel or upgrade your contribution at any time.
+        </p>
+      </div>
     </ReviewerLayout>
   )
 }
