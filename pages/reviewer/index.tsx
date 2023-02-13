@@ -38,10 +38,10 @@ function ReviewerPortal() {
         </div>
       </div>
       <div className="bg-gray-200 rounded-xl py-5 px-3 sm:py-5 sm:px-10 lg:px-32 my-8">
-        <p className="mx-auto font-black text-sm text-red-850 text-center mt-1">
+        <p className="mx-auto font-black text-md text-red-850 text-center mt-1">
           Sponsor a student
         </p>
-        <a
+        {/* <a
           href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
           target="_blank"
           rel="noopener noreferrer"
@@ -49,7 +49,31 @@ function ReviewerPortal() {
           <button className="px-10 py-1 block mx-auto bg-red-850 font-black text-lg text-white text-center">
             Donate Now
           </button>
-        </a>
+        </a> */}
+        <div className="grid grid-cols-6 gap-4">
+          <div className="col-start-3 col-span-1">
+            <a
+              href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="px-10 py-1 block mx-auto bg-red-850 text-sm font-black text-white text-center rounded-3xl mt-2">
+                PayPal
+              </button>
+            </a>
+          </div>
+          <div className="col-start-4 col-span-1">
+            <a
+              href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="px-10 py-1 block mx-auto bg-red-850 text-sm font-black text-white text-center rounded-3xl mt-2">
+                Venmo
+              </button>
+            </a>
+          </div>
+        </div>
         <p className="text-sm mt-3 text-center">
           By supporting students, you are becoming an active participant in
           building their careers. All donations and contributions directly
