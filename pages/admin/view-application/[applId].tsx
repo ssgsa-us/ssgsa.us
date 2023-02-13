@@ -5,6 +5,12 @@ import { ApplicationData } from '../../../classes/application_data'
 import { Interviewer } from '../../../classes/interviewer'
 import { Reviewer } from '../../../classes/reviewer'
 import AdminStep1 from '../../../components/Admin/ApplicationSteps/Step1'
+import AdminStep2 from '../../../components/Admin/ApplicationSteps/Step2'
+import AdminStep3 from '../../../components/Admin/ApplicationSteps/Step3'
+import AdminStep4 from '../../../components/Admin/ApplicationSteps/Step4'
+import AdminStep5 from '../../../components/Admin/ApplicationSteps/Step5'
+import AdminStep6 from '../../../components/Admin/ApplicationSteps/Step6'
+import AdminStep7 from '../../../components/Admin/ApplicationSteps/Step7'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import ApplicationLayout from '../../../layouts/admin/ApplicationLayout'
@@ -108,10 +114,66 @@ function ViewApplication() {
       setStatus={setStatus}
     >
       {pageReady ? (
-        status == 1 ? (
+        status === 1 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <AdminStep1
               applicationData={applicationData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status === 2 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <AdminStep2
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status === 3 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <AdminStep3
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status === 4 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <AdminStep4
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status === 5 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <AdminStep5
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status === 6 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <AdminStep6
+              applId={applId}
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
+        ) : status === 7 ? (
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <AdminStep7
+              applId={applId}
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
               status={status}
               setStatus={setStatus}
             />
