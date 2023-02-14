@@ -43,7 +43,7 @@ const ReviewerStep3 = ({
   }, [adminPortalData])
 
   const validation = () => {
-    if (curricularMarks === null) {
+    if (curricularMarks == null) {
       setError('Please provide curricular marks.')
       return false
     }
@@ -56,15 +56,25 @@ const ReviewerStep3 = ({
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Academic/Curricular Activities
         </h1>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION1}
-        </p>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION2}
-        </p>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION3}
-        </p>
+        <div className="text-xs sm:text-sm md:text-base font-bold m-2">
+          <p className="mb-5">
+            {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION}
+          </p>
+          <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION1}
+            </li>
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION2}
+            </li>
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION3}
+            </li>
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION4}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <Step3 researchData={applicationData.research_experience} />

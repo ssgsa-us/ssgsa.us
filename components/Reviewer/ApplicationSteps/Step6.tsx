@@ -32,9 +32,11 @@ const ReviewerStep6 = ({
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Other Information
         </h1>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP6_INSTRUCTION1}
-        </p>
+        <div className="text-xs sm:text-sm md:text-base font-bold m-2">
+          <p className="mb-5">
+            {process.env.NEXT_PUBLIC_REVIEW_STEP6_INSTRUCTION}
+          </p>
+        </div>
       </div>
 
       <Step9 otherInfo={applicationData.other_information} />

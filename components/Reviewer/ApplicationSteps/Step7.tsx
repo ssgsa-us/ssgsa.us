@@ -37,7 +37,7 @@ const ReviewerStep7 = ({
       if (adminPortalData.review_marks[authUser.id].remark)
         setRemark(adminPortalData.review_marks[authUser.id].remark)
 
-      if (adminPortalData.review_marks[authUser.id].totalMarks)
+      if (!adminPortalData.review_marks[authUser.id].totalMarks)
         setTotalMarks(
           adminPortalData.review_marks[authUser.id].totalAcademicMarks +
             adminPortalData.review_marks[authUser.id].curricularMarks +
@@ -66,13 +66,15 @@ const ReviewerStep7 = ({
           value={adminPortalData.review_marks[authUser.id].extracurricularMarks}
         />
         <Field
-          name={`Essay-Type Questions ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS}`}
+          name={`Essay-Type Questions ${
+            Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS) * 5
+          }`}
           value={adminPortalData.review_marks[authUser.id].totalSOPMarks}
         />
         <Field name="Total Marks (out of 100)" value={totalMarks} />
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name="Remark"
+            name="Any additional remark for the applicant"
             value={remark}
             type="text"
             onChange={(e) => setRemark(e.target.value)}

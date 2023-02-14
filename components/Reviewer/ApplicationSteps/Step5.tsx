@@ -80,23 +80,23 @@ const ReviewerStep5 = ({
   }
 
   const validation = () => {
-    if (sopMarks['SOP1'] === null) {
+    if (sopMarks['SOP1'] == null) {
       setError('Please provide marks in Question (a)')
       return false
     }
-    if (sopMarks['SOP2'] === null) {
+    if (sopMarks['SOP2'] == null) {
       setError('Please provide marks in Question (b)')
       return false
     }
-    if (sopMarks['SOP3'] === null) {
+    if (sopMarks['SOP3'] == null) {
       setError('Please provide marks in Question (c)')
       return false
     }
-    if (sopMarks['SOP4'] === null) {
+    if (sopMarks['SOP4'] == null) {
       setError('Please provide marks in Question (d)')
       return false
     }
-    if (sopMarks['SOP5'] === null) {
+    if (sopMarks['SOP5'] == null) {
       setError('Please provide marks in Question (e)')
       return false
     }
@@ -110,15 +110,34 @@ const ReviewerStep5 = ({
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Essay-Type Questions
         </h1>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION1}
-        </p>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION2}
-        </p>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION3}
-        </p>
+        <div className="text-xs sm:text-sm md:text-base font-bold m-2">
+          <p className="mb-5">
+            {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION}
+          </p>
+          <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION1}
+            </li>
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION2}
+            </li>
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION3}
+            </li>
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION4}
+            </li>
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION5}
+            </li>
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION6}
+            </li>
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP5_INSTRUCTION7}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">

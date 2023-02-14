@@ -78,13 +78,23 @@ const Step3 = ({ researchData }: Props) => (
                           .conferenceName
                       }
                     />
-                    <Field
-                      name="Link"
-                      value={
-                        researchData[Number(key)].publications[Number(pubKey)]
-                          .link
-                      }
-                    />
+                    <div className="flex justify-start my-4">
+                      <p className="text-red-850 sm:text-lg md:text-xl font-extrabold w-2/5 mr-5">
+                        Link
+                      </p>
+                      <a
+                        className="text-sm sm:text-lg break-all w-3/5"
+                        href={
+                          researchData[Number(key)].publications[Number(pubKey)]
+                            .link
+                        }
+                      >
+                        {
+                          researchData[Number(key)].publications[Number(pubKey)]
+                            .link
+                        }
+                      </a>
+                    </div>
                   </div>
                 ),
               )
