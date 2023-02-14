@@ -13,6 +13,7 @@ import AdminStep7 from '../../../components/Admin/ApplicationSteps/Step7'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import ApplicationLayout from '../../../layouts/admin/ApplicationLayout'
+import { Users } from '../../../types'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
 import { getUserDetailsByIds } from '../../api/getUserDetails'
@@ -23,8 +24,8 @@ function ViewApplication() {
   )
   const [applicationData, setApplicationData] = useState<ApplicationData>()
   const [selectedReviewerId, setSelectedReviewerId] = useState<string>('')
-  const [reviewers, setReviewers] = useState<{ [key: string]: User }>({})
-  const [interviewers, setInterviewers] = useState<{ [key: string]: User }>({})
+  const [reviewers, setReviewers] = useState<Users>({})
+  const [interviewers, setInterviewers] = useState<Users>({})
   const [status, setStatus] = useState<number>(1)
   const [formStatus, setFormStatus] = useState<number>(1)
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
