@@ -37,13 +37,12 @@ const ReviewerStep7 = ({
       if (adminPortalData.review_marks[authUser.id].remark)
         setRemark(adminPortalData.review_marks[authUser.id].remark)
 
-      if (!adminPortalData.review_marks[authUser.id].totalMarks)
-        setTotalMarks(
-          adminPortalData.review_marks[authUser.id].totalAcademicMarks +
-            adminPortalData.review_marks[authUser.id].curricularMarks +
-            adminPortalData.review_marks[authUser.id].extracurricularMarks +
-            adminPortalData.review_marks[authUser.id].totalSOPMarks,
-        )
+      setTotalMarks(
+        adminPortalData.review_marks[authUser.id].totalAcademicMarks +
+          adminPortalData.review_marks[authUser.id].curricularMarks +
+          adminPortalData.review_marks[authUser.id].extracurricularMarks +
+          adminPortalData.review_marks[authUser.id].totalSOPMarks,
+      )
     }
   }, [])
 
