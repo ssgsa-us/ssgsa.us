@@ -60,7 +60,7 @@ const ProceedButtons = ({
             if (validation())
               if (status === 7)
                 updateReviewMarks(7)
-                  .then(() => router.push('/admin'))
+                  .then(() => router.push('/reviewer/applications'))
                   .catch(() => setError('Try again, network error!'))
               else
                 updateReviewMarks(
@@ -71,7 +71,7 @@ const ProceedButtons = ({
           }}
         >
           <p className="mr-2">
-            {status === 7 ? 'Complete' : 'Save And Proceed'}
+            {status === 7 ? 'Complete Review and Proceed' : 'Save And Proceed'}
           </p>
           <FontAwesomeIcon
             icon={faArrowAltCircleRight}

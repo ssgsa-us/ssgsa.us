@@ -50,9 +50,18 @@ const ReviewerStep7 = ({
   return (
     <div className="w-full">
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
-        <h1 className="text-3xl text-red-850 text-center font-bold pb-5 mb-10">
+        <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Review Marks
         </h1>
+        <div className="text-xs sm:text-sm md:text-base font-bold mb-10">
+          <p className="mb-5">
+            <span className="text-base md:text-lg text-blue-850 font-black">
+              Note:
+            </span>{' '}
+            Click on Complete to finalize reviewing this application
+          </p>
+        </div>
+
         <Field
           name={`Educational Qualification ${process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS}`}
           value={adminPortalData.review_marks[authUser.id].totalAcademicMarks}
