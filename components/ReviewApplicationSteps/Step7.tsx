@@ -11,12 +11,18 @@ const Step7 = ({ extraCurrActivities }: Props) => (
     <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
       Extracurricular Activites
     </h1>
-    <Field name="Description" value={extraCurrActivities.description} />
-    <FileField
-      fieldName="Corresponding Documents"
-      fileName="ExtraCurricularActivities.pdf"
-      url={extraCurrActivities.document}
-    />
+    {!extraCurrActivities || !Object.keys(extraCurrActivities).length ? (
+      <p className="font-bold mb-4">No Extra Curricular Activities Added</p>
+    ) : (
+      <>
+        <Field name="Description" value={extraCurrActivities.description} />
+        <FileField
+          fieldName="Corresponding Documents"
+          fileName="ExtraCurricularActivities.pdf"
+          url={extraCurrActivities.document}
+        />
+      </>
+    )}
   </div>
 )
 
