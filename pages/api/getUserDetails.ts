@@ -13,3 +13,15 @@ export const getUserDetailsById = async (userId: string) => {
 
   return user
 }
+
+export const getUserDetailsByIds = async (userIds: Array<string>) => {
+  let users: { [key: string]: User } = {}
+
+  userIds.map((userId: string) => {
+    getUserDetailsById(userId)
+      .then((user: User) => (users[userId] = user))
+      .catch(() => {})
+  })
+
+  return users
+}

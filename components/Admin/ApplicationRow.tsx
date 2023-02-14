@@ -2,9 +2,8 @@ import Link from 'next/link'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
-import { Reviewer } from '../../classes/reviewer'
-import { getInterviewerDetailsById } from '../../pages/api/getInterviewerDetails'
-import { getReviewerDetailsById } from '../../pages/api/getReviewerDetails'
+import { User } from '../../classes/user'
+import { getUserDetailsById } from '../../pages/api/getUserDetails'
 import { updateApplicationStatus } from '../../pages/api/updateApplicationStatus'
 import { updateInterviewSet } from '../../pages/api/updateInterviewSet'
 import { updateReviewSet } from '../../pages/api/updateReviewSet'
@@ -113,8 +112,8 @@ export default function ApplicationRow({
     const revMarks = application.adminPortalData.review_marks
     if (revMarks)
       Object.keys(revMarks).map(async (reviewerId: string, index: number) => {
-        await getReviewerDetailsById(reviewerId)
-          .then((reviewer: Reviewer) => {
+        await getUserDetailsById(reviewerId)
+          .then((reviewer: User) => {
             if (reviewer)
               setReviewerMarks((prev) => ({
                 ...prev,
@@ -131,8 +130,8 @@ export default function ApplicationRow({
     if (intMarks)
       Object.keys(intMarks).map(
         async (interviewerId: string, index: number) => {
-          await getInterviewerDetailsById(interviewerId)
-            .then((interview: Reviewer) => {
+          await getUserDetailsById(interviewerId)
+            .then((interview: User) => {
               if (interview)
                 setInterviewerMarks((prevInterviewerMarks) => {
                   return {

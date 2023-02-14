@@ -2,8 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
-import { Interviewer } from '../../../classes/interviewer'
-import { Reviewer } from '../../../classes/reviewer'
+import { User } from '../../../classes/user'
 import AdminStep1 from '../../../components/Admin/ApplicationSteps/Step1'
 import AdminStep2 from '../../../components/Admin/ApplicationSteps/Step2'
 import AdminStep3 from '../../../components/Admin/ApplicationSteps/Step3'
@@ -16,18 +15,16 @@ import Roles from '../../../constants/roles'
 import ApplicationLayout from '../../../layouts/admin/ApplicationLayout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
-import { getInterviewerDetailsById } from '../../api/getInterviewerDetails'
-import { getReviewerDetailsById } from '../../api/getReviewerDetails'
+import { getUserDetailsByIds } from '../../api/getUserDetails'
 
 function ViewApplication() {
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>(
     new AdminPortalData(),
   )
   const [applicationData, setApplicationData] = useState<ApplicationData>()
-  const [reviewers, setReviewers] = useState<{ [key: string]: Reviewer }>({})
-  const [interviewers, setInterviewers] = useState<{ [key: string]: Reviewer }>(
-    {},
-  )
+  const [selectedReviewerId, setSelectedReviewerId] = useState<string>('')
+  const [reviewers, setReviewers] = useState<{ [key: string]: User }>({})
+  const [interviewers, setInterviewers] = useState<{ [key: string]: User }>({})
   const [status, setStatus] = useState<number>(1)
   const [formStatus, setFormStatus] = useState<number>(1)
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
@@ -36,27 +33,15 @@ function ViewApplication() {
   const applId = String(router.query['applId'])
 
   const updateReviewerDetails = (data: AdminPortalData) => {
-    Object.keys(data.review_marks).map((reviewerId: string) => {
-      getReviewerDetailsById(reviewerId)
-        .then((reviewer: Reviewer) =>
-          setReviewers((prevReviewers) => {
-            return { ...prevReviewers, [reviewerId]: reviewer }
-          }),
-        )
-        .catch(() => {})
-    })
+    getUserDetailsByIds(Object.keys(data.review_marks))
+      .then((data) => setReviewers(data))
+      .catch(() => {})
   }
 
   const updateInterviewerDetails = (data: AdminPortalData) => {
-    Object.keys(data.interview_marks).map((interviewerId: string) => {
-      getInterviewerDetailsById(interviewerId)
-        .then((interviewer: Interviewer) =>
-          setInterviewers((prevInterviewers) => {
-            return { ...prevInterviewers, [interviewerId]: interviewer }
-          }),
-        )
-        .catch(() => {})
-    })
+    getUserDetailsByIds(Object.keys(data.interview_marks))
+      .then((data) => setInterviewers(data))
+      .catch(() => {})
   }
 
   useEffect(() => {
@@ -114,71 +99,96 @@ function ViewApplication() {
       setStatus={setStatus}
     >
       {pageReady ? (
-        status === 1 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <AdminStep1
-              applicationData={applicationData}
-              status={status}
-              setStatus={setStatus}
-            />
-          </div>
-        ) : status === 2 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <AdminStep2
-              applicationData={applicationData}
-              adminPortalData={adminPortalData}
-              status={status}
-              setStatus={setStatus}
-            />
-          </div>
-        ) : status === 3 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <AdminStep3
-              applicationData={applicationData}
-              adminPortalData={adminPortalData}
-              status={status}
-              setStatus={setStatus}
-            />
-          </div>
-        ) : status === 4 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <AdminStep4
-              applicationData={applicationData}
-              adminPortalData={adminPortalData}
-              status={status}
-              setStatus={setStatus}
-            />
-          </div>
-        ) : status === 5 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <AdminStep5
-              applicationData={applicationData}
-              adminPortalData={adminPortalData}
-              status={status}
-              setStatus={setStatus}
-            />
-          </div>
-        ) : status === 6 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <AdminStep6
-              applId={applId}
-              applicationData={applicationData}
-              adminPortalData={adminPortalData}
-              status={status}
-              setStatus={setStatus}
-            />
-          </div>
-        ) : status === 7 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
-            <AdminStep7
-              applId={applId}
-              applicationData={applicationData}
-              adminPortalData={adminPortalData}
-              status={status}
-              setStatus={setStatus}
-            />
-          </div>
-        ) : null
+        <div>
+          {adminPortalData.application_status > 1 ||
+          Object.keys(reviewers).length ? (
+            <div className="flex justify-center items-center space-x-5 mt-10">
+              <p className="font-bold text-lg md:text-xl">
+                Select One Reviewer
+              </p>
+              <select
+                name="Reviewers"
+                value={selectedReviewerId}
+                onChange={(e) => setSelectedReviewerId(e.target.value)}
+                className="border-2 border-gray-400 rounded-xl p-3"
+              >
+                {Object.keys(reviewers).map((reviewerId, index) => (
+                  <option
+                    key={index}
+                    label={reviewers[reviewerId].name}
+                    value={reviewerId}
+                  />
+                ))}
+              </select>
+            </div>
+          ) : null}
+
+          {status === 1 ? (
+            <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+              <AdminStep1
+                applicationData={applicationData}
+                status={status}
+                setStatus={setStatus}
+              />
+            </div>
+          ) : status === 2 ? (
+            <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+              <AdminStep2
+                applicationData={applicationData}
+                adminPortalData={adminPortalData}
+                status={status}
+                setStatus={setStatus}
+              />
+            </div>
+          ) : status === 3 ? (
+            <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+              <AdminStep3
+                applicationData={applicationData}
+                adminPortalData={adminPortalData}
+                status={status}
+                setStatus={setStatus}
+              />
+            </div>
+          ) : status === 4 ? (
+            <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+              <AdminStep4
+                applicationData={applicationData}
+                adminPortalData={adminPortalData}
+                status={status}
+                setStatus={setStatus}
+              />
+            </div>
+          ) : status === 5 ? (
+            <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+              <AdminStep5
+                applicationData={applicationData}
+                adminPortalData={adminPortalData}
+                status={status}
+                setStatus={setStatus}
+              />
+            </div>
+          ) : status === 6 ? (
+            <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+              <AdminStep6
+                applId={applId}
+                applicationData={applicationData}
+                adminPortalData={adminPortalData}
+                status={status}
+                setStatus={setStatus}
+              />
+            </div>
+          ) : status === 7 ? (
+            <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+              <AdminStep7
+                applId={applId}
+                applicationData={applicationData}
+                adminPortalData={adminPortalData}
+                status={status}
+                setStatus={setStatus}
+              />
+            </div>
+          ) : null}
+        </div>
       ) : (
         <div className="mt-96" />
       )}
