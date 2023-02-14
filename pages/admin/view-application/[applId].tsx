@@ -27,7 +27,7 @@ function ViewApplication() {
   const [reviewers, setReviewers] = useState<Users>({})
   const [interviewers, setInterviewers] = useState<Users>({})
   const [status, setStatus] = useState<number>(1)
-  const [formStatus, setFormStatus] = useState<number>(1)
+  const [formStatus, setFormStatus] = useState<number>(6)
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
   const router = useRouter()
