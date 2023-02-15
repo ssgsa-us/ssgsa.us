@@ -65,21 +65,21 @@ const ReviewerStep7 = ({
         </div>
 
         <Field
-          name={`Educational Qualification ${instructions.ACADEMIC_MAX_MARKS}`}
+          name={`Educational Qualification (Out of ${instructions.ACADEMIC_MAX_MARKS})`}
           value={adminPortalData.review_marks[authUser.id].totalAcademicMarks}
         />
         <Field
-          name={`Academic / Curricular Activities ${instructions.CURRICULAR_MAX_MARKS}`}
+          name={`Academic / Curricular Activities (Out of ${instructions.CURRICULAR_MAX_MARKS})`}
           value={adminPortalData.review_marks[authUser.id].curricularMarks}
         />
         <Field
-          name={`Extracurricular Activities ${instructions.EXTRACURRICULAR_MAX_MARKS}`}
+          name={`Extracurricular Activities (Out of ${instructions.EXTRACURRICULAR_MAX_MARKS})`}
           value={adminPortalData.review_marks[authUser.id].extracurricularMarks}
         />
         <Field
-          name={`Essay-Type Questions ${
-            Number(instructions.SOP_MAX_MARKS) * 5
-          }`}
+          name={`Essay-Type Questions (Out of ${
+            instructions.SOP_MAX_MARKS * 5
+          })`}
           value={adminPortalData.review_marks[authUser.id].totalSOPMarks}
         />
         <Field name="Total Marks (out of 100)" value={totalMarks} />
