@@ -170,6 +170,7 @@ function ViewApplication() {
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
+              instructions={instructions}
             />
           </div>
         )
