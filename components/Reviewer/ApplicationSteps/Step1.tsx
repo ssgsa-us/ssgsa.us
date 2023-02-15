@@ -32,9 +32,16 @@ const ReviewerStep1 = ({
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Applicant&apos;s Tentative Plan And Personal Data
         </h1>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP1_INSTRUCTION1}
-        </p>
+        <div className="text-xs sm:text-sm md:text-base font-bold m-2">
+          <p className="mb-5">
+            {process.env.NEXT_PUBLIC_REVIEW_STEP1_INSTRUCTION}
+          </p>
+          <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP1_INSTRUCTION1}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <Step1 applicationData={applicationData} />

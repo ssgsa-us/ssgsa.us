@@ -37,22 +37,30 @@ const ReviewerStep7 = ({
       if (adminPortalData.review_marks[authUser.id].remark)
         setRemark(adminPortalData.review_marks[authUser.id].remark)
 
-      if (adminPortalData.review_marks[authUser.id].totalMarks)
-        setTotalMarks(
-          adminPortalData.review_marks[authUser.id].totalAcademicMarks +
-            adminPortalData.review_marks[authUser.id].curricularMarks +
-            adminPortalData.review_marks[authUser.id].extracurricularMarks +
-            adminPortalData.review_marks[authUser.id].totalSOPMarks,
-        )
+      setTotalMarks(
+        adminPortalData.review_marks[authUser.id].totalAcademicMarks +
+          adminPortalData.review_marks[authUser.id].curricularMarks +
+          adminPortalData.review_marks[authUser.id].extracurricularMarks +
+          adminPortalData.review_marks[authUser.id].totalSOPMarks,
+      )
     }
   }, [])
 
   return (
     <div className="w-full">
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
-        <h1 className="text-3xl text-red-850 text-center font-bold pb-5 mb-10">
+        <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Review Marks
         </h1>
+        <div className="text-xs sm:text-sm md:text-base font-bold mb-10">
+          <p className="mb-5">
+            <span className="text-base md:text-lg text-blue-850 font-black">
+              Note:
+            </span>{' '}
+            Click on Complete to finalize reviewing this application
+          </p>
+        </div>
+
         <Field
           name={`Educational Qualification ${process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS}`}
           value={adminPortalData.review_marks[authUser.id].totalAcademicMarks}
@@ -66,13 +74,15 @@ const ReviewerStep7 = ({
           value={adminPortalData.review_marks[authUser.id].extracurricularMarks}
         />
         <Field
-          name={`Essay-Type Questions ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS}`}
+          name={`Essay-Type Questions ${
+            Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS) * 5
+          }`}
           value={adminPortalData.review_marks[authUser.id].totalSOPMarks}
         />
         <Field name="Total Marks (out of 100)" value={totalMarks} />
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name="Remark"
+            name="Any additional remark for the applicant"
             value={remark}
             type="text"
             onChange={(e) => setRemark(e.target.value)}

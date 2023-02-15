@@ -1,14 +1,7 @@
-type ReviewMarks = {
-  A: number
-  B: number
-  C: number
-  D: number
-  E: number
-  remark: string
-}
+import { ReviewMarksType } from '../../types'
 
 type Props = {
-  reviewMarks: ReviewMarks
+  reviewMarks: ReviewMarksType[string]
 }
 
 export default function ReviewMarksModal({ reviewMarks }: Props) {
@@ -26,56 +19,45 @@ export default function ReviewMarksModal({ reviewMarks }: Props) {
           <div className="px-5">
             <div className="flex justify-between space-x-5 my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_A} (Out of{' '}
-                {process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS})
-              </p>
-              <p className="sm:text-lg font-bold">{reviewMarks.A}</p>
-            </div>
-            <div className="flex justify-between space-x-5 my-5">
-              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_B} (Out of{' '}
-                {process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS})
-              </p>
-              <p className="sm:text-lg font-bold">{reviewMarks.B}</p>
-            </div>
-            <div className="flex justify-between space-x-5 my-5">
-              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_C} (Out of{' '}
-                {process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS})
-              </p>
-              <p className="sm:text-lg font-bold">{reviewMarks.C}</p>
-            </div>
-            <div className="flex justify-between space-x-5 my-5">
-              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_D} (Out of{' '}
-                {process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS})
-              </p>
-              <p className="sm:text-lg font-bold">{reviewMarks.D}</p>
-            </div>
-            <div className="flex justify-between space-x-5 my-5">
-              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                {process.env.NEXT_PUBLIC_REVIEW_MARKS_INDEX_E} (Out of{' '}
-                {process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS})
-              </p>
-              <p className="sm:text-lg font-bold">{reviewMarks.E}</p>
-            </div>
-            <div className="flex justify-between space-x-5 my-5">
-              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                Total Marks (Out of{' '}
-                {Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_A_MAX_MARKS) +
-                  Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_B_MAX_MARKS) +
-                  Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_C_MAX_MARKS) +
-                  Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_D_MAX_MARKS) +
-                  Number(process.env.NEXT_PUBLIC_REVIEW_INDEX_E_MAX_MARKS)}
-                )
+                Educational Qualifications (Out of{' '}
+                {process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS})
               </p>
               <p className="sm:text-lg font-bold">
-                {reviewMarks.A +
-                  reviewMarks.B +
-                  reviewMarks.C +
-                  reviewMarks.D +
-                  reviewMarks.E}
+                {reviewMarks.totalAcademicMarks}
               </p>
+            </div>
+            <div className="flex justify-between space-x-5 my-5">
+              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                Academic / Curricular Activities (Out of{' '}
+                {process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS})
+              </p>
+              <p className="sm:text-lg font-bold">
+                {reviewMarks.curricularMarks}
+              </p>
+            </div>
+            <div className="flex justify-between space-x-5 my-5">
+              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                Extracurricular Activities (Out of{' '}
+                {process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS})
+              </p>
+              <p className="sm:text-lg font-bold">
+                {reviewMarks.extracurricularMarks}
+              </p>
+            </div>
+            <div className="flex justify-between space-x-5 my-5">
+              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                Essay-Type Questions (Out of{' '}
+                {Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS) * 5})
+              </p>
+              <p className="sm:text-lg font-bold">
+                {reviewMarks.totalSOPMarks}
+              </p>
+            </div>
+            <div className="flex justify-between space-x-5 my-5">
+              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                Total Marks (Out of 100)
+              </p>
+              <p className="sm:text-lg font-bold">{reviewMarks.totalMarks}</p>
             </div>
             <div className="flex items-center justify-between space-x-5 my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">

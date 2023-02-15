@@ -40,7 +40,7 @@ const ReviewerStep4 = ({
   }, [adminPortalData])
 
   const validation = () => {
-    if (extracurricularMarks === null) {
+    if (extracurricularMarks == null) {
       setError('Please provide extra curricular marks.')
       return false
     }
@@ -53,15 +53,16 @@ const ReviewerStep4 = ({
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Extracurricular Activities
         </h1>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP4_INSTRUCTION1}
-        </p>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP4_INSTRUCTION2}
-        </p>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP4_INSTRUCTION3}
-        </p>
+        <div className="text-xs sm:text-sm md:text-base font-bold m-2">
+          <p className="mb-5">
+            {process.env.NEXT_PUBLIC_REVIEW_STEP4_INSTRUCTION}
+          </p>
+          <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP4_INSTRUCTION1}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <Step7 extraCurrActivities={applicationData.extra_curriculars} />

@@ -134,9 +134,19 @@ const ReviewerStep2 = ({
         <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
           Educational Qualifications
         </h1>
-        <p className="text-xs sm:text-sm md:text-base font-bold pl-2 pt-2">
-          {process.env.NEXT_PUBLIC_REVIEW_STEP2_INSTRUCTION1}
-        </p>
+        <div className="text-xs sm:text-sm md:text-base font-bold m-2">
+          <p className="mb-5">
+            {process.env.NEXT_PUBLIC_REVIEW_STEP2_INSTRUCTION}
+          </p>
+          <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP2_INSTRUCTION1}
+            </li>
+            <li className="my-2">
+              {process.env.NEXT_PUBLIC_REVIEW_STEP2_INSTRUCTION2}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">

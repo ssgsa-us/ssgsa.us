@@ -2,12 +2,12 @@ import Link from 'next/link'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
-import { Reviewer } from '../../classes/reviewer'
-import { getInterviewerDetailsById } from '../../pages/api/getInterviewerDetails'
-import { getReviewerDetailsById } from '../../pages/api/getReviewerDetails'
+import { User } from '../../classes/user'
+import { getUserDetailsById } from '../../pages/api/getUserDetails'
 import { updateApplicationStatus } from '../../pages/api/updateApplicationStatus'
 import { updateInterviewSet } from '../../pages/api/updateInterviewSet'
 import { updateReviewSet } from '../../pages/api/updateReviewSet'
+import { AcademicRecordType, ReviewMarksType } from '../../types'
 import InterviewMarksModal from '../modals/InterviewerMarksModel'
 import ReviewMarksModal from '../modals/ReviewMarksModal'
 import SetDropdown from './SetDropdown'
@@ -23,14 +23,6 @@ type Props = {
   setChangeOccured: Dispatch<SetStateAction<boolean>>
 }
 
-type ReviewMarks = {
-  A: number
-  B: number
-  C: number
-  D: number
-  E: number
-  remark: string
-}
 type InterviewMarks = {
   A: number
   B: number
@@ -39,9 +31,29 @@ type InterviewMarks = {
   remark: string
 }
 
-type ReviewerMarks = { [key: number]: { name: string; marks: ReviewMarks } }
+type ReviewerMarks = {
+  [key: number]: { name: string; marks: ReviewMarksType[string] }
+}
 type InterviewerMarks = {
   [key: number]: { name: string; marks: InterviewMarks }
+}
+
+const initialReviewMarks = {
+  1: { name: '-', marks: null },
+  2: { name: '-', marks: null },
+  3: { name: '-', marks: null },
+  4: { name: '-', marks: null },
+  5: { name: '-', marks: null },
+  6: { name: '-', marks: null },
+}
+
+const initialInterviewMarks = {
+  1: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
+  2: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
+  3: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
+  4: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
+  5: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
+  6: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
 }
 
 export default function ApplicationRow({
@@ -54,41 +66,28 @@ export default function ApplicationRow({
   const [reviewSet, setReviewSet] = useState<string>(
     application.adminPortalData.review_set,
   )
-  const [reviewerMarks, setReviewerMarks] = useState<ReviewerMarks>({
-    1: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
-    2: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
-    3: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
-    4: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
-    5: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
-    6: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, E: 0, remark: '' } },
-  })
+  const [reviewerMarks, setReviewerMarks] =
+    useState<ReviewerMarks>(initialReviewMarks)
   const [interviewSet, setInterviewSet] = useState<string>(
     application.adminPortalData.interview_set,
   )
-  const [interviewerMarks, setInterviewerMarks] = useState<InterviewerMarks>({
-    1: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-    2: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-    3: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-    4: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-    5: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-    6: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-  })
+  const [interviewerMarks, setInterviewerMarks] = useState<InterviewerMarks>(
+    initialInterviewMarks,
+  )
+  const [bachelorFaculties, setBachelorFaculties] = useState<Array<String>>([])
+  const [masterFaculties, setMasterFaculties] = useState<Array<String>>([])
 
   const reviewMarkComponent = (reviewMarks: {
     name: string
-    marks: ReviewMarks
+    marks: ReviewMarksType[string]
   }) => (
     <div>
       <p className="navgroup-text">
-        {reviewMarks.marks.A +
-          reviewMarks.marks.B +
-          reviewMarks.marks.C +
-          reviewMarks.marks.D +
-          reviewMarks.marks.E}
+        {reviewMarks.marks ? reviewMarks.marks.totalMarks : '-'}
       </p>
-      {reviewMarks.name == '-' ? null : (
+      {reviewMarks.marks ? (
         <ReviewMarksModal reviewMarks={reviewMarks.marks} />
-      )}
+      ) : null}
     </div>
   )
 
@@ -110,32 +109,36 @@ export default function ApplicationRow({
   )
 
   useEffect(() => {
-    if (application.adminPortalData.review_marks)
-      Object.keys(application.adminPortalData.review_marks).map(
-        async (reviewerId: string, index: number) => {
-          await getReviewerDetailsById(reviewerId)
-            .then((reviewer: Reviewer) => {
-              if (reviewer) true
-            })
-            .catch(() => {})
-        },
-      )
+    const revMarks = application.adminPortalData.review_marks
+    if (revMarks)
+      Object.keys(revMarks).map(async (reviewerId: string, index: number) => {
+        await getUserDetailsById(reviewerId)
+          .then((reviewer: User) => {
+            if (reviewer)
+              setReviewerMarks((prev) => ({
+                ...prev,
+                [index + 1]: {
+                  name: reviewer.name,
+                  marks: revMarks[reviewerId],
+                },
+              }))
+          })
+          .catch(() => {})
+      })
 
-    if (application.adminPortalData.interview_marks)
-      Object.keys(application.adminPortalData.interview_marks).map(
+    const intMarks = application.adminPortalData.interview_marks
+    if (intMarks)
+      Object.keys(intMarks).map(
         async (interviewerId: string, index: number) => {
-          await getInterviewerDetailsById(interviewerId)
-            .then((interview: Reviewer) => {
+          await getUserDetailsById(interviewerId)
+            .then((interview: User) => {
               if (interview)
                 setInterviewerMarks((prevInterviewerMarks) => {
                   return {
                     ...prevInterviewerMarks,
                     [index + 1]: {
                       name: interview.name,
-                      marks:
-                        application.adminPortalData.interview_marks[
-                          interviewerId
-                        ],
+                      marks: intMarks[interviewerId],
                     },
                   }
                 })
@@ -143,6 +146,21 @@ export default function ApplicationRow({
             .catch(() => {})
         },
       )
+
+    const academicRecord: AcademicRecordType =
+      application.applicationData.academic_record
+    Object.keys(academicRecord).map((key) => {
+      if (academicRecord[Number(key)].degreeLevel === 'Bachelor')
+        setBachelorFaculties((prev) => [
+          ...prev,
+          academicRecord[Number(key)].faculty,
+        ])
+      else if (academicRecord[Number(key)].degreeLevel === 'Master')
+        setMasterFaculties((prev) => [
+          ...prev,
+          academicRecord[Number(key)].faculty,
+        ])
+    })
   }, [])
 
   return (
@@ -163,15 +181,17 @@ export default function ApplicationRow({
         {application.applicationData.faculty}
       </td>
       <td className="border border-blue-850 p-2">
-        {
-          application.applicationData.academic_record["Bachelor's Degree"]
-            .branch
-        }
+        {bachelorFaculties.length
+          ? bachelorFaculties.map((faculty, index) =>
+              index === bachelorFaculties.length - 1 ? faculty : faculty + ', ',
+            )
+          : '-'}
       </td>
       <td className="border border-blue-850 p-2">
-        {application.applicationData.academic_record["Master's Degree"]
-          ? application.applicationData.academic_record["Master's Degree"]
-              .branch
+        {masterFaculties.length
+          ? masterFaculties.map((faculty, index) =>
+              index === masterFaculties.length - 1 ? faculty : faculty + ', ',
+            )
           : '-'}
       </td>
       <td className="border border-blue-850 p-2 text-center">

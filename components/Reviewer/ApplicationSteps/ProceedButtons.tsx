@@ -3,6 +3,7 @@ import {
   faArrowAltCircleRight,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction } from 'react'
 
 // updateApplicationData function: Used in next step and save information
@@ -28,6 +29,8 @@ const ProceedButtons = ({
   error,
   setError,
 }: Props) => {
+  const router = useRouter()
+
   return (
     <div className="mt-10">
       {error ? (
@@ -57,7 +60,7 @@ const ProceedButtons = ({
             if (validation())
               if (status === 7)
                 updateReviewMarks(7)
-                  .then(() => alert('Thanks for reviewing application!'))
+                  .then(() => router.push('/reviewer/applications'))
                   .catch(() => setError('Try again, network error!'))
               else
                 updateReviewMarks(
@@ -68,7 +71,7 @@ const ProceedButtons = ({
           }}
         >
           <p className="mr-2">
-            {status === 7 ? 'Complete' : 'Save And Proceed'}
+            {status === 7 ? 'Complete Review and Proceed' : 'Save And Proceed'}
           </p>
           <FontAwesomeIcon
             icon={faArrowAltCircleRight}

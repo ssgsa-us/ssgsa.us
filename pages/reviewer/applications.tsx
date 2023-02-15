@@ -106,7 +106,9 @@ function ReviewerApplications() {
                     <th className="border border-blue-850 py-2 px-10">
                       Essay-Type Questions
                       <br />
-                      (Out of {process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})
+                      (Out of{' '}
+                      {Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS) * 5}
+                      )
                     </th>
                     <th className="border border-blue-850 p-2">
                       Total (out of 100)

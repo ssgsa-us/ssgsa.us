@@ -11,22 +11,52 @@ function ReviewerPortal() {
           Instructions
         </h1>
         <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 lg:px-32 my-10">
-          <p className="my-5 text-lg text-blue-850">
-            Please go through the attached rubric thoroughly before reviewing
-            the applications.
+          <p className="mt-5 mb-2 text-lg">
+            The Application will be reviewed on the following basis:
           </p>
-          <p className="my-5 text-lg text-blue-850">
-            Please verify the aggregate percentages from the student marksheets.
-            If inconsistency is observed, consider the aggregate percentage from
-            your own calculation.
+          <div className="ml-5 my-2">
+            <p className="text-lg font-bold">
+              Academic Grades (
+              {process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS} points)
+            </p>
+          </div>
+          <div className="ml-5 my-2">
+            <p className="text-lg font-bold">
+              Curricular Activities (
+              {process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS} points)
+            </p>
+            <p className="text-lg">
+              Projects, work experience, publications, internships, academic
+              awards & recognition, etc.
+            </p>
+          </div>
+          <div className="ml-5 my-2">
+            <p className="text-lg font-bold">
+              Extra-Curricular Activities (
+              {process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS} points)
+            </p>
+            <p className="text-lg">
+              Leadership experience, literary and cultural involvement, sports,
+              volunteering, social work etc.
+            </p>
+          </div>
+          <div className="ml-5 my-2">
+            <p className="text-lg font-bold">
+              Essay-Type Question (
+              {process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS} points)
+            </p>
+            <p className="text-lg">
+              Motivation for higher education as gauged from essays.
+            </p>
+          </div>
+          <p className="my-5 text-lg">
+            You will find detailed information in each application to help you
+            in grading.
           </p>
-          <p className="my-5 text-lg text-blue-850">
-            The rubric has built-in formulas for various categories and a
-            guideline on probable grades.{' '}
-            <span className="text-red-850">
-              Please try to follow the guidelines to ensure the equitable and
-              unbiased evaluation of the applications.
-            </span>
+          <p className="my-5 text-lg">
+            <span className="font-bold">Note:</span> If you find any kind of
+            plagiarism or misinformation in any of the applications, please
+            report to us.
           </p>
           <div className="flex justify-center">
             <Link href={process.env.NEXT_PUBLIC_REVIEWER_RUBRIC_URL || ''}>

@@ -1,3 +1,7 @@
+import { User } from './classes/user'
+
+export type Users = { [key: string]: User }
+
 export type AuthUser = {
   id: string
   email: string
