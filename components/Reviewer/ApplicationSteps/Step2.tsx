@@ -3,7 +3,11 @@ import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
 import { step2 } from '../../../pages/api/updateReviewMarks'
-import { AcademicRecordType, ReviewMarksType } from '../../../types'
+import {
+  AcademicRecordType,
+  ReviewMarksType,
+  ReviewerInstructionsType,
+} from '../../../types'
 import CheckBoxInput from '../../ApplicationSteps/Checkboxes'
 import TextInput from '../../ApplicationSteps/TextInput'
 import AcademicRecord from '../../ReviewApplicationSteps/AcademicRecord'
@@ -17,6 +21,7 @@ type Props = {
   formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  instructions: ReviewerInstructionsType
 }
 
 const ReviewerStep2 = ({
@@ -26,6 +31,7 @@ const ReviewerStep2 = ({
   formStatus,
   status,
   setStatus,
+  instructions,
 }: Props) => {
   const { authUser } = useAuth()
   const [academicGrades, setAcademicGrades] = useState<
@@ -85,17 +91,11 @@ const ReviewerStep2 = ({
     if (masterGrades)
       total =
         Math.round(
-          masterGrades *
-            (Number(process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS) / 2) +
-            bachelorGrades *
-              (Number(process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS) / 2),
+          masterGrades * (instructions.ACADEMIC_MAX_MARKS / 2) +
+            bachelorGrades * (instructions.ACADEMIC_MAX_MARKS / 2),
         ) / 100
     else
-      total =
-        Math.round(
-          bachelorGrades *
-            Number(process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS),
-        ) / 100
+      total = Math.round(bachelorGrades * instructions.ACADEMIC_MAX_MARKS) / 100
 
     setTotalGrades(total)
     return total
@@ -135,17 +135,18 @@ const ReviewerStep2 = ({
           Educational Qualifications
         </h1>
         <div className="text-xs sm:text-sm md:text-base font-bold m-2">
-          <p className="mb-5">
-            {process.env.NEXT_PUBLIC_REVIEW_STEP2_INSTRUCTION}
-          </p>
+          <p className="mb-5">{instructions.STEP2_INSTRUCTION}</p>
           <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
-            <li className="my-2">
-              {process.env.NEXT_PUBLIC_REVIEW_STEP2_INSTRUCTION1}
-            </li>
-            <li className="my-2">
-              {process.env.NEXT_PUBLIC_REVIEW_STEP2_INSTRUCTION2}
-            </li>
+            <li className="my-2">{instructions.STEP2_INSTRUCTION1}</li>
+            <li className="my-2">{instructions.STEP2_INSTRUCTION2}</li>
           </ul>
+          <p className="my-5">
+            <span className="text-base md:text-lg text-blue-850 font-black">
+              Note:
+            </span>{' '}
+            For updating total marks, Go to last step and click on complete
+            button
+          </p>
         </div>
       </div>
 
@@ -249,7 +250,7 @@ const ReviewerStep2 = ({
           Education Qualifications Marks
         </h1>
         <Field
-          name={`Total Marks (out of ${process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS})`}
+          name={`Total Marks (out of ${instructions.ACADEMIC_MAX_MARKS})`}
           value={totalGrades}
         />
         <div className="flex justify-center mt-10">

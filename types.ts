@@ -202,3 +202,34 @@ export type ReviewMarksType = {
     totalMarks: number
   }
 }
+
+export type ReviewerInstructionsType = {
+  ACADEMIC_MAX_MARKS?: number
+  CURRICULAR_MAX_MARKS?: number
+  EXTRACURRICULAR_MAX_MARKS?: number
+  SOP_MAX_MARKS?: number
+  RUBRIC_URL?: string
+  STEP1_INSTRUCTION?: string
+  STEP1_INSTRUCTION1?: string
+  STEP2_INSTRUCTION?: string
+  STEP2_INSTRUCTION1?: string
+  STEP2_INSTRUCTION2?: string
+  STEP3_INSTRUCTION?: string
+  STEP3_INSTRUCTION1?: string
+  STEP3_INSTRUCTION2?: string
+  STEP3_INSTRUCTION3?: string
+  STEP3_INSTRUCTION4?: string
+  STEP4_INSTRUCTION?: string
+  STEP4_INSTRUCTION1?: string
+  STEP4_INSTRUCTION2?: string
+  STEP4_INSTRUCTION3?: string
+  STEP5_INSTRUCTION?: string
+  STEP5_INSTRUCTION1?: string
+  STEP5_INSTRUCTION2?: string
+  STEP5_INSTRUCTION3?: string
+  STEP5_INSTRUCTION4?: string
+  STEP5_INSTRUCTION5?: string
+  STEP5_INSTRUCTION6?: string
+  STEP5_INSTRUCTION7?: string
+  STEP6_INSTRUCTION?: string
+}

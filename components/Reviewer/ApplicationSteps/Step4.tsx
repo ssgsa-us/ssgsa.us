@@ -3,6 +3,7 @@ import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
 import { step4 } from '../../../pages/api/updateReviewMarks'
+import { ReviewerInstructionsType } from '../../../types'
 import TextInput from '../../ApplicationSteps/TextInput'
 import Step7 from '../../ReviewApplicationSteps/Step7'
 import ProceedButtons from './ProceedButtons'
@@ -14,6 +15,7 @@ type Props = {
   formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  instructions: ReviewerInstructionsType
 }
 
 const ReviewerStep4 = ({
@@ -23,6 +25,7 @@ const ReviewerStep4 = ({
   formStatus,
   status,
   setStatus,
+  instructions,
 }: Props) => {
   const { authUser } = useAuth()
   const [extracurricularMarks, setExtracurricularMarks] = useState<number>(null)
@@ -54,14 +57,17 @@ const ReviewerStep4 = ({
           Extracurricular Activities
         </h1>
         <div className="text-xs sm:text-sm md:text-base font-bold m-2">
-          <p className="mb-5">
-            {process.env.NEXT_PUBLIC_REVIEW_STEP4_INSTRUCTION}
-          </p>
+          <p className="mb-5">{instructions.STEP4_INSTRUCTION}</p>
           <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
-            <li className="my-2">
-              {process.env.NEXT_PUBLIC_REVIEW_STEP4_INSTRUCTION1}
-            </li>
+            <li className="my-2">{instructions.STEP4_INSTRUCTION1}</li>
           </ul>
+          <p className="my-5">
+            <span className="text-base md:text-lg text-blue-850 font-black">
+              Note:
+            </span>{' '}
+            For updating total marks, Go to last step and click on complete
+            button
+          </p>
         </div>
       </div>
 
@@ -73,15 +79,13 @@ const ReviewerStep4 = ({
         </h1>
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Enter Total Marks (out of ${process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS})`}
+            name={`Enter Total Marks (out of ${instructions.EXTRACURRICULAR_MAX_MARKS})`}
             value={extracurricularMarks}
             type="number"
             onChange={(e) => {
               if (
                 Number(e.target.value) <=
-                  Number(
-                    process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS,
-                  ) &&
+                  instructions.EXTRACURRICULAR_MAX_MARKS &&
                 Number(e.target.value) >= 0
               )
                 setExtracurricularMarks(Number(e.target.value))
@@ -89,9 +93,7 @@ const ReviewerStep4 = ({
             required={true}
             step="0.01"
             minimum={0}
-            maximum={Number(
-              process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS,
-            )}
+            maximum={instructions.EXTRACURRICULAR_MAX_MARKS}
           />
         </div>
       </div>

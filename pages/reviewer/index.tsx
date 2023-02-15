@@ -1,9 +1,20 @@
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { ReviewerInstructionsType } from '../../types'
 import requireAuth from '../../components/requireAuth'
 import Roles from '../../constants/roles'
 import ReviewerLayout from '../../layouts/reviewer/reviewer-layout'
+import { getReviewerInstructions } from '../api/instructions'
 
 function ReviewerPortal() {
+  const [instructions, setInstructions] = useState<ReviewerInstructionsType>({})
+
+  useEffect(() => {
+    getReviewerInstructions()
+      .then((data) => setInstructions(data))
+      .catch(() => alert('Not able to fetch instructions, Try reloading!'))
+  }, [])
+
   return (
     <ReviewerLayout>
       <div>
@@ -16,14 +27,12 @@ function ReviewerPortal() {
           </p>
           <div className="ml-5 my-2">
             <p className="text-lg font-bold">
-              Academic Grades (
-              {process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS} points)
+              Academic Grades ({instructions.ACADEMIC_MAX_MARKS} points)
             </p>
           </div>
           <div className="ml-5 my-2">
             <p className="text-lg font-bold">
-              Curricular Activities (
-              {process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS} points)
+              Curricular Activities ({instructions.CURRICULAR_MAX_MARKS} points)
             </p>
             <p className="text-lg">
               Projects, work experience, publications, internships, academic
@@ -33,7 +42,7 @@ function ReviewerPortal() {
           <div className="ml-5 my-2">
             <p className="text-lg font-bold">
               Extra-Curricular Activities (
-              {process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS} points)
+              {instructions.EXTRACURRICULAR_MAX_MARKS} points)
             </p>
             <p className="text-lg">
               Leadership experience, literary and cultural involvement, sports,
@@ -42,8 +51,7 @@ function ReviewerPortal() {
           </div>
           <div className="ml-5 my-2">
             <p className="text-lg font-bold">
-              Essay-Type Question (
-              {process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS} points)
+              Essay-Type Question ({instructions.SOP_MAX_MARKS} points)
             </p>
             <p className="text-lg">
               Motivation for higher education as gauged from essays.
@@ -59,7 +67,7 @@ function ReviewerPortal() {
             report to us.
           </p>
           <div className="flex justify-center">
-            <Link href={process.env.NEXT_PUBLIC_REVIEWER_RUBRIC_URL || ''}>
+            <Link href={instructions.RUBRIC_URL || ''}>
               <a className="text-white text-lg py-2 px-4 my-10 rounded-3xl bg-red-850">
                 Download the Rubric here
               </a>

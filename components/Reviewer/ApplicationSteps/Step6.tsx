@@ -3,6 +3,7 @@ import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
 import { step6 } from '../../../pages/api/updateReviewMarks'
+import { ReviewerInstructionsType } from '../../../types'
 import Step9 from '../../ReviewApplicationSteps/Step9'
 import ProceedButtons from './ProceedButtons'
 
@@ -13,6 +14,7 @@ type Props = {
   formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  instructions: ReviewerInstructionsType
 }
 
 const ReviewerStep6 = ({
@@ -22,6 +24,7 @@ const ReviewerStep6 = ({
   formStatus,
   status,
   setStatus,
+  instructions,
 }: Props) => {
   const { authUser } = useAuth()
   const [error, setError] = useState<string>('')
@@ -33,9 +36,7 @@ const ReviewerStep6 = ({
           Other Information
         </h1>
         <div className="text-xs sm:text-sm md:text-base font-bold m-2">
-          <p className="mb-5">
-            {process.env.NEXT_PUBLIC_REVIEW_STEP6_INSTRUCTION}
-          </p>
+          <p className="mb-5">{instructions.STEP6_INSTRUCTION}</p>
         </div>
       </div>
 
