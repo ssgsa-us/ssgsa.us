@@ -3,6 +3,7 @@ import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
 import { step7 } from '../../../pages/api/updateReviewMarks'
+import { ReviewerInstructionsType } from '../../../types'
 import TextInput from '../../ApplicationSteps/TextInput'
 import Field from '../../ReviewApplicationSteps/Field'
 import ProceedButtons from './ProceedButtons'
@@ -14,6 +15,7 @@ type Props = {
   formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  instructions: ReviewerInstructionsType
 }
 
 const ReviewerStep7 = ({
@@ -23,6 +25,7 @@ const ReviewerStep7 = ({
   formStatus,
   status,
   setStatus,
+  instructions,
 }: Props) => {
   const { authUser } = useAuth()
   const [remark, setRemark] = useState<string>('')
@@ -62,20 +65,20 @@ const ReviewerStep7 = ({
         </div>
 
         <Field
-          name={`Educational Qualification ${process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS}`}
+          name={`Educational Qualification ${instructions.ACADEMIC_MAX_MARKS}`}
           value={adminPortalData.review_marks[authUser.id].totalAcademicMarks}
         />
         <Field
-          name={`Academic / Curricular Activities ${process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS}`}
+          name={`Academic / Curricular Activities ${instructions.CURRICULAR_MAX_MARKS}`}
           value={adminPortalData.review_marks[authUser.id].curricularMarks}
         />
         <Field
-          name={`Extracurricular Activities ${process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS}`}
+          name={`Extracurricular Activities ${instructions.EXTRACURRICULAR_MAX_MARKS}`}
           value={adminPortalData.review_marks[authUser.id].extracurricularMarks}
         />
         <Field
           name={`Essay-Type Questions ${
-            Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS) * 5
+            Number(instructions.SOP_MAX_MARKS) * 5
           }`}
           value={adminPortalData.review_marks[authUser.id].totalSOPMarks}
         />
