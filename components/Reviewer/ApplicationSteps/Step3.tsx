@@ -3,6 +3,7 @@ import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
 import { step3 } from '../../../pages/api/updateReviewMarks'
+import { ReviewerInstructionsType } from '../../../types'
 import TextInput from '../../ApplicationSteps/TextInput'
 import Step3 from '../../ReviewApplicationSteps/Step3'
 import Step4 from '../../ReviewApplicationSteps/Step4'
@@ -17,6 +18,7 @@ type Props = {
   formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  instructions: ReviewerInstructionsType
 }
 
 const ReviewerStep3 = ({
@@ -26,6 +28,7 @@ const ReviewerStep3 = ({
   formStatus,
   status,
   setStatus,
+  instructions,
 }: Props) => {
   const { authUser } = useAuth()
   const [curricularMarks, setCurricularMarks] = useState<number>(null)
@@ -57,23 +60,20 @@ const ReviewerStep3 = ({
           Academic/Curricular Activities
         </h1>
         <div className="text-xs sm:text-sm md:text-base font-bold m-2">
-          <p className="mb-5">
-            {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION}
-          </p>
+          <p className="mb-5">{instructions.STEP3_INSTRUCTION}</p>
           <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
-            <li className="my-2">
-              {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION1}
-            </li>
-            <li className="my-2">
-              {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION2}
-            </li>
-            <li className="my-2">
-              {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION3}
-            </li>
-            <li className="my-2">
-              {process.env.NEXT_PUBLIC_REVIEW_STEP3_INSTRUCTION4}
-            </li>
+            <li className="my-2">{instructions.STEP3_INSTRUCTION1}</li>
+            <li className="my-2">{instructions.STEP3_INSTRUCTION2}</li>
+            <li className="my-2">{instructions.STEP3_INSTRUCTION3}</li>
+            <li className="my-2">{instructions.STEP3_INSTRUCTION4}</li>
           </ul>
+          <p className="my-5">
+            <span className="text-base md:text-lg text-blue-850 font-black">
+              Note:
+            </span>{' '}
+            For updating total marks, Go to last step and click on complete
+            button
+          </p>
         </div>
       </div>
 
@@ -88,13 +88,12 @@ const ReviewerStep3 = ({
         </h1>
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Enter Total Marks (out of ${process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS})`}
+            name={`Enter Total Marks (out of ${instructions.CURRICULAR_MAX_MARKS})`}
             value={curricularMarks}
             type="number"
             onChange={(e) => {
               if (
-                Number(e.target.value) <=
-                  Number(process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS) &&
+                Number(e.target.value) <= instructions.CURRICULAR_MAX_MARKS &&
                 Number(e.target.value) >= 0
               )
                 setCurricularMarks(Number(e.target.value))
@@ -102,9 +101,7 @@ const ReviewerStep3 = ({
             required={true}
             step="0.01"
             minimum={0}
-            maximum={Number(
-              process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS,
-            )}
+            maximum={instructions.CURRICULAR_MAX_MARKS}
           />
         </div>
       </div>

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
+import { ReviewerInstructionsType } from '../../types'
 import Loading from '../../components/Loading'
 import requireAuth from '../../components/requireAuth'
 import ApplicationRow from '../../components/Reviewer/ApplicationRow'
 import Roles from '../../constants/roles'
 import { useAuth } from '../../context/AuthUserContext'
 import ReviewerLayout from '../../layouts/reviewer/reviewer-layout'
+import { getReviewerInstructions } from '../api/instructions'
 import { getReviewerSetApplications } from '../api/getReviewerSetApplications'
 
 type Applications = {
@@ -23,7 +25,14 @@ function ReviewerApplications() {
     authUser.sets.length ? authUser.sets[0] : '',
   )
   const [pageReady, setPageReady] = useState<boolean>(false)
+  const [instructions, setInstructions] = useState<ReviewerInstructionsType>({})
   const allSets = authUser.sets
+
+  useEffect(() => {
+    getReviewerInstructions()
+      .then((data) => setInstructions(data))
+      .catch(() => alert('Not able to fetch instructions, Try reloading!'))
+  }, [])
 
   useEffect(() => {
     if (selectedSet)
@@ -87,28 +96,22 @@ function ReviewerApplications() {
                     <th className="border border-blue-850 py-2 px-10">
                       Educational Qualifications
                       <br />
-                      (Out of{' '}
-                      {process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS})
+                      (Out of {instructions.ACADEMIC_MAX_MARKS})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
                       Academic / Curricular Activities
                       <br />
-                      (Out of{' '}
-                      {process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS})
+                      (Out of {instructions.CURRICULAR_MAX_MARKS})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
                       Extracurricular Activities
                       <br />
-                      (Out of{' '}
-                      {process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS}
-                      )
+                      (Out of {instructions.EXTRACURRICULAR_MAX_MARKS})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
                       Essay-Type Questions
                       <br />
-                      (Out of{' '}
-                      {Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS) * 5}
-                      )
+                      (Out of {instructions.SOP_MAX_MARKS * 5})
                     </th>
                     <th className="border border-blue-850 p-2">
                       Total (out of 100)

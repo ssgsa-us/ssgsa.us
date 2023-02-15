@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import { useAuth } from '../../context/AuthUserContext'

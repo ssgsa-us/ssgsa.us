@@ -3,6 +3,7 @@ import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
 import { step1 } from '../../../pages/api/updateReviewMarks'
+import { ReviewerInstructionsType } from '../../../types'
 import Step1 from '../../ReviewApplicationSteps/Step1'
 import ProceedButtons from './ProceedButtons'
 
@@ -13,6 +14,7 @@ type Props = {
   formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  instructions: ReviewerInstructionsType
 }
 
 const ReviewerStep1 = ({
@@ -22,6 +24,7 @@ const ReviewerStep1 = ({
   formStatus,
   status,
   setStatus,
+  instructions,
 }: Props) => {
   const { authUser } = useAuth()
   const [error, setError] = useState<string>('')
@@ -33,13 +36,9 @@ const ReviewerStep1 = ({
           Applicant&apos;s Tentative Plan And Personal Data
         </h1>
         <div className="text-xs sm:text-sm md:text-base font-bold m-2">
-          <p className="mb-5">
-            {process.env.NEXT_PUBLIC_REVIEW_STEP1_INSTRUCTION}
-          </p>
+          <p className="mb-5">{instructions.STEP1_INSTRUCTION}</p>
           <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
-            <li className="my-2">
-              {process.env.NEXT_PUBLIC_REVIEW_STEP1_INSTRUCTION1}
-            </li>
+            <li className="my-2">{instructions.STEP1_INSTRUCTION1}</li>
           </ul>
         </div>
       </div>

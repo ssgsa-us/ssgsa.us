@@ -16,6 +16,8 @@ import { useAuth } from '../../../context/AuthUserContext'
 import ApplicationLayout from '../../../layouts/reviewer/ApplicationLayout'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
+import { ReviewerInstructionsType } from '../../../types'
+import { getReviewerInstructions } from '../../api/instructions'
 
 function ViewApplication() {
   const { authUser } = useAuth()
@@ -26,8 +28,15 @@ function ViewApplication() {
   const [formStatus, setFormStatus] = useState<number>(1)
   const [status, setStatus] = useState<number>(1)
   const [pageReady, setPageReady] = useState<boolean>(false)
+  const [instructions, setInstructions] = useState<ReviewerInstructionsType>({})
   const router = useRouter()
   const applId = String(router.query['applId'])
+
+  useEffect(() => {
+    getReviewerInstructions()
+      .then((data) => setInstructions(data))
+      .catch(() => alert('Not able to fetch instructions, Try reloading!'))
+  }, [])
 
   useEffect(() => {
     if (applId) {
@@ -89,6 +98,7 @@ function ViewApplication() {
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
+              instructions={instructions}
             />
           </div>
         ) : status == 2 ? (
@@ -100,6 +110,7 @@ function ViewApplication() {
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
+              instructions={instructions}
             />
           </div>
         ) : status == 3 ? (
@@ -111,6 +122,7 @@ function ViewApplication() {
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
+              instructions={instructions}
             />
           </div>
         ) : status == 4 ? (
@@ -122,6 +134,7 @@ function ViewApplication() {
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
+              instructions={instructions}
             />
           </div>
         ) : status == 5 ? (
@@ -133,6 +146,7 @@ function ViewApplication() {
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
+              instructions={instructions}
             />
           </div>
         ) : status == 6 ? (
@@ -144,6 +158,7 @@ function ViewApplication() {
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
+              instructions={instructions}
             />
           </div>
         ) : (
