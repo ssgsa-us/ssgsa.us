@@ -1,12 +1,19 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
+import {
+  ReviewMarksType,
+  ReviewerInstructionsType,
+  Users,
+} from '../../../types'
 import Field from '../../ReviewApplicationSteps/Field'
 import ProceedButtons from './ProceedButtons'
 
 type Props = {
   applicationData: ApplicationData
   adminPortalData: AdminPortalData
+  reviewers: Users
+  revInstructions: ReviewerInstructionsType
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
 }
@@ -14,33 +21,30 @@ type Props = {
 const AdminStep5 = ({
   applicationData,
   adminPortalData,
+  reviewers,
+  revInstructions,
   status,
   setStatus,
 }: Props) => {
   const sopAnswers = applicationData.sop_answers
-  // const [sopMarks, setSOPMarks] = useState<ReviewMarksType[string]['sopMarks']>(
-  //   {
-  //     SOP1: null,
-  //     SOP2: null,
-  //     SOP3: null,
-  //     SOP4: null,
-  //     SOP5: null,
-  //   },
-  // )
-  // const [totalMarks, setTotalMarks] = useState<number>(0)
+  const [reviewMarks, setReviewMarks] = useState<ReviewMarksType>({})
 
-  // useEffect(() => {
-  //   if (
-  //     adminPortalData.review_marks &&
-  //     adminPortalData.review_marks[authUser.id]
-  //   ) {
-  //     if (adminPortalData.review_marks[authUser.id].sopMarks)
-  //       setSOPMarks(adminPortalData.review_marks[authUser.id].sopMarks)
+  useEffect(() => {
+    if (
+      !adminPortalData ||
+      !adminPortalData.review_marks ||
+      !Object.keys(reviewers).length
+    )
+      return
 
-  //     if (adminPortalData.review_marks[authUser.id].totalSOPMarks)
-  //       setTotalMarks(adminPortalData.review_marks[authUser.id].totalSOPMarks)
-  //   }
-  // }, [adminPortalData])
+    Object.keys(adminPortalData.review_marks).map((reviewerId) => {
+      if (adminPortalData.review_marks[reviewerId].formStatus === 8)
+        setReviewMarks((prev) => ({
+          ...prev,
+          [reviewerId]: adminPortalData.review_marks[reviewerId],
+        }))
+    })
+  }, [adminPortalData, reviewers])
 
   return (
     <div className="w-full">
@@ -57,48 +61,84 @@ const AdminStep5 = ({
                 name={`a) ${process.env.NEXT_PUBLIC_QUESTION_1}`}
                 value={sopAnswers['SOP1']}
               />
-              {/* <div className="md:w-1/2 text-blue-850 font-black">
-            <Field
-              name={`Points for Essay (a) (out of ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})`}
-              value={sopMarks['SOP1']}
-            />
-          </div> */}
+              <div className="mb-20 ml-10">
+                {Object.keys(reviewMarks).map((reviewerId, index) => (
+                  <div className="mb-5" key={index}>
+                    <p className="font-bold sm:text-lg font-extrabold">
+                      Marks given by Reviewer {reviewers[reviewerId].name}
+                    </p>
+                    <div className="ml-5 text-blue-850">
+                      <Field
+                        name={`Points for Essay (a) (out of ${revInstructions.SOP_MAX_MARKS})`}
+                        value={reviewMarks[reviewerId].sopMarks['SOP1']}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="mb-20">
               <Field
                 name={`b) ${process.env.NEXT_PUBLIC_QUESTION_2}`}
                 value={sopAnswers['SOP2']}
               />
-              {/* <div className="md:w-1/2 text-blue-850 font-black">
-            <Field
-              name={`Points for Essay (b) (out of ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})`}
-              value={sopMarks['SOP2']}
-            />
-          </div> */}
+              <div className="mb-20 ml-10">
+                {Object.keys(reviewMarks).map((reviewerId, index) => (
+                  <div className="mb-5" key={index}>
+                    <p className="font-bold sm:text-lg font-extrabold">
+                      Marks given by Reviewer {reviewers[reviewerId].name}
+                    </p>
+                    <div className="ml-5 text-blue-850">
+                      <Field
+                        name={`Points for Essay (b) (out of ${revInstructions.SOP_MAX_MARKS})`}
+                        value={reviewMarks[reviewerId].sopMarks['SOP2']}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="mb-20">
               <Field
                 name={`c) ${process.env.NEXT_PUBLIC_QUESTION_3}`}
                 value={sopAnswers['SOP3']}
               />
-              {/* <div className="md:w-1/2 text-blue-850 font-black">
-            <Field
-              name={`Points for Essay (c) (out of ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})`}
-              value={sopMarks['SOP13']}
-            />
-          </div> */}
+              <div className="mb-20 ml-10">
+                {Object.keys(reviewMarks).map((reviewerId, index) => (
+                  <div className="mb-5" key={index}>
+                    <p className="font-bold sm:text-lg font-extrabold">
+                      Marks given by Reviewer {reviewers[reviewerId].name}
+                    </p>
+                    <div className="ml-5 text-blue-850">
+                      <Field
+                        name={`Points for Essay (c) (out of ${revInstructions.SOP_MAX_MARKS})`}
+                        value={reviewMarks[reviewerId].sopMarks['SOP3']}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="mb-20">
               <Field
                 name={`d) ${process.env.NEXT_PUBLIC_QUESTION_4}`}
                 value={sopAnswers['SOP4']}
               />
-              {/* <div className="md:w-1/2 text-blue-850 font-black">
-            <Field
-              name={`Points for Essay (d) (out of ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})`}
-              value={sopMarks['SOP4']}
-            />
-          </div> */}
+              <div className="mb-20 ml-10">
+                {Object.keys(reviewMarks).map((reviewerId, index) => (
+                  <div className="mb-5" key={index}>
+                    <p className="font-bold sm:text-lg font-extrabold">
+                      Marks given by Reviewer {reviewers[reviewerId].name}
+                    </p>
+                    <div className="ml-5 text-blue-850">
+                      <Field
+                        name={`Points for Essay (d) (out of ${revInstructions.SOP_MAX_MARKS})`}
+                        value={reviewMarks[reviewerId].sopMarks['SOP4']}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="mb-5">
@@ -106,28 +146,46 @@ const AdminStep5 = ({
                 name={`e) ${process.env.NEXT_PUBLIC_QUESTION_5}`}
                 value={sopAnswers['SOP5']}
               />
-              {/* <div className="md:w-1/2 text-blue-850 font-black">
-            <Field
-              name={`Points for Essay (e) (out of ${process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS})`}
-              value={sopMarks['SOP5']}
-            />
-          </div> */}
+              <div className="mb-20 ml-10">
+                {Object.keys(reviewMarks).map((reviewerId, index) => (
+                  <div className="mb-5" key={index}>
+                    <p className="font-bold sm:text-lg font-extrabold">
+                      Marks given by Reviewer {reviewers[reviewerId].name}
+                    </p>
+                    <div className="ml-5 text-blue-850">
+                      <Field
+                        name={`Points for Essay (e) (out of ${revInstructions.SOP_MAX_MARKS})`}
+                        value={reviewMarks[reviewerId].sopMarks['SOP5']}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </>
         )}
       </div>
 
-      {/* <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
+      <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
         <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
           Essay-Type Question Marks
         </h1>
-        <Field
-          name={`Total Marks (out of ${
-            Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS) * 5
-          })`}
-          value={totalMarks}
-        />
-      </div> */}
+        {Object.keys(reviewMarks).map((reviewerId, index) => (
+          <div className="my-5" key={index}>
+            <p className="font-bold sm:text-lg font-extrabold">
+              Marks given by Reviewer {reviewers[reviewerId].name}
+            </p>
+            <div className="ml-5 text-blue-850">
+              <Field
+                name={`Total Curricular Marks (out of ${
+                  revInstructions.SOP_MAX_MARKS * 5
+                })`}
+                value={reviewMarks[reviewerId].totalSOPMarks}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
 
       <ProceedButtons status={status} setStatus={setStatus} error="" />
     </div>
