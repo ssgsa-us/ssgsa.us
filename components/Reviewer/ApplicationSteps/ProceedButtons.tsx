@@ -59,7 +59,7 @@ const ProceedButtons = ({
           onClick={() => {
             if (validation())
               if (status === 7)
-                updateReviewMarks(7)
+                updateReviewMarks(8)
                   .then(() => router.push('/reviewer/applications'))
                   .catch(() => setError('Try again, network error!'))
               else

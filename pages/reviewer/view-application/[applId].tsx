@@ -14,9 +14,9 @@ import ReviewerStep7 from '../../../components/Reviewer/ApplicationSteps/Step7'
 import Roles from '../../../constants/roles'
 import { useAuth } from '../../../context/AuthUserContext'
 import ApplicationLayout from '../../../layouts/reviewer/ApplicationLayout'
+import { ReviewerInstructionsType } from '../../../types'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
-import { ReviewerInstructionsType } from '../../../types'
 import { getReviewerInstructions } from '../../api/instructions'
 
 function ViewApplication() {
@@ -161,7 +161,7 @@ function ViewApplication() {
               instructions={instructions}
             />
           </div>
-        ) : (
+        ) : status == 7 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <ReviewerStep7
               applId={applId}
@@ -172,6 +172,16 @@ function ViewApplication() {
               setStatus={setStatus}
               instructions={instructions}
             />
+          </div>
+        ) : (
+          <div className="flex justify-center items-center my-48">
+            <p className="text-xl text-red-850">
+              This application is already reviewed. You can still update the
+              marks.
+              <br />
+              Make sure to click on complete button on step 7, after making any
+              change.
+            </p>
           </div>
         )
       ) : (
