@@ -17,6 +17,7 @@ type Props = {
   revInstructions: ReviewerInstructionsType
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  formStatus: number
 }
 
 const AdminStep4 = ({
@@ -26,6 +27,7 @@ const AdminStep4 = ({
   revInstructions,
   status,
   setStatus,
+  formStatus,
 }: Props) => {
   const [reviewMarks, setReviewMarks] = useState<ReviewMarksType>({})
 
@@ -50,26 +52,33 @@ const AdminStep4 = ({
     <div className="w-full">
       <Step7 extraCurrActivities={applicationData.extra_curriculars} />
 
-      <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
-        <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
-          Extracurricular Activities Marks
-        </h1>
-        {Object.keys(reviewMarks).map((reviewerId, index) => (
-          <div className="my-5" key={index}>
-            <p className="font-bold sm:text-lg font-extrabold">
-              Marks given by Reviewer {reviewers[reviewerId].name}
-            </p>
-            <div className="ml-5 text-blue-850">
-              <Field
-                name={`Total Curricular Marks (out of ${revInstructions.EXTRACURRICULAR_MAX_MARKS})`}
-                value={reviewMarks[reviewerId].extracurricularMarks}
-              />
+      {Object.keys(reviewMarks).length ? (
+        <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
+          <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
+            Extracurricular Activities Marks
+          </h1>
+          {Object.keys(reviewMarks).map((reviewerId, index) => (
+            <div className="my-5" key={index}>
+              <p className="font-bold sm:text-lg font-extrabold">
+                Marks given by Reviewer {reviewers[reviewerId].name}
+              </p>
+              <div className="ml-5 text-blue-850">
+                <Field
+                  name={`Total Curricular Marks (out of ${revInstructions.EXTRACURRICULAR_MAX_MARKS})`}
+                  value={reviewMarks[reviewerId].extracurricularMarks}
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : null}
 
-      <ProceedButtons status={status} setStatus={setStatus} error="" />
+      <ProceedButtons
+        status={status}
+        setStatus={setStatus}
+        formStatus={formStatus}
+        error=""
+      />
     </div>
   )
 }

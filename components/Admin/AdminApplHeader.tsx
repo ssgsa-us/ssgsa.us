@@ -176,8 +176,8 @@ export default function AdminApplHeader({
               'Extracurricular Activities',
               'Essay-Type Questions',
               'Other Information',
-              'Review Marks',
-              'Interview Marks',
+              'Reviewer Marks',
+              'Interviewer Marks',
             ]}
           />
           <div className="flex items-center justify-center mt-3 md:mt-0 ml-2">

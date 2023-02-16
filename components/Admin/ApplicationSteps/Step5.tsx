@@ -16,6 +16,7 @@ type Props = {
   revInstructions: ReviewerInstructionsType
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  formStatus: number
 }
 
 const AdminStep5 = ({
@@ -25,6 +26,7 @@ const AdminStep5 = ({
   revInstructions,
   status,
   setStatus,
+  formStatus,
 }: Props) => {
   const sopAnswers = applicationData.sop_answers
   const [reviewMarks, setReviewMarks] = useState<ReviewMarksType>({})
@@ -166,28 +168,35 @@ const AdminStep5 = ({
         )}
       </div>
 
-      <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
-        <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
-          Essay-Type Question Marks
-        </h1>
-        {Object.keys(reviewMarks).map((reviewerId, index) => (
-          <div className="my-5" key={index}>
-            <p className="font-bold sm:text-lg font-extrabold">
-              Marks given by Reviewer {reviewers[reviewerId].name}
-            </p>
-            <div className="ml-5 text-blue-850">
-              <Field
-                name={`Total Curricular Marks (out of ${
-                  revInstructions.SOP_MAX_MARKS * 5
-                })`}
-                value={reviewMarks[reviewerId].totalSOPMarks}
-              />
+      {Object.keys(reviewMarks).length ? (
+        <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
+          <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
+            Essay-Type Question Marks
+          </h1>
+          {Object.keys(reviewMarks).map((reviewerId, index) => (
+            <div className="my-5" key={index}>
+              <p className="font-bold sm:text-lg font-extrabold">
+                Marks given by Reviewer {reviewers[reviewerId].name}
+              </p>
+              <div className="ml-5 text-blue-850">
+                <Field
+                  name={`Total Curricular Marks (out of ${
+                    revInstructions.SOP_MAX_MARKS * 5
+                  })`}
+                  value={reviewMarks[reviewerId].totalSOPMarks}
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : null}
 
-      <ProceedButtons status={status} setStatus={setStatus} error="" />
+      <ProceedButtons
+        status={status}
+        setStatus={setStatus}
+        formStatus={formStatus}
+        error=""
+      />
     </div>
   )
 }

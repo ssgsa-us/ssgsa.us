@@ -68,6 +68,9 @@ export default function ApplicationsTable({
                 Reviewer Marks
               </th>
               <th className="border border-blue-850 p-2" rowSpan={3}>
+                Mark As Reviewed
+              </th>
+              <th className="border border-blue-850 p-2" rowSpan={3}>
                 Finalise For Interview
               </th>
               <th className="border border-blue-850 p-2" rowSpan={3}>

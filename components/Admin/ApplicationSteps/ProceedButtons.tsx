@@ -8,10 +8,11 @@ import { Dispatch, SetStateAction } from 'react'
 type Props = {
   status: number
   setStatus: Dispatch<SetStateAction<number>>
+  formStatus: number
   error: string
 }
 
-const ProceedButtons = ({ status, setStatus, error }: Props) => {
+const ProceedButtons = ({ status, setStatus, formStatus, error }: Props) => {
   return (
     <div className="mt-10">
       {error ? (
@@ -37,9 +38,11 @@ const ProceedButtons = ({ status, setStatus, error }: Props) => {
         </button>
         <button
           className={`text-white text-base md:text-xl ${
-            status === 8 ? 'bg-blue-860 cursor-not-allowed' : 'bg-blue-850'
+            status < formStatus
+              ? 'bg-blue-850'
+              : 'bg-blue-860 cursor-not-allowed'
           } mt-2 sm:mt-0 ml-2 py-2 px-5 rounded-lg flex flex-row items-center`}
-          onClick={() => (status !== 8 ? setStatus(status + 1) : null)}
+          onClick={() => (status < formStatus ? setStatus(status + 1) : null)}
         >
           <p className="mr-2">Next Step</p>
           <FontAwesomeIcon

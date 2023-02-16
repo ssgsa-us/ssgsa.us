@@ -7,14 +7,25 @@ type Props = {
   applicationData: ApplicationData
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  formStatus: number
 }
 
-const AdminStep1 = ({ applicationData, status, setStatus }: Props) => {
+const AdminStep1 = ({
+  applicationData,
+  status,
+  setStatus,
+  formStatus,
+}: Props) => {
   return (
     <div className="w-full">
       <Step1 applicationData={applicationData} />
 
-      <ProceedButtons status={status} setStatus={setStatus} error="" />
+      <ProceedButtons
+        status={status}
+        setStatus={setStatus}
+        formStatus={formStatus}
+        error=""
+      />
     </div>
   )
 }

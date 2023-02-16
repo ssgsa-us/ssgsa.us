@@ -20,6 +20,7 @@ type Props = {
   revInstructions: ReviewerInstructionsType
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  formStatus: number
 }
 
 const AdminStep3 = ({
@@ -29,6 +30,7 @@ const AdminStep3 = ({
   revInstructions,
   status,
   setStatus,
+  formStatus,
 }: Props) => {
   const [reviewMarks, setReviewMarks] = useState<ReviewMarksType>({})
 
@@ -62,26 +64,33 @@ const AdminStep3 = ({
       <Step5 workshops={applicationData.poster_or_workshops} />
       <Step6 curricularActivities={applicationData.curricular_activities} />
 
-      <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
-        <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
-          Academic/Curricular Activities Marks
-        </h1>
-        {Object.keys(reviewMarks).map((reviewerId, index) => (
-          <div className="my-5" key={index}>
-            <p className="font-bold sm:text-lg font-extrabold">
-              Marks given by Reviewer {reviewers[reviewerId].name}
-            </p>
-            <div className="ml-5 text-blue-850">
-              <Field
-                name={`Total Curricular Marks (out of ${revInstructions.CURRICULAR_MAX_MARKS})`}
-                value={reviewMarks[reviewerId].curricularMarks}
-              />
+      {Object.keys(reviewMarks).length ? (
+        <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
+          <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
+            Academic/Curricular Activities Marks
+          </h1>
+          {Object.keys(reviewMarks).map((reviewerId, index) => (
+            <div className="my-5" key={index}>
+              <p className="font-bold sm:text-lg font-extrabold">
+                Marks given by Reviewer {reviewers[reviewerId].name}
+              </p>
+              <div className="ml-5 text-blue-850">
+                <Field
+                  name={`Total Curricular Marks (out of ${revInstructions.CURRICULAR_MAX_MARKS})`}
+                  value={reviewMarks[reviewerId].curricularMarks}
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : null}
 
-      <ProceedButtons status={status} setStatus={setStatus} error="" />
+      <ProceedButtons
+        status={status}
+        setStatus={setStatus}
+        formStatus={formStatus}
+        error=""
+      />
     </div>
   )
 }

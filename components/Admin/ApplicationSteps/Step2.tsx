@@ -18,6 +18,7 @@ type Props = {
   revInstructions: ReviewerInstructionsType
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  formStatus: number
 }
 
 const AdminStep2 = ({
@@ -27,6 +28,7 @@ const AdminStep2 = ({
   revInstructions,
   status,
   setStatus,
+  formStatus,
 }: Props) => {
   const academicRecord: AcademicRecordType = applicationData.academic_record
   const [reviewMarks, setReviewMarks] = useState<ReviewMarksType>({})
@@ -104,26 +106,33 @@ const AdminStep2 = ({
         )}
       </div>
 
-      <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
-        <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
-          Education Qualifications Marks
-        </h1>
-        {Object.keys(reviewMarks).map((reviewerId, index) => (
-          <div className="my-5" key={index}>
-            <p className="font-bold sm:text-lg font-extrabold">
-              Marks given by Reviewer {reviewers[reviewerId].name}
-            </p>
-            <div className="ml-5 text-blue-850">
-              <Field
-                name={`Total Academic Marks (out of ${revInstructions.ACADEMIC_MAX_MARKS})`}
-                value={reviewMarks[reviewerId].totalAcademicMarks}
-              />
+      {Object.keys(reviewMarks).length ? (
+        <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
+          <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
+            Education Qualifications Marks
+          </h1>
+          {Object.keys(reviewMarks).map((reviewerId, index) => (
+            <div className="my-5" key={index}>
+              <p className="font-bold sm:text-lg font-extrabold">
+                Marks given by Reviewer {reviewers[reviewerId].name}
+              </p>
+              <div className="ml-5 text-blue-850">
+                <Field
+                  name={`Total Academic Marks (out of ${revInstructions.ACADEMIC_MAX_MARKS})`}
+                  value={reviewMarks[reviewerId].totalAcademicMarks}
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : null}
 
-      <ProceedButtons status={status} setStatus={setStatus} error="" />
+      <ProceedButtons
+        status={status}
+        setStatus={setStatus}
+        formStatus={formStatus}
+        error=""
+      />
     </div>
   )
 }

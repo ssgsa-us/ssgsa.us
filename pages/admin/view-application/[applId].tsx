@@ -116,6 +116,7 @@ function ViewApplication() {
                 applicationData={applicationData}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
               />
             </div>
           ) : status === 2 ? (
@@ -127,6 +128,7 @@ function ViewApplication() {
                 revInstructions={revInstructions}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
               />
             </div>
           ) : status === 3 ? (
@@ -138,6 +140,7 @@ function ViewApplication() {
                 revInstructions={revInstructions}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
               />
             </div>
           ) : status === 4 ? (
@@ -149,6 +152,7 @@ function ViewApplication() {
                 revInstructions={revInstructions}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
               />
             </div>
           ) : status === 5 ? (
@@ -160,6 +164,7 @@ function ViewApplication() {
                 revInstructions={revInstructions}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
               />
             </div>
           ) : status === 6 ? (
@@ -170,18 +175,23 @@ function ViewApplication() {
                 adminPortalData={adminPortalData}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
+                changeOccured={changeOccured}
+                setChangeOccured={setChangeOccured}
               />
             </div>
           ) : status === 7 ? (
             <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
               <AdminStep7
                 applId={applId}
-                applicationData={applicationData}
                 adminPortalData={adminPortalData}
                 reviewers={reviewers}
                 revInstructions={revInstructions}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
+                changeOccured={changeOccured}
+                setChangeOccured={setChangeOccured}
               />
             </div>
           ) : null}
