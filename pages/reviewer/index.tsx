@@ -41,30 +41,21 @@ function ReviewerPortal() {
         <p className="mx-auto font-black text-md text-red-850 text-center mt-1">
           Sponsor a student
         </p>
-        {/* <a
-          href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <button className="px-10 py-1 block mx-auto bg-red-850 font-black text-lg text-white text-center">
-            Donate Now
-          </button>
-        </a> */}
-        <div className="grid grid-cols-6 gap-4">
-          <div className="col-start-3 col-span-1">
+        <div className="grid grid-cols-7 gap-1">
+          <div className="col-start-3 col-span-2">
             <a
               href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
               target="_blank"
               rel="noopener noreferrer"
             >
               <button className="px-10 py-1 block mx-auto bg-red-850 text-sm font-black text-white text-center rounded-3xl mt-2">
-                PayPal
+                PayPal/Credit Card
               </button>
             </a>
           </div>
-          <div className="col-start-4 col-span-1">
+          <div className="col-start-5 col-span-1">
             <a
-              href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
+              href="https://account.venmo.com/u/SSGSA"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -74,7 +65,7 @@ function ReviewerPortal() {
             </a>
           </div>
         </div>
-        <p className="text-sm mt-3 text-center">
+        <p className="text-sm mt-3 text-center text-blue-850">
           By supporting students, you are becoming an active participant in
           building their careers. All donations and contributions directly
           sponsor the attempts of talented students to secure admission in an
