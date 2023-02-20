@@ -12,37 +12,47 @@ import AdminStep7 from '../../../components/Admin/ApplicationSteps/Step7'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import ApplicationLayout from '../../../layouts/admin/ApplicationLayout'
-import { Users } from '../../../types'
+import { ReviewerInstructionsType, Users } from '../../../types'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
 import { getUserDetailsByIds } from '../../api/getUserDetails'
+import { getReviewerInstructions } from '../../api/instructions'
 
 function ViewApplication() {
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>(
     new AdminPortalData(),
   )
   const [applicationData, setApplicationData] = useState<ApplicationData>()
-  const [selectedReviewerId, setSelectedReviewerId] = useState<string>('')
   const [reviewers, setReviewers] = useState<Users>({})
   const [interviewers, setInterviewers] = useState<Users>({})
   const [status, setStatus] = useState<number>(1)
   const [formStatus, setFormStatus] = useState<number>(6)
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
+  const [revInstructions, setRevInstructions] =
+    useState<ReviewerInstructionsType>({})
   const router = useRouter()
   const applId = String(router.query['applId'])
 
   const updateReviewerDetails = (data: AdminPortalData) => {
     getUserDetailsByIds(Object.keys(data.review_marks))
       .then((data) => setReviewers(data))
-      .catch(() => {})
+      .catch(() => alert('Not able to fetch reviewer details'))
   }
 
   const updateInterviewerDetails = (data: AdminPortalData) => {
     getUserDetailsByIds(Object.keys(data.interview_marks))
       .then((data) => setInterviewers(data))
-      .catch(() => {})
+      .catch(() => alert('Not able to fetch interviewer details'))
   }
+
+  useEffect(() => {
+    getReviewerInstructions()
+      .then((data) => setRevInstructions(data))
+      .catch(() =>
+        alert('Not able to fetch reviewer instructions, Try reloading!'),
+      )
+  }, [])
 
   useEffect(() => {
     if (applId)
@@ -100,35 +110,13 @@ function ViewApplication() {
     >
       {pageReady ? (
         <div>
-          {adminPortalData.application_status > 1 ||
-          Object.keys(reviewers).length ? (
-            <div className="flex justify-center items-center space-x-5 mt-10">
-              <p className="font-bold text-lg md:text-xl">
-                Select One Reviewer
-              </p>
-              <select
-                name="Reviewers"
-                value={selectedReviewerId}
-                onChange={(e) => setSelectedReviewerId(e.target.value)}
-                className="border-2 border-gray-400 rounded-xl p-3"
-              >
-                {Object.keys(reviewers).map((reviewerId, index) => (
-                  <option
-                    key={index}
-                    label={reviewers[reviewerId].name}
-                    value={reviewerId}
-                  />
-                ))}
-              </select>
-            </div>
-          ) : null}
-
           {status === 1 ? (
             <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
               <AdminStep1
                 applicationData={applicationData}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
               />
             </div>
           ) : status === 2 ? (
@@ -136,8 +124,11 @@ function ViewApplication() {
               <AdminStep2
                 applicationData={applicationData}
                 adminPortalData={adminPortalData}
+                reviewers={reviewers}
+                revInstructions={revInstructions}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
               />
             </div>
           ) : status === 3 ? (
@@ -145,8 +136,11 @@ function ViewApplication() {
               <AdminStep3
                 applicationData={applicationData}
                 adminPortalData={adminPortalData}
+                reviewers={reviewers}
+                revInstructions={revInstructions}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
               />
             </div>
           ) : status === 4 ? (
@@ -154,8 +148,11 @@ function ViewApplication() {
               <AdminStep4
                 applicationData={applicationData}
                 adminPortalData={adminPortalData}
+                reviewers={reviewers}
+                revInstructions={revInstructions}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
               />
             </div>
           ) : status === 5 ? (
@@ -163,8 +160,11 @@ function ViewApplication() {
               <AdminStep5
                 applicationData={applicationData}
                 adminPortalData={adminPortalData}
+                reviewers={reviewers}
+                revInstructions={revInstructions}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
               />
             </div>
           ) : status === 6 ? (
@@ -175,16 +175,23 @@ function ViewApplication() {
                 adminPortalData={adminPortalData}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
+                changeOccured={changeOccured}
+                setChangeOccured={setChangeOccured}
               />
             </div>
           ) : status === 7 ? (
             <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
               <AdminStep7
                 applId={applId}
-                applicationData={applicationData}
                 adminPortalData={adminPortalData}
+                reviewers={reviewers}
+                revInstructions={revInstructions}
                 status={status}
                 setStatus={setStatus}
+                formStatus={formStatus}
+                changeOccured={changeOccured}
+                setChangeOccured={setChangeOccured}
               />
             </div>
           ) : null}

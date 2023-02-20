@@ -294,6 +294,28 @@ export default function ApplicationRow({
         {reviewMarkComponent(reviewerMarks[6])}
       </td>
       <td className="border border-blue-850 p-2 text-center">
+        {application.adminPortalData.application_status >= 3 ? (
+          <p className="text-red">Reviewed</p>
+        ) : (
+          <button
+            className={`text-white text-base md:text-lg py-1 px-3 rounded-lg ${
+              application.adminPortalData.application_status == 2
+                ? 'bg-red-850'
+                : 'bg-red-860 cursor-not-allowed'
+            }`}
+            onClick={() =>
+              application.adminPortalData.application_status == 2
+                ? updateApplicationStatus(applicationId, 3)
+                    .then(() => setChangeOccured(!changeOccured))
+                    .catch(() => alert('Try again, network error!'))
+                : null
+            }
+          >
+            Mark As Reviewed
+          </button>
+        )}
+      </td>
+      <td className="border border-blue-850 p-2 text-center">
         {application.adminPortalData.application_status == 4 ? (
           <p className="text-red">Already Finalised</p>
         ) : application.adminPortalData.application_status >= 5 ? (

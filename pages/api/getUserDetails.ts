@@ -16,13 +16,22 @@ export const getUserDetailsById = async (userId: string) => {
 }
 
 export const getUserDetailsByIds = async (userIds: Array<string>) => {
-  let users: Users = {}
+  let users: Users = await firestore
+    .collection('users')
+    .where(firebase.firestore.FieldPath.documentId(), 'in', userIds)
+    .withConverter(userController)
+    .get()
+    .then((usersData: firebase.firestore.QuerySnapshot<User>) => {
+      let users: Users = {}
 
-  userIds.map((userId: string) => {
-    getUserDetailsById(userId)
-      .then((user: User) => (users[userId] = user))
-      .catch(() => {})
-  })
+      usersData.forEach(
+        (document: firebase.firestore.QueryDocumentSnapshot<User>) => {
+          users[document.id] = document.data()
+        },
+      )
+
+      return users
+    })
 
   return users
 }

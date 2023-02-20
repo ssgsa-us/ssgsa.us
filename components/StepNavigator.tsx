@@ -31,6 +31,7 @@ export default function StepNavigator({
           ? 'md:hidden' // to hide step
           : ''
       }`}
+      key={step}
     >
       <button
         className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer ${

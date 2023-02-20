@@ -162,6 +162,7 @@ export default function ReviewerApplHeader({
               'Essay-Type Questions',
               'Other Information',
               'Review Marks',
+              'Completed',
             ]}
           />
           <div className="flex items-center justify-center mt-3 md:mt-0 ml-2">

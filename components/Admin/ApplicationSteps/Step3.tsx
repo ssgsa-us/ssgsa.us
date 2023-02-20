@@ -1,6 +1,12 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
+import {
+  ReviewMarksType,
+  ReviewerInstructionsType,
+  Users,
+} from '../../../types'
+import Field from '../../ReviewApplicationSteps/Field'
 import Step3 from '../../ReviewApplicationSteps/Step3'
 import Step4 from '../../ReviewApplicationSteps/Step4'
 import Step5 from '../../ReviewApplicationSteps/Step5'
@@ -10,28 +16,40 @@ import ProceedButtons from './ProceedButtons'
 type Props = {
   applicationData: ApplicationData
   adminPortalData: AdminPortalData
+  reviewers: Users
+  revInstructions: ReviewerInstructionsType
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
+  formStatus: number
 }
 
 const AdminStep3 = ({
   applicationData,
   adminPortalData,
+  reviewers,
+  revInstructions,
   status,
   setStatus,
+  formStatus,
 }: Props) => {
-  // const [curricularMarks, setCurricularMarks] = useState<number>(null)
+  const [reviewMarks, setReviewMarks] = useState<ReviewMarksType>({})
 
-  // useEffect(() => {
-  //   if (
-  //     adminPortalData.review_marks &&
-  //     adminPortalData.review_marks[authUser.id] &&
-  //     adminPortalData.review_marks[authUser.id].curricularMarks !== null
-  //   )
-  //     setCurricularMarks(
-  //       adminPortalData.review_marks[authUser.id].curricularMarks,
-  //     )
-  // }, [adminPortalData])
+  useEffect(() => {
+    if (
+      !adminPortalData ||
+      !adminPortalData.review_marks ||
+      !Object.keys(reviewers).length
+    )
+      return
+
+    Object.keys(adminPortalData.review_marks).map((reviewerId) => {
+      if (adminPortalData.review_marks[reviewerId].formStatus === 8)
+        setReviewMarks((prev) => ({
+          ...prev,
+          [reviewerId]: adminPortalData.review_marks[reviewerId],
+        }))
+    })
+  }, [adminPortalData, reviewers])
 
   return (
     <div className="w-full">
@@ -46,19 +64,33 @@ const AdminStep3 = ({
       <Step5 workshops={applicationData.poster_or_workshops} />
       <Step6 curricularActivities={applicationData.curricular_activities} />
 
-      {/* <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
-        <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
-          Academic/Curricular Activities Marks
-        </h1>
-        <div className="md:w-1/2 text-blue-850 font-black">
-          <Field
-            name={`Total Marks (out of ${process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS})`}
-            value={curricularMarks}
-          />
+      {Object.keys(reviewMarks).length ? (
+        <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
+          <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
+            Academic/Curricular Activities Marks
+          </h1>
+          {Object.keys(reviewMarks).map((reviewerId, index) => (
+            <div className="my-5" key={index}>
+              <p className="font-bold sm:text-lg font-extrabold">
+                Marks given by Reviewer {reviewers[reviewerId].name}
+              </p>
+              <div className="ml-5 text-blue-850">
+                <Field
+                  name={`Total Curricular Marks (out of ${revInstructions.CURRICULAR_MAX_MARKS})`}
+                  value={reviewMarks[reviewerId].curricularMarks}
+                />
+              </div>
+            </div>
+          ))}
         </div>
-      </div> */}
+      ) : null}
 
-      <ProceedButtons status={status} setStatus={setStatus} error="" />
+      <ProceedButtons
+        status={status}
+        setStatus={setStatus}
+        formStatus={formStatus}
+        error=""
+      />
     </div>
   )
 }
