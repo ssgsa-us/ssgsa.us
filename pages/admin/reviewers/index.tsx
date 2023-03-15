@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import SetDropdown from '../../../components/Admin/SetDropdown'
 import Loading from '../../../components/Loading'
@@ -6,6 +8,7 @@ import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import { Users } from '../../../types'
 import { getUsersByRole } from '../../api/getUserDetails'
+import { sendRevSetMails } from '../../api/updateReviewSet'
 import { updateUserSets } from '../../api/updateUserSets'
 
 type SelectedSetsType = { [key: string]: Array<string> }
@@ -14,6 +17,7 @@ function ReviewersList() {
   const [reviewers, setReviewers] = useState<Users>({})
   const [pageReady, setPageReady] = useState<boolean>(false)
   const [selectedSets, setSelectedSets] = useState<SelectedSetsType>()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getUsersByRole(Roles.REVIEWER)
@@ -29,7 +33,6 @@ function ReviewersList() {
       .catch(() => alert('Try again, network error!'))
       .finally(() => setPageReady(true))
   }, [])
-  console.log(selectedSets)
 
   return (
     <AdminLayout>
@@ -128,6 +131,26 @@ function ReviewersList() {
                 ))}
               </tbody>
             </table>
+            <button
+              className="text-white text-base md:text-lg py-1 px-3 mt-10 rounded-lg bg-red-850"
+              onClick={() => {
+                if (loading) return
+
+                setLoading(true)
+                sendRevSetMails().finally(() => setLoading(false))
+              }}
+            >
+              {!loading ? (
+                'Send Credential Mails'
+              ) : (
+                <FontAwesomeIcon
+                  icon={faSpinner}
+                  width={30}
+                  spin={true}
+                  className="mx-5"
+                />
+              )}
+            </button>
           </div>
         </div>
       ) : (
