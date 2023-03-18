@@ -41,8 +41,8 @@ function ReviewerPortal() {
         <p className="mx-auto font-black text-md text-red-850 text-center mt-1">
           Sponsor a student
         </p>
-        <div className="grid grid-cols-7 gap-1">
-          <div className="col-start-3 col-span-2">
+        <div className="flex justify-center space-x-5">
+          <div className="">
             <a
               href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
               target="_blank"
@@ -53,7 +53,7 @@ function ReviewerPortal() {
               </button>
             </a>
           </div>
-          <div className="col-start-5 col-span-1">
+          <div>
             <a
               href="https://account.venmo.com/u/SSGSA"
               target="_blank"
@@ -63,6 +63,18 @@ function ReviewerPortal() {
                 Venmo
               </button>
             </a>
+          </div>
+          <div>
+            <button className="px-10 py-1 block mx-auto bg-red-850 text-sm font-black text-white text-center rounded-3xl mt-2">
+              <details open>
+                <summary>Zelle</summary>
+                <p>
+                  Username: SSGSA
+                  <br />
+                  Phone number: 0000000000
+                </p>
+              </details>
+            </button>
           </div>
         </div>
         <p className="text-sm mt-3 text-center text-blue-850">
