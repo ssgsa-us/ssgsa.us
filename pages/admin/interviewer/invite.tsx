@@ -1,0 +1,256 @@
+import '@fortawesome/fontawesome-svg-core/styles.css' // import for spin
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useEffect, useState } from 'react'
+import * as XLSX from 'xlsx'
+import requireAuth from '../../../components/requireAuth'
+import Roles from '../../../constants/roles'
+import AdminLayout from '../../../layouts/admin/admin-layout'
+import {
+  addInterviewerInvite,
+  getAcceptedInterviewers,
+  getRejetedInterviewers,
+  getUnresponsiveInterviewers,
+  sendIntReminder,
+} from '../../api/interviewerInvite'
+
+function InviteInterviewers() {
+  const [file, setFile] = useState<File>()
+  const [acceptedInterviewers, setAcceptedInterviewers] = useState([])
+  const [rejectedInterviewers, setRejectedInterviewers] = useState([])
+  const [unresposiveInterviewers, setUnresposiveInterviewers] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    getAcceptedInterviewers()
+      .then((data) => {
+        setAcceptedInterviewers(data)
+      })
+      .catch(() => alert('Try again, network error!'))
+
+    getRejetedInterviewers()
+      .then((data) => {
+        setRejectedInterviewers(data)
+      })
+      .catch(() => alert('Try again, network error!'))
+
+    getUnresponsiveInterviewers()
+      .then((data) => {
+        setUnresposiveInterviewers(data)
+      })
+      .catch((e) => alert(JSON.stringify(e)))
+  }, [])
+
+  const proceed = () => {
+    if (loading) return
+    if (!file) return
+
+    setLoading(true)
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      // Read data from excel file as worksheets
+      let data = e.target.result
+      let readedData = XLSX.read(data, { type: 'binary' })
+
+      // Get a specific worksheet from file data
+      let sheetName = readedData.SheetNames[0]
+      let sheet = readedData.Sheets[sheetName]
+
+      // Get all Interviewer details as array from worksheet
+      let Interviewers = XLSX.utils.sheet_to_json(sheet, { header: 1 })
+
+      Interviewers.forEach(async (Interviewer: Array<string>, index) => {
+        if (!index) return // leave first row
+        if (!Interviewer[0]) return
+
+        // Interviewer details
+        // Interviewer[0] represents Interviewer email
+        // Interviewer[1] represents name of Interviewer
+        const email = String(Interviewer[0]).trim()
+        const name = Interviewer[1]
+
+        setTimeout(() => {
+          addInterviewerInvite(email, name)
+
+          if (index === Interviewers.length - 1) {
+            setTimeout(() => {
+              setLoading(false)
+              alert('Sent invites to all Interviewers!')
+            }, 1000)
+          }
+        }, 1000 * index)
+      })
+    }
+
+    reader.readAsBinaryString(file)
+  }
+
+  const sendReminders = () => {
+    if (loading) return
+
+    setLoading(true)
+    unresposiveInterviewers.forEach((Interviewer, index) => {
+      setTimeout(() => {
+        sendIntReminder(Interviewer.email, Interviewer.reminder + 1 || 1)
+
+        if (index === unresposiveInterviewers.length - 1) {
+          setTimeout(() => {
+            setLoading(false)
+            alert('Sent reminder to unresponsive Interviewers!')
+          }, 1000)
+        }
+      }, 1000 * index)
+    })
+  }
+
+  return (
+    <AdminLayout>
+      <div className="py-10">
+        <h1 className="text-sm sm:text-xl md:text-2xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
+          Invite Interviewers
+        </h1>
+
+        <div className="flex justify-around mt-20 mb-10">
+          <input
+            type="file"
+            accept=".xlsx"
+            onChange={(e) => setFile(e.target.files[0])}
+            className="text-white text-base font-bold md:text-lg bg-gray-500 rounded-lg cursor-pointer w-max"
+          />
+          <button
+            onClick={proceed}
+            className="text-white text-base md:text-lg bg-blue-850 ml-2 px-5 rounded-lg flex flex-row items-center cursor-pointer"
+          >
+            {!loading ? (
+              'Submit'
+            ) : (
+              <FontAwesomeIcon
+                icon={faSpinner}
+                width={30}
+                spin={true}
+                className="mx-5"
+              />
+            )}
+          </button>
+        </div>
+        <p className="text-red-850 text-center mb-10">
+          Note: Provide the excel file containing the data in the specified
+          format.
+        </p>
+
+        <div>
+          <h2 className="text-sm sm:text-lg md:text-xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
+            Accepted Interviewers
+          </h2>
+
+          <div className="flex justify-center">
+            <table className="border-separate p-2">
+              <thead>
+                <tr>
+                  <th className="border border-blue-850 p-2">S.No.</th>
+                  <th className="border border-blue-850 p-2">Name</th>
+                  <th className="border border-blue-850 p-2">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {acceptedInterviewers.map((Interviewer, index) => (
+                  <tr key={index}>
+                    <td className="border border-blue-850 p-2">{index + 1}</td>
+                    <td className="border border-blue-850 p-2">
+                      {Interviewer.name}
+                    </td>
+                    <td className="border border-blue-850 p-2">
+                      {Interviewer.email}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-sm sm:text-lg md:text-xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
+            Rejected Interviewers
+          </h2>
+
+          <div className="flex justify-center">
+            <table className="border-separate p-2">
+              <thead>
+                <tr>
+                  <th className="border border-blue-850 p-2">S.No.</th>
+                  <th className="border border-blue-850 p-2">Name</th>
+                  <th className="border border-blue-850 p-2">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rejectedInterviewers.map((Interviewer, index) => (
+                  <tr key={index}>
+                    <td className="border border-blue-850 p-2">{index + 1}</td>
+                    <td className="border border-blue-850 p-2">
+                      {Interviewer.name}
+                    </td>
+                    <td className="border border-blue-850 p-2">
+                      {Interviewer.email}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-sm sm:text-lg md:text-xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
+            Unresponsive Interviewers
+          </h2>
+
+          <div className="flex justify-center mb-10">
+            <button
+              onClick={sendReminders}
+              className="text-white text-base md:text-lg bg-red-850 ml-2 py-2 px-5 rounded-lg flex flex-row items-center cursor-pointer"
+            >
+              {!loading ? (
+                'Send Reminders'
+              ) : (
+                <FontAwesomeIcon
+                  icon={faSpinner}
+                  width={30}
+                  spin={true}
+                  className="mx-5"
+                />
+              )}
+            </button>
+          </div>
+
+          <div className="flex justify-center">
+            <table className="border-separate p-2">
+              <thead>
+                <tr>
+                  <th className="border border-blue-850 p-2">S.No.</th>
+                  <th className="border border-blue-850 p-2">Name</th>
+                  <th className="border border-blue-850 p-2">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {unresposiveInterviewers.map((Interviewer, index) => (
+                  <tr key={index}>
+                    <td className="border border-blue-850 p-2">{index + 1}</td>
+                    <td className="border border-blue-850 p-2">
+                      {Interviewer.name}
+                    </td>
+                    <td className="border border-blue-850 p-2">
+                      {Interviewer.email}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </AdminLayout>
+  )
+}
+
+export default requireAuth(InviteInterviewers, Roles.ADMIN)
