@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import * as XLSX from 'xlsx'
 import requireAuth from '../../../components/requireAuth'
+import AdminTable from '../../../components/AdminTable'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import {
@@ -144,28 +145,7 @@ function InviteReviewers() {
           </h2>
 
           <div className="flex justify-center">
-            <table className="border-separate p-2">
-              <thead>
-                <tr>
-                  <th className="border border-blue-850 p-2">S.No.</th>
-                  <th className="border border-blue-850 p-2">Name</th>
-                  <th className="border border-blue-850 p-2">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {acceptedReviewers.map((reviewer, index) => (
-                  <tr key={index}>
-                    <td className="border border-blue-850 p-2">{index + 1}</td>
-                    <td className="border border-blue-850 p-2">
-                      {reviewer.name}
-                    </td>
-                    <td className="border border-blue-850 p-2">
-                      {reviewer.email}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <AdminTable user={acceptedReviewers} />
           </div>
         </div>
 
@@ -175,28 +155,7 @@ function InviteReviewers() {
           </h2>
 
           <div className="flex justify-center">
-            <table className="border-separate p-2">
-              <thead>
-                <tr>
-                  <th className="border border-blue-850 p-2">S.No.</th>
-                  <th className="border border-blue-850 p-2">Name</th>
-                  <th className="border border-blue-850 p-2">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rejectedReviewers.map((reviewer, index) => (
-                  <tr key={index}>
-                    <td className="border border-blue-850 p-2">{index + 1}</td>
-                    <td className="border border-blue-850 p-2">
-                      {reviewer.name}
-                    </td>
-                    <td className="border border-blue-850 p-2">
-                      {reviewer.email}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <AdminTable user={rejectedReviewers} />
           </div>
         </div>
 
@@ -224,28 +183,7 @@ function InviteReviewers() {
           </div>
 
           <div className="flex justify-center">
-            <table className="border-separate p-2">
-              <thead>
-                <tr>
-                  <th className="border border-blue-850 p-2">S.No.</th>
-                  <th className="border border-blue-850 p-2">Name</th>
-                  <th className="border border-blue-850 p-2">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {unresposiveReviewers.map((reviewer, index) => (
-                  <tr key={index}>
-                    <td className="border border-blue-850 p-2">{index + 1}</td>
-                    <td className="border border-blue-850 p-2">
-                      {reviewer.name}
-                    </td>
-                    <td className="border border-blue-850 p-2">
-                      {reviewer.email}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <AdminTable user={unresposiveReviewers} />
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import * as XLSX from 'xlsx'
 import requireAuth from '../../../components/requireAuth'
+import AdminTable from '../../../components/AdminTable'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import {
@@ -144,28 +145,7 @@ function InviteInterviewers() {
           </h2>
 
           <div className="flex justify-center">
-            <table className="border-separate p-2">
-              <thead>
-                <tr>
-                  <th className="border border-blue-850 p-2">S.No.</th>
-                  <th className="border border-blue-850 p-2">Name</th>
-                  <th className="border border-blue-850 p-2">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {acceptedInterviewers.map((Interviewer, index) => (
-                  <tr key={index}>
-                    <td className="border border-blue-850 p-2">{index + 1}</td>
-                    <td className="border border-blue-850 p-2">
-                      {Interviewer.name}
-                    </td>
-                    <td className="border border-blue-850 p-2">
-                      {Interviewer.email}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <AdminTable user={acceptedInterviewers} />
           </div>
         </div>
 
@@ -175,28 +155,7 @@ function InviteInterviewers() {
           </h2>
 
           <div className="flex justify-center">
-            <table className="border-separate p-2">
-              <thead>
-                <tr>
-                  <th className="border border-blue-850 p-2">S.No.</th>
-                  <th className="border border-blue-850 p-2">Name</th>
-                  <th className="border border-blue-850 p-2">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rejectedInterviewers.map((Interviewer, index) => (
-                  <tr key={index}>
-                    <td className="border border-blue-850 p-2">{index + 1}</td>
-                    <td className="border border-blue-850 p-2">
-                      {Interviewer.name}
-                    </td>
-                    <td className="border border-blue-850 p-2">
-                      {Interviewer.email}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <AdminTable user={rejectedInterviewers} />
           </div>
         </div>
 
@@ -224,28 +183,7 @@ function InviteInterviewers() {
           </div>
 
           <div className="flex justify-center">
-            <table className="border-separate p-2">
-              <thead>
-                <tr>
-                  <th className="border border-blue-850 p-2">S.No.</th>
-                  <th className="border border-blue-850 p-2">Name</th>
-                  <th className="border border-blue-850 p-2">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {unresposiveInterviewers.map((Interviewer, index) => (
-                  <tr key={index}>
-                    <td className="border border-blue-850 p-2">{index + 1}</td>
-                    <td className="border border-blue-850 p-2">
-                      {Interviewer.name}
-                    </td>
-                    <td className="border border-blue-850 p-2">
-                      {Interviewer.email}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <AdminTable user={unresposiveInterviewers} />
           </div>
         </div>
       </div>
