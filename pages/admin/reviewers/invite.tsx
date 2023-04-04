@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import * as XLSX from 'xlsx'
 import requireAuth from '../../../components/requireAuth'
-import AdminTable from '../../../components/AdminTable'
+import AdminTable from '../../../components/UsersTable'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import {

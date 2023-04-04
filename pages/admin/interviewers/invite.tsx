@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import * as XLSX from 'xlsx'
 import requireAuth from '../../../components/requireAuth'
-import AdminTable from '../../../components/AdminTable'
+import UsersTable from '../../../components/UsersTable'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import {
@@ -145,7 +145,7 @@ function inviteInterviewers() {
           </h2>
 
           <div className="flex justify-center">
-            <AdminTable user={acceptedInterviewers} />
+            <UsersTable users={acceptedInterviewers} />
           </div>
         </div>
 
@@ -155,7 +155,7 @@ function inviteInterviewers() {
           </h2>
 
           <div className="flex justify-center">
-            <AdminTable user={rejectedInterviewers} />
+            <UsersTable users={rejectedInterviewers} />
           </div>
         </div>
 
@@ -183,7 +183,7 @@ function inviteInterviewers() {
           </div>
 
           <div className="flex justify-center">
-            <AdminTable user={unresposiveInterviewers} />
+            <UsersTable users={unresposiveInterviewers} />
           </div>
         </div>
       </div>

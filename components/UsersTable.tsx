@@ -1,4 +1,4 @@
-export default function AdminTable(props) {
+export default function UsersTable(props) {
   return (
     <table className="border-separate p-2">
       <thead>
@@ -9,11 +9,11 @@ export default function AdminTable(props) {
         </tr>
       </thead>
       <tbody>
-        {props.user.map((Interviewer, index) => (
+        {props.users.map((user, index) => (
           <tr key={index}>
             <td className="border border-blue-850 p-2">{index + 1}</td>
-            <td className="border border-blue-850 p-2">{Interviewer.name}</td>
-            <td className="border border-blue-850 p-2">{Interviewer.email}</td>
+            <td className="border border-blue-850 p-2">{user.name}</td>
+            <td className="border border-blue-850 p-2">{user.email}</td>
           </tr>
         ))}
       </tbody>
