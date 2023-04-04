@@ -15,7 +15,7 @@ import {
   sendIntReminder,
 } from '../../api/interviewerInvite'
 
-function inviteInterviewers() {
+function InviteInterviewers() {
   const [file, setFile] = useState<File>()
   const [acceptedInterviewers, setAcceptedInterviewers] = useState([])
   const [rejectedInterviewers, setRejectedInterviewers] = useState([])
@@ -191,4 +191,4 @@ function inviteInterviewers() {
   )
 }
 
-export default requireAuth(inviteInterviewers, Roles.ADMIN)
+export default requireAuth(InviteInterviewers, Roles.ADMIN)
