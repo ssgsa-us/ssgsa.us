@@ -15,7 +15,7 @@ import {
   sendIntReminder,
 } from '../../api/interviewerInvite'
 
-function InviteInterviewers() {
+function inviteInterviewers() {
   const [file, setFile] = useState<File>()
   const [acceptedInterviewers, setAcceptedInterviewers] = useState([])
   const [rejectedInterviewers, setRejectedInterviewers] = useState([])
@@ -58,22 +58,22 @@ function InviteInterviewers() {
       let sheet = readedData.Sheets[sheetName]
 
       // Get all Interviewer details as array from worksheet
-      let Interviewers = XLSX.utils.sheet_to_json(sheet, { header: 1 })
+      let interviewers = XLSX.utils.sheet_to_json(sheet, { header: 1 })
 
-      Interviewers.forEach(async (Interviewer: Array<string>, index) => {
+      interviewers.forEach(async (interviewer: Array<string>, index) => {
         if (!index) return // leave first row
-        if (!Interviewer[0]) return
+        if (!interviewer[0]) return
 
         // Interviewer details
         // Interviewer[0] represents Interviewer email
         // Interviewer[1] represents name of Interviewer
-        const email = String(Interviewer[0]).trim()
-        const name = Interviewer[1]
+        const email = String(interviewer[0]).trim()
+        const name = interviewer[1]
 
         setTimeout(() => {
           addInterviewerInvite(email, name)
 
-          if (index === Interviewers.length - 1) {
+          if (index === interviewers.length - 1) {
             setTimeout(() => {
               setLoading(false)
               alert('Sent invites to all Interviewers!')
@@ -90,9 +90,9 @@ function InviteInterviewers() {
     if (loading) return
 
     setLoading(true)
-    unresposiveInterviewers.forEach((Interviewer, index) => {
+    unresposiveInterviewers.forEach((interviewer, index) => {
       setTimeout(() => {
-        sendIntReminder(Interviewer.email, Interviewer.reminder + 1 || 1)
+        sendIntReminder(interviewer.email, interviewer.reminder + 1 || 1)
 
         if (index === unresposiveInterviewers.length - 1) {
           setTimeout(() => {
@@ -191,4 +191,4 @@ function InviteInterviewers() {
   )
 }
 
-export default requireAuth(InviteInterviewers, Roles.ADMIN)
+export default requireAuth(inviteInterviewers, Roles.ADMIN)
