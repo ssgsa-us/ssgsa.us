@@ -145,7 +145,7 @@ function InviteReviewers() {
           </h2>
 
           <div className="flex justify-center">
-            <UsersTable user={acceptedReviewers} />
+            <UsersTable users={acceptedReviewers} />
           </div>
         </div>
 
@@ -155,7 +155,7 @@ function InviteReviewers() {
           </h2>
 
           <div className="flex justify-center">
-            <UsersTable user={rejectedReviewers} />
+            <UsersTable users={rejectedReviewers} />
           </div>
         </div>
 
@@ -183,7 +183,7 @@ function InviteReviewers() {
           </div>
 
           <div className="flex justify-center">
-            <UsersTable user={unresposiveReviewers} />
+            <UsersTable users={unresposiveReviewers} />
           </div>
         </div>
       </div>
