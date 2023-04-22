@@ -2,6 +2,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Footer() {
+  // define the obfuscated email
+  const email = "c" + "o" + "n" + "t" + "a" + "c" + "t" + "@" + "s" + "s" + "g" + "s" + "a" + "." + "u" + "s";
+
+  // function to create the mailto link
+  function createMailtoLink() {
+    // use the obfuscated email in the mailto link
+    return "mailto:" + email;
+  }
   return (
     <div className="mt-5">
       <div className="flex justify-center">
@@ -60,7 +68,10 @@ export default function Footer() {
           </Link>
         </div>
         <div className="col-span-3 flex flex-col items-center sm:items-start bg-blue-850 p-3">
-          <p className="text-sm font-bold mb-1">contact@ssgsa.us</p>
+        <p className="text-sm font-bold mb-1">
+            {/* use JavaScript to write the obfuscated email */}
+            <script type="text/javascript">document.write(email);</script>
+          </p>
           <p className="text-xs mb-3">A 501(c) (3) Non-profit Organisation</p>
           <p className="text-xs">&copy; Copyright 2006-21</p>
           <p className="text-xs">All Rights Reserved by SSGSA</p>
