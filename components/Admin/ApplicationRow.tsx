@@ -7,7 +7,11 @@ import { getUserDetailsById } from '../../pages/api/getUserDetails'
 import { updateApplicationStatus } from '../../pages/api/updateApplicationStatus'
 import { updateInterviewSet } from '../../pages/api/updateInterviewSet'
 import { updateReviewSet } from '../../pages/api/updateReviewSet'
-import { AcademicRecordType, ReviewMarksType } from '../../types'
+import {
+  AcademicRecordType,
+  InterviewMarksType,
+  ReviewMarksType,
+} from '../../types'
 import InterviewMarksModal from '../modals/InterviewerMarksModel'
 import ReviewMarksModal from '../modals/ReviewMarksModal'
 import SetDropdown from './SetDropdown'
@@ -23,37 +27,20 @@ type Props = {
   setChangeOccured: Dispatch<SetStateAction<boolean>>
 }
 
-type InterviewMarks = {
-  A: number
-  B: number
-  C: number
-  D: number
-  remark: string
-}
-
 type ReviewerMarks = {
   [key: number]: { name: string; marks: ReviewMarksType[string] }
 }
 type InterviewerMarks = {
-  [key: number]: { name: string; marks: InterviewMarks }
+  [key: number]: { name: string; marks: InterviewMarksType[string] }
 }
 
-const initialReviewMarks = {
+const initialMarks = {
   1: { name: '-', marks: null },
   2: { name: '-', marks: null },
   3: { name: '-', marks: null },
   4: { name: '-', marks: null },
   5: { name: '-', marks: null },
   6: { name: '-', marks: null },
-}
-
-const initialInterviewMarks = {
-  1: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-  2: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-  3: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-  4: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-  5: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
-  6: { name: '-', marks: { A: 0, B: 0, C: 0, D: 0, remark: '' } },
 }
 
 export default function ApplicationRow({
@@ -67,13 +54,12 @@ export default function ApplicationRow({
     application.adminPortalData.review_set,
   )
   const [reviewerMarks, setReviewerMarks] =
-    useState<ReviewerMarks>(initialReviewMarks)
+    useState<ReviewerMarks>(initialMarks)
   const [interviewSet, setInterviewSet] = useState<string>(
     application.adminPortalData.interview_set,
   )
-  const [interviewerMarks, setInterviewerMarks] = useState<InterviewerMarks>(
-    initialInterviewMarks,
-  )
+  const [interviewerMarks, setInterviewerMarks] =
+    useState<InterviewerMarks>(initialMarks)
   const [bachelorFaculties, setBachelorFaculties] = useState<Array<String>>([])
   const [masterFaculties, setMasterFaculties] = useState<Array<String>>([])
 
@@ -93,14 +79,11 @@ export default function ApplicationRow({
 
   const interviewMarkComponent = (interviewMarks: {
     name: string
-    marks: InterviewMarks
+    marks: InterviewMarksType[string]
   }) => (
     <div>
       <p className="navgroup-text">
-        {interviewMarks.marks.A +
-          interviewMarks.marks.B +
-          interviewMarks.marks.C +
-          interviewMarks.marks.D}
+        {interviewMarks.marks ? interviewMarks.marks.totalMarks : '-'}
       </p>
       {interviewMarks.name == '-' ? null : (
         <InterviewMarksModal interviewMarks={interviewMarks.marks} />
@@ -133,9 +116,9 @@ export default function ApplicationRow({
           await getUserDetailsById(interviewerId)
             .then((interview: User) => {
               if (interview)
-                setInterviewerMarks((prevInterviewerMarks) => {
+                setInterviewerMarks((prev) => {
                   return {
-                    ...prevInterviewerMarks,
+                    ...prev,
                     [index + 1]: {
                       name: interview.name,
                       marks: intMarks[interviewerId],

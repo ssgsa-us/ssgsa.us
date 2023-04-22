@@ -243,6 +243,7 @@ export type InterviewMarksType = {
     researchAptitude: number
     motivationToGoBack: number
     totalMarks: number
+    remark: string
   }
 }
 
