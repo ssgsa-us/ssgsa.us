@@ -32,10 +32,10 @@ function ViewApplication() {
   const setInterviewerMarks = (data: AdminPortalData) => {
     let interview_marks = data.interview_marks
     if (interview_marks && interview_marks[authUser.id]) {
-      setA(interview_marks[authUser.id].A || 0)
-      setB(interview_marks[authUser.id].B || 0)
-      setC(interview_marks[authUser.id].C || 0)
-      setD(interview_marks[authUser.id].D || 0)
+      setA(0)
+      setB(0)
+      setC(0)
+      setD(0)
       setRemark(interview_marks[authUser.id].remark || '')
     }
   }
