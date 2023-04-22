@@ -252,4 +252,5 @@ export type InterviewerInstructionsType = {
   COMMUNICATION?: number
   RESEARCH_APTITUDE?: number
   MOTIVATION_TO_GO_BACK?: number
+  STEP1_INSTRUCTION?: string
 }

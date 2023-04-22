@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import Loading from '../../../components/Loading'
+import InterviewerStep1 from '../../../components/Interviewer/ApplicationSteps/Step1'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import { useAuth } from '../../../context/AuthUserContext'
@@ -85,7 +86,17 @@ function ViewApplication() {
     >
       {pageReady ? (
         status == 1 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10"></div>
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <InterviewerStep1
+              applId={applId}
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              formStatus={formStatus}
+              status={status}
+              setStatus={setStatus}
+              instructions={instructions}
+            />
+          </div>
         ) : status == 2 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10"></div>
         ) : status == 3 ? (
