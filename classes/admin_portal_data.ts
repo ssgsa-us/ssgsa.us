@@ -1,15 +1,5 @@
 import firebase from '../firebase'
-import { ReviewMarksType } from '../types'
-
-type InterviewMarks = {
-  [key: string]: {
-    A: number
-    B: number
-    C: number
-    D: number
-    remark: string
-  }
-}
+import { InterviewMarksType, ReviewMarksType } from '../types'
 
 // Values of application status are:
 //   0 or undefined for 'unremoved' or not checked
@@ -23,14 +13,14 @@ export class AdminPortalData {
   application_status: number
   review_marks: ReviewMarksType
   review_set: string
-  interview_marks: InterviewMarks
+  interview_marks: InterviewMarksType
   interview_set: string
 
   updateDetails(
     application_status: number,
     review_marks: ReviewMarksType,
     review_set: string,
-    interview_marks: InterviewMarks,
+    interview_marks: InterviewMarksType,
     interview_set: string,
   ) {
     this.application_status = application_status
