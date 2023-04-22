@@ -1,10 +1,20 @@
-import { ReviewMarksType } from '../../types'
+import { useEffect, useState } from 'react'
+import { ReviewMarksType, ReviewerInstructionsType } from '../../types'
+import { getReviewerInstructions } from '../../pages/api/instructions'
 
 type Props = {
   reviewMarks: ReviewMarksType[string]
 }
 
 export default function ReviewMarksModal({ reviewMarks }: Props) {
+  const [instructions, setInstructions] = useState<ReviewerInstructionsType>({})
+
+  useEffect(() => {
+    getReviewerInstructions()
+      .then((data) => setInstructions(data))
+      .catch(() => alert('Not able to fetch instructions, Try reloading!'))
+  }, [])
+
   return (
     <div className="absolute top-0 left-0 z-50">
       <div className="hidden navgroup-box w-fit p-8">
@@ -20,7 +30,7 @@ export default function ReviewMarksModal({ reviewMarks }: Props) {
             <div className="flex justify-between space-x-5 my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                 Educational Qualifications (Out of{' '}
-                {process.env.NEXT_PUBLIC_REVIEW_ACADEMIC_MAX_MARKS})
+                {instructions.ACADEMIC_MAX_MARKS})
               </p>
               <p className="sm:text-lg font-bold">
                 {reviewMarks.totalAcademicMarks}
@@ -29,7 +39,7 @@ export default function ReviewMarksModal({ reviewMarks }: Props) {
             <div className="flex justify-between space-x-5 my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                 Academic / Curricular Activities (Out of{' '}
-                {process.env.NEXT_PUBLIC_REVIEW_CURRICULAR_MAX_MARKS})
+                {instructions.CURRICULAR_MAX_MARKS})
               </p>
               <p className="sm:text-lg font-bold">
                 {reviewMarks.curricularMarks}
@@ -38,7 +48,7 @@ export default function ReviewMarksModal({ reviewMarks }: Props) {
             <div className="flex justify-between space-x-5 my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
                 Extracurricular Activities (Out of{' '}
-                {process.env.NEXT_PUBLIC_REVIEW_EXTRACURRICULAR_MAX_MARKS})
+                {instructions.EXTRACURRICULAR_MAX_MARKS})
               </p>
               <p className="sm:text-lg font-bold">
                 {reviewMarks.extracurricularMarks}
@@ -46,8 +56,7 @@ export default function ReviewMarksModal({ reviewMarks }: Props) {
             </div>
             <div className="flex justify-between space-x-5 my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                Essay-Type Questions (Out of{' '}
-                {Number(process.env.NEXT_PUBLIC_REVIEW_SOP_MAX_MARKS) * 5})
+                Essay-Type Questions (Out of {instructions.SOP_MAX_MARKS * 5})
               </p>
               <p className="sm:text-lg font-bold">
                 {reviewMarks.totalSOPMarks}
