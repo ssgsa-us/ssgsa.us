@@ -26,3 +26,7 @@ export const createUser = (
     .withConverter(userController)
     .set(user)
 }
+
+export const updateUserRole = (userId: string, role: string) => {
+  firestore.doc(path.join('users', userId)).update({ role })
+}
