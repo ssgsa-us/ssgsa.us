@@ -1,7 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
+import { useAuth } from '../../../context/AuthUserContext'
+import { updateIntFormStatus } from '../../../pages/api/updateInterviewMarks'
 import {
+  InterviewerInstructionsType,
   ReviewMarksType,
   ReviewerInstructionsType,
   Users,
@@ -10,24 +13,30 @@ import Field from '../../ReviewApplicationSteps/Field'
 import ProceedButtons from './ProceedButtons'
 
 type Props = {
+  applId: string
   applicationData: ApplicationData
   adminPortalData: AdminPortalData
   reviewers: Users
   revInstructions: ReviewerInstructionsType
+  intInstructions: InterviewerInstructionsType
+  formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
-  formStatus: number
 }
 
-const AdminStep5 = ({
+const InterviewerStep5 = ({
+  applId,
   applicationData,
   adminPortalData,
   reviewers,
   revInstructions,
+  intInstructions,
+  formStatus,
   status,
   setStatus,
-  formStatus,
 }: Props) => {
+  const { authUser } = useAuth()
+  const [error, setError] = useState<string>('')
   const sopAnswers = applicationData.sop_answers
   const [reviewMarks, setReviewMarks] = useState<ReviewMarksType>({})
 
@@ -50,6 +59,23 @@ const AdminStep5 = ({
 
   return (
     <div className="w-full">
+      <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
+        <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
+          Essay-Type Questions
+        </h1>
+        <div className="text-xs sm:text-sm md:text-base font-bold m-2">
+          <p className="mb-5">{intInstructions.STEP5_INSTRUCTION}</p>
+          <ul style={{ listStyle: 'disc' }} className="ml-2 p-2 pl-4">
+            <li className="my-2">{intInstructions.STEP5_INSTRUCTION1}</li>
+            <li className="my-2">{intInstructions.STEP5_INSTRUCTION2}</li>
+            <li className="my-2">{intInstructions.STEP5_INSTRUCTION3}</li>
+            <li className="my-2">{intInstructions.STEP5_INSTRUCTION4}</li>
+            <li className="my-2">{intInstructions.STEP5_INSTRUCTION5}</li>
+            <li className="my-2">{intInstructions.STEP5_INSTRUCTION6}</li>
+          </ul>
+        </div>
+      </div>
+
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-5">
         <h1 className="text-xl sm:text-2xl text-center font-bold pb-5">
           Essay-Type Questions
@@ -192,13 +218,18 @@ const AdminStep5 = ({
       ) : null}
 
       <ProceedButtons
+        formStatus={formStatus}
         status={status}
         setStatus={setStatus}
-        formStatus={formStatus}
-        error=""
+        validation={() => true}
+        updateInterviewMarks={(newStatus: number) =>
+          updateIntFormStatus(applId, authUser.id, newStatus)
+        }
+        error={error}
+        setError={setError}
       />
     </div>
   )
 }
 
-export default AdminStep5
+export default InterviewerStep5
