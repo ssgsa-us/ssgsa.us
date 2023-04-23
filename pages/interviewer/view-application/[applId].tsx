@@ -4,14 +4,19 @@ import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import Loading from '../../../components/Loading'
 import InterviewerStep1 from '../../../components/Interviewer/ApplicationSteps/Step1'
+import InterviewerStep2 from '../../../components/Interviewer/ApplicationSteps/Step2'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import { useAuth } from '../../../context/AuthUserContext'
 import ApplicationLayout from '../../../layouts/interviewer/ApplicationLayout'
-import { InterviewerInstructionsType } from '../../../types'
+import { InterviewerInstructionsType, Users } from '../../../types'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
-import { getInterviewerInstructions } from '../../api/instructions'
+import { getUserDetailsByIds } from '../../api/getUserDetails'
+import {
+  getInterviewerInstructions,
+  getReviewerInstructions,
+} from '../../api/instructions'
 
 function ViewApplication() {
   const { authUser } = useAuth()
@@ -22,16 +27,32 @@ function ViewApplication() {
   const [formStatus, setFormStatus] = useState<number>(1)
   const [status, setStatus] = useState<number>(1)
   const [pageReady, setPageReady] = useState<boolean>(false)
-  const [instructions, setInstructions] = useState<InterviewerInstructionsType>(
-    {},
-  )
+  const [reviewers, setReviewers] = useState<Users>({})
+  const [intInstructions, setIntInstructions] =
+    useState<InterviewerInstructionsType>({})
+  const [revInstructions, setRevInstructions] =
+    useState<InterviewerInstructionsType>({})
   const router = useRouter()
   const applId = String(router.query['applId'])
 
+  const updateReviewerDetails = (data: AdminPortalData) => {
+    getUserDetailsByIds(Object.keys(data.review_marks))
+      .then((data) => setReviewers(data))
+      .catch(() => alert('Not able to fetch reviewer details'))
+  }
+
   useEffect(() => {
     getInterviewerInstructions()
-      .then((data) => setInstructions(data))
-      .catch(() => alert('Not able to fetch instructions, Try reloading!'))
+      .then((data) => setIntInstructions(data))
+      .catch(() =>
+        alert('Not able to fetch interview instructions, Try reloading!'),
+      )
+
+    getReviewerInstructions()
+      .then((data) => setRevInstructions(data))
+      .catch(() =>
+        alert('Not able to fetch review instructions, Try reloading!'),
+      )
   }, [])
 
   useEffect(() => {
@@ -43,6 +64,8 @@ function ViewApplication() {
             .then((data: AdminPortalData) => {
               if (data) {
                 setAdminPortalData(data)
+                if (data.review_marks) updateReviewerDetails(data)
+
                 if (
                   data.interview_marks &&
                   data.interview_marks[authUser.id] &&
@@ -66,6 +89,8 @@ function ViewApplication() {
         .then((data: AdminPortalData) => {
           if (data) {
             setAdminPortalData(data)
+            if (data.review_marks) updateReviewerDetails(data)
+
             if (
               data.interview_marks &&
               data.interview_marks[authUser.id] &&
@@ -94,11 +119,23 @@ function ViewApplication() {
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
-              instructions={instructions}
+              intInstructions={intInstructions}
             />
           </div>
         ) : status == 2 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10"></div>
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <InterviewerStep2
+              applId={applId}
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              reviewers={reviewers}
+              revInstructions={revInstructions}
+              intInstructions={intInstructions}
+              formStatus={formStatus}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
         ) : status == 3 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10"></div>
         ) : status == 4 ? (

@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
-import { step1 } from '../../../pages/api/updateInterviewMarks'
+import { updateIntFormStatus } from '../../../pages/api/updateInterviewMarks'
 import { InterviewerInstructionsType } from '../../../types'
 import Step1 from '../../ReviewApplicationSteps/Step1'
 import ProceedButtons from './ProceedButtons'
@@ -14,7 +14,7 @@ type Props = {
   formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
-  instructions: InterviewerInstructionsType
+  intInstructions: InterviewerInstructionsType
 }
 
 const InterviewerStep1 = ({
@@ -24,7 +24,7 @@ const InterviewerStep1 = ({
   formStatus,
   status,
   setStatus,
-  instructions,
+  intInstructions,
 }: Props) => {
   const { authUser } = useAuth()
   const [error, setError] = useState<string>('')
@@ -36,7 +36,7 @@ const InterviewerStep1 = ({
           Applicant&apos;s Tentative Plan And Personal Data
         </h1>
         <div className="text-xs sm:text-sm md:text-base font-bold m-2">
-          <p className="mb-5">{instructions.STEP1_INSTRUCTION}</p>
+          <p className="mb-5">{intInstructions.STEP1_INSTRUCTION}</p>
         </div>
       </div>
 
@@ -48,7 +48,7 @@ const InterviewerStep1 = ({
         setStatus={setStatus}
         validation={() => true}
         updateInterviewMarks={(newStatus: number) =>
-          step1(applId, authUser.id, newStatus)
+          updateIntFormStatus(applId, authUser.id, newStatus)
         }
         error={error}
         setError={setError}

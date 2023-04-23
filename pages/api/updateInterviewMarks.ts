@@ -1,7 +1,7 @@
 import path from 'path'
 import { firestore } from '../../firebase'
 
-export const step1 = (
+export const updateIntFormStatus = (
   userId: string,
   interviewerId: string,
   formStatus: number,
