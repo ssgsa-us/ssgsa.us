@@ -2,17 +2,15 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
-import { step7 } from '../../../pages/api/updateReviewMarks'
+import { updateIntFormStatus } from '../../../pages/api/updateInterviewMarks'
 import {
   InterviewerInstructionsType,
   ReviewMarksType,
   ReviewerInstructionsType,
   Users,
 } from '../../../types'
-import TextInput from '../../ApplicationSteps/TextInput'
 import Field from '../../ReviewApplicationSteps/Field'
 import ProceedButtons from './ProceedButtons'
-import { updateIntFormStatus } from '../../../pages/api/updateInterviewMarks'
 
 type Props = {
   applId: string
