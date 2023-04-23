@@ -71,7 +71,7 @@ const ProceedButtons = ({
           }}
         >
           <p className="mr-2">
-            {status === 7
+            {status === 8
               ? 'Complete Interview and Proceed'
               : 'Save And Proceed'}
           </p>

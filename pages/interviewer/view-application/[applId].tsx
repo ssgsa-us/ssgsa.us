@@ -21,6 +21,7 @@ import {
   getInterviewerInstructions,
   getReviewerInstructions,
 } from '../../api/instructions'
+import InterviewerStep7 from '../../../components/Interviewer/ApplicationSteps/Step7'
 
 function ViewApplication() {
   const { authUser } = useAuth()
@@ -195,7 +196,19 @@ function ViewApplication() {
             />
           </div>
         ) : status == 7 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10"></div>
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <InterviewerStep7
+              applId={applId}
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              reviewers={reviewers}
+              revInstructions={revInstructions}
+              intInstructions={intInstructions}
+              formStatus={formStatus}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
         ) : status == 8 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10"></div>
         ) : (
