@@ -256,4 +256,11 @@ export type InterviewerInstructionsType = {
   STEP2_INSTRUCTION?: string
   STEP3_INSTRUCTION?: string
   STEP4_INSTRUCTION?: string
+  STEP5_INSTRUCTION?: string
+  STEP5_INSTRUCTION1?: string
+  STEP5_INSTRUCTION2?: string
+  STEP5_INSTRUCTION3?: string
+  STEP5_INSTRUCTION4?: string
+  STEP5_INSTRUCTION5?: string
+  STEP5_INSTRUCTION6?: string
 }

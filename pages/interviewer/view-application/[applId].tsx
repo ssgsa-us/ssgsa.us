@@ -7,6 +7,7 @@ import InterviewerStep1 from '../../../components/Interviewer/ApplicationSteps/S
 import InterviewerStep2 from '../../../components/Interviewer/ApplicationSteps/Step2'
 import InterviewerStep3 from '../../../components/Interviewer/ApplicationSteps/Step3'
 import InterviewerStep4 from '../../../components/Interviewer/ApplicationSteps/Step4'
+import InterviewerStep5 from '../../../components/Interviewer/ApplicationSteps/Step5'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import { useAuth } from '../../../context/AuthUserContext'
@@ -167,7 +168,19 @@ function ViewApplication() {
             />
           </div>
         ) : status == 5 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10"></div>
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <InterviewerStep5
+              applId={applId}
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              reviewers={reviewers}
+              revInstructions={revInstructions}
+              intInstructions={intInstructions}
+              formStatus={formStatus}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
         ) : status == 6 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10"></div>
         ) : status == 7 ? (
