@@ -64,7 +64,7 @@ const AdminStep4 = ({
               </p>
               <div className="ml-5 text-blue-850">
                 <Field
-                  name={`Total Curricular Marks (out of ${revInstructions.EXTRACURRICULAR_MAX_MARKS})`}
+                  name={`Extracurricular Marks (out of ${revInstructions.EXTRACURRICULAR_MAX_MARKS})`}
                   value={reviewMarks[reviewerId].extracurricularMarks}
                 />
               </div>
