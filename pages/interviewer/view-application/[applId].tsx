@@ -5,6 +5,7 @@ import { ApplicationData } from '../../../classes/application_data'
 import Loading from '../../../components/Loading'
 import InterviewerStep1 from '../../../components/Interviewer/ApplicationSteps/Step1'
 import InterviewerStep2 from '../../../components/Interviewer/ApplicationSteps/Step2'
+import InterviewerStep3 from '../../../components/Interviewer/ApplicationSteps/Step3'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import { useAuth } from '../../../context/AuthUserContext'
@@ -137,7 +138,19 @@ function ViewApplication() {
             />
           </div>
         ) : status == 3 ? (
-          <div className="flex flex-col items-center mx-3 my-10 sm:m-10"></div>
+          <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+            <InterviewerStep3
+              applId={applId}
+              applicationData={applicationData}
+              adminPortalData={adminPortalData}
+              reviewers={reviewers}
+              revInstructions={revInstructions}
+              intInstructions={intInstructions}
+              formStatus={formStatus}
+              status={status}
+              setStatus={setStatus}
+            />
+          </div>
         ) : status == 4 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10"></div>
         ) : status == 5 ? (
