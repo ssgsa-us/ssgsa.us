@@ -1,37 +1,44 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
-import { updateApplicationStatus } from '../../../pages/api/updateApplicationStatus'
+import { ApplicationData } from '../../../classes/application_data'
+import { useAuth } from '../../../context/AuthUserContext'
+import { step7 } from '../../../pages/api/updateReviewMarks'
 import {
+  InterviewerInstructionsType,
   ReviewMarksType,
   ReviewerInstructionsType,
   Users,
 } from '../../../types'
+import TextInput from '../../ApplicationSteps/TextInput'
 import Field from '../../ReviewApplicationSteps/Field'
 import ProceedButtons from './ProceedButtons'
+import { updateIntFormStatus } from '../../../pages/api/updateInterviewMarks'
 
 type Props = {
   applId: string
+  applicationData: ApplicationData
   adminPortalData: AdminPortalData
   reviewers: Users
   revInstructions: ReviewerInstructionsType
+  intInstructions: InterviewerInstructionsType
+  formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
-  formStatus: number
-  changeOccured: boolean
-  setChangeOccured: Dispatch<SetStateAction<boolean>>
 }
 
-const AdminStep7 = ({
+const InterviewerStep7 = ({
   applId,
+  applicationData,
   adminPortalData,
   reviewers,
   revInstructions,
+  intInstructions,
+  formStatus,
   status,
   setStatus,
-  formStatus,
-  changeOccured,
-  setChangeOccured,
 }: Props) => {
+  const { authUser } = useAuth()
+  const [error, setError] = useState<string>('')
   const [reviewMarks, setReviewMarks] = useState<ReviewMarksType>({})
 
   useEffect(() => {
@@ -54,8 +61,8 @@ const AdminStep7 = ({
   return (
     <div className="w-full">
       <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
-        <h1 className="text-3xl text-red-850 text-center font-bold pb-5 mb-10">
-          Reviewer Marks
+        <h1 className="text-3xl text-red-850 text-center font-bold pb-5">
+          Review Marks
         </h1>
 
         {Object.keys(reviewMarks).map((reviewerId, index) => (
@@ -99,61 +106,19 @@ const AdminStep7 = ({
         ))}
       </div>
 
-      <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10">
-        <h1 className="text-3xl text-red-850 text-center font-bold pb-5 mb-10">
-          Application Status
-        </h1>
-
-        <div className="flex flex-col items-center">
-          <p className="text-red-850 text-2xl mb-5">
-            {adminPortalData.application_status == 2
-              ? 'Finalised For Review'
-              : adminPortalData.application_status == 3
-              ? 'Reviewed'
-              : adminPortalData.application_status == 4
-              ? 'Finalised For Interview'
-              : 'Interviewed'}
-          </p>
-          {adminPortalData.application_status >= 4 ? null : (
-            <button
-              className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850 mb-5"
-              onClick={() =>
-                updateApplicationStatus(
-                  applId,
-                  adminPortalData.application_status + 1,
-                )
-                  .then(() => setChangeOccured(!changeOccured))
-                  .catch(() => alert('Try again, network error!'))
-              }
-            >
-              {adminPortalData.application_status == 2
-                ? 'Mark As Reviewed'
-                : 'Finalise For Interview'}
-            </button>
-          )}
-          {adminPortalData.application_status == 4 ? (
-            <button
-              className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-red-850 mb-5"
-              onClick={() =>
-                updateApplicationStatus(applId, 3)
-                  .then(() => setChangeOccured(!changeOccured))
-                  .catch(() => alert('Try again, network error!'))
-              }
-            >
-              Remove From Interview Process
-            </button>
-          ) : null}
-        </div>
-      </div>
-
       <ProceedButtons
+        formStatus={formStatus}
         status={status}
         setStatus={setStatus}
-        formStatus={formStatus}
-        error=""
+        validation={() => true}
+        updateInterviewMarks={(newStatus: number) =>
+          updateIntFormStatus(applId, authUser.id, newStatus)
+        }
+        error={error}
+        setError={setError}
       />
     </div>
   )
 }
 
-export default AdminStep7
+export default InterviewerStep7
