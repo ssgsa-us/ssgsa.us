@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Footer() {
+  const email = "contact" + "@" + "ssgsa.us";
   return (
     <div className="mt-5">
       <div className="flex justify-center">
@@ -60,7 +61,15 @@ export default function Footer() {
           </Link>
         </div>
         <div className="col-span-3 flex flex-col items-center sm:items-start bg-blue-850 p-3">
-          <p className="text-sm font-bold mb-1">contact [at] ssgsa [dot] us</p>
+          <p className="text-sm font-bold mb-1">
+            {email.split("").map((char, index) => {
+              if (char === "@") {
+                return <span key={index}>&#64;</span>;
+              } else {
+                return <span key={index}>{char}</span>;
+              }
+            })}
+          </p>
           <p className="text-xs mb-3">A 501(c) (3) Non-profit Organisation</p>
           <p className="text-xs">&copy; Copyright 2006-21</p>
           <p className="text-xs">All Rights Reserved by SSGSA</p>
