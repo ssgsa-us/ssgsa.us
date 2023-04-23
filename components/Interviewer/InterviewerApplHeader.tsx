@@ -138,10 +138,10 @@ export default function InterviewerApplHeader({
               </button>
             </div>
             <div className="pt-5 text-white pl-2 flex flex-col ">
-              <Link href="/reviewer">
+              <Link href="/interviewer">
                 <a> Instructions </a>
               </Link>
-              <Link href="/reviewer/applications">
+              <Link href="/interviewer/applications">
                 <a> All Applications </a>
               </Link>
             </div>
