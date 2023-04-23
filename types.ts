@@ -263,4 +263,5 @@ export type InterviewerInstructionsType = {
   STEP5_INSTRUCTION4?: string
   STEP5_INSTRUCTION5?: string
   STEP5_INSTRUCTION6?: string
+  STEP6_INSTRUCTION?: string
 }
