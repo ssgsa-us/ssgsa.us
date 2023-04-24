@@ -241,9 +241,15 @@ export default function Portal() {
       </div>
       <p className="text-sm text-center mx-5 sm:mx-10 lg:mx-20">
         If you encounter any error during application process, please contact us
-        at <a className="text-blue-800 font-black">contact@ssgsa.us</a> or{' '}
-        <a className="text-blue-800 font-black">developers@ssgsa.us</a>,
-        describing your problem{' '}
+        at{' '}
+        <a className="text-blue-800 font-black">
+          &#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#115;&#115;&#103;&#115;&#097;&#046;&#117;&#115;
+        </a>{' '}
+        or{' '}
+        <a className="text-blue-800 font-black">
+          &#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#115;&#115;&#103;&#115;&#097;&#046;&#117;&#115;
+        </a>
+        , describing your problem{' '}
         <span className="text-red-850">with a screenshot of the error</span>
       </p>
     </PortalLayout>
