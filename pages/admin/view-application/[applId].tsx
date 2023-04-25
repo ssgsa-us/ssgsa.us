@@ -9,14 +9,22 @@ import AdminStep4 from '../../../components/Admin/ApplicationSteps/Step4'
 import AdminStep5 from '../../../components/Admin/ApplicationSteps/Step5'
 import AdminStep6 from '../../../components/Admin/ApplicationSteps/Step6'
 import AdminStep7 from '../../../components/Admin/ApplicationSteps/Step7'
+import AdminStep8 from '../../../components/Admin/ApplicationSteps/Step8'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import ApplicationLayout from '../../../layouts/admin/ApplicationLayout'
-import { ReviewerInstructionsType, Users } from '../../../types'
+import {
+  InterviewerInstructionsType,
+  ReviewerInstructionsType,
+  Users,
+} from '../../../types'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
 import { getUserDetailsByIds } from '../../api/getUserDetails'
-import { getReviewerInstructions } from '../../api/instructions'
+import {
+  getInterviewerInstructions,
+  getReviewerInstructions,
+} from '../../api/instructions'
 
 function ViewApplication() {
   const [adminPortalData, setAdminPortalData] = useState<AdminPortalData>(
@@ -31,6 +39,8 @@ function ViewApplication() {
   const [pageReady, setPageReady] = useState<boolean>(false)
   const [revInstructions, setRevInstructions] =
     useState<ReviewerInstructionsType>({})
+  const [intInstructions, setIntInstructions] =
+    useState<InterviewerInstructionsType>({})
   const router = useRouter()
   const applId = String(router.query['applId'])
 
@@ -51,6 +61,12 @@ function ViewApplication() {
       .then((data) => setRevInstructions(data))
       .catch(() =>
         alert('Not able to fetch reviewer instructions, Try reloading!'),
+      )
+
+    getInterviewerInstructions()
+      .then((data) => setRevInstructions(data))
+      .catch(() =>
+        alert('Not able to fetch interviewer instructions, Try reloading!'),
       )
   }, [])
 
@@ -187,6 +203,20 @@ function ViewApplication() {
                 adminPortalData={adminPortalData}
                 reviewers={reviewers}
                 revInstructions={revInstructions}
+                status={status}
+                setStatus={setStatus}
+                formStatus={formStatus}
+                changeOccured={changeOccured}
+                setChangeOccured={setChangeOccured}
+              />
+            </div>
+          ) : status === 8 ? (
+            <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
+              <AdminStep8
+                applId={applId}
+                adminPortalData={adminPortalData}
+                interviewers={interviewers}
+                intInstructions={intInstructions}
                 status={status}
                 setStatus={setStatus}
                 formStatus={formStatus}
