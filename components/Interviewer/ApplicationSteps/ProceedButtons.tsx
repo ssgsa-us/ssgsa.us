@@ -58,8 +58,8 @@ const ProceedButtons = ({
           className="text-white text-base md:text-xl bg-blue-850 mt-2 sm:mt-0 ml-2 py-2 px-5 rounded-lg flex flex-row items-center"
           onClick={() => {
             if (validation())
-              if (status === 8)
-                updateInterviewMarks(9)
+              if (status === 7)
+                updateInterviewMarks(8)
                   .then(() => router.push('/interviewer/applications'))
                   .catch(() => setError('Try again, network error!'))
               else
@@ -71,7 +71,7 @@ const ProceedButtons = ({
           }}
         >
           <p className="mr-2">
-            {status === 8
+            {status === 7
               ? 'Complete Interview and Proceed'
               : 'Save And Proceed'}
           </p>
