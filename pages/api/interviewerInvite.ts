@@ -10,7 +10,7 @@ export const addInterviewerInvite = (email: string, name: string) => {
 }
 
 export const getInterviewerInvite = async (email: string) => {
-  let InterviewerInvite: firebase.firestore.DocumentData = await firestore
+  let interviewerInvite: firebase.firestore.DocumentData = await firestore
     .doc(path.join('interviewer_invites', email))
     .get()
     .then(
@@ -21,7 +21,7 @@ export const getInterviewerInvite = async (email: string) => {
       },
     )
 
-  return InterviewerInvite
+  return interviewerInvite
 }
 
 export const updateInterviewerResponse = (email: string, response: string) => {
