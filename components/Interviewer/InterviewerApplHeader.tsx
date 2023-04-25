@@ -158,7 +158,6 @@ export default function InterviewerApplHeader({
               'Extracurricular Activities',
               'Essay-Type Questions',
               'Other Information',
-              'Review Marks',
               'Interview Marks',
               'Completed',
             ]}
