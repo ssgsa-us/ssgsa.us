@@ -180,7 +180,7 @@ const AdminStep5 = ({
               </p>
               <div className="ml-5 text-blue-850">
                 <Field
-                  name={`Total Curricular Marks (out of ${
+                  name={`Total Essay-Type Marks (out of ${
                     revInstructions.SOP_MAX_MARKS * 5
                   })`}
                   value={reviewMarks[reviewerId].totalSOPMarks}
