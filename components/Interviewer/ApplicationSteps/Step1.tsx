@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useState } from 'react'
-import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
 import { updateIntFormStatus } from '../../../pages/api/updateInterviewMarks'
@@ -10,21 +9,19 @@ import ProceedButtons from './ProceedButtons'
 type Props = {
   applId: string
   applicationData: ApplicationData
-  adminPortalData: AdminPortalData
   formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
-  intInstructions: InterviewerInstructionsType
+  instructions: InterviewerInstructionsType
 }
 
 const InterviewerStep1 = ({
   applId,
   applicationData,
-  adminPortalData,
   formStatus,
   status,
   setStatus,
-  intInstructions,
+  instructions,
 }: Props) => {
   const { authUser } = useAuth()
   const [error, setError] = useState<string>('')
@@ -36,7 +33,7 @@ const InterviewerStep1 = ({
           Applicant&apos;s Tentative Plan And Personal Data
         </h1>
         <div className="text-xs sm:text-sm md:text-base font-bold m-2">
-          <p className="mb-5">{intInstructions.STEP1_INSTRUCTION}</p>
+          <p className="mb-5">{instructions.STEP1_INSTRUCTION}</p>
         </div>
       </div>
 

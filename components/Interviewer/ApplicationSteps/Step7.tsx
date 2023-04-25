@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
-import { ApplicationData } from '../../../classes/application_data'
 import { useAuth } from '../../../context/AuthUserContext'
 import { updateInterviewMarks } from '../../../pages/api/updateInterviewMarks'
 import { InterviewerInstructionsType } from '../../../types'
@@ -11,9 +10,8 @@ import ProceedButtons from './ProceedButtons'
 
 type Props = {
   applId: string
-  applicationData: ApplicationData
   adminPortalData: AdminPortalData
-  intInstructions: InterviewerInstructionsType
+  instructions: InterviewerInstructionsType
   formStatus: number
   status: number
   setStatus: Dispatch<SetStateAction<Number>>
@@ -21,9 +19,8 @@ type Props = {
 
 const InterviewerStep7 = ({
   applId,
-  applicationData,
   adminPortalData,
-  intInstructions,
+  instructions,
   formStatus,
   status,
   setStatus,
@@ -119,13 +116,13 @@ const InterviewerStep7 = ({
 
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Higher Studies Motivation (Out of ${intInstructions.HIGHER_STUDIES_MOTIVATION})`}
+            name={`Higher Studies Motivation (Out of ${instructions.HIGHER_STUDIES_MOTIVATION})`}
             value={higherStudiesMot}
             type="number"
             onChange={(e) => {
               if (
                 Number(e.target.value) <=
-                  intInstructions.HIGHER_STUDIES_MOTIVATION &&
+                  instructions.HIGHER_STUDIES_MOTIVATION &&
                 Number(e.target.value) >= 0
               ) {
                 setTotalMarks(
@@ -137,17 +134,17 @@ const InterviewerStep7 = ({
             required={true}
             step="0.01"
             minimum={0}
-            maximum={intInstructions.HIGHER_STUDIES_MOTIVATION}
+            maximum={instructions.HIGHER_STUDIES_MOTIVATION}
           />
         </div>
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Communication (Out of ${intInstructions.COMMUNICATION})`}
+            name={`Communication (Out of ${instructions.COMMUNICATION})`}
             value={communication}
             type="number"
             onChange={(e) => {
               if (
-                Number(e.target.value) <= intInstructions.COMMUNICATION &&
+                Number(e.target.value) <= instructions.COMMUNICATION &&
                 Number(e.target.value) >= 0
               ) {
                 setTotalMarks(
@@ -159,17 +156,17 @@ const InterviewerStep7 = ({
             required={true}
             step="0.01"
             minimum={0}
-            maximum={intInstructions.COMMUNICATION}
+            maximum={instructions.COMMUNICATION}
           />
         </div>
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Research Aptitude (Out of ${intInstructions.RESEARCH_APTITUDE})`}
+            name={`Research Aptitude (Out of ${instructions.RESEARCH_APTITUDE})`}
             value={researchAptitude}
             type="number"
             onChange={(e) => {
               if (
-                Number(e.target.value) <= intInstructions.RESEARCH_APTITUDE &&
+                Number(e.target.value) <= instructions.RESEARCH_APTITUDE &&
                 Number(e.target.value) >= 0
               ) {
                 setTotalMarks(
@@ -181,18 +178,17 @@ const InterviewerStep7 = ({
             required={true}
             step="0.01"
             minimum={0}
-            maximum={intInstructions.RESEARCH_APTITUDE}
+            maximum={instructions.RESEARCH_APTITUDE}
           />
         </div>
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Motivation To Go Back (Out of ${intInstructions.MOTIVATION_TO_GO_BACK})`}
+            name={`Motivation To Go Back (Out of ${instructions.MOTIVATION_TO_GO_BACK})`}
             value={motivationToGoBack}
             type="number"
             onChange={(e) => {
               if (
-                Number(e.target.value) <=
-                  intInstructions.MOTIVATION_TO_GO_BACK &&
+                Number(e.target.value) <= instructions.MOTIVATION_TO_GO_BACK &&
                 Number(e.target.value) >= 0
               ) {
                 setTotalMarks(
@@ -204,7 +200,7 @@ const InterviewerStep7 = ({
             required={true}
             step="0.01"
             minimum={0}
-            maximum={intInstructions.MOTIVATION_TO_GO_BACK}
+            maximum={instructions.MOTIVATION_TO_GO_BACK}
           />
         </div>
         <Field name="Total Marks (out of 100)" value={totalMarks} />

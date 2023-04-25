@@ -17,11 +17,7 @@ import ApplicationLayout from '../../../layouts/interviewer/ApplicationLayout'
 import { InterviewerInstructionsType, Users } from '../../../types'
 import { getAdminPortalData } from '../../api/getAdminPortalData'
 import { getApplicationData } from '../../api/getApplicationData'
-import { getUserDetailsByIds } from '../../api/getUserDetails'
-import {
-  getInterviewerInstructions,
-  getReviewerInstructions,
-} from '../../api/instructions'
+import { getInterviewerInstructions } from '../../api/instructions'
 
 function ViewApplication() {
   const { authUser } = useAuth()
@@ -32,31 +28,17 @@ function ViewApplication() {
   const [formStatus, setFormStatus] = useState<number>(1)
   const [status, setStatus] = useState<number>(1)
   const [pageReady, setPageReady] = useState<boolean>(false)
-  const [reviewers, setReviewers] = useState<Users>({})
-  const [intInstructions, setIntInstructions] =
-    useState<InterviewerInstructionsType>({})
-  const [revInstructions, setRevInstructions] =
-    useState<InterviewerInstructionsType>({})
+  const [instructions, setInstructions] = useState<InterviewerInstructionsType>(
+    {},
+  )
   const router = useRouter()
   const applId = String(router.query['applId'])
 
-  const updateReviewerDetails = (data: AdminPortalData) => {
-    getUserDetailsByIds(Object.keys(data.review_marks))
-      .then((data) => setReviewers(data))
-      .catch(() => alert('Not able to fetch reviewer details'))
-  }
-
   useEffect(() => {
     getInterviewerInstructions()
-      .then((data) => setIntInstructions(data))
+      .then((data) => setInstructions(data))
       .catch(() =>
         alert('Not able to fetch interview instructions, Try reloading!'),
-      )
-
-    getReviewerInstructions()
-      .then((data) => setRevInstructions(data))
-      .catch(() =>
-        alert('Not able to fetch review instructions, Try reloading!'),
       )
   }, [])
 
@@ -69,7 +51,6 @@ function ViewApplication() {
             .then((data: AdminPortalData) => {
               if (data) {
                 setAdminPortalData(data)
-                if (data.review_marks) updateReviewerDetails(data)
 
                 if (
                   data.interview_marks &&
@@ -94,7 +75,6 @@ function ViewApplication() {
         .then((data: AdminPortalData) => {
           if (data) {
             setAdminPortalData(data)
-            if (data.review_marks) updateReviewerDetails(data)
 
             if (
               data.interview_marks &&
@@ -120,11 +100,10 @@ function ViewApplication() {
             <InterviewerStep1
               applId={applId}
               applicationData={applicationData}
-              adminPortalData={adminPortalData}
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
-              intInstructions={intInstructions}
+              instructions={instructions}
             />
           </div>
         ) : status == 2 ? (
@@ -132,10 +111,7 @@ function ViewApplication() {
             <InterviewerStep2
               applId={applId}
               applicationData={applicationData}
-              adminPortalData={adminPortalData}
-              reviewers={reviewers}
-              revInstructions={revInstructions}
-              intInstructions={intInstructions}
+              instructions={instructions}
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
@@ -146,10 +122,7 @@ function ViewApplication() {
             <InterviewerStep3
               applId={applId}
               applicationData={applicationData}
-              adminPortalData={adminPortalData}
-              reviewers={reviewers}
-              revInstructions={revInstructions}
-              intInstructions={intInstructions}
+              instructions={instructions}
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
@@ -160,10 +133,7 @@ function ViewApplication() {
             <InterviewerStep4
               applId={applId}
               applicationData={applicationData}
-              adminPortalData={adminPortalData}
-              reviewers={reviewers}
-              revInstructions={revInstructions}
-              intInstructions={intInstructions}
+              instructions={instructions}
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
@@ -174,10 +144,7 @@ function ViewApplication() {
             <InterviewerStep5
               applId={applId}
               applicationData={applicationData}
-              adminPortalData={adminPortalData}
-              reviewers={reviewers}
-              revInstructions={revInstructions}
-              intInstructions={intInstructions}
+              instructions={instructions}
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
@@ -188,20 +155,18 @@ function ViewApplication() {
             <InterviewerStep6
               applId={applId}
               applicationData={applicationData}
-              adminPortalData={adminPortalData}
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
-              intInstructions={intInstructions}
+              instructions={instructions}
             />
           </div>
         ) : status == 7 ? (
           <div className="flex flex-col items-center mx-3 my-10 sm:m-10">
             <InterviewerStep7
               applId={applId}
-              applicationData={applicationData}
               adminPortalData={adminPortalData}
-              intInstructions={intInstructions}
+              instructions={instructions}
               formStatus={formStatus}
               status={status}
               setStatus={setStatus}
