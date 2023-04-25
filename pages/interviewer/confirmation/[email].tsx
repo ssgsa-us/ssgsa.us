@@ -134,13 +134,13 @@ function InterviewerConfirmation() {
         </h1>
         <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10">
           <p className="my-5 text-sm sm:text-lg text-blue-850">
-            If you agree to interview SSGSA Applications this year, please first
-            enter a PASSWORD that you will use to log in, and then click on the
-            YES button. If you are declining to interview, please press the NO
-            button without needing to enter the password.
+            To allot you the profile of the candidates,, please create a
+            password for your login on the following link. Your email will be
+            your USERNAME.
           </p>
           <p className="my-5 text-sm sm:text-lg text-blue-850">
-            Note: Your email will be your username.
+            Note: If you were also a reviewer, you need not create another
+            password. Please use the same one you have used before.
           </p>
           {error ? (
             <p className="text-red-850 text-center pt-1">
