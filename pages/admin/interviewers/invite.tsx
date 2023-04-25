@@ -8,36 +8,36 @@ import UsersTable from '../../../components/UsersTable'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import {
-  addReviewerInvite,
-  getAcceptedReviewers,
-  getRejetedReviewers,
-  getUnresponsiveReviewers,
-  sendRevReminder,
-} from '../../api/reviewerInvite'
+  addInterviewerInvite,
+  getAcceptedInterviewers,
+  getRejetedInterviewers,
+  getUnresponsiveInterviewers,
+  sendIntReminder,
+} from '../../api/interviewerInvite'
 
-function InviteReviewers() {
+function InviteInterviewers() {
   const [file, setFile] = useState<File>()
-  const [acceptedReviewers, setAcceptedReviewers] = useState([])
-  const [rejectedReviewers, setRejectedReviewers] = useState([])
-  const [unresposiveReviewers, setUnresposiveReviewers] = useState([])
+  const [acceptedInterviewers, setAcceptedInterviewers] = useState([])
+  const [rejectedInterviewers, setRejectedInterviewers] = useState([])
+  const [unresposiveInterviewers, setUnresposiveInterviewers] = useState([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    getAcceptedReviewers()
+    getAcceptedInterviewers()
       .then((data) => {
-        setAcceptedReviewers(data)
+        setAcceptedInterviewers(data)
       })
       .catch(() => alert('Try again, network error!'))
 
-    getRejetedReviewers()
+    getRejetedInterviewers()
       .then((data) => {
-        setRejectedReviewers(data)
+        setRejectedInterviewers(data)
       })
       .catch(() => alert('Try again, network error!'))
 
-    getUnresponsiveReviewers()
+    getUnresponsiveInterviewers()
       .then((data) => {
-        setUnresposiveReviewers(data)
+        setUnresposiveInterviewers(data)
       })
       .catch((e) => alert(JSON.stringify(e)))
   }, [])
@@ -57,26 +57,26 @@ function InviteReviewers() {
       let sheetName = readedData.SheetNames[0]
       let sheet = readedData.Sheets[sheetName]
 
-      // Get all reviewer details as array from worksheet
-      let reviewers = XLSX.utils.sheet_to_json(sheet, { header: 1 })
+      // Get all Interviewer details as array from worksheet
+      let interviewers = XLSX.utils.sheet_to_json(sheet, { header: 1 })
 
-      reviewers.forEach(async (reviewer: Array<string>, index) => {
+      interviewers.forEach(async (interviewer: Array<string>, index) => {
         if (!index) return // leave first row
-        if (!reviewer[0]) return
+        if (!interviewer[0]) return
 
-        // reviewer details
-        // reviewer[0] represents reviewer email
-        // reviewer[1] represents name of reviewer
-        const email = String(reviewer[0]).trim()
-        const name = reviewer[1]
+        // Interviewer details
+        // Interviewer[0] represents Interviewer email
+        // Interviewer[1] represents name of Interviewer
+        const email = String(interviewer[0]).trim()
+        const name = interviewer[1]
 
         setTimeout(() => {
-          addReviewerInvite(email, name)
+          addInterviewerInvite(email, name)
 
-          if (index === reviewers.length - 1) {
+          if (index === interviewers.length - 1) {
             setTimeout(() => {
               setLoading(false)
-              alert('Sent invites to all reviewers!')
+              alert('Sent invites to all Interviewers!')
             }, 1000)
           }
         }, 1000 * index)
@@ -90,14 +90,14 @@ function InviteReviewers() {
     if (loading) return
 
     setLoading(true)
-    unresposiveReviewers.forEach((reviewer, index) => {
+    unresposiveInterviewers.forEach((interviewer, index) => {
       setTimeout(() => {
-        sendRevReminder(reviewer.email, reviewer.reminder + 1 || 1)
+        sendIntReminder(interviewer.email, interviewer.reminder + 1 || 1)
 
-        if (index === unresposiveReviewers.length - 1) {
+        if (index === unresposiveInterviewers.length - 1) {
           setTimeout(() => {
             setLoading(false)
-            alert('Sent reminder to unresponsive reviewers!')
+            alert('Sent reminder to unresponsive Interviewers!')
           }, 1000)
         }
       }, 1000 * index)
@@ -108,7 +108,7 @@ function InviteReviewers() {
     <AdminLayout>
       <div className="py-10">
         <h1 className="text-sm sm:text-xl md:text-2xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
-          Invite Reviewers
+          Invite Interviewers
         </h1>
 
         <div className="flex justify-around mt-20 mb-10">
@@ -141,27 +141,27 @@ function InviteReviewers() {
 
         <div>
           <h2 className="text-sm sm:text-lg md:text-xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
-            Accepted Reviewers
+            Accepted Interviewers
           </h2>
 
           <div className="flex justify-center">
-            <UsersTable users={acceptedReviewers} />
+            <UsersTable users={acceptedInterviewers} />
           </div>
         </div>
 
         <div>
           <h2 className="text-sm sm:text-lg md:text-xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
-            Rejected Reviewers
+            Rejected Interviewers
           </h2>
 
           <div className="flex justify-center">
-            <UsersTable users={rejectedReviewers} />
+            <UsersTable users={rejectedInterviewers} />
           </div>
         </div>
 
         <div>
           <h2 className="text-sm sm:text-lg md:text-xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
-            Unresponsive Reviewers
+            Unresponsive Interviewers
           </h2>
 
           <div className="flex justify-center mb-10">
@@ -183,7 +183,7 @@ function InviteReviewers() {
           </div>
 
           <div className="flex justify-center">
-            <UsersTable users={unresposiveReviewers} />
+            <UsersTable users={unresposiveInterviewers} />
           </div>
         </div>
       </div>
@@ -191,4 +191,4 @@ function InviteReviewers() {
   )
 }
 
-export default requireAuth(InviteReviewers, Roles.ADMIN)
+export default requireAuth(InviteInterviewers, Roles.ADMIN)
