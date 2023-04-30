@@ -44,7 +44,7 @@ function InterviewerPortal() {
             Academic of Research Aptitude (30 Points)
           </p>
           <p className="my-5 text-lg text-blue-850">
-            We need to assess the candidate's knowledge about their field of
+            We need to assess the candidate&#39;s knowledge about their field of
             study or the field of research they are interested in or have done
             in the past. Specifically, please try to assess fundamental concepts
             of their subject which would be critical for them in their higher
@@ -62,8 +62,8 @@ function InterviewerPortal() {
           <p className="my-5 text-lg text-blue-850">
             After interviewing each candidate, each panelist is expected to
             record the points based on their own impartial and rational judgment
-            of the candidate's aforementioned abilities. To this end, use our
-            web-portal where you can easily enter and record the points. We
+            of the candidate&#39;s aforementioned abilities. To this end, use
+            our web-portal where you can easily enter and record the points. We
             recommend you to record the points on an excel sheet or a piece of
             paper, as a backup.
           </p>
