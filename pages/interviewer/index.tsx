@@ -1,8 +1,20 @@
+import { useState, useEffect } from 'react'
 import requireAuth from '../../components/requireAuth'
 import Roles from '../../constants/roles'
 import InterviewerLayout from '../../layouts/interviewer/interviewer-layout'
+import { InterviewerInstructionsType } from '../../types'
+import { getInterviewerInstructions } from '../api/instructions'
 
 function InterviewerPortal() {
+  const [instructions, setInstructions] = useState<InterviewerInstructionsType>(
+    {},
+  )
+
+  useEffect(() => {
+    getInterviewerInstructions()
+      .then((data) => setInstructions(data))
+      .catch(() => alert('Not able to fetch instructions, Try reloading!'))
+  }, [])
   return (
     <InterviewerLayout>
       <div>
@@ -16,7 +28,8 @@ function InterviewerPortal() {
             interviewed based on the following rubric:
           </p>
           <p className="my-5 text-lg font-bold italic">
-            Motivation for higher studies (30 Points)
+            Motivation for higher studies (
+            {instructions.HIGHER_STUDIES_MOTIVATION} Points)
           </p>
           <p className="my-5 text-lg text-blue-850">
             We encourage you to probe the students in detail about their plans.
@@ -30,7 +43,7 @@ function InterviewerPortal() {
             school.
           </p>
           <p className="my-5 text-lg font-bold italic">
-            Communication Skills (30 Points)
+            Communication Skills ({instructions.COMMUNICATION} Points)
           </p>
           <p className="my-5 text-lg text-blue-850">
             A candidate must have basic English language proficiency/fluency.
@@ -41,7 +54,8 @@ function InterviewerPortal() {
             rewarded.
           </p>
           <p className="my-5 text-lg font-bold italic">
-            Academic of Research Aptitude (30 Points)
+            Academic of Research Aptitude ({instructions.RESEARCH_APTITUDE}{' '}
+            Points)
           </p>
           <p className="my-5 text-lg text-blue-850">
             We need to assess the candidate&#39;s knowledge about their field of
@@ -51,7 +65,8 @@ function InterviewerPortal() {
             studies.
           </p>
           <p className="my-5 text-lg font-bold italic">
-            Motivation to Give Back (10 Points)
+            Motivation to Give Back ({instructions.MOTIVATION_TO_GO_BACK}{' '}
+            Points)
           </p>
           <p className="my-5 text-lg text-blue-850">
             The candidate should be motivated to give back to their community
