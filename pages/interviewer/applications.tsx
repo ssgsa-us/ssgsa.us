@@ -101,17 +101,17 @@ function InterviewerApplications() {
                       (Out of {instructions.HIGHER_STUDIES_MOTIVATION})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
-                      Communication
+                      Communication Skills
                       <br />
                       (Out of {instructions.COMMUNICATION})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
-                      Research Aptitude
+                      Academic or Research Aptitude
                       <br />
                       (Out of {instructions.RESEARCH_APTITUDE})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
-                      Motivation to Go Back
+                      Motivation to Give Back
                       <br />
                       (Out of {instructions.MOTIVATION_TO_GO_BACK})
                     </th>

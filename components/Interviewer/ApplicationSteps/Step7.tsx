@@ -116,7 +116,7 @@ const InterviewerStep7 = ({
 
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Higher Studies Motivation (Out of ${instructions.HIGHER_STUDIES_MOTIVATION})`}
+            name={`Motivation for Higher Studies (Out of ${instructions.HIGHER_STUDIES_MOTIVATION})`}
             value={higherStudiesMot}
             type="number"
             onChange={(e) => {
@@ -139,7 +139,7 @@ const InterviewerStep7 = ({
         </div>
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Communication (Out of ${instructions.COMMUNICATION})`}
+            name={`Communication Skills (Out of ${instructions.COMMUNICATION})`}
             value={communication}
             type="number"
             onChange={(e) => {
@@ -161,7 +161,7 @@ const InterviewerStep7 = ({
         </div>
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Research Aptitude (Out of ${instructions.RESEARCH_APTITUDE})`}
+            name={`Academic or Research Aptitude (Out of ${instructions.RESEARCH_APTITUDE})`}
             value={researchAptitude}
             type="number"
             onChange={(e) => {
@@ -183,7 +183,7 @@ const InterviewerStep7 = ({
         </div>
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Motivation To Go Back (Out of ${instructions.MOTIVATION_TO_GO_BACK})`}
+            name={`Motivation to Give Back (Out of ${instructions.MOTIVATION_TO_GO_BACK})`}
             value={motivationToGoBack}
             type="number"
             onChange={(e) => {
