@@ -106,7 +106,7 @@ function InterviewerApplications() {
                       (Out of {instructions.COMMUNICATION})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
-                      Academic of Research Aptitude
+                      Academic or Research Aptitude
                       <br />
                       (Out of {instructions.RESEARCH_APTITUDE})
                     </th>

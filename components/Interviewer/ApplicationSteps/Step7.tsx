@@ -161,7 +161,7 @@ const InterviewerStep7 = ({
         </div>
         <div className="md:w-1/2 text-blue-850 font-black">
           <TextInput
-            name={`Academic of Research Aptitude (Out of ${instructions.RESEARCH_APTITUDE})`}
+            name={`Academic or Research Aptitude (Out of ${instructions.RESEARCH_APTITUDE})`}
             value={researchAptitude}
             type="number"
             onChange={(e) => {

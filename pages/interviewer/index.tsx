@@ -54,7 +54,7 @@ function InterviewerPortal() {
             rewarded.
           </p>
           <p className="my-5 text-lg font-bold italic">
-            Academic of Research Aptitude ({instructions.RESEARCH_APTITUDE}{' '}
+            Academic or Research Aptitude ({instructions.RESEARCH_APTITUDE}{' '}
             Points)
           </p>
           <p className="my-5 text-lg text-blue-850">
