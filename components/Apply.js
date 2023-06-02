@@ -65,12 +65,12 @@ const Apply = () => {
           </button>
         </a>
         <a
-          href="/assets/PressRelease_SSGSA_2022_23.pdf"
+          href="/assets/PressRelease_SSGSA_2023_24.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
           <button className="px-2 py-2 mt-3 w-full bg-red-850 text-sm text-white text-center">
-            SSGSA results (2022-2023) announced
+            SSGSA results (2023-2024) announced
           </button>
         </a>
         <a

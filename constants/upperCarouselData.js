@@ -1,5 +1,14 @@
 export const CarouselData = [
   {
+    imgSrc: '/SSGSA_Result_2023_24.jpeg',
+    imgAlt: 'SSGSA 2023-24 Result Photo',
+    heading: 'Result of SSGSA for 2023-24',
+    width: 400,
+    height: 300,
+    content:
+      'The Sir Syed Education Society of North America proudly announces the selection of 25 exemplary students and alumni from AMU for the highly coveted Sir Syed Global Scholar Award (SSGSA) for the academic session 2023-24. The SSGSA program received an overwhelming number of exceptional applications this year from a diverse range of faculties including Arts, Commerce, Humanities, Law, Science, Medicine, Life Sciences, and Engineering & Technology. Each application underwent a rigorous evaluation process, carefully reviewed by three independent experts in the respective fields of the applicants followed by the final round of online interviews.',
+  },
+  {
     imgSrc: '/Scholars_Orientation_2022.png',
     imgAlt: 'Scholars Orientation 2022 Photo',
     heading: 'SSGSA Orientation Session 2022-23',
