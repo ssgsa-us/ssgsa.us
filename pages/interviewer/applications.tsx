@@ -8,6 +8,8 @@ import Roles from '../../constants/roles'
 import { useAuth } from '../../context/AuthUserContext'
 import InterviewerLayout from '../../layouts/interviewer/interviewer-layout'
 import { getInterviewerSetApplications } from '../api/getInterviewerSetApplications'
+import { getInterviewerInstructions } from '../api/instructions'
+import { InterviewerInstructionsType } from '../../types'
 
 type Applications = {
   [key: string]: {
@@ -23,7 +25,16 @@ function InterviewerApplications() {
     authUser.sets.length ? authUser.sets[0] : '',
   )
   const [pageReady, setPageReady] = useState<boolean>(false)
+  const [instructions, setInstructions] = useState<InterviewerInstructionsType>(
+    {},
+  )
   const allSets = authUser.sets
+
+  useEffect(() => {
+    getInterviewerInstructions()
+      .then((data) => setInstructions(data))
+      .catch(() => alert('Not able to fetch instructions, Try reloading!'))
+  }, [])
 
   useEffect(() => {
     if (selectedSet)
@@ -77,63 +88,37 @@ function InterviewerApplications() {
                       Phone Number
                     </th>
                     <th className="border border-blue-850 p-2" rowSpan={2}>
-                      Bachelor&apos;s Major/Branch
-                    </th>
-                    <th className="border border-blue-850 p-2" rowSpan={2}>
-                      Master&apos;s Major/Branch
-                    </th>
-                    <th className="border border-blue-850 p-2" rowSpan={2}>
                       View Completed Applications
                     </th>
                     <th className="border border-blue-850 p-2" colSpan={5}>
                       Interview Marks
                     </th>
-                    <th className="border border-blue-850 p-2" rowSpan={2}>
-                      Update Marks
-                    </th>
                   </tr>
                   <tr>
                     <th className="border border-blue-850 py-2 px-10">
-                      {process.env.NEXT_PUBLIC_INTERVIEW_MARKS_INDEX_A}
+                      Motivation for Higher Studies
                       <br />
-                      (Out of{' '}
-                      {process.env.NEXT_PUBLIC_INTERVIEW_INDEX_A_MAX_MARKS})
+                      (Out of {instructions.HIGHER_STUDIES_MOTIVATION})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
-                      {process.env.NEXT_PUBLIC_INTERVIEW_MARKS_INDEX_B}
+                      Communication Skills
                       <br />
-                      (Out of{' '}
-                      {process.env.NEXT_PUBLIC_INTERVIEW_INDEX_B_MAX_MARKS})
+                      (Out of {instructions.COMMUNICATION})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
-                      {process.env.NEXT_PUBLIC_INTERVIEW_MARKS_INDEX_C}
+                      Academic or Research Aptitude
                       <br />
-                      (Out of{' '}
-                      {process.env.NEXT_PUBLIC_INTERVIEW_INDEX_C_MAX_MARKS})
+                      (Out of {instructions.RESEARCH_APTITUDE})
                     </th>
                     <th className="border border-blue-850 py-2 px-10">
-                      {process.env.NEXT_PUBLIC_INTERVIEW_MARKS_INDEX_D}
+                      Motivation to Give Back
                       <br />
-                      (Out of{' '}
-                      {process.env.NEXT_PUBLIC_INTERVIEW_INDEX_D_MAX_MARKS})
+                      (Out of {instructions.MOTIVATION_TO_GO_BACK})
                     </th>
                     <th className="border border-blue-850 p-2">
                       Total
                       <br />
-                      (Out of{' '}
-                      {Number(
-                        process.env.NEXT_PUBLIC_INTERVIEW_INDEX_A_MAX_MARKS,
-                      ) +
-                        Number(
-                          process.env.NEXT_PUBLIC_INTERVIEW_INDEX_B_MAX_MARKS,
-                        ) +
-                        Number(
-                          process.env.NEXT_PUBLIC_INTERVIEW_INDEX_C_MAX_MARKS,
-                        ) +
-                        Number(
-                          process.env.NEXT_PUBLIC_INTERVIEW_INDEX_D_MAX_MARKS,
-                        )}
-                      )
+                      (Out of 100)
                     </th>
                   </tr>
                 </thead>

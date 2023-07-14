@@ -46,7 +46,7 @@ const UpperCarousel = () => {
             </div>
             <div className="mx-5 flex flex-col justify-center sm:py-10 sm:w-1/2 xl:w-2/3">
               <h2 className="text-2xl font-black">{data.heading}</h2>
-              <p className="mt-3">{data.content}</p>
+              <p className="mt-3 text-justify">{data.content}</p>
             </div>
           </div>
         )

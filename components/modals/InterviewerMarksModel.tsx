@@ -1,16 +1,22 @@
-type InterviewMarks = {
-  A: number
-  B: number
-  C: number
-  D: number
-  remark: string
-}
+import { useEffect, useState } from 'react'
+import { InterviewMarksType, InterviewerInstructionsType } from '../../types'
+import { getInterviewerInstructions } from '../../pages/api/instructions'
 
 type Props = {
-  interviewMarks: InterviewMarks
+  interviewMarks: InterviewMarksType[string]
 }
 
 export default function InterviewMarksModal({ interviewMarks }: Props) {
+  const [instructions, setInstructions] = useState<InterviewerInstructionsType>(
+    {},
+  )
+
+  useEffect(() => {
+    getInterviewerInstructions()
+      .then((data) => setInstructions(data))
+      .catch(() => alert('Not able to fetch instructions, Try reloading!'))
+  }, [])
+
   return (
     <div className="absolute top-0 left-0 z-50">
       <div className="hidden navgroup-box w-fit p-8">
@@ -25,46 +31,44 @@ export default function InterviewMarksModal({ interviewMarks }: Props) {
           <div className="px-5">
             <div className="flex justify-between space-x-5 my-5">
               <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                {process.env.NEXT_PUBLIC_INTERVIEW_MARKS_INDEX_A} (Out of{' '}
-                {process.env.NEXT_PUBLIC_INTERVIEW_INDEX_A_MAX_MARKS})
-              </p>
-              <p className="sm:text-lg font-bold">{interviewMarks.A}</p>
-            </div>
-            <div className="flex justify-between space-x-5 my-5">
-              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                {process.env.NEXT_PUBLIC_INTERVIEW_MARKS_INDEX_B} (Out of{' '}
-                {process.env.NEXT_PUBLIC_INTERVIEW_INDEX_B_MAX_MARKS})
-              </p>
-              <p className="sm:text-lg font-bold">{interviewMarks.B}</p>
-            </div>
-            <div className="flex justify-between space-x-5 my-5">
-              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                {process.env.NEXT_PUBLIC_INTERVIEW_MARKS_INDEX_C} (Out of{' '}
-                {process.env.NEXT_PUBLIC_INTERVIEW_INDEX_C_MAX_MARKS})
-              </p>
-              <p className="sm:text-lg font-bold">{interviewMarks.C}</p>
-            </div>
-            <div className="flex justify-between space-x-5 my-5">
-              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                {process.env.NEXT_PUBLIC_INTERVIEW_MARKS_INDEX_D} (Out of{' '}
-                {process.env.NEXT_PUBLIC_INTERVIEW_INDEX_D_MAX_MARKS})
-              </p>
-              <p className="sm:text-lg font-bold">{interviewMarks.D}</p>
-            </div>
-            <div className="flex justify-between space-x-5 my-5">
-              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
-                Total Marks (Out of{' '}
-                {Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_A_MAX_MARKS) +
-                  Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_B_MAX_MARKS) +
-                  Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_C_MAX_MARKS) +
-                  Number(process.env.NEXT_PUBLIC_INTERVIEW_INDEX_D_MAX_MARKS)}
-                )
+                Motivation for Higher Studies (Out of{' '}
+                {instructions.HIGHER_STUDIES_MOTIVATION})
               </p>
               <p className="sm:text-lg font-bold">
-                {interviewMarks.A +
-                  interviewMarks.B +
-                  interviewMarks.C +
-                  interviewMarks.D}
+                {interviewMarks.higherStudiesMotivation}
+              </p>
+            </div>
+            <div className="flex justify-between space-x-5 my-5">
+              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                Communication (Out of {instructions.COMMUNICATION})
+              </p>
+              <p className="sm:text-lg font-bold">
+                {interviewMarks.communication}
+              </p>
+            </div>
+            <div className="flex justify-between space-x-5 my-5">
+              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                Research Aptitude (Out of {instructions.RESEARCH_APTITUDE})
+              </p>
+              <p className="sm:text-lg font-bold">
+                {interviewMarks.researchAptitude}
+              </p>
+            </div>
+            <div className="flex justify-between space-x-5 my-5">
+              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                Motivation to Go Back (Out of{' '}
+                {instructions.MOTIVATION_TO_GO_BACK})
+              </p>
+              <p className="sm:text-lg font-bold">
+                {interviewMarks.motivationToGoBack}
+              </p>
+            </div>
+            <div className="flex justify-between space-x-5 my-5">
+              <p className="text-red-850 text-lg sm:text-xl font-extrabold">
+                Total Marks (Out of 100)
+              </p>
+              <p className="sm:text-lg font-bold">
+                {interviewMarks.totalMarks}
               </p>
             </div>
             <div className="flex items-center justify-between space-x-5 my-5">

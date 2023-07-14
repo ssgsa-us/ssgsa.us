@@ -86,7 +86,14 @@ const AdminStep7 = ({
                 name="Total Marks (out of 100)"
                 value={reviewMarks[reviewerId].totalMarks}
               />
-              <Field name="Remark" value={reviewMarks[reviewerId].remark} />
+              <Field
+                name="Remark"
+                value={
+                  !reviewMarks[reviewerId].remark
+                    ? 'No remark provided'
+                    : reviewMarks[reviewerId].remark
+                }
+              />
             </div>
           </div>
         ))}

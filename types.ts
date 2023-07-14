@@ -233,3 +233,35 @@ export type ReviewerInstructionsType = {
   STEP5_INSTRUCTION7?: string
   STEP6_INSTRUCTION?: string
 }
+
+export type InterviewMarksType = {
+  // key will be interviewer Id
+  [key: string]: {
+    formStatus: number // Form Status for specific interviewer
+    higherStudiesMotivation: number
+    communication: number
+    researchAptitude: number
+    motivationToGoBack: number
+    totalMarks: number
+    remark: string
+  }
+}
+
+export type InterviewerInstructionsType = {
+  HIGHER_STUDIES_MOTIVATION?: number
+  COMMUNICATION?: number
+  RESEARCH_APTITUDE?: number
+  MOTIVATION_TO_GO_BACK?: number
+  STEP1_INSTRUCTION?: string
+  STEP2_INSTRUCTION?: string
+  STEP3_INSTRUCTION?: string
+  STEP4_INSTRUCTION?: string
+  STEP5_INSTRUCTION?: string
+  STEP5_INSTRUCTION1?: string
+  STEP5_INSTRUCTION2?: string
+  STEP5_INSTRUCTION3?: string
+  STEP5_INSTRUCTION4?: string
+  STEP5_INSTRUCTION5?: string
+  STEP5_INSTRUCTION6?: string
+  STEP6_INSTRUCTION?: string
+}
