@@ -2,23 +2,48 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import EditMemberModal from '../../../components/Admin/Modals/Member/Edit'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
-import { MemberCategoryType } from '../../../types'
+import { MemberCategoryType, MemberType } from '../../../types'
+import { editMember } from '../../api/admin/constants/members'
 import { getMembers } from '../../api/constants'
 
+type MembersType = { [id: string]: MemberCategoryType }
+
 function MembersUpdateForm() {
-  const [membersList, setMembersList] = useState<Array<MemberCategoryType>>([])
+  const [membersList, setMembersList] = useState<MembersType>({})
+  const [selCategoryId, setSelCategoryId] = useState<string>(null)
+  const [selMemberInd, setSelMemberInd] = useState<number>(null)
+  const [selMember, setSelMember] = useState<MemberType>(null)
+  const [changeOccured, setChangeOccured] = useState<boolean>(null)
   const [error, setError] = useState<string>('')
 
   useEffect(() => {
     getMembers()
-      .then((data) =>
-        setMembersList(Object.values(data).sort((a, b) => a.index - b.index)),
-      )
+      .then((data) => setMembersList(data))
       .catch(() => setError('Not able to get members list, Try again!'))
-  }, [])
+  }, [changeOccured])
+
+  const updateMember = () => {
+    const catMembers = membersList[selCategoryId].members
+    catMembers[selMemberInd] = selMember
+
+    editMember(selCategoryId, catMembers)
+      .then(() => {
+        alert('Updated Member Details')
+        setChangeOccured(!changeOccured)
+      })
+      .catch(() => setError('Not able to update member details, Try again!'))
+      .finally(() => closeEditModal())
+  }
+
+  const closeEditModal = () => {
+    setSelCategoryId(null)
+    setSelMemberInd(null)
+    setSelMember(null)
+  }
 
   return (
     <AdminLayout>
@@ -26,10 +51,10 @@ function MembersUpdateForm() {
         Members
       </h1>
       {!error ? (
-        membersList.map((doc, ind) => (
-          <div className="mx-8 my-8" key={ind}>
+        Object.keys(membersList).map((key) => (
+          <div className="mx-8 my-8" key={key}>
             <h3 className="text-red-850 font-extrabold text-center text-xl lg:text-2xl">
-              {doc.category}
+              {membersList[key].category}
             </h3>
             <div className="flex justify-center mt-4 flex-wrap">
               <table className="border-separate p-2">
@@ -46,7 +71,7 @@ function MembersUpdateForm() {
                   </tr>
                 </thead>
                 <tbody>
-                  {doc.members.map((member, index) => (
+                  {membersList[key].members.map((member, index) => (
                     <tr>
                       <td className="border border-blue-850 p-2">
                         {index + 1}
@@ -79,7 +104,16 @@ function MembersUpdateForm() {
                       </td>
                       <td className="border border-blue-850 p-2">
                         <div className="flex justify-center items-center">
-                          <FontAwesomeIcon icon={faEdit} width={20} />
+                          <FontAwesomeIcon
+                            className="cursor-pointer"
+                            icon={faEdit}
+                            width={20}
+                            onClick={() => {
+                              setSelCategoryId(key)
+                              setSelMemberInd(index)
+                              setSelMember(member)
+                            }}
+                          />
                         </div>
                       </td>
                     </tr>
@@ -96,6 +130,12 @@ function MembersUpdateForm() {
           </h3>
         </div>
       )}
+      <EditMemberModal
+        member={selMember}
+        setMember={setSelMember}
+        updateMember={updateMember}
+        closeModal={closeEditModal}
+      />
     </AdminLayout>
   )
 }
