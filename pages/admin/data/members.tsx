@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
-import { MemberType } from '../../../types'
+import { MemberCategoryType } from '../../../types'
 import { getMembers } from '../../api/constants'
 
 function MembersUpdateForm() {
-  const [membersList, setMembersList] = useState<Array<MemberType>>([])
+  const [membersList, setMembersList] = useState<Array<MemberCategoryType>>([])
   const [error, setError] = useState<string>('')
 
   useEffect(() => {

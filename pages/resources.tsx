@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import MainLayout from '../layouts/Main'
-import { ResourceType } from '../types'
+import { ResourceCategoryType } from '../types'
 import { getResources } from './api/constants'
 
 export default function Home() {
-  const [resources, setResources] = useState<Array<ResourceType>>([])
+  const [resources, setResources] = useState<Array<ResourceCategoryType>>([])
   const [error, setError] = useState<string>('')
 
   useEffect(() => {

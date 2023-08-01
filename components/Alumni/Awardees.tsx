@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { getAwardees } from '../../pages/api/constants'
-import { AwardeeType } from '../../types'
+import { AwardeeSessionType } from '../../types'
 
 const Awardees = () => {
   const [currentSession, setCurrentSession] = useState('2007-08')
-  const [awardees, setAwardees] = useState<Array<AwardeeType>>([])
+  const [awardees, setAwardees] = useState<Array<AwardeeSessionType>>([])
   const [error, setError] = useState<string>('')
 
   useEffect(() => {

@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { getLeadershipHistory } from '../../pages/api/constants'
-import { LeaderType } from '../../types'
+import { LeaderCategoryType } from '../../types'
 
 const Leadership = () => {
-  const [leaders, setLeaders] = useState<Array<LeaderType>>([])
+  const [leaders, setLeaders] = useState<Array<LeaderCategoryType>>([])
   const [error, setError] = useState<string>('')
 
   useEffect(() => {
