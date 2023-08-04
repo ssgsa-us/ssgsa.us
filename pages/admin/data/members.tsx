@@ -97,7 +97,7 @@ function MembersUpdateForm() {
                 </thead>
                 <tbody>
                   {membersList[key].members.map((member, index) => (
-                    <tr>
+                    <tr key={key}>
                       <td className="border border-blue-850 p-2">
                         {index + 1}
                       </td>
