@@ -52,7 +52,8 @@ function MembersUpdateForm() {
   }
 
   const deleteMember = (catId: string, index: number) => {
-    const catMembers = membersList[catId].members.splice(index, 1)
+    const catMembers = membersList[catId].members
+    catMembers.splice(index, 1)
 
     updateMembers(catId, catMembers)
       .then(() => {
