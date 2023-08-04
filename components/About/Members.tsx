@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { getMembers } from '../../pages/api/constants'
-import { MemberType } from '../../types'
+import { MemberCategoryType } from '../../types'
 
 const Members = () => {
-  const [members, setMembers] = useState<Array<MemberType>>([])
+  const [members, setMembers] = useState<Array<MemberCategoryType>>([])
   const [error, setError] = useState<string>('')
 
   useEffect(() => {

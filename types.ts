@@ -89,38 +89,50 @@ export type AnswerType = {
 }
 
 export type AwardeeType = {
-  awardees: Array<{
-    field: string
-    name: string
-  }>
+  field: string
+  name: string
+}
+
+export type AwardeeSessionType = {
+  awardees: Array<AwardeeType>
   index: number
   session: string
 }
 
+export type AwardeesType = { [id: string]: AwardeeSessionType }
+
 export type LeaderType = {
-  category: string
-  index: number
-  members: Array<{
-    imageUrl: string
-    name: string
-    place: string
-    scholar: string
-    term: string
-  }>
+  imageUrl: string
+  name: string
+  place: string
+  scholar: string
+  term: string
 }
 
-export type MemberType = {
+export type LeaderCategoryType = {
   category: string
   index: number
-  members: Array<{
-    imageUrl: string
-    name: string
-    place: string
-    position: string
-    scholar: string
-    university: string
-  }>
+  members: Array<LeaderType>
 }
+
+export type LeadersType = { [id: string]: LeaderCategoryType }
+
+export type MemberType = {
+  imageUrl: string
+  name: string
+  place: string
+  position: string
+  scholar: string
+  university: string
+}
+
+export type MemberCategoryType = {
+  category: string
+  index: number
+  members: Array<MemberType>
+}
+
+export type MembersType = { [id: string]: MemberCategoryType }
 
 export type MonthStoryType = {
   index: number
@@ -130,21 +142,29 @@ export type MonthStoryType = {
   title: string
 }
 
+export type MonthStoriesType = { [id: string]: MonthStoryType }
+
 export type NewsletterType = {
   index: number
   link: string
   title: string
 }
 
+export type NewslettersType = { [id: string]: NewsletterType }
+
 export type ResourceType = {
+  link: string
+  text: string
+  title: string
+}
+
+export type ResourceCategoryType = {
   category: string
   index: number
-  resources: Array<{
-    link: string
-    text: string
-    title: string
-  }>
+  resources: Array<ResourceType>
 }
+
+export type ResourcesType = { [id: string]: ResourceCategoryType }
 
 export type ScholarType = {
   imageUrl: string
@@ -152,14 +172,20 @@ export type ScholarType = {
   words: string
 }
 
-export type SuccessfulScholarType = {
+export type ScholarsType = { [id: string]: ScholarType }
+
+export type SuccScholarType = {
+  field: string
+  name: string
+}
+
+export type SuccScholarSessionType = {
   index: number
-  scholars: Array<{
-    field: string
-    name: string
-  }>
+  scholars: Array<SuccScholarType>
   session: number
 }
+
+export type SuccessfulScholarsType = { [id: string]: SuccScholarSessionType }
 
 export type TestimonialType = {
   imageUrl: string
@@ -167,6 +193,8 @@ export type TestimonialType = {
   position: string
   words: string
 }
+
+export type TestimonialsType = { [id: string]: TestimonialType }
 
 export type ApplicationDatesType = {
   session?: string
