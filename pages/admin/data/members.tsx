@@ -7,8 +7,13 @@ import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import { MemberCategoryType, MemberType } from '../../../types'
-import { updateMembers } from '../../api/admin/constants/members'
+import {
+  deleteMembersCategory,
+  updateMembers,
+  updateMembersCategory,
+} from '../../api/admin/constants/members'
 import { getMembers } from '../../api/constants'
+import UpdateCategoryModal from '../../../components/Admin/Modals/Members/UpdateCategory'
 
 type MembersType = { [id: string]: MemberCategoryType }
 
@@ -17,6 +22,7 @@ function MembersUpdateForm() {
   const [selCategoryId, setSelCategoryId] = useState<string>(null)
   const [selMemberInd, setSelMemberInd] = useState<number>(null)
   const [member, setMember] = useState<MemberType>(null)
+  const [categoryTitle, setCategoryTitle] = useState<string>(null)
   const [changeOccured, setChangeOccured] = useState<boolean>(null)
   const [error, setError] = useState<string>('')
 
@@ -63,10 +69,57 @@ function MembersUpdateForm() {
       .catch(() => setError('Not able to remove member, Try again!'))
   }
 
+  const editCategoryDetails = () => {
+    const category: MemberCategoryType = {
+      category: categoryTitle,
+      ...membersList[selCategoryId],
+    }
+
+    updateMembersCategory(selCategoryId, category)
+      .then(() => {
+        alert('Updated Category Title')
+        setChangeOccured(!changeOccured)
+      })
+      .catch(() => setError('Not able to update category title, Try again!'))
+      .finally(() => closeModal())
+  }
+
+  const addNewCategory = () => {
+    const nextCatInd = Object.keys(membersList).length + 1
+    const category: MemberCategoryType = {
+      category: categoryTitle,
+      index: nextCatInd,
+      members: [],
+    }
+
+    updateMembersCategory(String(nextCatInd), category)
+      .then(() => {
+        alert('New Category Created')
+        setChangeOccured(!changeOccured)
+      })
+      .catch(() => setError('Not able to create new category, Try again!'))
+      .finally(() => closeModal())
+  }
+
+  const deleteCategory = (catId: string) => {
+    deleteMembersCategory(catId)
+      .then(() => {
+        alert(`${membersList[catId].category} Category Deleted`)
+        setChangeOccured(!changeOccured)
+      })
+      .catch(() =>
+        setError(`
+        Not able to delete category ${membersList[catId].category}, Try again!
+      `),
+      )
+      .finally(() => closeModal())
+  }
+
   const closeModal = () => {
     setSelCategoryId(null)
     setSelMemberInd(null)
     setMember(null)
+    setCategoryTitle(null)
   }
 
   return (
@@ -77,9 +130,33 @@ function MembersUpdateForm() {
       {!error ? (
         Object.keys(membersList).map((key) => (
           <div className="mx-8 my-8" key={key}>
-            <h3 className="text-red-850 font-extrabold text-center text-xl lg:text-2xl">
-              {membersList[key].category}
-            </h3>
+            <div className="flex justify-center">
+              <h3 className="text-red-850 font-extrabold text-center text-xl lg:text-2xl">
+                {membersList[key].category}
+              </h3>
+              <FontAwesomeIcon
+                className="cursor-pointer ml-5"
+                icon={faEdit}
+                width={20}
+                onClick={() => {
+                  setSelCategoryId(key)
+                  setCategoryTitle(membersList[key].category)
+                }}
+              />
+              <FontAwesomeIcon
+                className="cursor-pointer ml-5"
+                icon={faTrash}
+                width={20}
+                onClick={() => {
+                  if (
+                    confirm(
+                      `Are you sure, you want to remove this category "${membersList[key].category}"`,
+                    ) == true
+                  )
+                    deleteCategory(key)
+                }}
+              />
+            </div>
             <div className="flex justify-center mt-4 flex-wrap">
               <table className="border-separate p-2">
                 <thead>
@@ -167,9 +244,9 @@ function MembersUpdateForm() {
                 </tbody>
               </table>
             </div>
-            <div className="flex justify-center mt-4 flex-wrap">
+            <div className="flex justify-center my-5 flex-wrap">
               <button
-                className="text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg"
+                className="text-white text-base md:text-lg bg-red-850 p-2 rounded-lg"
                 onClick={() => {
                   setSelCategoryId(key)
                   setMember({
@@ -194,16 +271,31 @@ function MembersUpdateForm() {
           </h3>
         </div>
       )}
+
+      <div className="flex justify-center my-10 flex-wrap">
+        <button
+          className="text-white text-base md:text-lg bg-red-850 p-2 rounded-lg"
+          onClick={() => setCategoryTitle('')}
+        >
+          Add New Category
+        </button>
+      </div>
+
       <UpdateMemberModal
-        title={
-          !member || selMemberInd === null
-            ? 'Add New Member'
-            : 'Edit Member Details'
-        }
+        title={selMemberInd === null ? 'Add New Member' : 'Edit Member Details'}
         member={member}
         setMember={setMember}
-        updateMember={
-          !member || selMemberInd === null ? addNewMember : editMemberDetails
+        updateMember={selMemberInd === null ? addNewMember : editMemberDetails}
+        closeModal={closeModal}
+      />
+      <UpdateCategoryModal
+        title={
+          selCategoryId === null ? 'Add New Category' : 'Edit Category Title'
+        }
+        categoryTitle={categoryTitle}
+        setCategoryTitle={setCategoryTitle}
+        updateCategory={
+          selCategoryId === null ? addNewCategory : editCategoryDetails
         }
         closeModal={closeModal}
       />

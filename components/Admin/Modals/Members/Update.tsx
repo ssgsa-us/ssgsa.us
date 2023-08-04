@@ -121,7 +121,7 @@ export default function UpdateMemberModal({
               </div>
               <div className="flex justify-center my-5">
                 <button
-                  className={`text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg`}
+                  className="text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg"
                   onClick={!member.name ? null : updateMember}
                   disabled={!member.name}
                 >
