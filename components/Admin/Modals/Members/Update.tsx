@@ -4,13 +4,15 @@ import { Dispatch, SetStateAction } from 'react'
 import { MemberType } from '../../../../types'
 
 type Props = {
+  title: string
   member: MemberType
   setMember: Dispatch<SetStateAction<MemberType>>
   updateMember: () => void
   closeModal: () => void
 }
 
-export default function EditMemberModal({
+export default function UpdateMemberModal({
+  title,
   member,
   setMember,
   updateMember,
@@ -31,7 +33,7 @@ export default function EditMemberModal({
             {/*header*/}
             <div className="flex items-center border-b border-solid border-blue-850 rounded-t p-5">
               <h3 className="text-2xl text-blue-850 text-center w-11/12 font-bold">
-                Edit Member Details
+                {title}
               </h3>
               <div className="w-1/12">
                 <FontAwesomeIcon
@@ -47,6 +49,7 @@ export default function EditMemberModal({
               <div className="flex items-center my-5">
                 <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5">
                   Name
+                  <span className="text-red-850 font-black">*</span>
                 </p>
                 <input
                   name="name"
@@ -118,8 +121,9 @@ export default function EditMemberModal({
               </div>
               <div className="flex justify-center my-5">
                 <button
-                  className="text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg"
-                  onClick={updateMember}
+                  className={`text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg`}
+                  onClick={!member.name ? null : updateMember}
+                  disabled={!member.name}
                 >
                   Update
                 </button>
