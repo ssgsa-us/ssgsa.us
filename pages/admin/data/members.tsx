@@ -1,4 +1,4 @@
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -7,7 +7,7 @@ import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import { MemberCategoryType, MemberType } from '../../../types'
-import { editMember } from '../../api/admin/constants/members'
+import { updateMembers } from '../../api/admin/constants/members'
 import { getMembers } from '../../api/constants'
 
 type MembersType = { [id: string]: MemberCategoryType }
@@ -30,7 +30,7 @@ function MembersUpdateForm() {
     const catMembers = membersList[selCategoryId].members
     catMembers[selMemberInd] = member
 
-    editMember(selCategoryId, catMembers)
+    updateMembers(selCategoryId, catMembers)
       .then(() => {
         alert('Updated Member Details')
         setChangeOccured(!changeOccured)
@@ -42,13 +42,24 @@ function MembersUpdateForm() {
   const addNewMember = () => {
     const catMembers = [...membersList[selCategoryId].members, member]
 
-    editMember(selCategoryId, catMembers)
+    updateMembers(selCategoryId, catMembers)
       .then(() => {
         alert('New Member Created')
         setChangeOccured(!changeOccured)
       })
       .catch(() => setError('Not able to create new member, Try again!'))
       .finally(() => closeModal())
+  }
+
+  const deleteMember = (catId: string, index: number) => {
+    const catMembers = membersList[catId].members.splice(index, 1)
+
+    updateMembers(catId, catMembers)
+      .then(() => {
+        alert('Member Removed')
+        setChangeOccured(!changeOccured)
+      })
+      .catch(() => setError('Not able to remove member, Try again!'))
   }
 
   const closeModal = () => {
@@ -80,6 +91,7 @@ function MembersUpdateForm() {
                     <th className="border border-blue-850 p-2">Place</th>
                     <th className="border border-blue-850 p-2">Image</th>
                     <th className="border border-blue-850 p-2">Edit</th>
+                    <th className="border border-blue-850 p-2">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -105,13 +117,17 @@ function MembersUpdateForm() {
                       </td>
                       <td className="border border-blue-850 p-2">
                         <div className="flex justify-center items-center">
-                          <Image
-                            src={member.imageUrl}
-                            alt={member.name}
-                            width={50}
-                            height={50}
-                            className="rounded-full"
-                          />
+                          {!member.imageUrl ? (
+                            '-'
+                          ) : (
+                            <Image
+                              src={member.imageUrl}
+                              alt={member.name}
+                              width={50}
+                              height={50}
+                              className="rounded-full"
+                            />
+                          )}
                         </div>
                       </td>
                       <td className="border border-blue-850 p-2">
@@ -124,6 +140,23 @@ function MembersUpdateForm() {
                               setSelCategoryId(key)
                               setSelMemberInd(index)
                               setMember(member)
+                            }}
+                          />
+                        </div>
+                      </td>
+                      <td className="border border-blue-850 p-2">
+                        <div className="flex justify-center items-center">
+                          <FontAwesomeIcon
+                            className="cursor-pointer"
+                            icon={faTrash}
+                            width={20}
+                            onClick={() => {
+                              if (
+                                confirm(
+                                  `Are you sure, you want to remove this member "${member.name}"`,
+                                ) == true
+                              )
+                                deleteMember(key, index)
                             }}
                           />
                         </div>
