@@ -30,7 +30,7 @@ const Members = () => {
               {doc.members.map((member, index) => (
                 <div
                   className="flex flex-col items-center text-center m-2 p-2 transform duration-200 hover:scale-110 cursor-pointer"
-                  style={{ maxWidth: 220 }}
+                  style={{ maxWidth: 230 }}
                   key={ind * 10 + index}
                 >
                   <Image
