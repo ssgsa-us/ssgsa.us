@@ -67,8 +67,8 @@ export default function UpdateConstantModal({
             </div>
             {/*body*/}
             <div className="px-5">
-              {fields.map((field: FieldType) => (
-                <div className="flex items-center my-5">
+              {fields.map((field: FieldType, index: number) => (
+                <div className="flex items-center my-5" key={index}>
                   <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5">
                     {field.title}
                     {field.required ? (
