@@ -4,20 +4,20 @@ import { Dispatch, SetStateAction } from 'react'
 
 type Props = {
   title: string
-  categoryTitle: string
-  setCategoryTitle: Dispatch<SetStateAction<string>>
-  updateCategory: () => void
+  groupTitle: string
+  setGroupTitle: Dispatch<SetStateAction<string>>
+  updateGroup: () => void
   closeModal: () => void
 }
 
-export default function UpdateCategoryModal({
+export default function UpdateGroupModal({
   title,
-  categoryTitle,
-  setCategoryTitle,
-  updateCategory,
+  groupTitle,
+  setGroupTitle,
+  updateGroup,
   closeModal,
 }: Props) {
-  if (categoryTitle === null) return null
+  if (groupTitle === null) return null
   return (
     <div className="fixed top-0 left-0 w-full h-full z-50">
       <div className="flex justify-center items-center w-full h-full">
@@ -41,27 +41,28 @@ export default function UpdateCategoryModal({
             <div className="px-5">
               <div className="flex items-center my-5">
                 <p className="text-red-850 text-lg sm:text-xl font-extrabold w-2/5">
-                  Category Title
+                  Title Name
                   <span className="text-red-850 font-black">*</span>
                 </p>
                 <input
                   name="name"
                   type="text"
-                  value={categoryTitle}
-                  onChange={(e) => setCategoryTitle(e.target.value)}
+                  value={groupTitle}
+                  onChange={(e) => setGroupTitle(e.target.value)}
                   className="border-2 border-gray-300 w-3/5 rounded-xl p-2"
                 />
               </div>
               <div className="flex justify-center my-5">
                 <p className="text-blue-850 text-sm sm:text-base font-extrabold">
-                  Members can be added/updated separately
+                  Constants can be added/updated separately under this group
                 </p>
               </div>
               <div className="flex justify-center my-5">
                 <button
                   className="text-white text-base md:text-lg bg-red-850 mb-4 sm:ml-4 sm:mb-0 py-2 px-2 rounded-lg"
-                  onClick={!categoryTitle ? null : updateCategory}
-                  disabled={!categoryTitle}
+                  onClick={() =>
+                    !groupTitle ? alert('Title is required') : updateGroup()
+                  }
                 >
                   Update
                 </button>

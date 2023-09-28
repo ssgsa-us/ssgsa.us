@@ -2,20 +2,18 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import UpdateMemberModal from '../../../components/Admin/Modals/Members/Update'
+import UpdateConstantModal from '../../../components/Admin/Modals/UpdateConstant'
+import UpdateGroupModal from '../../../components/Admin/Modals/UpdateGroup'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
-import { MemberCategoryType, MemberType } from '../../../types'
+import { MemberCategoryType, MemberType, MembersType } from '../../../types'
 import {
   deleteMembersCategory,
   updateMembers,
   updateMembersCategory,
 } from '../../api/admin/constants/members'
 import { getMembers } from '../../api/constants'
-import UpdateCategoryModal from '../../../components/Admin/Modals/Members/UpdateCategory'
-
-type MembersType = { [id: string]: MemberCategoryType }
 
 function MembersUpdateForm() {
   const [membersList, setMembersList] = useState<MembersType>({})
@@ -71,8 +69,8 @@ function MembersUpdateForm() {
 
   const editCategoryDetails = () => {
     const category: MemberCategoryType = {
-      category: categoryTitle,
       ...membersList[selCategoryId],
+      category: categoryTitle,
     }
 
     updateMembersCategory(selCategoryId, category)
@@ -281,20 +279,30 @@ function MembersUpdateForm() {
         </button>
       </div>
 
-      <UpdateMemberModal
+      <UpdateConstantModal
         title={selMemberInd === null ? 'Add New Member' : 'Edit Member Details'}
-        member={member}
-        setMember={setMember}
-        updateMember={selMemberInd === null ? addNewMember : editMemberDetails}
+        fields={[
+          { name: 'name', title: 'Name', required: true },
+          { name: 'scholar', title: 'Scholar', required: false },
+          { name: 'position', title: 'Position', required: false },
+          { name: 'university', title: 'University', required: false },
+          { name: 'place', title: 'Place', required: false },
+          { name: 'imageUrl', title: 'Image', required: false },
+        ]}
+        constant={member}
+        setConstant={setMember}
+        updateConstant={
+          selMemberInd === null ? addNewMember : editMemberDetails
+        }
         closeModal={closeModal}
       />
-      <UpdateCategoryModal
+      <UpdateGroupModal
         title={
           selCategoryId === null ? 'Add New Category' : 'Edit Category Title'
         }
-        categoryTitle={categoryTitle}
-        setCategoryTitle={setCategoryTitle}
-        updateCategory={
+        groupTitle={categoryTitle}
+        setGroupTitle={setCategoryTitle}
+        updateGroup={
           selCategoryId === null ? addNewCategory : editCategoryDetails
         }
         closeModal={closeModal}
