@@ -1,6 +1,6 @@
 import path from 'path'
-import { AnswerType } from '../../types'
-import { firestore } from '../../firebase'
+import { AnswerType } from '../../../types'
+import { firestore } from '../../../firebase'
 
 export const updateApplicationData = (
   userId: string,

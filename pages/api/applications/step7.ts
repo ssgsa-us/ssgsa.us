@@ -1,6 +1,6 @@
 import path from 'path'
-import { firestore } from '../../firebase'
-import { ExtraCurricularsType } from '../../types'
+import { firestore } from '../../../firebase'
+import { ExtraCurricularsType } from '../../../types'
 
 export const updateApplicationData = (
   userId: string,
