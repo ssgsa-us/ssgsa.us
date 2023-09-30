@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
 import { useAuth } from '../../context/AuthUserContext'
-import { updateApplicationData } from '../../pages/api/step3'
+import { updateApplicationData } from '../../pages/api/applications/step3'
 import { ResearchExperiencesType } from '../../types'
 import CheckBoxInput from './Checkboxes'
 import ProceedButtons from './ProceedButtons'

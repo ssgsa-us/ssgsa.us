@@ -2,7 +2,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../context/AuthUserContext'
-import { uploadDocument } from '../../pages/api/uploadDocument'
+import { uploadDocument } from '../../pages/api/applications/uploadDocument'
 import '@fortawesome/fontawesome-svg-core/styles.css' // import for spin
 
 type Props = {

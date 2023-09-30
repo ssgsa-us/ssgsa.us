@@ -6,7 +6,7 @@ import {
   uploadBytesResumable,
   UploadTaskSnapshot,
 } from 'firebase/storage'
-import { storage } from '../../firebase'
+import { storage } from '../../../firebase'
 
 export const uploadDocument = async (
   userId: string,

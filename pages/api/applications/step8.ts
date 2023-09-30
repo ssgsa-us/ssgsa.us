@@ -1,14 +1,14 @@
 import path from 'path'
-import { ResearchExperiencesType } from '../../types'
-import { firestore } from '../../firebase'
+import { AnswerType } from '../../../types'
+import { firestore } from '../../../firebase'
 
 export const updateApplicationData = (
   userId: string,
-  researchExperiences: ResearchExperiencesType,
+  SOPAnswers: AnswerType,
   formStatus: number,
 ) => {
   return firestore.doc(path.join('applications_data', userId)).update({
-    research_experience: researchExperiences,
+    sop_answers: SOPAnswers,
     form_status: formStatus,
   })
 }

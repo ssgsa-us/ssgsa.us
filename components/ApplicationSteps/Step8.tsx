@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ProceedButtons from './ProceedButtons'
 import { useAuth } from '../../context/AuthUserContext'
 import { AnswerType } from '../../types'
-import { updateApplicationData } from '../../pages/api/step8'
+import { updateApplicationData } from '../../pages/api/applications/step8'
 import { ApplicationData } from '../../classes/application_data'
 
 type Props = {

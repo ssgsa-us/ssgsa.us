@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
 import { useAuth } from '../../context/AuthUserContext'
-import { updateApplicationData } from '../../pages/api/step9'
+import { updateApplicationData } from '../../pages/api/applications/step9'
 import ProceedButtons from './ProceedButtons'
 import Textarea from './Textarea'
 

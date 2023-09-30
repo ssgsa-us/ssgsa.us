@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
 import { ApplicationData } from '../../../classes/application_data'
-import { updateApplicationStatus } from '../../../pages/api/updateApplicationStatus'
+import { updateApplicationStatus } from '../../../pages/api/applications/updateApplicationStatus'
 import { updateReviewSet } from '../../../pages/api/updateReviewSet'
 import Step9 from '../../ReviewApplicationSteps/Step9'
 import SetDropdown from '../SetDropdown'
