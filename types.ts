@@ -182,7 +182,7 @@ export type SuccScholarType = {
 export type SuccScholarSessionType = {
   index: number
   scholars: Array<SuccScholarType>
-  session: number
+  session: string
 }
 
 export type SuccessfulScholarsType = { [id: string]: SuccScholarSessionType }

@@ -3,7 +3,7 @@ import { getSuccessfulScholarsList } from '../../pages/api/constants'
 import { SuccScholarSessionType } from '../../types'
 
 const SuccessfulScholars = () => {
-  const [currentSession, setCurrentSession] = useState<number>(2007)
+  const [currentSession, setCurrentSession] = useState<string>('2007')
   const [scholars, setScholars] = useState<Array<SuccScholarSessionType>>([])
   const [error, setError] = useState<string>('')
 
