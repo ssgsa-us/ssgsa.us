@@ -4,7 +4,7 @@ import { AdminPortalData } from '../../classes/admin_portal_data'
 import { ApplicationData } from '../../classes/application_data'
 import { User } from '../../classes/user'
 import { getUserDetailsById } from '../../pages/api/getUserDetails'
-import { updateApplicationStatus } from '../../pages/api/updateApplicationStatus'
+import { updateApplicationStatus } from '../../pages/api/applications/updateApplicationStatus'
 import { updateInterviewSet } from '../../pages/api/updateInterviewSet'
 import { updateReviewSet } from '../../pages/api/updateReviewSet'
 import {

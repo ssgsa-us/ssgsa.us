@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
 import { useAuth } from '../../context/AuthUserContext'
-import { updateApplicationData } from '../../pages/api/step10'
+import { updateApplicationData } from '../../pages/api/applications/step10'
 import ReviewApplication from './ReviewApplication'
 import TextInput from './TextInput'
 

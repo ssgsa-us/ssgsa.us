@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { ApplicationData } from '../../classes/application_data'
 import { useAuth } from '../../context/AuthUserContext'
-import { updateApplicationData } from '../../pages/api/step6'
+import { updateApplicationData } from '../../pages/api/applications/step6'
 import { CurricularActivitiesType } from '../../types'
 import FileUploadComponent from './FileUpload'
 import ProceedButtons from './ProceedButtons'

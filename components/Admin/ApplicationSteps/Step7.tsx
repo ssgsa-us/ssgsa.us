@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AdminPortalData } from '../../../classes/admin_portal_data'
-import { updateApplicationStatus } from '../../../pages/api/updateApplicationStatus'
+import { updateApplicationStatus } from '../../../pages/api/applications/updateApplicationStatus'
 import {
   ReviewMarksType,
   ReviewerInstructionsType,
