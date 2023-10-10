@@ -13,7 +13,7 @@ const Donate = () => {
         {/* //make div inside of div which should contain form below it */}
         <div className="justify-center bg-grey-850 rounded-lg shadow-lg w-96">
           <div className="flex justify-center">
-            <p className="text-black text-sm font-black py-2 px-6">
+            <p className="text-black text-md font-black py-2 px-6">
               Our Contribution towards the world around us
             </p>
           </div>
@@ -23,8 +23,8 @@ const Donate = () => {
               contribute to the betterment of the world around us."
             </p>
           </div>
-          <div className="flex justify-center flex-col items-center">
-            <p className="text-red-600 text-sm font-black py-2 px-6">
+          <div className="flex justify-center flex-col items-right">
+            <p className="text-red-600 text-right text-sm font-black py-2 px-6">
               -Sir Syed Ahmed Khan
             </p>
             <hr className="border-t-4 border-blue-800 my-4 py-2 w-full"></hr>
@@ -159,7 +159,7 @@ const Donate = () => {
               </div>
               <div className="flex justify-center">
                 <p className="text-red-600 text-sm font-bold py-2 px-6">
-                  Pay with:{' '}
+                  Kindly Donate with:{' '}
                 </p>
               </div>
               <div className="flex justify-center">
@@ -191,7 +191,7 @@ const Donate = () => {
                 </button>
               </div>
 
-              <div className="flex justify mu-2">
+              <div className="flex justify mt-4">
                 <p className="text-black text-sm font-bold py-2 px-0 text-justify">
                   By supporting students, you are becoming an active participant
                   in building their careers. All donations and contributions
@@ -214,8 +214,15 @@ const Donate = () => {
             >
               &times;
             </button>
-            <p className="mb-4">Username: SSGSA</p>
-            <p>Last 4 digits to verify (if needed): 6725</p>
+            <p className="text-black text-center text-sm font-black py-2 px-6">
+              Kindly use this Username for donation
+            </p>
+            <p className="mb-4 text-blue-800 font-bold text-center">
+              Username: SSGSA
+            </p>
+            <p className="text-black text-sm font-black py-2 px-6">
+              Please use these 4-digits to verify (if needed): 6725
+            </p>
           </div>
         </div>
       )}
@@ -229,7 +236,12 @@ const Donate = () => {
             >
               &times;
             </button>
-            <p>Username: finance.ssgsa@gmail.com</p>
+            <p className="text-black text-sm font-black py-2 px-6 ">
+              Kindly use this Username for donation
+            </p>
+            <p className="mb-4 text-blue-800 font-bold text-center">
+              finance.ssgsa@gmail.com
+            </p>
           </div>
         </div>
       )}
