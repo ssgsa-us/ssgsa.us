@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 const Donate = () => {
   const [activeModal, setActiveModal] = useState(null)
+
   return (
     <div className="mx-8 sm:mx-12 lg:mx-12 mt-10 justify-center">
       <div>
@@ -39,50 +40,50 @@ const Donate = () => {
                 <div className="w-full px-3">
                   <label
                     className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
-                    for="grid-password"
+                    htmlFor="grid-password"
                   >
                     Donation Type: *
                   </label>
                   <button
                     className="border-2 border-black md:text-lg px-4 text-base text-black mr-2"
-                    onClick={() => null}
+                    onClick={() => setActiveModal(null)}
                   >
                     <p className="ml-2">One-Time</p>
                   </button>
                   <button
                     className="border-2 border-black md:text-lg px-1 text-base text-black mb-2"
-                    onClick={() => null}
+                    onClick={() => setActiveModal(null)}
                   >
                     <p className="ml-2">Monthly Recurring</p>
                   </button>
                   <div>
                     <label
                       className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
-                      for="grid-password"
+                      htmlFor="grid-password"
                     >
                       Select Amount: *
                     </label>
                     <button
                       className="border-2 border-black md:text-lg px-1 text-base text-black mr-2"
-                      onClick={() => null}
+                      onClick={() => setActiveModal(null)}
                     >
                       <p className="ml-2">$10</p>
                     </button>
                     <button
                       className="border-2 border-black md:text-lg px-1 text-base text-black mr-2"
-                      onClick={() => null}
+                      onClick={() => setActiveModal(null)}
                     >
                       <p className="ml-2">$20</p>
                     </button>
                     <button
                       className="border-2 border-black md:text-lg px-1 text-base text-black mr-2"
-                      onClick={() => null}
+                      onClick={() => setActiveModal(null)}
                     >
                       <p className="ml-2">$50</p>
                     </button>
                     <button
                       className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mb-2"
-                      onClick={() => null}
+                      onClick={() => setActiveModal(null)}
                     >
                       <p className="ml-2">$100</p>
                     </button>
@@ -90,7 +91,7 @@ const Donate = () => {
                   <div>
                     <label
                       className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
-                      for="grid-password"
+                      htmlFor="grid-password"
                     >
                       Or enter your own:
                     </label>
@@ -120,7 +121,7 @@ const Donate = () => {
                   <div>
                     <label
                       className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
-                      for="grid-password"
+                      htmlFor="grid-password"
                     >
                       Name: *
                     </label>
@@ -133,7 +134,7 @@ const Donate = () => {
 
                     <label
                       className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
-                      for="grid-password"
+                      htmlFor="grid-password"
                     >
                       Email: *
                     </label>
