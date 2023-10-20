@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React, { useState } from 'react'
 
 const Donate = () => {
@@ -98,7 +99,7 @@ const Donate = () => {
                     <div className="flex items-center space-x-4">
                       {/* Currency and Image */}
                       <div className="flex items-center bg-grey-850 text-black border border-grey-850 rounded py-2.5 px-2 sm:px-4 mb-3 leading-tight">
-                        <img
+                        <Image
                           src="/us.png"
                           alt="US Flag"
                           className="h-3 sm:h-6 w-auto mr-2" // Added margin-right for spacing
