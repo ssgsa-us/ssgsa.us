@@ -100,11 +100,12 @@ const Donate = () => {
                       {/* Currency and Image */}
                       <div className="flex items-center bg-grey-850 text-black border border-grey-850 rounded py-2.5 px-2 sm:px-4 mb-3 leading-tight">
                         <Image
+                          width={50}
+                          height={30}
                           src="/us.png"
                           alt="US Flag"
-                          className="h-3 sm:h-6 w-auto mr-2" // Added margin-right for spacing
                         />
-                        <p>$</p>
+                        <p className="ml-2">$</p>
                       </div>
 
                       {/* Amount */}
