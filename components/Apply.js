@@ -36,15 +36,17 @@ const Apply = () => {
               <Image src="/donate2.png" alt="Donate" width={280} height={30} />
             </a>
           </div>
-          <a
+          {/* <a
             href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
             target="_blank"
             rel="noopener noreferrer"
-          >
+          > */}
+          <Link href="/donate">
             <button className="px-10 py-1 block mx-auto bg-red-850 font-black text-lg text-white text-center">
               Donate Now
             </button>
-          </a>
+          </Link>
+          {/* </a> */}
           <p className="text-sm mt-8">
             By supporting students, you are becoming an active participant in
             building their careers. All donations and contributions directly
