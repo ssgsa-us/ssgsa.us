@@ -4,15 +4,15 @@ const Donate = () => {
   const [activeModal, setActiveModal] = useState(null)
 
   return (
-    <div className="mx-8 sm:mx-12 lg:mx-12 mt-10 justify-center">
+    <div className="mx-4 sm:mx-12 lg:mx-12 mt-10 justify-center">
       <div>
-        <h1 className="bg-blue-850 flex font-extrabold justify-center lg:text-xl m-auto mb-8 px-6 py-2 rounded-br-3xl rounded-tl-3xl sm:px-12 sm:text-xl text-center text-white text-xl w-0">
+        <h1 className="bg-blue-850 flex font-extrabold justify-center lg:text-xl m-auto mb-8 px-12 py-2 rounded-br-3xl rounded-tl-3xl sm:px-12 sm:text-xl text-center text-white text-xl w-0">
           Donate
         </h1>
       </div>
       <div className="mb-8 flex justify-center">
         {/* //make div inside of div which should contain form below it */}
-        <div className="justify-center bg-grey-850 rounded-lg shadow-lg w-96">
+        <div className="justify-center bg-grey-850 rounded-lg shadow-lg w-full sm:w-96">
           <div className="flex justify-center">
             <p className="text-black text-md font-black py-2 px-6">
               Our Contribution towards the world around us
@@ -20,8 +20,8 @@ const Donate = () => {
           </div>
           <div className="flex justify-center items-center flex-col">
             <p className="text-blue-500 font-bold py-2 px-6 text-justify">
-              "We are all part of a larger society, and it is our duty to
-              contribute to the betterment of the world around us."
+              &quot;We are all part of a larger society, and it is our duty to
+              contribute to the betterment of the world around us.&quot;
             </p>
           </div>
           <div className="flex justify-center flex-col items-right">
@@ -32,7 +32,7 @@ const Donate = () => {
           </div>
 
           <div className="flex justify-center">
-            <form className="bg-pink p-8 rounded-lg shadow-lg w-96 relative">
+            <form className="bg-pink p-8 rounded-lg shadow-lg w-full sm:w-96 relative">
               <p className="text-red-600 text-sm font-bold px-6 absolute top-0 left-0">
                 *Required
               </p>
@@ -45,13 +45,13 @@ const Donate = () => {
                     Donation Type: *
                   </label>
                   <button
-                    className="border-2 border-black md:text-lg px-4 text-base text-black mr-2"
+                    className="border-2 border-black md:text-lg px-4 text-base text-black mr-2 mt-1 sm:mt-0"
                     onClick={() => setActiveModal(null)}
                   >
                     <p className="ml-2">One-Time</p>
                   </button>
                   <button
-                    className="border-2 border-black md:text-lg px-1 text-base text-black mb-2"
+                    className="border-2 border-black md:text-lg px-1 text-base text-black mb-2 mt-1 sm:mt-0"
                     onClick={() => setActiveModal(null)}
                   >
                     <p className="ml-2">Monthly Recurring</p>
@@ -64,25 +64,25 @@ const Donate = () => {
                       Select Amount: *
                     </label>
                     <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2"
+                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mt-1 sm:mt-0"
                       onClick={() => setActiveModal(null)}
                     >
                       <p className="ml-2">$10</p>
                     </button>
                     <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2"
+                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mt-1 sm:mt-0"
                       onClick={() => setActiveModal(null)}
                     >
                       <p className="ml-2">$20</p>
                     </button>
                     <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2"
+                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mt-1 sm:mt-0"
                       onClick={() => setActiveModal(null)}
                     >
                       <p className="ml-2">$50</p>
                     </button>
                     <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mb-2"
+                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mb-2 mt-1 sm:mt-0"
                       onClick={() => setActiveModal(null)}
                     >
                       <p className="ml-2">$100</p>
@@ -90,18 +90,18 @@ const Donate = () => {
                   </div>
                   <div>
                     <label
-                      className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
+                      className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2 mt-1"
                       htmlFor="grid-password"
                     >
                       Or enter your own:
                     </label>
                     <div className="flex items-center space-x-4">
                       {/* Currency and Image */}
-                      <div className="flex items-center bg-grey-850 text-black border border-grey-850 rounded py-2.5 px-4 mb-3 leading-tight">
+                      <div className="flex items-center bg-grey-850 text-black border border-grey-850 rounded py-2.5 px-2 sm:px-4 mb-3 leading-tight">
                         <img
                           src="/us.png"
                           alt="US Flag"
-                          className="h-6 w-auto mr-2" // Added margin-right for spacing
+                          className="h-3 sm:h-6 w-auto mr-2" // Added margin-right for spacing
                         />
                         <p>$</p>
                       </div>
@@ -163,30 +163,30 @@ const Donate = () => {
                   Kindly Donate with:{' '}
                 </p>
               </div>
-              <div className="flex justify-center">
+              <div className="flex flex-wrap sm:flex-nowrap justify-center">
                 <a
                   href="https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
-                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-4 mx-1 rounded-full inline-flex items-center justify-center no-underline whitespace-nowrap"
+                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-4 mx-1 mt-1 sm:mt-0 rounded-full inline-flex items-center justify-center no-underline whitespace-nowrap"
                 >
                   Credit Card
                 </a>
                 <a
                   href="https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
-                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-2 mx-1 rounded-full inline-flex items-center justify-center no-underline"
+                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-2 mx-1 mt-1 sm:mt-0 rounded-full inline-flex items-center justify-center no-underline"
                 >
                   PayPal
                 </a>
                 <button
                   type="button"
                   onClick={() => setActiveModal('venmo')}
-                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-2 px-2 mx-1 rounded-full"
+                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-2 px-2 mx-1 mt-1 sm:mt-0 rounded-full"
                 >
                   Venmo
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveModal('zelle')}
-                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-2 px-2 mx-1 rounded-full"
+                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-2 px-2 mx-1 mt-1 sm:mt-0 rounded-full"
                 >
                   Zelle
                 </button>
