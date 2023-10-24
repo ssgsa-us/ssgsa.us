@@ -1,8 +1,41 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
+import { addDonation } from '../../pages/api/donate'
 
 const Donate = () => {
+  const router = useRouter()
   const [activeModal, setActiveModal] = useState(null)
+  const [donationType, setDonationType] = useState('')
+  const [amount, setAmount] = useState(0)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [anonymous, setAnonymous] = useState(false)
+
+  const donate = async (paymentType) => {
+    if (!donationType || !amount) {
+      alert('Please provide Donation Type and Amount')
+      return
+    }
+    if (!anonymous) {
+      if (!name || !email) {
+        alert('Please provide Name and Email or tick on anonymous')
+        return
+      }
+      await addDonation(name, email, donationType, amount, paymentType)
+    }
+
+    if (paymentType == 'Credit')
+      router.push(
+        'https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6',
+      )
+    else if (paymentType == 'Paypal')
+      router.push(
+        'https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6',
+      )
+    else if (paymentType == 'Venmo') setActiveModal('venmo')
+    else setActiveModal('zelle')
+  }
 
   return (
     <div className="mx-4 sm:mx-12 lg:mx-12 mt-10 justify-center">
@@ -46,14 +79,24 @@ const Donate = () => {
                     Donation Type: *
                   </label>
                   <button
-                    className="border-2 border-black md:text-lg px-4 text-base text-black mr-2 mt-1 sm:mt-0"
-                    onClick={() => setActiveModal(null)}
+                    className={`${
+                      donationType == 'One-Time' ? 'border-blue-850' : ''
+                    } border-2 border-gray-350 md:text-lg px-4 text-base text-black mr-2 mt-1 sm:mt-0`}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setDonationType('One-Time')
+                    }}
                   >
                     <p className="ml-2">One-Time</p>
                   </button>
                   <button
-                    className="border-2 border-black md:text-lg px-1 text-base text-black mb-2 mt-1 sm:mt-0"
-                    onClick={() => setActiveModal(null)}
+                    className={`${
+                      donationType == 'Monthly' ? 'border-blue-850' : ''
+                    } border-2 border-gray-350 md:text-lg px-1 text-base text-black mb-2 mt-1 sm:mt-0`}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setDonationType('Monthly')
+                    }}
                   >
                     <p className="ml-2">Monthly Recurring</p>
                   </button>
@@ -65,26 +108,46 @@ const Donate = () => {
                       Select Amount: *
                     </label>
                     <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mt-1 sm:mt-0"
-                      onClick={() => setActiveModal(null)}
+                      className={`${
+                        amount == 10 ? 'border-blue-850' : ''
+                      } border-2 border-gray-350 md:text-lg px-1 text-base text-black mr-2 mt-1 sm:mt-0"`}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setAmount(10)
+                      }}
                     >
                       <p className="ml-2">$10</p>
                     </button>
                     <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mt-1 sm:mt-0"
-                      onClick={() => setActiveModal(null)}
+                      className={`${
+                        amount == 20 ? 'border-blue-850' : ''
+                      } border-2 border-gray-350 md:text-lg px-1 text-base text-black mr-2 mt-1 sm:mt-0"`}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setAmount(20)
+                      }}
                     >
                       <p className="ml-2">$20</p>
                     </button>
                     <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mt-1 sm:mt-0"
-                      onClick={() => setActiveModal(null)}
+                      className={`${
+                        amount == 50 ? 'border-blue-850' : ''
+                      } border-2 border-gray-350 md:text-lg px-1 text-base text-black mr-2 mt-1 sm:mt-0"`}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setAmount(50)
+                      }}
                     >
                       <p className="ml-2">$50</p>
                     </button>
                     <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mb-2 mt-1 sm:mt-0"
-                      onClick={() => setActiveModal(null)}
+                      className={`${
+                        amount == 100 ? 'border-blue-850' : ''
+                      } border-2 border-gray-350 md:text-lg px-1 text-base text-black mr-2 mb-2 mt-1 sm:mt-0"`}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setAmount(100)
+                      }}
                     >
                       <p className="ml-2">$100</p>
                     </button>
@@ -115,6 +178,7 @@ const Donate = () => {
                           id="grid-amount"
                           type="text"
                           placeholder="Amount"
+                          onChange={(e) => setAmount(Number(e.target.value))}
                         />
                       </div>
                     </div>
@@ -125,26 +189,28 @@ const Donate = () => {
                       className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Name: *
+                      Name: {!anonymous ? '*' : null}
                     </label>
                     <input
                       className="appearance-none block w-full bg-grey-850 text-black border border-grey-850 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       id="grid-password"
                       type="text"
                       placeholder="John Doe"
+                      onChange={(e) => setName(e.target.value)}
                     />
 
                     <label
                       className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Email: *
+                      Email: {!anonymous ? '*' : null}
                     </label>
                     <input
                       className="appearance-none block w-full bg-grey-850 text-black border border-grey-850 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       id="grid-password"
                       type="text"
                       placeholder="xyz@abc.com"
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="flex items-center">
@@ -153,6 +219,7 @@ const Donate = () => {
                       id="anonymous"
                       name="anonymous"
                       value="anonymous_user"
+                      onChange={(e) => setAnonymous(e.target.checked)}
                     />
                     <label htmlFor="anonymous" className="ml-2">
                       Keep me anonymous
@@ -166,28 +233,42 @@ const Donate = () => {
                 </p>
               </div>
               <div className="flex flex-wrap sm:flex-nowrap justify-center">
-                <a
-                  href="https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    donate('Credit')
+                  }}
                   className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-4 mx-1 mt-1 sm:mt-0 rounded-full inline-flex items-center justify-center no-underline whitespace-nowrap"
                 >
                   Credit Card
-                </a>
-                <a
-                  href="https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6"
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    donate('Paypal')
+                  }}
                   className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-2 mx-1 mt-1 sm:mt-0 rounded-full inline-flex items-center justify-center no-underline"
                 >
                   PayPal
-                </a>
+                </button>
                 <button
                   type="button"
-                  onClick={() => setActiveModal('venmo')}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    donate('Venmo')
+                  }}
                   className="bg-red-850 hover:bg-red-700 text-white font-bold py-2 px-2 mx-1 mt-1 sm:mt-0 rounded-full"
                 >
                   Venmo
                 </button>
                 <button
                   type="button"
-                  onClick={() => setActiveModal('zelle')}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    donate('Zelle')
+                  }}
                   className="bg-red-850 hover:bg-red-700 text-white font-bold py-2 px-2 mx-1 mt-1 sm:mt-0 rounded-full"
                 >
                   Zelle
