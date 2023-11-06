@@ -1,6 +1,4 @@
-import Donate from '../components/Donate/donate'
-import Apply from '../components/Apply'
-import Foundation from '../components/About/Foundation'
+import Donate from '../components/Donate/Donate'
 import MainLayout from '../layouts/Main'
 
 export default function Home() {
