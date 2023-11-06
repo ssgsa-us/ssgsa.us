@@ -33,90 +33,16 @@ const Donate = () => {
 
           <div className="flex justify-center">
             <form className="bg-pink p-8 rounded-lg shadow-lg w-96 relative">
-              <p className="text-red-600 text-sm font-bold px-6 absolute top-0 left-0">
-                *Required
-              </p>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label
-                    className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Donation Type: *
-                  </label>
-                  <button
-                    className="border-2 border-black md:text-lg px-4 text-base text-black mr-2"
-                    onClick={() => setActiveModal(null)}
-                  >
-                    <p className="ml-2">One-Time</p>
-                  </button>
-                  <button
-                    className="border-2 border-black md:text-lg px-1 text-base text-black mb-2"
-                    onClick={() => setActiveModal(null)}
-                  >
-                    <p className="ml-2">Monthly Recurring</p>
-                  </button>
-                  <div>
-                    <label
-                      className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Select Amount: *
-                    </label>
-                    <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2"
-                      onClick={() => setActiveModal(null)}
-                    >
-                      <p className="ml-2">$10</p>
-                    </button>
-                    <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2"
-                      onClick={() => setActiveModal(null)}
-                    >
-                      <p className="ml-2">$20</p>
-                    </button>
-                    <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2"
-                      onClick={() => setActiveModal(null)}
-                    >
-                      <p className="ml-2">$50</p>
-                    </button>
-                    <button
-                      className="border-2 border-black md:text-lg px-1 text-base text-black mr-2 mb-2"
-                      onClick={() => setActiveModal(null)}
-                    >
-                      <p className="ml-2">$100</p>
-                    </button>
-                  </div>
-                  <div>
-                    <label
-                      className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Or enter your own:
-                    </label>
-                    <div className="flex items-center space-x-4">
-                      {/* Currency and Image */}
-                      <div className="flex items-center bg-grey-850 text-black border border-grey-850 rounded py-2.5 px-4 mb-3 leading-tight">
-                        <img
-                          src="/us.png"
-                          alt="US Flag"
-                          className="h-6 w-auto mr-2" // Added margin-right for spacing
-                        />
-                        <p>$</p>
-                      </div>
-
-                      {/* Amount */}
-                      <div>
-                        <input
-                          className="appearance-none block w-full bg-grey-850 text-black border border-grey-850 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                          id="grid-amount"
-                          type="text"
-                          placeholder="Amount"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  <p className="text-blue-500 font-bold px-1 text-justify mb-5">
+                    Every contribution, no matter how small, makes a significant
+                    impact. Whether it's $10, $20, or an amount that feels
+                    comfortable for you, your support is immensely valued. To
+                    alleviate any potential financial strain, we encourage
+                    considering a monthly donation that aligns with your
+                    capacity.
+                  </p>
 
                   <div>
                     <label
@@ -216,10 +142,16 @@ const Donate = () => {
               &times;
             </button>
             <p className="text-black text-center text-sm font-black py-2 px-6">
-              Kindly use this Username for donation
+              Please click on this link:
+              <em>
+                <span className="text-blue-800 font-bold">
+                  <a href="https://account.venmo.com/u/SSGSA"> Venmo</a>
+                </span>
+              </em>
             </p>
+
             <p className="mb-4 text-blue-800 font-bold text-center">
-              Username: SSGSA
+              or Search with the Username: SSGSA
             </p>
             <p className="text-black text-sm font-black py-2 px-6">
               Please use these 4-digits to verify (if needed): 6725
