@@ -74,7 +74,7 @@ const Donate = () => {
                 <div className="w-full px-3">
                   <p className="text-blue-500 font-bold px-1 text-justify mb-5">
                     Every contribution, no matter how small, makes a significant
-                    impact. Whether it's $10, $20, or an amount that feels
+                    impact. Whether it&apos;s $10, $20, or an amount that feels
                     comfortable for you, your support is immensely valued. To
                     alleviate any potential financial strain, we encourage
                     considering a monthly donation that aligns with your
