@@ -47,11 +47,6 @@ const Donate = () => {
       <div className="mb-8 flex justify-center">
         {/* //make div inside of div which should contain form below it */}
         <div className="justify-center bg-grey-850 rounded-lg shadow-lg w-full sm:w-96">
-          {/* <div className="flex justify-center">
-            <p className="text-black text-md font-black py-2 px-6">
-              Our Contribution towards the world around us
-            </p>
-          </div> */}
           <div className="flex justify-center items-center flex-col">
             <p className="text-blue-500 font-bold py-2 px-6 text-justify">
               &quot;We are all part of a larger society, and it is our duty to
