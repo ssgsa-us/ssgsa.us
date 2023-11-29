@@ -6,25 +6,8 @@ import { addDonation } from '../../pages/api/donate'
 const Donate = () => {
   const router = useRouter()
   const [activeModal, setActiveModal] = useState(null)
-  // const [donationType, setDonationType] = useState('')
-  // const [amount, setAmount] = useState(0)
-  // const [name, setName] = useState('')
-  // const [email, setEmail] = useState('')
-  // const [anonymous, setAnonymous] = useState(false)
 
   const donate = async (paymentType) => {
-    // if (!donationType || !amount) {
-    //   alert('Please provide Donation Type and Amount')
-    //   return
-    // }
-    // if (!anonymous) {
-    //   if (!name || !email) {
-    //     alert('Please provide Name and Email or tick on anonymous')
-    //     return
-    //   }
-    //   await addDonation(name, email, paymentType)
-    // }
-
     if (paymentType == 'Credit')
       router.push(
         'https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=MYCSXB9B4ENP6',
