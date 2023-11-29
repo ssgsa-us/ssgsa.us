@@ -8,22 +8,22 @@ const Donate = () => {
   const [activeModal, setActiveModal] = useState(null)
   // const [donationType, setDonationType] = useState('')
   // const [amount, setAmount] = useState(0)
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [anonymous, setAnonymous] = useState(false)
+  // const [name, setName] = useState('')
+  // const [email, setEmail] = useState('')
+  // const [anonymous, setAnonymous] = useState(false)
 
   const donate = async (paymentType) => {
     // if (!donationType || !amount) {
     //   alert('Please provide Donation Type and Amount')
     //   return
     // }
-    if (!anonymous) {
-      if (!name || !email) {
-        alert('Please provide Name and Email or tick on anonymous')
-        return
-      }
-      await addDonation(name, email, paymentType)
-    }
+    // if (!anonymous) {
+    //   if (!name || !email) {
+    //     alert('Please provide Name and Email or tick on anonymous')
+    //     return
+    //   }
+    //   await addDonation(name, email, paymentType)
+    // }
 
     if (paymentType == 'Credit')
       router.push(
@@ -65,9 +65,9 @@ const Donate = () => {
               <p className="text-red-600 text-sm font-bold px-6 absolute top-0 left-0">
                 *Required
               </p>
-              <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
-                  <p className="text-blue-500 font-bold px-1 text-justify mb-5">
+                  <p className="text-blue-500 font-bold px-1 text-justify mb-3">
                     Every contribution, no matter how small, makes a significant
                     impact. Whether it&apos;s $10, $20, or an amount that feels
                     comfortable for you, your support is immensely valued. To
@@ -75,63 +75,22 @@ const Donate = () => {
                     considering a monthly donation that aligns with your
                     capacity.
                   </p>
-
-                  <div>
-                    <label
-                      className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Name: {!anonymous ? '*' : null}
-                    </label>
-                    <input
-                      className="appearance-none block w-full bg-grey-850 text-black border border-grey-850 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-password"
-                      type="text"
-                      placeholder="John Doe"
-                      onChange={(e) => setName(e.target.value)}
-                    />
-
-                    <label
-                      className="block uppercase tracking-wide text-red-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Email: {!anonymous ? '*' : null}
-                    </label>
-                    <input
-                      className="appearance-none block w-full bg-grey-850 text-black border border-grey-850 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-password"
-                      type="text"
-                      placeholder="xyz@abc.com"
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="anonymous"
-                      name="anonymous"
-                      value="anonymous_user"
-                      onChange={(e) => setAnonymous(e.target.checked)}
-                    />
-                    <label htmlFor="anonymous" className="ml-2">
-                      Keep me anonymous
-                    </label>
-                  </div>
                 </div>
               </div>
               <div className="flex justify-center">
-                <p className="text-red-600 text-sm font-bold py-2 px-6">
+                <p className="text-red-600 text-sm font-bold py-1 px-6">
                   Kindly Donate with:{' '}
                 </p>
               </div>
-              <div className="flex flex-wrap sm:flex-nowrap justify-center">
+              <div className="flex flex-wrap md:flex-nowrap justify-center py-2 my-2">
                 <button
                   type="button"
                   onClick={(e) => {
                     e.preventDefault()
                     donate('Credit')
                   }}
-                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-4 mx-1 mt-1 sm:mt-0 rounded-full inline-flex items-center justify-center no-underline whitespace-nowrap"
+                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-4 mx-1 mt-1 sm:mt-0 rounded-full"
+                  style={{ fontSize: '1.5rem' }}
                 >
                   Credit Card
                 </button>
@@ -141,17 +100,21 @@ const Donate = () => {
                     e.preventDefault()
                     donate('Paypal')
                   }}
-                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-2 mx-1 mt-1 sm:mt-0 rounded-full inline-flex items-center justify-center no-underline"
+                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-4 mx-1 mt-1 sm:mt-0 rounded-full"
+                  style={{ fontSize: '1.5rem' }}
                 >
                   PayPal
                 </button>
+              </div>
+              <div className="flex flex-wrap sm:flex-nowrap justify-center">
                 <button
                   type="button"
                   onClick={(e) => {
                     e.preventDefault()
                     donate('Venmo')
                   }}
-                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-2 px-2 mx-1 mt-1 sm:mt-0 rounded-full"
+                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-4 mx-1 mt-1 sm:mt-0 rounded-full"
+                  style={{ fontSize: '1.5rem' }}
                 >
                   Venmo
                 </button>
@@ -161,12 +124,12 @@ const Donate = () => {
                     e.preventDefault()
                     donate('Zelle')
                   }}
-                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-2 px-2 mx-1 mt-1 sm:mt-0 rounded-full"
+                  className="bg-red-850 hover:bg-red-700 text-white font-bold py-1 px-4 mx-1 mt-1 sm:mt-0 rounded-full"
+                  style={{ fontSize: '1.5rem' }}
                 >
                   Zelle
                 </button>
               </div>
-
               <div className="flex justify mt-4">
                 <p className="text-black text-sm font-bold py-2 px-0 text-justify">
                   By supporting students, you are becoming an active participant
