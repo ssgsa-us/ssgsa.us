@@ -6,11 +6,11 @@ import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/admin-layout'
 import { MonthStoriesType, MonthStoryType } from '../../../types'
-import { getMonthStories } from '../../api/constants'
 import {
   deleteMonthStory,
   updateMonthStory,
 } from '../../api/admin/constants/monthStories'
+import { getMonthStories } from '../../api/constants'
 
 function MonthStoriesUpdateForm() {
   const [monthStoriesList, setMonthStoriesList] = useState<MonthStoriesType>({})

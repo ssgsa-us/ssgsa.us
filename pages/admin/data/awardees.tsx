@@ -82,7 +82,11 @@ function AwardeesUpdateForm() {
   }
 
   const addNewSession = () => {
-    const nextSessionInd = Object.keys(awardeesList).length + 1
+    const nextSessionInd =
+      Math.max.apply(
+        null,
+        Object.keys(awardeesList).map((i) => Number(i)),
+      ) + 1
     const session: AwardeeSessionType = {
       session: sessionTitle,
       index: nextSessionInd,
