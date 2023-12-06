@@ -11,13 +11,7 @@ export default function Home() {
     <MainLayout>
       <div className="bg-gray-350 text-red-850 font-black w-screen -ml-2 sm:-ml-5 md:-ml-10 lg:-ml-20 xl:-ml-40 mt-8 lg:mr-2 lg:p-3 p-2">
         <marquee className="flex items-center">
-          <a
-            href="/assets/PressRelease_SSGSA_2023_24.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Results of SSGSA for 2023 - 2024 is announced
-          </a>
+          Applications for SSGSA 2024-2025 will be announced soon
         </marquee>
       </div>
       <Counter />
@@ -41,7 +35,7 @@ export default function Home() {
         <div className="w-full lg:mr-4">
           <h1 className="text-blue-850 text-xl lg:text-2xl mx-2 mb-4 font-extrabold">
             Dates of Full Term{' '}
-            <span className="font-lora font-medium">2022-2023</span>
+            <span className="font-lora font-medium">2024-2025</span>
           </h1>
           <Datetable
             bgcolor="bg-blue-850"

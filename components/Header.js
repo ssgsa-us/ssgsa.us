@@ -180,7 +180,7 @@ export default function Header() {
                   </Link>
                   <Link href="/apply#Timeline">
                     <a className="px-4 md:py-4 md:px-2 text-white md:text-blue-850 hover:bg-blue-850 hover:text-white text-sm">
-                      Application Timeline: 2022-2023
+                      Application Timeline for 2024-2025
                     </a>
                   </Link>
                   <Link href="/faq">
