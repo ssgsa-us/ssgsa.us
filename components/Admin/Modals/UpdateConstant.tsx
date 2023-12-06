@@ -5,6 +5,8 @@ import {
   AwardeeType,
   LeaderType,
   MemberType,
+  MonthStoryType,
+  NewsletterType,
   ResourceType,
   SuccScholarType,
 } from '../../../types'
@@ -19,6 +21,8 @@ type ConstantType =
   | MemberType
   | AwardeeType
   | SuccScholarType
+  | NewsletterType
+  | MonthStoryType
   | ResourceType
   | LeaderType
 
