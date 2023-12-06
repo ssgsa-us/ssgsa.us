@@ -86,7 +86,11 @@ function SuccScholarsUpdateForm() {
   }
 
   const addNewSession = () => {
-    const nextSessionInd = Object.keys(scholarsList).length + 1
+    const nextSessionInd =
+      Math.max.apply(
+        null,
+        Object.keys(scholarsList).map((i) => Number(i)),
+      ) + 1
     const session: SuccScholarSessionType = {
       session: sessionTitle,
       index: nextSessionInd,

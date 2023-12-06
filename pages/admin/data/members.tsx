@@ -83,7 +83,11 @@ function MembersUpdateForm() {
   }
 
   const addNewCategory = () => {
-    const nextCatInd = Object.keys(membersList).length + 1
+    const nextCatInd =
+      Math.max.apply(
+        null,
+        Object.keys(membersList).map((i) => Number(i)),
+      ) + 1
     const category: MemberCategoryType = {
       category: categoryTitle,
       index: nextCatInd,
