@@ -81,8 +81,9 @@ const ReviewerStep2 = ({
       if (academicRecord[Number(key)].degreeLevel === 'Bachelor')
         bachelorGrades = Math.max(bachelorGrades, percentage)
       else if (
-        academicRecord[Number(key)].degreeLevel === 'Master' &&
-        academicRecord[Number(key)].grades !== 1
+        (academicRecord[Number(key)].degreeLevel === 'Master' ||
+          academicRecord[Number(key)].degreeLevel === 'Doctoral') &&
+        academicRecord[Number(key)].grades
       )
         masterGrades = Math.max(masterGrades, percentage)
     })
