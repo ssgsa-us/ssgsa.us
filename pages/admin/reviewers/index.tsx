@@ -3,7 +3,7 @@ import SetDropdown from '../../../components/Admin/SetDropdown'
 import Loading from '../../../components/Loading'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
-import AdminLayout from '../../../layouts/admin/admin-layout'
+import AdminLayout from '../../../layouts/admin/AdminLayout'
 import { Users } from '../../../types'
 import { getUsersByRole } from '../../api/getUserDetails'
 import { updateUserSets } from '../../api/updateUserSets'
@@ -29,7 +29,6 @@ function ReviewersList() {
       .catch(() => alert('Try again, network error!'))
       .finally(() => setPageReady(true))
   }, [])
-  console.log(selectedSets)
 
   return (
     <AdminLayout>

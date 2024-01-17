@@ -1,4 +1,4 @@
-import AdminApplHeader from '../../components/Admin/AdminApplHeader'
+import ApplicationHeader from '../../components/Admin/Headers/Application'
 import Footer from '../../components/Footer'
 import styles from '../../styles/Home.module.css'
 
@@ -10,7 +10,7 @@ export default function ApplicationLayout({
 }) {
   return (
     <div className={styles.container}>
-      <AdminApplHeader
+      <ApplicationHeader
         status={status}
         formStatus={formStatus}
         setStatus={setStatus}

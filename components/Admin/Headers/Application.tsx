@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, SetStateAction, Dispatch } from 'react'
-import logo from '../../public/logo.png'
-import { useAuth } from '../../context/AuthUserContext'
-import StepNavigator from '../StepNavigator'
+import logo from '../../../public/logo.png'
+import { useAuth } from '../../../context/AuthUserContext'
+import StepNavigator from '../../StepNavigator'
 
 type Props = {
   status: number
@@ -14,7 +14,7 @@ type Props = {
 // Making header as dynamic for showing steps coming in stepsData
 // Used in application header on application and reviewer portal
 // Only showing five step at a time in header
-export default function AdminApplHeader({
+export default function ApplicationHeader({
   status,
   formStatus,
   setStatus,
@@ -141,25 +141,25 @@ export default function AdminApplHeader({
               </button>
             </div>
             <div className="pt-5 text-white pl-2 flex flex-col ">
-              <Link href="/admin/partial-applications">
+              <Link href="/admin/applications/partial">
                 <a>Partial Applications</a>
               </Link>
-              <Link href="/admin">
+              <Link href="/admin/applications/completed">
                 <a>Completed Applications</a>
               </Link>
-              <Link href="/admin/removed-applications">
+              <Link href="/admin/applications/removed">
                 <a>Removed Applications</a>
               </Link>
-              <Link href="/admin/finalised-applications-for-review">
+              <Link href="/admin/applications/finalised-for-review">
                 <a>Finalised Applications For Review</a>
               </Link>
-              <Link href="/admin/reviewed-applications">
+              <Link href="/admin/applications/reviewed">
                 <a>Reviewed Applications</a>
               </Link>
-              <Link href="/admin/finalised-applications-for-interview">
+              <Link href="/admin/applications/finalised-for-interview">
                 <a>Finalised Applications For Interview</a>
               </Link>
-              <Link href="/admin/interviewed-applications">
+              <Link href="/admin/applications/interviewed">
                 <a>Interviewed Applications</a>
               </Link>
             </div>

@@ -178,7 +178,7 @@ export default function ApplicationRow({
           : '-'}
       </td>
       <td className="border border-blue-850 p-2 text-center">
-        <Link href={`/admin/view-application/${applicationId}`}>
+        <Link href={`/admin/application/${applicationId}`}>
           <a className="text-white text-base md:text-lg bg-blue-850 py-1 px-3 rounded-lg">
             View
           </a>

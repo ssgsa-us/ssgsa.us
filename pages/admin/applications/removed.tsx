@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { AdminPortalData } from '../../classes/admin_portal_data'
-import { ApplicationData } from '../../classes/application_data'
-import ApplicationsTable from '../../components/Admin/ApplicationsTable'
-import Loading from '../../components/Loading'
-import requireAuth from '../../components/requireAuth'
-import Roles from '../../constants/roles'
-import AdminLayout from '../../layouts/admin/admin-layout'
-import { getApplicationsWithGivenStatus } from '../api/getApplicationsResponse'
+import { AdminPortalData } from '../../../classes/admin_portal_data'
+import { ApplicationData } from '../../../classes/application_data'
+import ApplicationsTable from '../../../components/Admin/ApplicationsTable'
+import Loading from '../../../components/Loading'
+import requireAuth from '../../../components/requireAuth'
+import Roles from '../../../constants/roles'
+import ApplicationsLayout from '../../../layouts/admin/ApplicationsLayout'
+import { getApplicationsWithGivenStatus } from '../../api/getApplicationsResponse'
 
 type Applications = {
   [key: string]: {
@@ -15,13 +15,13 @@ type Applications = {
   }
 }
 
-function InterviewedApplications() {
+function RemovedApplications() {
   const [applications, setApplications] = useState<Applications>()
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
 
   useEffect(() => {
-    getApplicationsWithGivenStatus(5)
+    getApplicationsWithGivenStatus(1)
       .then((data) => {
         setApplications(data)
       })
@@ -30,7 +30,7 @@ function InterviewedApplications() {
   }, [changeOccured])
 
   return (
-    <AdminLayout>
+    <ApplicationsLayout>
       {pageReady ? (
         <ApplicationsTable
           applications={applications}
@@ -38,10 +38,10 @@ function InterviewedApplications() {
           setChangeOccured={setChangeOccured}
         />
       ) : (
-        <Loading message="Loading your applications!" />
+        <Loading message="Loading removed applications!" />
       )}
-    </AdminLayout>
+    </ApplicationsLayout>
   )
 }
 
-export default requireAuth(InterviewedApplications, Roles.ADMIN)
+export default requireAuth(RemovedApplications, Roles.ADMIN)
