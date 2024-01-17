@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import UpdateConstantModal from '../../../components/Admin/Modals/UpdateConstant'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
-import AdminLayout from '../../../layouts/admin/admin-layout'
+import AdminLayout from '../../../layouts/admin/ApplicationsLayout'
 import { MonthStoriesType, MonthStoryType } from '../../../types'
 import {
   deleteMonthStory,

@@ -2,10 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import logo from '../public/logo.png'
-import { useAuth } from '../context/AuthUserContext'
+import logo from '../../../public/logo.png'
+import { useAuth } from '../../../context/AuthUserContext'
 
-export default function AdminHeader() {
+export default function ApplicationsHeader() {
   const [active, setActive] = useState(false)
   const router = useRouter()
   const { signOut } = useAuth()

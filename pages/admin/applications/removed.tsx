@@ -5,7 +5,7 @@ import ApplicationsTable from '../../../components/Admin/ApplicationsTable'
 import Loading from '../../../components/Loading'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
-import AdminLayout from '../../../layouts/admin/admin-layout'
+import ApplicationsLayout from '../../../layouts/admin/ApplicationsLayout'
 import { getApplicationsWithGivenStatus } from '../../api/getApplicationsResponse'
 
 type Applications = {
@@ -30,7 +30,7 @@ function RemovedApplications() {
   }, [changeOccured])
 
   return (
-    <AdminLayout>
+    <ApplicationsLayout>
       {pageReady ? (
         <ApplicationsTable
           applications={applications}
@@ -40,7 +40,7 @@ function RemovedApplications() {
       ) : (
         <Loading message="Loading removed applications!" />
       )}
-    </AdminLayout>
+    </ApplicationsLayout>
   )
 }
 

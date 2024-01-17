@@ -4,7 +4,7 @@ import { ApplicationData } from '../../../classes/application_data'
 import Loading from '../../../components/Loading'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
-import AdminLayout from '../../../layouts/admin/admin-layout'
+import ApplicationsLayout from '../../../layouts/admin/ApplicationsLayout'
 import { getPartialApplications } from '../../api/getApplicationsResponse'
 
 type PartialApplications = {
@@ -25,7 +25,7 @@ function PartialApplications() {
   }, [])
 
   return (
-    <AdminLayout>
+    <ApplicationsLayout>
       {pageReady ? (
         <div className="mt-10 bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 overflow-x-auto whitespace-nowrap">
           <table className="border border-blue-850 border-seperate p-2">
@@ -80,7 +80,7 @@ function PartialApplications() {
       ) : (
         <Loading message="Loading partial applications!" />
       )}
-    </AdminLayout>
+    </ApplicationsLayout>
   )
 }
 

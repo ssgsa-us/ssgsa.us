@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, SetStateAction, Dispatch } from 'react'
-import logo from '../../public/logo.png'
-import { useAuth } from '../../context/AuthUserContext'
-import StepNavigator from '../StepNavigator'
+import logo from '../../../public/logo.png'
+import { useAuth } from '../../../context/AuthUserContext'
+import StepNavigator from '../../StepNavigator'
 
 type Props = {
   status: number
@@ -14,7 +14,7 @@ type Props = {
 // Making header as dynamic for showing steps coming in stepsData
 // Used in application header on application and reviewer portal
 // Only showing five step at a time in header
-export default function AdminApplHeader({
+export default function ApplicationHeader({
   status,
   formStatus,
   setStatus,

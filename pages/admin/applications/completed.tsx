@@ -5,7 +5,7 @@ import ApplicationsTable from '../../../components/Admin/ApplicationsTable'
 import Loading from '../../../components/Loading'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
-import AdminLayout from '../../../layouts/admin/admin-layout'
+import ApplicationsLayout from '../../../layouts/admin/ApplicationsLayout'
 import { getCompletedApplications } from '../../api/getApplicationsResponse'
 
 type Applications = {
@@ -30,7 +30,7 @@ function CompletedApplications() {
   }, [changeOccured])
 
   return (
-    <AdminLayout>
+    <ApplicationsLayout>
       {pageReady ? (
         <ApplicationsTable
           applications={applications}
@@ -40,7 +40,7 @@ function CompletedApplications() {
       ) : (
         <Loading message="Loading completed applications!" />
       )}
-    </AdminLayout>
+    </ApplicationsLayout>
   )
 }
 
