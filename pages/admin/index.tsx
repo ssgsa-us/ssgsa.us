@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import requireAuth from '../../components/requireAuth'
 import Roles from '../../constants/roles'
-import AdminLayout from '../../layouts/admin/ApplicationsLayout'
+import AdminLayout from '../../layouts/admin/AdminLayout'
 
 function Admin() {
   return (

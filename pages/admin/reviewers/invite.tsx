@@ -6,7 +6,7 @@ import * as XLSX from 'xlsx'
 import requireAuth from '../../../components/requireAuth'
 import UsersTable from '../../../components/UsersTable'
 import Roles from '../../../constants/roles'
-import AdminLayout from '../../../layouts/admin/ApplicationsLayout'
+import AdminLayout from '../../../layouts/admin/AdminLayout'
 import {
   addReviewerInvite,
   getAcceptedReviewers,
