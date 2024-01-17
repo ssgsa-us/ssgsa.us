@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { AdminPortalData } from '../../classes/admin_portal_data'
-import { ApplicationData } from '../../classes/application_data'
-import ApplicationsTable from '../../components/Admin/ApplicationsTable'
-import Loading from '../../components/Loading'
-import requireAuth from '../../components/requireAuth'
-import Roles from '../../constants/roles'
-import AdminLayout from '../../layouts/admin/admin-layout'
-import { getCompletedApplications } from '../api/getApplicationsResponse'
+import { AdminPortalData } from '../../../classes/admin_portal_data'
+import { ApplicationData } from '../../../classes/application_data'
+import ApplicationsTable from '../../../components/Admin/ApplicationsTable'
+import Loading from '../../../components/Loading'
+import requireAuth from '../../../components/requireAuth'
+import Roles from '../../../constants/roles'
+import AdminLayout from '../../../layouts/admin/admin-layout'
+import { getApplicationsWithGivenStatus } from '../../api/getApplicationsResponse'
 
 type Applications = {
   [key: string]: {
@@ -15,13 +15,13 @@ type Applications = {
   }
 }
 
-function CompletedApplications() {
+function FinalisedApplicationsForInterview() {
   const [applications, setApplications] = useState<Applications>()
   const [changeOccured, setChangeOccured] = useState<boolean>(false)
   const [pageReady, setPageReady] = useState<boolean>(false)
 
   useEffect(() => {
-    getCompletedApplications()
+    getApplicationsWithGivenStatus(4)
       .then((data) => {
         setApplications(data)
       })
@@ -38,10 +38,10 @@ function CompletedApplications() {
           setChangeOccured={setChangeOccured}
         />
       ) : (
-        <Loading message="Loading your applications!" />
+        <Loading message="Loading finalised applications for interview!" />
       )}
     </AdminLayout>
   )
 }
 
-export default requireAuth(CompletedApplications, Roles.ADMIN)
+export default requireAuth(FinalisedApplicationsForInterview, Roles.ADMIN)

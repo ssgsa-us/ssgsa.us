@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { ApplicationData } from '../../classes/application_data'
-import Loading from '../../components/Loading'
-import requireAuth from '../../components/requireAuth'
-import Roles from '../../constants/roles'
-import AdminLayout from '../../layouts/admin/admin-layout'
-import { getPartialApplications } from '../api/getApplicationsResponse'
+import { ApplicationData } from '../../../classes/application_data'
+import Loading from '../../../components/Loading'
+import requireAuth from '../../../components/requireAuth'
+import Roles from '../../../constants/roles'
+import AdminLayout from '../../../layouts/admin/admin-layout'
+import { getPartialApplications } from '../../api/getApplicationsResponse'
 
 type PartialApplications = {
   [key: string]: ApplicationData
@@ -78,7 +78,7 @@ function PartialApplications() {
           </table>
         </div>
       ) : (
-        <Loading message="Loading your applications!" />
+        <Loading message="Loading partial applications!" />
       )}
     </AdminLayout>
   )
