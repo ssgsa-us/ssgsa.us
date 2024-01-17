@@ -368,8 +368,8 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                     required={
                       academicData[key].degreeLevel === 'Master' ||
                       academicData[key].degreeLevel === 'Doctoral'
-                        ? true
-                        : false
+                        ? false
+                        : true
                     }
                     step="0.01"
                     minimum={0}
