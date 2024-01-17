@@ -9,15 +9,17 @@ export const createUser = (
   email: string,
   mobile: Number,
   verificationEmailEpoch: number,
-  role: string = Roles.APPLICANT,
-  sets: Array<string> = [],
+  roles: Array<string> = [Roles.APPLICANT],
+  review_sets: Array<string> = [],
+  interview_sets: Array<string> = [],
 ) => {
   const user: User = new User(
     name,
     email,
     mobile,
-    role,
-    sets,
+    roles,
+    review_sets,
+    interview_sets,
     verificationEmailEpoch,
   )
 
