@@ -29,7 +29,6 @@ function ReviewersList() {
       .catch(() => alert('Try again, network error!'))
       .finally(() => setPageReady(true))
   }, [])
-  console.log(selectedSets)
 
   return (
     <AdminLayout>
