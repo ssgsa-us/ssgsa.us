@@ -71,10 +71,10 @@ export default function ApplicationsHeader() {
         >
           <div className="flex flex-col w-full md:flex-row md:justify-center lg:ml-28">
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
-              <Link href="/admin/partial-applications">
+              <Link href="/admin/applications/partial">
                 <a
                   className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
-                    router.pathname == '/admin/partial-applications'
+                    router.pathname == '/admin/applications/partial'
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                   }`}
@@ -84,10 +84,10 @@ export default function ApplicationsHeader() {
               </Link>
             </div>
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
-              <Link href="/admin">
+              <Link href="/admin/applications/completed">
                 <a
                   className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
-                    router.pathname == '/admin'
+                    router.pathname == '/admin/applications/completed'
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                   }`}
@@ -97,10 +97,10 @@ export default function ApplicationsHeader() {
               </Link>
             </div>
             <div className="bg-white py-0.5 md:py-0 md:pl-0.5">
-              <Link href={'/admin/removed-applications'}>
+              <Link href={'/admin/applications/removed'}>
                 <a
                   className={`py-2 px-2 text-white flex md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
-                    router.pathname == '/admin/removed-applications'
+                    router.pathname == '/admin/applications/removed'
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                   }`}
@@ -110,11 +110,11 @@ export default function ApplicationsHeader() {
               </Link>
             </div>
             <div className="bg-white pt-0.5 md:pt-0 md:pl-0.5">
-              <Link href="/admin/finalised-applications-for-review">
+              <Link href="/admin/applications/finalised-for-review">
                 <a
                   className={`py-2 px-2 text-white flex md:flex-col md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
                     router.pathname ==
-                    '/admin/finalised-applications-for-review'
+                    '/admin/applications/finalised-for-review'
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                   }`}
@@ -124,10 +124,10 @@ export default function ApplicationsHeader() {
               </Link>
             </div>
             <div className="bg-white py-0.5 md:py-0 md:pl-0.5">
-              <Link href={'/admin/reviewed-applications'}>
+              <Link href={'/admin/applications/reviewed'}>
                 <a
                   className={`py-2 px-2 text-white flex md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
-                    router.pathname == '/admin/reviewed-applications'
+                    router.pathname == '/admin/applications/reviewed'
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                   }`}
@@ -137,11 +137,11 @@ export default function ApplicationsHeader() {
               </Link>
             </div>
             <div className="bg-white py-0.5 md:py-0 md:pl-0.5">
-              <Link href={'/admin/finalised-applications-for-interview'}>
+              <Link href={'/admin/applications/finalised-for-interview'}>
                 <a
                   className={`py-2 px-2 text-white flex md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
                     router.pathname ==
-                    '/admin/finalised-applications-for-interview'
+                    '/admin/applications/finalised-for-interview'
                       ? 'bg-blue-850'
                       : 'bg-red-850 hover:bg-blue-850'
                   }`}
@@ -152,10 +152,10 @@ export default function ApplicationsHeader() {
             </div>
           </div>
           <div className="bg-white py-0.5 md:py-0 md:px-0.5">
-            <Link href={'/admin/interviewed-applications'}>
+            <Link href={'/admin/applications/interviewed'}>
               <a
                 className={`py-2 px-2 text-white flex md:items-center md:justify-center space-x-5 md:space-x-0 h-full w-full cursor-pointer text-sm md:text-base lg:text-lg ${
-                  router.pathname == '/admin/interviewed-applications'
+                  router.pathname == '/admin/applications/interviewed'
                     ? 'bg-blue-850'
                     : 'bg-red-850 hover:bg-blue-850'
                 }`}

@@ -27,19 +27,19 @@ function Admin() {
           <Link href={'/admin/interviewers'}>
             <a className="my-5">All Interviewers</a>
           </Link>
-          <Link href={'/admin/data/awardees'}>
+          <Link href={'/admin/constants/awardees'}>
             <a className="my-5">Update Awardees List</a>
           </Link>
-          <Link href={'/admin/data/members'}>
+          <Link href={'/admin/constants/members'}>
             <a className="my-5">Update Members List</a>
           </Link>
-          <Link href={'/admin/data/monthStories'}>
+          <Link href={'/admin/constants/monthStories'}>
             <a className="my-5">Update Month Stories</a>
           </Link>
-          <Link href={'/admin/data/newsletters'}>
+          <Link href={'/admin/constants/newsletters'}>
             <a className="my-5">Update Newsletters</a>
           </Link>
-          <Link href={'/admin/data/successful-scholars'}>
+          <Link href={'/admin/constants/successful-scholars'}>
             <a className="my-5">Update Successful Scholars List</a>
           </Link>
         </div>
