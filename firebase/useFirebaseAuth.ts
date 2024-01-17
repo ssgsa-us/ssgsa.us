@@ -7,8 +7,9 @@ import { User } from '../classes/user'
 const formatAuthUser = (id: string, user: User) => ({
   id: id,
   email: user.email,
-  role: user.role,
-  sets: user.sets,
+  roles: user.roles,
+  review_sets: user.review_sets,
+  interview_sets: user.interview_sets,
   verificationEmailEpoch: user.verificationEmailEpoch,
 })
 

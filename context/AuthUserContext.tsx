@@ -6,8 +6,9 @@ const authUserContext = createContext({
   authUser: {
     id: '',
     email: '',
-    role: '',
-    sets: [],
+    roles: [],
+    review_sets: [],
+    interview_sets: [],
     verificationEmailEpoch: null,
   },
   loading: true,
