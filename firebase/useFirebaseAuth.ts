@@ -1,3 +1,4 @@
+import router from 'next/router'
 import { useState, useEffect } from 'react'
 import firebase, { auth } from './index'
 import { AuthUser } from '../types'
@@ -50,8 +51,7 @@ export default function useFirebaseAuth() {
 
   const signOut = () =>
     auth.signOut().then(() => {
-      setAuthUser(null)
-      setLoading(true)
+      router.push('/signin')
     })
 
   // listen for firebase state change

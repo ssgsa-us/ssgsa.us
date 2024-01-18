@@ -24,7 +24,7 @@ const authUserContext = createContext({
     auth.createUserWithEmailAndPassword(email, password),
   sendPasswordResetEmail: async (email: string): Promise<void> =>
     auth.sendPasswordResetEmail(email),
-  signOut: async () => auth.signOut().then(() => {}),
+  signOut: async () => auth.signOut(),
 })
 
 export function AuthUserProvider({ children }) {

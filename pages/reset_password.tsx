@@ -22,10 +22,13 @@ export default function ResetPassword() {
     if (!loading) return
 
     if (authUser && authUser.email) {
-      if (authUser.role === Roles.ADMIN) router.push('/admin')
-      else if (authUser.role === Roles.INTERVIEWER) router.push('/interviewer')
-      else if (authUser.role === Roles.REVIEWER) router.push('/reviewer')
-      else router.push('/application-portal')
+      if (authUser.roles.includes(Roles.ADMIN)) router.push('/admin')
+      else if (authUser.roles.includes(Roles.INTERVIEWER))
+        router.push('/interviewer')
+      else if (authUser.roles.includes(Roles.REVIEWER)) router.push('/reviewer')
+      else if (authUser.roles.includes(Roles.APPLICANT))
+        router.push('/application-portal')
+      else router.push('/')
     }
   }, [loading, authUser])
 

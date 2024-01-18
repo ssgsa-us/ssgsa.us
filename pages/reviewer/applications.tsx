@@ -22,11 +22,11 @@ function ReviewerApplications() {
   const { authUser } = useAuth()
   const [applications, setApplications] = useState<Applications>({})
   const [selectedSet, setSelectedSet] = useState<string>(
-    authUser.sets.length ? authUser.sets[0] : '',
+    authUser.review_sets.length ? authUser.review_sets[0] : '',
   )
   const [pageReady, setPageReady] = useState<boolean>(false)
   const [instructions, setInstructions] = useState<ReviewerInstructionsType>({})
-  const allSets = authUser.sets
+  const allSets = authUser.review_sets
 
   useEffect(() => {
     getReviewerInstructions()

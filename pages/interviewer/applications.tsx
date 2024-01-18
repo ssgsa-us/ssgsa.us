@@ -22,13 +22,13 @@ function InterviewerApplications() {
   const { authUser } = useAuth()
   const [applications, setApplications] = useState<Applications>()
   const [selectedSet, setSelectedSet] = useState<string>(
-    authUser.sets.length ? authUser.sets[0] : '',
+    authUser.interview_sets.length ? authUser.interview_sets[0] : '',
   )
   const [pageReady, setPageReady] = useState<boolean>(false)
   const [instructions, setInstructions] = useState<InterviewerInstructionsType>(
     {},
   )
-  const allSets = authUser.sets
+  const allSets = authUser.interview_sets
 
   useEffect(() => {
     getInterviewerInstructions()

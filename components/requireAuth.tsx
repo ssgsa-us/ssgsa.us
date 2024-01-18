@@ -21,7 +21,7 @@ export default function requireAuth(ChildComponent, authRole) {
 
       if (!authUser || !authUser.email) router.push('/signin')
       else {
-        if (authUser.role !== authRole) router.push('/404')
+        if (!authUser.roles.includes(authRole)) router.push('/404')
         else {
           if (authRole === Roles.APPLICANT) {
             if (auth.currentUser.emailVerified) setPageReady(true)
