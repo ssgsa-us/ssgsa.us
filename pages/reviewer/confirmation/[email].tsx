@@ -66,7 +66,7 @@ function ReviewerConfirmation() {
                   email,
                   0,
                   new Date().getTime(),
-                  Roles.REVIEWER,
+                  [Roles.REVIEWER],
                 )
               })
               .finally(() => {

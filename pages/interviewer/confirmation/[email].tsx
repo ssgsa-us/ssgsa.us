@@ -66,7 +66,7 @@ function InterviewerConfirmation() {
                   email,
                   0,
                   new Date().getTime(),
-                  Roles.INTERVIEWER,
+                  [Roles.INTERVIEWER],
                 )
               })
               .finally(() => {

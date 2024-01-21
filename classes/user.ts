@@ -4,23 +4,26 @@ export class User {
   name: string
   email: string
   mobile: Number | null
-  role: string
-  sets: Array<string>
+  roles: Array<string>
+  review_sets: Array<string>
+  interview_sets: Array<string>
   verificationEmailEpoch: number
 
   constructor(
     name: string,
     email: string,
     mobile: Number | null,
-    role: string,
-    sets: Array<string>,
+    roles: Array<string>,
+    review_sets: Array<string>,
+    interview_sets: Array<string>,
     verificationEmailEpoch: number,
   ) {
     this.name = name
     this.email = email
     this.mobile = mobile
-    this.role = role
-    this.sets = sets
+    this.roles = roles
+    this.review_sets = review_sets
+    this.interview_sets = interview_sets
     this.verificationEmailEpoch = verificationEmailEpoch
   }
 }
@@ -31,8 +34,9 @@ export const userController = {
       name: user.name,
       email: user.email,
       mobile: user.mobile,
-      role: user.role,
-      sets: user.sets,
+      roles: user.roles,
+      review_sets: user.review_sets,
+      interview_sets: user.interview_sets,
     }
   },
 
@@ -45,8 +49,9 @@ export const userController = {
       data.name,
       data.email,
       data.mobile,
-      data.role,
-      data.sets,
+      data.roles,
+      data.review_sets,
+      data.interview_sets,
       data.verificationEmailEpoch,
     )
 

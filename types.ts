@@ -5,8 +5,9 @@ export type Users = { [key: string]: User }
 export type AuthUser = {
   id: string
   email: string
-  role: string // Used to authorize user
-  sets: Array<string> // Sets are only used for reviewer and interviewer
+  roles: Array<string> // Used to authorize user
+  review_sets: Array<string> // Sets used for reviewer
+  interview_sets: Array<string> // Sets used for interviewer
   verificationEmailEpoch: number
 }
 

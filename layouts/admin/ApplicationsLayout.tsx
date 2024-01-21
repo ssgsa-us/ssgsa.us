@@ -1,4 +1,4 @@
-import ApplicationsHeader from '../../components/Admin/Headers/Applictions'
+import ApplicationsHeader from '../../components/Admin/Headers/Applications'
 import Footer from '../../components/Footer'
 import styles from '../../styles/Home.module.css'
 

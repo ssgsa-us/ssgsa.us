@@ -6,7 +6,7 @@ import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/AdminLayout'
 import { Users } from '../../../types'
 import { getUsersByRole } from '../../api/getUserDetails'
-import { updateUserSets } from '../../api/updateUserSets'
+import { updateInterviewSets } from '../../api/updateUserSets'
 
 type SelectedSetsType = { [key: string]: Array<string> }
 
@@ -22,7 +22,7 @@ function InterviewersList() {
         Object.keys(data).map((interviewerId) =>
           setSelectedSets((prev) => ({
             ...prev,
-            [interviewerId]: data[interviewerId].sets,
+            [interviewerId]: data[interviewerId].interview_sets,
           })),
         )
       })
@@ -71,7 +71,7 @@ function InterviewersList() {
                       {interviewers[interviewerId].email}
                     </td>
                     <td className="border border-blue-850 p-2">
-                      {interviewers[interviewerId].sets.join(', ')}
+                      {interviewers[interviewerId].interview_sets.join(', ')}
                     </td>
                     <td className="border border-blue-850 p-2">
                       <div className="flex justify-center">
@@ -109,7 +109,7 @@ function InterviewersList() {
                       <button
                         className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-blue-850"
                         onClick={() => {
-                          updateUserSets(
+                          updateInterviewSets(
                             interviewerId,
                             selectedSets[interviewerId],
                           )
@@ -118,7 +118,7 @@ function InterviewersList() {
                                 ...prev,
                                 [interviewerId]: {
                                   ...prev[interviewerId],
-                                  sets: selectedSets[interviewerId],
+                                  interview_sets: selectedSets[interviewerId],
                                 },
                               })),
                             )

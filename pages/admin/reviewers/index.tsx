@@ -6,7 +6,7 @@ import Roles from '../../../constants/roles'
 import AdminLayout from '../../../layouts/admin/AdminLayout'
 import { Users } from '../../../types'
 import { getUsersByRole } from '../../api/getUserDetails'
-import { updateUserSets } from '../../api/updateUserSets'
+import { updateReviewSets } from '../../api/updateUserSets'
 
 type SelectedSetsType = { [key: string]: Array<string> }
 
@@ -22,7 +22,7 @@ function ReviewersList() {
         Object.keys(data).map((reviewerId) =>
           setSelectedSets((prev) => ({
             ...prev,
-            [reviewerId]: data[reviewerId].sets,
+            [reviewerId]: data[reviewerId].review_sets,
           })),
         )
       })
@@ -71,7 +71,7 @@ function ReviewersList() {
                       {reviewers[reviewerId].email}
                     </td>
                     <td className="border border-blue-850 p-2">
-                      {reviewers[reviewerId].sets.join(', ')}
+                      {reviewers[reviewerId].review_sets.join(', ')}
                     </td>
                     <td className="border border-blue-850 p-2">
                       <div className="flex justify-center">
@@ -107,13 +107,13 @@ function ReviewersList() {
                       <button
                         className="text-white text-base md:text-lg py-1 px-3 rounded-lg bg-blue-850"
                         onClick={() => {
-                          updateUserSets(reviewerId, selectedSets[reviewerId])
+                          updateReviewSets(reviewerId, selectedSets[reviewerId])
                             .then(() =>
                               setReviewers((prev) => ({
                                 ...prev,
                                 [reviewerId]: {
                                   ...prev[reviewerId],
-                                  sets: selectedSets[reviewerId],
+                                  review_sets: selectedSets[reviewerId],
                                 },
                               })),
                             )

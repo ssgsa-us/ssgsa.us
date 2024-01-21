@@ -53,7 +53,7 @@ export const getUserDetailsByIds = async (userIds: Array<string>) => {
 export const getUsersByRole = async (role: string) => {
   let users: Users = await firestore
     .collection('users')
-    .where('role', '==', role)
+    .where('roles', 'array-contains', role)
     .withConverter(userController)
     .get()
     .then(async (users_data: firebase.firestore.QuerySnapshot<User>) => {

@@ -17,7 +17,7 @@ export default function Portal() {
   useEffect(() => {
     if (!loading && authUser && authUser.email) {
       // If authUser is applicant, then he/she should have read the rules
-      if (authUser.role === Roles.APPLICANT) {
+      if (authUser.roles.includes(Roles.APPLICANT)) {
         setFirstCheck(true)
         setSecondCheck(true)
         setThirdCheck(true)

@@ -1,3 +1,4 @@
+import router from 'next/router'
 import { useState, useEffect } from 'react'
 import firebase, { auth } from './index'
 import { AuthUser } from '../types'
@@ -7,8 +8,9 @@ import { User } from '../classes/user'
 const formatAuthUser = (id: string, user: User) => ({
   id: id,
   email: user.email,
-  role: user.role,
-  sets: user.sets,
+  roles: user.roles,
+  review_sets: user.review_sets,
+  interview_sets: user.interview_sets,
   verificationEmailEpoch: user.verificationEmailEpoch,
 })
 
@@ -49,8 +51,7 @@ export default function useFirebaseAuth() {
 
   const signOut = () =>
     auth.signOut().then(() => {
-      setAuthUser(null)
-      setLoading(true)
+      router.push('/signin')
     })
 
   // listen for firebase state change
