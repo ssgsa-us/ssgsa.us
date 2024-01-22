@@ -65,7 +65,7 @@ function PartialApplications() {
                       {applications[applId].contact}
                     </td>
                     <td className="border border-blue-850 border-seperate p-2 text-center">
-                      <Link href={`/admin/view-application/${applId}`}>
+                      <Link href={`/admin/application/${applId}`}>
                         <a className="text-white text-base md:text-lg bg-blue-850 py-1 px-3 rounded-lg">
                           View
                         </a>
