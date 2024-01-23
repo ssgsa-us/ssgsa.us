@@ -74,14 +74,11 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
   const validation = () => {
     setError('')
 
-    // Save all valid workshops
-    let workshopsTemp: PosterOrWorkshopsType = {}
     const keys = Object.keys(workshops)
     for (let i = 0; i < keys.length; i++) {
       const workshop = workshops[Number(keys[i])]
       // Check if user provide some input, then do validation and show error if any
-      // then add valid workshop to workshops
-      if (workshopRequired(workshop))
+      if (workshopRequired(workshop)) {
         if (
           workshop.category != '' &&
           (workshop.category === 'Other' ? !!workshop.otherCategory : true) &&
@@ -89,10 +86,7 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
           (workshop.category === 'Poster' || workshop.duration) &&
           workshop.description
         ) {
-          if (workshop.description.split(' ').length <= 50) {
-            // Add valid workshop
-            workshopsTemp[Number(keys[i])] = workshop
-          } else {
+          if (workshop.description.split(' ').length > 50) {
             setError(
               'Description limit is 50 words for Poster/Workshop/Summer School ' +
                 String(i + 1) +
@@ -108,8 +102,11 @@ const Step5 = ({ applicationData, status, setStatus }: Props) => {
           )
           return false
         }
+      } else {
+        setError('Please remove empty Poster/Workshop ' + String(i + 1))
+        return false
+      }
     }
-    setWorkshops(workshopsTemp)
     return true
   }
 

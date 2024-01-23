@@ -118,14 +118,11 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
   const validation = () => {
     setError('')
 
-    // Save all valid experiences
-    let experiences: ResearchExperiencesType = {}
     const keys = Object.keys(researchData)
     for (let i = 0; i < keys.length; i++) {
       const experience = researchData[Number(keys[i])]
       // Check if user provide some input, then do validation and show error if any
-      // then add valid experience to experiences
-      if (experienceRequired(experience))
+      if (experienceRequired(experience)) {
         if (
           experience.university &&
           experience.title &&
@@ -136,23 +133,17 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
           experience.description
         ) {
           if (experience.description.split(' ').length <= 200) {
-            // Save all valid publications
-            let publications: ResearchExperiencesType[number]['publications'] =
-              {}
             const pubKeys = Object.keys(experience.publications)
             for (let j = 0; j < pubKeys.length; j++) {
               // Check if user provide some input, then do validation and show error if any
-              // then add valid publication to publications
               const publication = experience.publications[Number(pubKeys[j])]
 
               if (publicationRequired(publication)) {
                 if (
-                  publication.titleAndDate &&
-                  publication.conferenceName &&
-                  publication.link
+                  !publication.titleAndDate ||
+                  !publication.conferenceName ||
+                  !publication.link
                 ) {
-                  publications[Number(pubKeys[j])] = publication
-                } else {
                   setError(
                     'Please fill all fields of Publication ' +
                       String(j + 1) +
@@ -162,13 +153,15 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
                   )
                   return false
                 }
+              } else {
+                setError(
+                  'Please remove empty Publication ' +
+                    String(j + 1) +
+                    ' in Experience ' +
+                    String(i + 1),
+                )
+                return false
               }
-            }
-
-            // Add valid experience with valid publications
-            experiences[Number(keys[i])] = {
-              ...experience,
-              publications,
             }
           } else {
             setError(
@@ -186,8 +179,11 @@ const Step3 = ({ applicationData, status, setStatus }: Props) => {
           )
           return false
         }
+      } else {
+        setError('Please remove empty Experience ' + String(i + 1))
+        return false
+      }
     }
-    setResearchData(experiences)
     return true
   }
 

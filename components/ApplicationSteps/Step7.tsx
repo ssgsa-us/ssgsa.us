@@ -57,16 +57,15 @@ const Step7 = ({ applicationData, status, setStatus }: Props) => {
   const validation = () => {
     setError('')
 
-    // Save all valid activities
-    let activities: ExtraCurricularsType = {}
     const keys = Object.keys(extraCurr)
     for (let i = 0; i < keys.length; i++) {
       const activity = extraCurr[Number(keys[i])]
-      if (activity.description || activity.document)
-        activities[Number(keys[i])] = activity
+      if (!activity.description && !activity.document) {
+        setError('Please remove empty Activity ' + String(i + 1))
+        return false
+      }
     }
 
-    setExtraCurr(activities)
     return true
   }
 

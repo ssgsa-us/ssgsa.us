@@ -80,14 +80,11 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
   const validation = () => {
     setError('')
 
-    // Save all valid experiences
-    let experiences: WorkExperiencesType = {}
     const keys = Object.keys(workExperiences)
     for (let i = 0; i < keys.length; i++) {
       const experience = workExperiences[Number(keys[i])]
       // Check if user provide some input, then do validation and show error if any
-      // then add valid experience to experiences
-      if (experienceRequired(experience))
+      if (experienceRequired(experience)) {
         if (
           experience.organization &&
           experience.title &&
@@ -96,10 +93,7 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           experience.endDate &&
           experience.description
         ) {
-          if (experience.description.split(' ').length <= 200) {
-            // Add valid experience
-            experiences[Number(keys[i])] = experience
-          } else {
+          if (experience.description.split(' ').length > 200) {
             setError(
               'Description limit is 200 words for Experience ' +
                 String(i + 1) +
@@ -115,8 +109,11 @@ const Step4 = ({ applicationData, status, setStatus }: Props) => {
           )
           return false
         }
+      } else {
+        setError('Please remove empty Experience ' + String(i + 1))
+        return false
+      }
     }
-    setWorkExperiences(experiences)
     return true
   }
 
