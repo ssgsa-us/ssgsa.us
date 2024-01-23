@@ -100,7 +100,9 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
     record.startedYear &&
     record.completionYear &&
     record.gradeCriteria &&
-    record.grades &&
+    (record.degreeLevel === 'Master' || record.degreeLevel === 'Doctoral'
+      ? true
+      : record.grades) &&
     record.document
 
   const validation = () => {
@@ -350,7 +352,7 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                     description={
                       academicData[key].degreeLevel === 'Master' ||
                       academicData[key].degreeLevel === 'Doctoral'
-                        ? "If you haven't yet received any marksheet from your master's or doctoral program, please write 1 below"
+                        ? "If you haven't yet received any marksheet from your master's or doctoral program, leave it as 0"
                         : ''
                     }
                     type="number"
@@ -363,7 +365,12 @@ const Step2 = ({ applicationData, status, setStatus }: Props) => {
                       )
                         updateField(key, 'grades', Number(e.target.value))
                     }}
-                    required={true}
+                    required={
+                      academicData[key].degreeLevel === 'Master' ||
+                      academicData[key].degreeLevel === 'Doctoral'
+                        ? false
+                        : true
+                    }
                     step="0.01"
                     minimum={0}
                     maximum={
