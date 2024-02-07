@@ -127,6 +127,7 @@ const SignUp = () => {
                 <input
                   className="col-span-7 sm:col-span-4 p-1 rounded"
                   name="Mobile"
+                  placeholder="Please mention country code too"
                   type="number"
                   value={mobile}
                   onChange={(e) => setMobile(Number(e.target.value))}

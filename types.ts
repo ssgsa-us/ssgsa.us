@@ -81,8 +81,10 @@ export type CurricularActivitiesType = {
 }
 
 export type ExtraCurricularsType = {
-  description: string
-  document: string
+  [key: number]: {
+    description: string
+    document: string
+  }
 }
 
 export type AnswerType = {

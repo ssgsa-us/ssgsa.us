@@ -83,7 +83,7 @@ export class ApplicationData {
     this.extra_curriculars = extra_curriculars
   }
 
-  step8(sop_answers: ExtraCurricularsType) {
+  step8(sop_answers: AnswerType) {
     this.sop_answers = sop_answers
   }
 

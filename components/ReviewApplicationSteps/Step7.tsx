@@ -14,14 +14,22 @@ const Step7 = ({ extraCurrActivities }: Props) => (
     {!extraCurrActivities || !Object.keys(extraCurrActivities).length ? (
       <p className="font-bold mb-4">No Extra Curricular Activities Added</p>
     ) : (
-      <>
-        <Field name="Description" value={extraCurrActivities.description} />
-        <FileField
-          fieldName="Corresponding Documents"
-          fileName="ExtraCurricularActivities.pdf"
-          url={extraCurrActivities.document}
-        />
-      </>
+      Object.keys(extraCurrActivities).map((key, index) => (
+        <div className="mb-10" key={key}>
+          <p className="text-black text-lg sm:text-xl font-extrabold">
+            Activity {index + 1}
+          </p>
+          <Field
+            name="Description"
+            value={extraCurrActivities[Number(key)].description}
+          />
+          <FileField
+            fieldName="Corresponding Documents"
+            fileName="ExtraCurricularActivities.pdf"
+            url={extraCurrActivities[Number(key)].document}
+          />
+        </div>
+      ))
     )}
   </div>
 )
