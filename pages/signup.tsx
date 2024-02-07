@@ -123,6 +123,9 @@ const SignUp = () => {
               <div className="grid grid-cols-7 gap-1 sm:gap-4 m-4">
                 <p className="col-span-2 sm:text-right text-blue-850 text-base md:text-lg">
                   Mobile
+                  <span className="text-xs md:text-sm">
+                    Please mention country code too
+                  </span>
                 </p>
                 <input
                   className="col-span-7 sm:col-span-4 p-1 rounded"
