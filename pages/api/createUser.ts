@@ -23,7 +23,7 @@ export const createUser = (
     verificationEmailEpoch,
   )
 
-  firestore
+  return firestore
     .doc(path.join('users', userUID))
     .withConverter(userController)
     .set(user)

@@ -297,6 +297,8 @@ export type InterviewerInstructionsType = {
 
 export type ReviewerInviteType = {
   name: string
+  email: string
+  sets: Array<string>
   reminder: number
   response: 'YES' | 'NO'
   account_created: boolean
