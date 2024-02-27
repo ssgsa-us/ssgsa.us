@@ -1,10 +1,13 @@
 import admin from 'firebase-admin'
-import serviceAccount from '../serviceAccountKey.json'
 
 if (!process.browser)
   if (!admin.apps.length) {
     admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+      credential: admin.credential.cert({
+        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+        privateKey: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY,
+        clientEmail: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
+      }),
       databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
     })
   }
