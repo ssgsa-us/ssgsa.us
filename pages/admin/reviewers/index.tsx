@@ -71,8 +71,8 @@ function ReviewersList() {
   }
 
   const createAccounts = () => {
-    const password = generateRandomPassword()
     accReviewers.map(async (reviewer) => {
+      const password = generateRandomPassword()
       await createReviewer(
         reviewer.name,
         reviewer.email,
@@ -125,6 +125,7 @@ function ReviewersList() {
               <button
                 className="text-white text-medium md:text-lg py-1 px-3 rounded-lg bg-blue-850"
                 onClick={createAccounts}
+                disabled
               >
                 Create Accounts
               </button>
