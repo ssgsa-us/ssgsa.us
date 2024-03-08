@@ -296,3 +296,12 @@ export type InterviewerInstructionsType = {
   STEP5_INSTRUCTION6?: string
   STEP6_INSTRUCTION?: string
 }
+
+export type ReviewerInviteType = {
+  name: string
+  email: string
+  sets: Array<string>
+  reminder: number
+  response: 'YES' | 'NO'
+  account_created: boolean
+}

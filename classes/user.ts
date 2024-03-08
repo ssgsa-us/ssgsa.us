@@ -37,6 +37,7 @@ export const userController = {
       roles: user.roles,
       review_sets: user.review_sets,
       interview_sets: user.interview_sets,
+      verificationEmailEpoch: user.verificationEmailEpoch,
     }
   },
 

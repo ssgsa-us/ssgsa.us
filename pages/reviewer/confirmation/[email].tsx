@@ -1,20 +1,14 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import Roles from '../../../constants/roles'
-import { useAuth } from '../../../context/AuthUserContext'
-import firebase from '../../../firebase'
 import ReviewerLayout from '../../../layouts/reviewer'
-import { createUser } from '../../api/createUser'
 import {
   getReviewerInvite,
   updateReviewerResponse,
 } from '../../api/reviewerInvite'
+import { ReviewerInviteType } from '../../../types'
 
 function ReviewerConfirmation() {
-  const { createUserWithEmailAndPassword } = useAuth()
-  const [password, setPassword] = useState<string>('')
-  const [reviewerInvite, setReviewerInvite] =
-    useState<firebase.firestore.DocumentData>(null)
+  const [reviewerInvite, setReviewerInvite] = useState<ReviewerInviteType>(null)
   const [error, setError] = useState<string>('')
   const router = useRouter()
   const email = String(router.query['email'])
@@ -36,59 +30,13 @@ function ReviewerConfirmation() {
       .catch(() => setError('Network issue, Try Again!'))
   }, [email])
 
-  const proceedYes = () => {
+  const proceed = (response) => {
     if (!reviewerInvite || !reviewerInvite.name) return
-
     setError('')
-    if (!password) {
-      setError('Please provide PASSWORD to create your account.')
-      return
-    }
 
-    createUserWithEmailAndPassword(email, password)
-      .then(async (result: firebase.auth.UserCredential) => {
-        result.user
-          .sendEmailVerification()
-          .then(() =>
-            alert(
-              'An email verification mail is sent to you. Please follow the instructions to verify your email.',
-            ),
-          )
-          .finally(() => {
-            // Update reviewer response to 'YES'
-            updateReviewerResponse(email, 'YES')
-              .then(() => {
-                // add reviewer data to firestore database
-                // Mobile not required for now so giving 0 for now
-                createUser(
-                  result.user.uid,
-                  reviewerInvite.name,
-                  email,
-                  0,
-                  new Date().getTime(),
-                  [Roles.REVIEWER],
-                )
-              })
-              .finally(() => {
-                alert('Thanks for responding')
-                router.push('/reviewer')
-              })
-          })
-      })
-      .catch((error) => {
-        if (error.code === 'auth/weak-password') {
-          setError('The password is too weak.')
-        } else {
-          setError(error.message.replace('Firebase', ''))
-        }
-      })
-  }
-
-  const proceedNo = () => {
-    if (!reviewerInvite || !reviewerInvite.name) return
-
-    updateReviewerResponse(email, 'NO').then(() => {
-      alert('Response Updated, Thank you!')
+    // Update reviewer response
+    updateReviewerResponse(email, response).then(() => {
+      alert('Thanks for responding')
       router.push('/')
     })
   }
@@ -101,13 +49,9 @@ function ReviewerConfirmation() {
         </h1>
         <div className="bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10 my-10">
           <p className="my-5 text-sm sm:text-lg text-blue-850">
-            If you agree to review SSGSA Applications this year, please first
-            enter a PASSWORD that you will use to log in, and then click on the
-            YES button. If you are declining to review, please press the NO
-            button without needing to enter the password.
-          </p>
-          <p className="my-5 text-sm sm:text-lg text-blue-850">
-            Note: Your email will be your username.
+            If you agree to review SSGSA Applications this year, please click on
+            the YES button. If you are declining to review, please press the NO
+            button.
           </p>
           {error ? (
             <p className="text-red-850 text-center pt-1">
@@ -115,14 +59,6 @@ function ReviewerConfirmation() {
             </p>
           ) : null}
           <div className="flex flex-col items-center my-10">
-            <input
-              name="Password"
-              placeholder="Provide your PASSWORD"
-              type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl p-2 mt-1 md:w-3/4 lg:w-1/2"
-            />
             <div className="flex mt-10">
               <button
                 className={`text-white text-base md:text-lg rounded-lg ${
@@ -131,7 +67,7 @@ function ReviewerConfirmation() {
                     : 'bg-red-850'
                 } py-2 px-5 order-1 sm:order-2
                 `}
-                onClick={proceedYes}
+                onClick={() => proceed('YES')}
                 disabled={!reviewerInvite || !reviewerInvite.name}
               >
                 YES
@@ -143,7 +79,7 @@ function ReviewerConfirmation() {
                     : 'bg-red-850'
                 } ml-5 py-2 px-5 order-1 sm:order-2
                 `}
-                onClick={proceedNo}
+                onClick={() => proceed('NO')}
                 disabled={!reviewerInvite || !reviewerInvite.name}
               >
                 NO
