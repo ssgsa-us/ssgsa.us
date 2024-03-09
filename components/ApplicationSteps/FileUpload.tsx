@@ -69,7 +69,7 @@ const FileUploadComponent = ({ fileName, fileUrl, setFileUrl }: Props) => {
               accept="application/pdf"
               onChange={(e) => {
                 if (e.target.files[0]) {
-                  if (e.target.files[0].name.split('.')[1] === 'pdf') {
+                  if (e.target.files[0].name.split('.').pop() === 'pdf') {
                     setFile(e.target.files[0])
                     setNewFileSelected(true)
                   } else {
