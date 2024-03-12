@@ -11,8 +11,9 @@ export default function Home() {
     <MainLayout>
       <div className="bg-gray-350 text-red-850 font-black w-screen -ml-2 sm:-ml-5 md:-ml-10 lg:-ml-20 xl:-ml-40 mt-8 lg:mr-2 lg:p-3 p-2">
         <marquee className="flex items-center">
+          <p>Deadline for application has been EXTENDED to March 12, 2024 (11:59 pm IST).</p>
           <Link href="/application-portal">
-            <a>Click here to apply</a>
+            <a>Click here to apply.</a>
           </Link>
         </marquee>
       </div>
