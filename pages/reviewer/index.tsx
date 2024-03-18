@@ -51,7 +51,7 @@ function ReviewerPortal() {
           </div>
           <div className="ml-5 my-2">
             <p className="text-lg font-bold">
-              Essay-Type Question ({instructions.SOP_MAX_MARKS} points)
+              Essay-Type Question ({instructions.SOP_MAX_MARKS * 5} points)
             </p>
             <p className="text-lg">
               Motivation for higher education as gauged from essays.
