@@ -305,3 +305,12 @@ export type ReviewerInviteType = {
   response: 'YES' | 'NO'
   account_created: boolean
 }
+
+export type InterviewerInviteType = {
+  name: string
+  email: string
+  sets: Array<string>
+  reminder: number
+  response: 'YES' | 'NO'
+  account_created: boolean
+}

@@ -9,7 +9,7 @@ type Props = {
   updateSets: (sets: Array<string>) => void
 }
 
-export default function ReviewersTableRow({
+export default function EvaluatorTableRow({
   index,
   name,
   email,

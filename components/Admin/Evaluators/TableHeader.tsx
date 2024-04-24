@@ -1,4 +1,4 @@
-export default function ReviewersTableHead() {
+export default function EvaluatorsTableHeader() {
   return (
     <thead>
       <tr>
