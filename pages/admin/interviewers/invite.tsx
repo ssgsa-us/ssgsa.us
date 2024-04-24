@@ -76,7 +76,9 @@ function InviteInterviewers() {
           if (index === interviewers.length - 1) {
             setTimeout(() => {
               setLoading(false)
-              alert('Sent invites to all interviewers!')
+              // For now, no need to send invitation mail
+              // alert('Sent invites to all interviewers!')
+              alert('Successfully uploaded all interviewers details')
             }, 1000)
           }
         }, 1000 * index)

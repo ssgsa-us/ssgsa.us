@@ -8,7 +8,7 @@ export const addInterviewerInvite = (email: string, name: string) => {
     email: email,
     sets: [],
     reminder: 0,
-    response: '',
+    response: 'YES', // For now, no need to send invitation mail
     account_created: false,
   })
 }

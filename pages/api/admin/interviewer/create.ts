@@ -13,6 +13,7 @@ export default async function handler(
 ) {
   const { name, email, password, sets } = req.body
 
+  let reviewer: boolean = false
   try {
     const userId: string | null = await adminFirestore
       .collection('users')
@@ -36,6 +37,7 @@ export default async function handler(
         verificationEmailEpoch: new Date().getTime(),
       })
     } else {
+      reviewer = true
       await adminFirestore.doc(`users/${userId}`).update({
         roles: firebaseAdmin.firestore.FieldValue.arrayUnion[Roles.INTERVIEWER],
         interview_sets: sets,
@@ -47,7 +49,7 @@ export default async function handler(
       .doc(email)
       .update({ account_created: true })
 
-    res.status(200).send({ success: true })
+    res.status(200).send({ success: true, reviewer })
   } catch (e) {
     console.log(e)
     res.status(400).send({ success: false })

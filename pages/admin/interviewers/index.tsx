@@ -14,12 +14,15 @@ import {
   updateAcceptedInterviewSets,
 } from '../../api/interviewerInvite'
 
+type UserCred = { name: string; email: string; password: string }
+
 function InterviewersList() {
   const [accInterviewers, setAccInterviewers] = useState<
     Array<InterviewerInviteType>
   >([])
   const [interviewers, setInterviewers] = useState<Users>({})
   const [pageReady, setPageReady] = useState<boolean>(false)
+  const [newIntCred, setNewIntCred] = useState<UserCred[]>([])
 
   useEffect(() => {
     getAcceptedIntWithoutAccount()
@@ -40,7 +43,7 @@ function InterviewersList() {
     sets: Array<string>,
   ) => {
     try {
-      const response = await fetch('/api/admin/interviewer/create', {
+      const result = await fetch('/api/admin/interviewer/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,12 +51,24 @@ function InterviewersList() {
         body: JSON.stringify({ name, email, password, sets }),
       })
 
-      try {
-        if (response)
-          await sendInterviewerCredMail(name, email, password, sets.join(' '))
-      } catch (e) {
-        console.log('Error while sending credential mail to', email)
+      const response = await result.json()
+      if (response != null && response.success === true) {
+        if (!response.reviewer) {
+          setNewIntCred((prev) => [...prev, { name, email, password }])
+        } else {
+          setNewIntCred((prev) => [
+            ...prev,
+            { name, email, password: 'REVIEWER Password' },
+          ])
+        }
       }
+      // For now, no need to send invitation mail
+      // try {
+      //   if (response)
+      //     await sendInterviewerCredMail(name, email, password, sets.join(' '))
+      // } catch (e) {
+      //   console.log('Error while sending credential mail to', email)
+      // }
     } catch (e) {
       console.log('Error while creating user ', email)
     }
@@ -87,6 +102,63 @@ function InterviewersList() {
       {pageReady ? (
         <>
           <div className="mt-10 bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
+            {/* For now, no credential mail is sent from portal, so showing passwords to admin as requested */}
+            {!newIntCred && !newIntCred.length ? null : (
+              <div>
+                <h1 className="text-sm sm:text-xl md:text-2xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
+                  New Interviewers Account Details
+                </h1>
+                <p className="text-xs sm:text-sm">
+                  Save the passwords somewhere, these will not be shown again
+                </p>
+                <div className="flex flex-col items-center">
+                  <div className="overflow-x-auto whitespace-nowrap pb-5 sm:pb-10">
+                    <table className="border-separate p-2">
+                      <thead>
+                        <tr>
+                          <th className="border border-blue-850 p-2 sticky left-0 z-10 bg-gray-200">
+                            S.No.
+                          </th>
+                          <th className="border border-blue-850 p-2 sticky left-0 z-10 bg-gray-200">
+                            Name
+                          </th>
+                          <th
+                            className="border border-blue-850 p-2"
+                            rowSpan={3}
+                          >
+                            Email Address
+                          </th>
+                          <th
+                            className="border border-blue-850 p-2"
+                            rowSpan={3}
+                          >
+                            Password
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {newIntCred.map((account, index) => (
+                          <tr>
+                            <td className="border border-blue-850 p-2 text-center sticky left-0 z-10 bg-gray-200">
+                              {index}
+                            </td>
+                            <td className="border border-blue-850 p-2 sticky left-12 z-10 bg-gray-200">
+                              {account.name}
+                            </td>
+                            <td className="border border-blue-850 p-2">
+                              {account.email}
+                            </td>
+                            <td className="border border-blue-850 p-2">
+                              {account.password}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
             <h1 className="text-sm sm:text-xl md:text-2xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
               Accepted Interviewers
             </h1>
