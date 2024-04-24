@@ -138,7 +138,7 @@ function InterviewersList() {
                       </thead>
                       <tbody>
                         {newIntCred.map((account, index) => (
-                          <tr>
+                          <tr key={account.email}>
                             <td className="border border-blue-850 p-2 text-center sticky left-0 z-10 bg-gray-200">
                               {index}
                             </td>
