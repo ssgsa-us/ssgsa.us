@@ -30,7 +30,7 @@ function InterviewersList() {
       .catch(() => alert('Try again, network error!'))
       .finally(() => setPageReady(true))
 
-    getUsersByRole(Roles.REVIEWER)
+    getUsersByRole(Roles.INTERVIEWER)
       .then((data) => setInterviewers(data))
       .catch(() => alert('Try again, network error!'))
       .finally(() => setPageReady(true))
@@ -53,7 +53,7 @@ function InterviewersList() {
 
       const response = await result.json()
       if (response != null && response.success === true) {
-        if (!response.reviewer) {
+        if (!response.isReviewer) {
           setNewIntCred((prev) => [...prev, { name, email, password }])
         } else {
           setNewIntCred((prev) => [
