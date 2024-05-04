@@ -232,7 +232,7 @@ function InterviewersList() {
                         index={index + 1}
                         name={interviewers[interviewerId].name}
                         email={interviewers[interviewerId].email}
-                        sets={interviewers[interviewerId].review_sets}
+                        sets={interviewers[interviewerId].interview_sets}
                         updateSets={(selectedSets: Array<string>) => {
                           updateInterviewSets(interviewerId, selectedSets)
                             .then(() =>
@@ -240,7 +240,7 @@ function InterviewersList() {
                                 ...prev,
                                 [interviewerId]: {
                                   ...prev[interviewerId],
-                                  review_sets: selectedSets[interviewerId],
+                                  interview_sets: selectedSets[interviewerId],
                                 },
                               })),
                             )
