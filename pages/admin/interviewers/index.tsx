@@ -103,7 +103,7 @@ function InterviewersList() {
         <>
           <div className="mt-10 bg-gray-200 rounded-3xl py-5 px-3 sm:py-10 sm:px-10">
             {/* For now, no credential mail is sent from portal, so showing passwords to admin as requested */}
-            {!newIntCred && !newIntCred.length ? null : (
+            {!newIntCred || !newIntCred.length ? null : (
               <div>
                 <h1 className="text-sm sm:text-xl md:text-2xl bg-blue-850 my-10 text-white text-center font-extrabold py-2 rounded-tl-3xl rounded-br-3xl">
                   New Interviewers Account Details
@@ -200,7 +200,6 @@ function InterviewersList() {
               <button
                 className="text-white text-medium md:text-lg py-1 px-3 rounded-lg bg-blue-850"
                 onClick={createAccounts}
-                disabled
               >
                 Create Accounts
               </button>
