@@ -39,7 +39,7 @@ export default async function handler(
     } else {
       isReviewer = true
       await adminFirestore.doc(`users/${userId}`).update({
-        roles: firebaseAdmin.firestore.FieldValue.arrayUnion[Roles.INTERVIEWER],
+        roles: firebaseAdmin.firestore.FieldValue.arrayUnion(Roles.INTERVIEWER),
         interview_sets: sets,
       })
     }

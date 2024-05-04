@@ -23,8 +23,11 @@ function InterviewersList() {
   const [interviewers, setInterviewers] = useState<Users>({})
   const [pageReady, setPageReady] = useState<boolean>(false)
   const [newIntCred, setNewIntCred] = useState<UserCred[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
+    if (loading) return
+
     getAcceptedIntWithoutAccount()
       .then((data) => setAccInterviewers(data))
       .catch(() => alert('Try again, network error!'))
@@ -34,7 +37,7 @@ function InterviewersList() {
       .then((data) => setInterviewers(data))
       .catch(() => alert('Try again, network error!'))
       .finally(() => setPageReady(true))
-  }, [])
+  }, [loading])
 
   const createInterviewer = async (
     name: string,
@@ -86,7 +89,9 @@ function InterviewersList() {
   }
 
   const createAccounts = () => {
-    accInterviewers.map(async (interviewer) => {
+    setLoading(true)
+    const totalInt = accInterviewers.length
+    accInterviewers.map(async (interviewer, index) => {
       const password = generateRandomPassword()
       await createInterviewer(
         interviewer.name,
@@ -94,6 +99,9 @@ function InterviewersList() {
         password,
         interviewer.sets,
       )
+      if (index == totalInt - 1) {
+        setLoading(false)
+      }
     })
   }
 
@@ -198,8 +206,11 @@ function InterviewersList() {
               </div>
 
               <button
-                className="text-white text-medium md:text-lg py-1 px-3 rounded-lg bg-blue-850"
+                className={`text-white text-medium md:text-lg py-1 px-3 rounded-lg bg-blue-850
+                    ${!loading ? null : 'opacity-70'}
+                `}
                 onClick={createAccounts}
+                disabled={loading}
               >
                 Create Accounts
               </button>
