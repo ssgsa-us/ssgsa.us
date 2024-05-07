@@ -210,7 +210,8 @@ function InterviewersList() {
                     ${!loading ? null : 'opacity-70'}
                 `}
                 onClick={createAccounts}
-                disabled={loading}
+                // disabled={loading}
+                disabled
               >
                 Create Accounts
               </button>

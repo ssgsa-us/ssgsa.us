@@ -32,47 +32,16 @@ function InterviewerPortal() {
             Motivation for higher studies (
             {instructions.HIGHER_STUDIES_MOTIVATION} Points)
           </p>
-          <p className="my-5 text-lg text-blue-850">
-            We encourage you to probe the students in detail about their plans.
-            Specifically, please try to figure out where higher education abroad
-            stands in their priority list as opposed to taking up alternate
-            career options upon completion of their current degree. Motivation
-            also gauges their genuine love for the subject instead of a wish to
-            travel abroad or getting this scholarship just for improving their
-            CVs. Please do your best to assess if they will be able to persevere
-            in the arduous process of the applications, and later the grad
-            school.
-          </p>
           <p className="my-5 text-lg font-bold italic">
             Communication Skills ({instructions.COMMUNICATION} Points)
-          </p>
-          <p className="my-5 text-lg text-blue-850">
-            A candidate must have basic English language proficiency/fluency.
-            Specifically, please try to assess if they are equipped to prepare
-            their application package and appear for an interview with their
-            prospective supervisor without major flaws in language. However, it
-            does not mean that any special literary/oratory skills have to be
-            rewarded.
           </p>
           <p className="my-5 text-lg font-bold italic">
             Academic or Research Aptitude ({instructions.RESEARCH_APTITUDE}{' '}
             Points)
           </p>
-          <p className="my-5 text-lg text-blue-850">
-            We need to assess the candidate&#39;s knowledge about their field of
-            study or the field of research they are interested in or have done
-            in the past. Specifically, please try to assess fundamental concepts
-            of their subject which would be critical for them in their higher
-            studies.
-          </p>
           <p className="my-5 text-lg font-bold italic">
             Motivation to Give Back ({instructions.MOTIVATION_TO_GO_BACK}{' '}
             Points)
-          </p>
-          <p className="my-5 text-lg text-blue-850">
-            The candidate should be motivated to give back to their community
-            and alma-mater with a consistent track record of leadership roles
-            and helping others.
           </p>
           <p className="mt-10 text-lg text-blue-850">
             For detailed instructions, please go through the following slides:
@@ -83,7 +52,7 @@ function InterviewerPortal() {
                 className="text-white text-lg py-2 px-4 my-2 rounded-3xl bg-red-850"
                 target="_blank"
               >
-                Instructions for Panelists
+                Click here for Slides
               </a>
             </Link>
           </div>
