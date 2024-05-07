@@ -20,7 +20,7 @@ type Applications = {
 
 function InterviewerApplications() {
   const { authUser } = useAuth()
-  const [applications, setApplications] = useState<Applications>()
+  const [applications, setApplications] = useState<Applications>({})
   const [selectedSet, setSelectedSet] = useState<string>(
     authUser.interview_sets.length ? authUser.interview_sets[0] : '',
   )

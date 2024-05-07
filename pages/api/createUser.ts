@@ -1,7 +1,7 @@
 import path from 'path'
 import { User, userController } from '../../classes/user'
 import Roles from '../../constants/roles'
-import { firestore } from '../../firebase'
+import firebase, { firestore } from '../../firebase'
 
 export const createUser = (
   userUID: string,
@@ -29,6 +29,8 @@ export const createUser = (
     .set(user)
 }
 
-export const updateUserRole = (userId: string, role: string) => {
-  firestore.doc(path.join('users', userId)).update({ role })
+export const addNewUserRole = (userId: string, newRole: string) => {
+  firestore.doc(path.join('users', userId)).update({
+    roles: firebase.firestore.FieldValue.arrayUnion[newRole],
+  })
 }

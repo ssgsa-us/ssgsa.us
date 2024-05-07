@@ -57,16 +57,16 @@ function InviteInterviewers() {
       let sheetName = readedData.SheetNames[0]
       let sheet = readedData.Sheets[sheetName]
 
-      // Get all Interviewer details as array from worksheet
+      // Get all interviewer details as array from worksheet
       let interviewers = XLSX.utils.sheet_to_json(sheet, { header: 1 })
 
       interviewers.forEach(async (interviewer: Array<string>, index) => {
         if (!index) return // leave first row
         if (!interviewer[0]) return
 
-        // Interviewer details
-        // Interviewer[0] represents Interviewer email
-        // Interviewer[1] represents name of Interviewer
+        // interviewer details
+        // interviewer[0] represents interviewer email
+        // interviewer[1] represents name of interviewer
         const email = String(interviewer[0]).trim()
         const name = interviewer[1]
 
@@ -76,7 +76,9 @@ function InviteInterviewers() {
           if (index === interviewers.length - 1) {
             setTimeout(() => {
               setLoading(false)
-              alert('Sent invites to all Interviewers!')
+              // For now, no need to send invitation mail
+              // alert('Sent invites to all interviewers!')
+              alert('Successfully uploaded all interviewers details')
             }, 1000)
           }
         }, 1000 * index)
@@ -97,7 +99,7 @@ function InviteInterviewers() {
         if (index === unresposiveInterviewers.length - 1) {
           setTimeout(() => {
             setLoading(false)
-            alert('Sent reminder to unresponsive Interviewers!')
+            alert('Sent reminder to unresponsive interviewers!')
           }, 1000)
         }
       }, 1000 * index)

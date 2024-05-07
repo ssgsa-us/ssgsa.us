@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import ReviewersTableHead from '../../../components/Admin/Reviewers/TableHead'
-import ReviewersTableRow from '../../../components/Admin/Reviewers/TableRow'
+import EvaluatorsTableHeader from '../../../components/Admin/Evaluators/TableHeader'
+import EvaluatorTableRow from '../../../components/Admin/Evaluators/TableRow'
 import Loading from '../../../components/Loading'
 import requireAuth from '../../../components/requireAuth'
 import Roles from '../../../constants/roles'
@@ -93,10 +93,10 @@ function ReviewersList() {
             <div className="flex flex-col items-center">
               <div className="overflow-x-auto whitespace-nowrap pb-5 sm:pb-10">
                 <table className="border-separate p-2">
-                  <ReviewersTableHead />
+                  <EvaluatorsTableHeader />
                   <tbody>
                     {accReviewers.map((reviewer, index) => (
-                      <ReviewersTableRow
+                      <EvaluatorTableRow
                         key={reviewer.email}
                         index={index + 1}
                         name={reviewer.name}
@@ -139,10 +139,10 @@ function ReviewersList() {
             <div className="flex flex-col items-center">
               <div className="overflow-x-auto whitespace-nowrap pb-5 sm:pb-10">
                 <table className="border-separate p-2">
-                  <ReviewersTableHead />
+                  <EvaluatorsTableHeader />
                   <tbody>
                     {Object.keys(reviewers).map((reviewerId, index) => (
-                      <ReviewersTableRow
+                      <EvaluatorTableRow
                         key={reviewerId}
                         index={index + 1}
                         name={reviewers[reviewerId].name}

@@ -295,9 +295,19 @@ export type InterviewerInstructionsType = {
   STEP5_INSTRUCTION5?: string
   STEP5_INSTRUCTION6?: string
   STEP6_INSTRUCTION?: string
+  INTERVIEW_RUBRIC_URL?: string
 }
 
 export type ReviewerInviteType = {
+  name: string
+  email: string
+  sets: Array<string>
+  reminder: number
+  response: 'YES' | 'NO'
+  account_created: boolean
+}
+
+export type InterviewerInviteType = {
   name: string
   email: string
   sets: Array<string>
