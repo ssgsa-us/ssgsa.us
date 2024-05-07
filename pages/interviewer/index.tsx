@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import requireAuth from '../../components/requireAuth'
 import Roles from '../../constants/roles'
@@ -73,11 +74,24 @@ function InterviewerPortal() {
             and alma-mater with a consistent track record of leadership roles
             and helping others.
           </p>
+          <p className="mt-10 text-lg text-blue-850">
+            For detailed instructions, please go through the following slides:
+          </p>
+          <div className="flex justify-center">
+            <Link href={instructions.INTERVIEW_RUBRIC_URL || ''}>
+              <a
+                className="text-white text-lg py-2 px-4 my-2 rounded-3xl bg-red-850"
+                target="_blank"
+              >
+                Instructions for Panelists
+              </a>
+            </Link>
+          </div>
           <h2 className="mt-10 mb-5 text-2xl font-bold">Recording Points</h2>
           <p className="my-5 text-lg text-blue-850">
             After interviewing each candidate, each panelist is expected to
             record the points based on their own impartial and rational judgment
-            of the candidate&#39;s aforementioned abilities. To this end, use
+            of the candidate&apos;s aforementioned abilities. To this end, use
             our web-portal where you can easily enter and record the points. We
             recommend you to record the points on an excel sheet or a piece of
             paper, as a backup.
