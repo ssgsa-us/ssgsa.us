@@ -11,7 +11,7 @@ export default function Home() {
     <MainLayout>
       <div className="bg-gray-350 text-red-850 font-black w-screen -ml-2 sm:-ml-5 md:-ml-10 lg:-ml-20 xl:-ml-40 mt-8 lg:mr-2 lg:p-3 p-2">
         <marquee className="flex items-center">
-          Applications for session 2024-25 are now closed.
+          Applications will be open soon. Stay Tuned!
         </marquee>
       </div>
       <Counter />
