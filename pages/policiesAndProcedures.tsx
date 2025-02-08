@@ -212,6 +212,63 @@ export default function Home() {
                 Europe.
               </p>
             </div>
+
+            <div className="my-5">
+              <h2 className="mb-2 text-lg font-bold">
+                SSGSA Policies and Procedures for 2025
+              </h2>
+              <ul
+                style={{ listStyleType: 'disc' }}
+                className="pl-2 sm:px-5 md:px-10"
+              >
+                <li className="my-2">
+                  The validity of the award will be for only one year (May 2025
+                  to May 2026). We recommend that you apply for the award only
+                  if you can commit at least 4 hours per week on preparing your
+                  university applications this year. Extensions to the award (up
+                  to 1 year) may be granted subject to approval from the mentors
+                  and SSGSA mentorship team.
+                </li>
+                <li className="my-2">
+                  The SSGSA Award will initially be offered on a provisional
+                  basis, followed by a three to four month probationary period
+                  commencing from the date of the result announcement, after
+                  which a comprehensive review of your progress will determine
+                  the confirmation of your status as an SSGSA Scholar, granting
+                  you access to financial benefits. The comprehensive review
+                  will consist of but is not limited to:
+                  <ul style={{ listStyleType: 'circle' }} className="pl-5">
+                    <li className="my-2">
+                      Creation of a university application timeline and plan
+                      with your assigned SSGSA mentors.
+                    </li>
+                    <li className="my-2">
+                      Regular and effective communication with SSGSA mentors.
+                    </li>
+                    <li className="my-2">
+                      Participation in workshops organized by SSGSA.
+                    </li>
+                  </ul>
+                </li>
+                <li className="my-2">
+                  Awardees are prohibited from participating in or benefiting
+                  from programs similar to SSGSA during the award period. If any
+                  financial support has been offered, repayments must be made
+                  within one month since the date of award revocation.
+                </li>
+                <li className="my-2">
+                  The exact timeline for completing the comprehensive review
+                  will be communicated after the award is offered. The SSGSA
+                  Executive Committee retains the sole discretion to revoke any
+                  support provided by the organization at any time and under any
+                  circumstances it deems necessary.
+                </li>
+                <li className="my-2">
+                  Please refer to the SSGSA policies and procedures page for a
+                  complete list of policies.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
