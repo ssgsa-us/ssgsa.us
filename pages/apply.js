@@ -49,7 +49,7 @@ export default function Home() {
 
           <div id="Timeline">
             <h1 className="my-8 bg-blue-850 lg:text-2xl text-xl text-white font-extrabold py-2 pl-6 sm:pl-12 rounded-tl-3xl rounded-br-3xl">
-              Application Timeline for SSGSA 2024-2025
+              Application Timeline for SSGSA 2025-2026
             </h1>
 
             <Datetable
