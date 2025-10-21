@@ -6,6 +6,7 @@ import {
   LeadersType,
   MembersType,
   MonthStoriesType,
+  NewsEventsType,
   NewslettersType,
   ResourcesType,
   ScholarsType,
@@ -127,4 +128,15 @@ export const getApplicationDates = async () => {
     )
 
   return applicationDates
+}
+
+export const getNewsEvents = async () => {
+  let newsEvents: NewsEventsType = await firestore
+    .doc(path.join('constants', 'news_events'))
+    .get()
+    .then((snapshot: firebase.firestore.DocumentSnapshot<NewsEventsType>) => {
+      return snapshot.data()
+    })
+
+  return newsEvents
 }
