@@ -264,21 +264,10 @@ export default function Header() {
             >
               <Link href="/ssma">
                 <a className="px-2 md:py-4 md:px-1 text-white text-sm">
-                  Simmone Siddiqui Memorial Award (SSMA)
+                  SSMA
                 </a>
                </Link>
               </div>
-            {/* <div
-              className={`flex flex-col justify-center h-full hover:bg-blue-850 ${
-                router.pathname == '/isra' && 'bg-blue-850'
-              }`}
-            >
-              <Link href="/isra">
-                <a className="px-2 md:py-4 md:px-1 text-white text-sm">
-                  International Summer Research Award (ISRA)
-                </a>
-              </Link>
-            </div> */}
           </div>
         </div>
       </div>
