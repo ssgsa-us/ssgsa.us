@@ -11,10 +11,15 @@ export default function Custom404() {
   useEffect(() => {
     getNewsEvents()
       .then((data) =>
-        setNews(Object.values(data).sort((a, b) => b.index - a.index)),
+        setNews(
+          Object.values(data).sort(
+            (a, b) =>
+              new Date(b.datePublished).getTime() -
+              new Date(a.datePublished).getTime(),
+          ),
+        ),
       )
       .catch((e) => {
-        console.log(e)
         setNewsError('Not able to get news events, Try again!')
       })
   }, [])
