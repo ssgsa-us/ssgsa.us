@@ -1,5 +1,14 @@
 export const CarouselData = [
   {
+    imgSrc: '/Ful_Arctic.png',
+    imgAlt: 'Ful at Arctic Photo',
+    heading: 'From Aligarh to the Arctic',
+    width: 1280,
+    height: 720,
+    content:
+      'Mohammad Ful Hossain Seikh, a SSGSA scholar (2018-19) and the first Alig to reach Greenland’s Summit Station, carried the spirit of Sir Syed Ahmad Khan and Aligarh Muslim University (AMU) to the top of the world. From Murshidabad to Aligarh and then to the Arctic, his journey reflects how education can ignite courage, resilience, and humility. Amid freezing winds and endless snow, he unfurled the flags of India, AMU, and the University of Kansas: a gesture symbolizing gratitude to his mentors and alma mater. His story stands as a powerful reminder that no matter how far we go, the journey of inspiration and purpose always begins at Aligarh.',
+  },
+  {
     imgSrc: '/SSMA_v2.png',
     imgAlt: 'SSMA 2025 Photo',
     heading: 'Simmone Siddiqui Memorial Award (SSMA)',
