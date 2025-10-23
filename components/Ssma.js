@@ -11,7 +11,7 @@ const Ssma = () => {
           established by the family of Late Ms. Simmone Siddiqui in her memory
           to support recipients of the Sir Syed Global Scholar Award (SSGSA) who
           intend to pursue graduate studies abroad. The award provides up to
-          $1000 to assist one SSGSA Scholar with one-time economy-class air
+          $1000 to assist annually one SSGSA Scholar with one-time economy-class air
           travel expenses from their current country of residence to the country
           where they will begin their graduate program. The amount will not be
           transferred directly to the awardee; instead, the SSGSA will
