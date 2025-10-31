@@ -246,8 +246,19 @@ export default function Header() {
               </div>
             </div>
           </div>
-
+          
           <div className="md:flex md:items-center md:space-x-1">
+            <div
+              className={`flex flex-col justify-center h-full hover:bg-blue-850 ${
+                router.pathname == '/ssma' && 'bg-blue-850'
+              }`}
+            >
+              <Link href="/ssma">
+                <a className="px-2 md:py-4 md:px-1 text-white text-sm">
+                  SSMA
+                </a>
+              </Link>
+            </div>
             <div
               className={`flex flex-col justify-center h-full hover:bg-blue-850 ${
                 router.pathname == '/donate' && 'bg-blue-850'
@@ -257,17 +268,6 @@ export default function Header() {
                 <a className="py-4 px-2 text-white text-sm">DONATE</a>
               </Link>
             </div>
-            {/* <div
-              className={`flex flex-col justify-center h-full hover:bg-blue-850 ${
-                router.pathname == '/isra' && 'bg-blue-850'
-              }`}
-            >
-              <Link href="/isra">
-                <a className="px-2 md:py-4 md:px-1 text-white text-sm">
-                  International Summer Research Award (ISRA)
-                </a>
-              </Link>
-            </div> */}
           </div>
         </div>
       </div>

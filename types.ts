@@ -315,3 +315,13 @@ export type InterviewerInviteType = {
   response: 'YES' | 'NO'
   account_created: boolean
 }
+
+export type NewsEventType = {
+  index: number
+  datePublished: string
+  news: string
+  eventDate: string
+  link: string
+}
+
+export type NewsEventsType = { [id: string]: NewsEventType }
