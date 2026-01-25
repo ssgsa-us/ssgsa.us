@@ -37,7 +37,7 @@ export default function Home() {
         <div className="w-full lg:mr-4">
           <h1 className="text-blue-850 text-xl lg:text-2xl mx-2 mb-4 font-extrabold">
             Dates of Full Term{' '}
-            <span className="font-lora font-medium">2025-2026</span>
+            <span className="font-lora font-medium">2026-2027</span>
           </h1>
           <Datetable
             bgcolor="bg-blue-850"
