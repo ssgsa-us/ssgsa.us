@@ -51,7 +51,7 @@ export default function Portal() {
           ) : new Date() >
             new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE) ? (
             <div className="bg-red-200 text-2xl text-red-850 text-center font-bold rounded-3xl p-2 pl-6 mb-5">
-              We are no longer accepting applications for the session 2025-26.
+              We are no longer accepting applications for the session 2026-27.
               The deadline was{' '}
               {new Date(process.env.NEXT_PUBLIC_APPLICATION_END_DATE)
                 .toString()
@@ -127,7 +127,9 @@ export default function Portal() {
               <label className="pl-5 text-blue-850">
                 I understand SSGSA takes plagiarism/forgery seriously and it
                 will be severely dealt with. This may lead to disqualification
-                of my application
+                of my application. I will not use AI (ChatGPT, Perplexity, etc.)
+                to write my text (e.g., essays), but can use the same to refine
+                my original handwritten texts.
               </label>
             </div>
           </div>
@@ -209,16 +211,15 @@ export default function Portal() {
 
         <div>
           <h1 className="text-2xl text-center text-blue-850 font-black mt-10">
-            SSGSA Policies and Procedures for 2025
+            SSGSA Policies and Procedures
           </h1>
           <ul style={{ listStyleType: 'disc' }} className="pl-5 text-lg">
             <li className="mt-6">
-              The validity of the award will be for only one year (May 2025 to
-              May 2026). We recommend that you apply for the award only if you
-              can commit at least 4 hours per week on preparing your university
-              applications this year. Extensions to the award (up to 1 year) may
-              be granted subject to approval from the mentors and SSGSA
-              mentorship team.
+              The validity of the award will be for only one year (from the award date).
+              We recommend that you apply for the award only if you can commit at least 
+              4 hours per week on preparing your university applications this year.
+              Extensions to the award (up to 1 year) may be granted subject to approval
+              from the mentors and SSGSA mentorship team.
             </li>
             <li className="mt-4">
               The SSGSA Award will initially be offered on a provisional basis,
@@ -273,8 +274,7 @@ export default function Portal() {
                 className="my-5 text-lg"
               />
               <label className="pl-5 text-blue-850">
-                I have read and agree to the SSGSA Policies and Procedures for
-                2025
+                I have read and agree to the SSGSA Policies and Procedures
               </label>
             </div>
           </div>

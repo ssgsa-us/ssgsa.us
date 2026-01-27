@@ -12,7 +12,7 @@ export default function Home() {
     <MainLayout>
       <div className="mt-8">
         <Banner
-          message="Results for the cycle 2025-26 are announced.      Please keep an eye on our social media sites for current events & webinars!"
+          message="Applications for SSGSA 2026 would open soon. Please keep an eye on our social media sites for current events & webinars!"
           link=""
         />
       </div>
@@ -37,7 +37,7 @@ export default function Home() {
         <div className="w-full lg:mr-4">
           <h1 className="text-blue-850 text-xl lg:text-2xl mx-2 mb-4 font-extrabold">
             Dates of Full Term{' '}
-            <span className="font-lora font-medium">2025-2026</span>
+            <span className="font-lora font-medium">2026-2027</span>
           </h1>
           <Datetable
             bgcolor="bg-blue-850"
