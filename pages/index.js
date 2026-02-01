@@ -12,7 +12,7 @@ export default function Home() {
     <MainLayout>
       <div className="mt-8">
         <Banner
-          message="Applications for session 2025-26 are open now. Click here to apply!"
+          message="Applications for session 2026-27 are open now. Click here to apply!"
           link="/application-portal"
         />
       </div>
