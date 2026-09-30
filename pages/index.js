@@ -16,7 +16,7 @@ export default function Home() {
           link="/application-portal"
         />
       </div>
-      <Counter countries={23} universities={150} scholars={194} />
+      <Counter countries={23} universities={151} scholars={195} />
       <UpperCarousel />
       <div className="bg-blue-850 rounded-xl text-white mx-2 my-10 p-5 sm:px-10">
         <h1 className="text-2xl font-black">What is SSGSA?</h1>
