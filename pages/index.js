@@ -12,11 +12,11 @@ export default function Home() {
     <MainLayout>
       <div className="mt-8">
         <Banner
-          message="Applications for session 2026-27 are open now. Click here to apply!"
+          message="Applications for session 2026-27 are closed!"
           link="/application-portal"
         />
       </div>
-      <Counter countries={23} universities={135} scholars={180} />
+      <Counter countries={23} universities={151} scholars={195} />
       <UpperCarousel />
       <div className="bg-blue-850 rounded-xl text-white mx-2 my-10 p-5 sm:px-10">
         <h1 className="text-2xl font-black">What is SSGSA?</h1>
