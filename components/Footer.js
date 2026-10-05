@@ -7,7 +7,7 @@ export default function Footer() {
     <div className="mt-5">
       <div className="flex justify-center">
         <div className="relative w-full xl:w-3/4 h-24 lg:h-28 hidden sm:block">
-          <Image
+          <Image unoptimized
             src="/SirSyedHall.jpg"
             alt="Sir Syed Hall"
             layout="fill"
@@ -17,7 +17,7 @@ export default function Footer() {
       </div>
       <div className="grid grid-cols-3 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 text-white">
         <div className="sm:col-span-2 hidden sm:flex items-center justify-center p-2">
-          <Image
+          <Image unoptimized
             src="/logo.png"
             alt="Logo"
             width={110}

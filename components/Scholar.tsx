@@ -46,7 +46,7 @@ const Scholar = () => {
               >
                 <div className="flex flex-col items-center justify-center m-2 p-2 sm:w-2/5">
                   <div className="relative rounded-full border-4 border-white overflow-hidden p-0 w-40 h-40">
-                    <Image
+                    <Image unoptimized
                       src={scholar.imageUrl}
                       alt={scholar.name}
                       layout="fill"

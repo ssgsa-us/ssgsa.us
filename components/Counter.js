@@ -12,7 +12,7 @@ const Counter = ({ countries, universities, scholars }) => {
       }}
     >
       <div className="absolute overflow-hidden z-n10 w-5/6 lg:w-3/4 xl:w-2/3">
-        <Image
+        <Image unoptimized
           layout="responsive"
           src={worldMap}
           alt="World Map"

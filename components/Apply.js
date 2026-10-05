@@ -20,7 +20,7 @@ const Apply = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src="/donate1.png" alt="Donate" width={280} height={30} />
+              <Image unoptimized src="/donate1.png" alt="Donate" width={280} height={30} />
             </a>
           </div>
           <a href="#"></a>
@@ -33,7 +33,7 @@ const Apply = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src="/donate2.png" alt="Donate" width={280} height={30} />
+              <Image unoptimized src="/donate2.png" alt="Donate" width={280} height={30} />
             </a>
           </div>
           {/* <a

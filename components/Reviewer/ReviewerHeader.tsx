@@ -24,7 +24,7 @@ export default function ReviewerHeader() {
         </div>
         <div className="mr-3 flex-2">
           <Link href="/">
-            <Image
+            <Image unoptimized
               width={60}
               height={60}
               src={logo}

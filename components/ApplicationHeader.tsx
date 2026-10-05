@@ -34,7 +34,7 @@ export default function ApplicationHeader({
         </div>
         <div className="mr-3 md:mr-10 flex-2">
           <Link href="/">
-            <Image width={60} height={60} src={logo} alt="SSGSA Logo" />
+            <Image unoptimized width={60} height={60} src={logo} alt="SSGSA Logo" />
           </Link>
         </div>
       </div>
