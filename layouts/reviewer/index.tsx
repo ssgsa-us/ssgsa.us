@@ -14,7 +14,7 @@ export default function PortalLayout({ children }) {
           </div>
           <div className="mr-3 flex-2">
             <Link href="/">
-              <Image width={110} height={110} src={logo} alt="SSGSA Logo" />
+              <Image unoptimized width={110} height={110} src={logo} alt="SSGSA Logo" />
             </Link>
           </div>
         </div>

@@ -47,7 +47,7 @@ const Testimonials = () => {
               >
                 <div className="flex flex-col items-center justify-center text-center m-2 p-2 md:w-1/3 lg:w-1/4">
                   <div className="relative rounded-full border-4 border-white overflow-hidden p-0 w-40 h-40">
-                    <Image
+                    <Image unoptimized
                       src={testimonial.imageUrl}
                       alt={testimonial.name}
                       layout="fill"

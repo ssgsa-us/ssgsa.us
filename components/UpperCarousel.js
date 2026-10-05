@@ -32,7 +32,7 @@ const UpperCarousel = () => {
             <div className="mx-5 mb-5 sm:my-5 sm:w-1/2 xl:w-1/3 table">
               <div className="table-cell align-middle">
                 <div className="relative">
-                  <Image
+                  <Image unoptimized
                     className="rounded-tl-3xl rounded-br-3xl"
                     layout="responsive"
                     src={data.imgSrc}

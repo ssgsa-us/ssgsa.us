@@ -33,7 +33,7 @@ const Leadership = () => {
                   style={{ maxWidth: 220 }}
                   key={ind * 10 + index}
                 >
-                  <Image
+                  <Image unoptimized
                     src={member.imageUrl}
                     alt={member.name}
                     width={100}

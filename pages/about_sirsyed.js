@@ -12,7 +12,7 @@ export default function Home() {
 
           <div className="flex-1 flex flex-col md:flex-row justify-around text-black">
             <div className="self-center md:self-start my-2 mr-3 md:w-200 md:h-400 lg:w-350 lg:h-500 w-300 h-350 md:order-2">
-              <Image
+              <Image unoptimized
                 src="/SirSyed.jpeg"
                 width="300"
                 height="350"

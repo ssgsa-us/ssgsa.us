@@ -33,7 +33,7 @@ const Members = () => {
                   style={{ maxWidth: 230 }}
                   key={ind * 10 + index}
                 >
-                  <Image
+                  <Image unoptimized
                     src={member.imageUrl}
                     alt={member.name}
                     width={100}

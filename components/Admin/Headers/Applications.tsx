@@ -23,7 +23,7 @@ export default function ApplicationsHeader() {
         </div>
         <div className="mr-3 flex-2">
           <Link href="/">
-            <Image
+            <Image unoptimized
               width={110}
               height={110}
               src={logo}
